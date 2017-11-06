@@ -8,6 +8,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {ToastService} from '../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../toast/toast-model';
 
+
 export enum SortDirection {
   NONE = 0,
   ASC,

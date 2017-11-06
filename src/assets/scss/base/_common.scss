@@ -296,7 +296,7 @@
   clear: both;
   margin-left: 30px;
   width: -moz-calc(100% - 35px);
-  width: -webkit-calc(100% -35px);
+  width: -webkit-calc(100% - 35px);
   width: calc(100% - 35px);
   border-bottom: 1px solid $c-color-gray-deep;
   padding: 15px;
@@ -354,7 +354,7 @@
   width:50px;
   height: 50px;
  }
- 
+
  .btn-sm.c-circle-btn, .btn-group-sm.c-circle-btn{
   border-radius: 100%;
   width:32px;

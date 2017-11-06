@@ -1,5 +1,27 @@
-
+<div class="c-content-inner">
+    <div>
+        <button class="btn btn-primary btn-sm" >心率指标
+        </button>
+        <button class="btn btn-primary btn-sm" >指标2
+        </button>
+        <button class="btn btn-primary btn-sm" >指标3
+        </button>
+        <button class="btn btn-primary btn-sm" >指标4
+        </button>
+        <button class="btn btn-primary btn-sm" >指标5
+        </button>
+    </div>
+    <div class="endTime">
+        <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'daytime'"  class="form-control" placeholder="结束时间" />
+    </div>
+    <div class="startTime">
+        <input   [(ngModel)]="selectedDateStart" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'daytime'"  class="form-control" placeholder="开始时间" />
+    </div>
+</div>
+<!--<app-ecgd-chart></app-ecgd-chart>-->
 <c-table-list
+  *ngIf="!showChartView"
+  (onChart)="onChart($event)"
   [headers]="headers"
   [data]="data"
   [chartBtn]="chartBtn"

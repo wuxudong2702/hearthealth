@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Injectable, OnInit } from '@angular/core';
 import {cell, SortDirection, DataType} from '../../../shared/table/table-list.component';
+import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { DatepickerI18n, DatepickerI18nType } from '../../../shared/datepickerI18n/datepickerI18n';
 
 const headers: Array<cell> = [
   {
@@ -11,87 +13,86 @@ const headers: Array<cell> = [
     pipe: {type: DataType.NONE, params: ''},
   },
   {
-    key: 'relationship',
+    key: 'accountType',
     show: true,
-    name: '与主账户关系',
+    name: '帐户类型',
     index: 0,
     order: SortDirection.NONE,
     pipe: {type: DataType.NONE, params: ''},
   },
   {
-    key: 'age',
+    key: 'relationship',
     show: true,
-    name: '年龄',
+    name: '与主账户关系',
     index: 2,
     order: SortDirection.NONE,
     pipe: {type: DataType.NONE, params: ''},
   },
   {
-    key: 'acquisitionTime',
+    key: 'historicalTests',
     show: true,
-    name: '采集时间',
+    name: '历史检测次数',
     index: 3,
     order: SortDirection.NONE,
     pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
   },
   {
-    key: 'sex',
+    key: 'earliest',
     show: true,
-    name: '性别',
+    name: '最早检测时间',
     index: 3,
     order: SortDirection.NONE,
-    pipe: {type: DataType.ENUM, params: {0: '女', 1: '男'}},
+    pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
+  },
+  {
+     key: 'latest',
+     show: true,
+     name: '最晚检测时间',
+     index: 4,
+     order: SortDirection.NONE,
+     pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
   },
 ];
-const data: Array<any> = [//表格內容列表
+const data: Array<any> = [
   {
     userName: 'user1',
-    relationship: '钱一',
-    acquisitionTime: '2017-8-1 18:09:00',
-    sex: 0,
-    age: 23,
+    accountType:'子帐户',
+    relationship: '父子',
+    historicalTests:'3',
+    earliest: '2017-8-1 18:09:00',
+    latest: '2017-10-1 10:20:00',
   },
   {
-    userName: 'user1',
-    relationship: '钱一',
-    acquisitionTime: '2017-8-1 18:09:00',
-    sex: 0,
-    age: 23,
+      userName: 'user1',
+      accountType:'子帐户',
+      relationship: '父子',
+      historicalTests:'3',
+      earliest: '2017-8-1 18:09:00',
+      latest: '2017-10-1 10:20:00',
   },
   {
-    userName: 'user1',
-    relationship: '钱一',
-    acquisitionTime: '2017-8-1 18:09:00',
-    sex: 0,
-    age: 23,
+      userName: 'user1',
+      accountType:'子帐户',
+      relationship: '父子',
+      historicalTests:'3',
+      earliest: '2017-8-1 18:09:00',
+      latest: '2017-10-1 10:20:00',
   },
   {
-    userName: 'user1',
-    relationship: '钱一',
-    acquisitionTime: '2017-8-1 18:09:00',
-    sex: 0,
-    age: 23,
+      userName: 'user1',
+      accountType:'子帐户',
+      relationship: '父子',
+      historicalTests:'3',
+      earliest: '2017-8-1 18:09:00',
+      latest: '2017-10-1 10:20:00',
   },
   {
-    userName: 'user1',
-    relationship: '钱一',
-    acquisitionTime: '2017-8-1 18:09:00',
-    sex: 1,
-    age: 23,
-  },
-  {
-    userName: 'user1',
-    relationship: '钱一都',
-    acquisitionTime: '2017-8-1 18:09:00',
-    sex: 0,
-    age: 23,
-  },
-  {
-    userName: 'user1',
-    relationship: '钱一',
-    acquisitionTime: '2017-8-1',
-    sex: 1,
-    age: 20,
+      userName: 'user1',
+      accountType:'子帐户',
+      relationship: '父子',
+      historicalTests:'3',
+      earliest: '2017-8-1 18:09:00',
+      latest: '2017-10-1 10:20:00',
   },
 
 ];
@@ -99,9 +100,13 @@ const data: Array<any> = [//表格內容列表
 @Component({
   selector: 'app-hhr',
   templateUrl: './hhr.component.html',
-  styleUrls: ['./hhr.component.css']
+  styleUrls: ['./hhr.component.css'],
+  providers: [DatepickerI18nType, { provide: NgbDatepickerI18n, useClass: DatepickerI18n }]
 })
 export class HhrComponent implements OnInit {
+
+  selectedDateStart;
+  selectedDateEnd;
 
   constructor() { }
 
@@ -122,4 +127,12 @@ export class HhrComponent implements OnInit {
   chartBtn: boolean = true;
   paginationBtn: boolean = true;
 
+  datePickerConfig = {
+     locale: 'zh-CN'
+  };
+  showChartView: boolean = false;
+  onChart(chartId:number){
+    console.log('chartId',chartId);
+    this.showChartView = !this.showChartView;
+  }
 }

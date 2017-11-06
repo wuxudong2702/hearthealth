@@ -1,3 +1,16 @@
-<p>
-  ecgd works!
-</p>
+
+<c-table-list
+  *ngIf="!showChartView"
+  (onChart)="onChart($event)"
+  [headers]="headers"
+  [data]="data"
+  [chartBtn]="chartBtn"
+  [deleteBtn]="deleteBtn"
+  [downloadBtn]="downloadBtn"
+  [searchBtn]="searchBtn"
+  [deleteAllBtn]="deleteAllBtn"
+  [setBtn]="setBtn"
+  [paginationBtn]="paginationBtn"
+>
+</c-table-list>
+<app-ecgd-chart *ngIf="showChartView" ></app-ecgd-chart>

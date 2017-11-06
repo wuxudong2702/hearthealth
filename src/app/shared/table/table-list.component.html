@@ -1,0 +1,107 @@
+<div class="c-content-inner">
+
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-sm" *ngIf="addBtn" (click)="add()"><i class="fa fa-plus fa-fw"></i>添加
+          </button>
+          <button class="btn btn-danger btn-sm" *ngIf="deleteAllBtn" (click)="showModalDelAll()"><i
+            class="fa fa-trash-o fa-fw"></i> 删除
+          </button>
+          <button class="btn btn-success btn-sm" *ngIf="downloadBtn" (click)="download()"><i
+            class="fa fa-arrow-down fa-fw"></i>下载
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2" *ngIf="searchBtn">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <select class="form-control"   [(ngModel)]="selectValue" >
+                <option value="" style="display:none">请选择</option>
+                <option *ngFor="let header of headers" [hidden]="!header.show" value="head.key">{{header.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2" *ngIf="searchBtn">
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="text" [(ngModel)]="searchValue" class="form-control"
+                 placeholder="请先选择再输入关键字" onfocus="this.placeholder=''" onblur="this.placeholder='请输入关键字'">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" *ngIf="searchBtn">
+      <div class="form-group">
+        <div class="col-md-9">
+          <button class="btn btn-primary" (click)="search()"><i class="fa fa-search fa-fw"></i> 查询</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th class="text-center"><input [(ngModel)]="isDelAll" (click)="delAllChecked()" type="checkbox"/></th>
+          <th class="text-center" *ngFor="let header of headers;let i = index" [hidden]="!header.show"
+              (click)="sort(i)">
+            {{header.name}}
+            <span class="fa" [class.fa-sort-asc]="header.order == 1"
+                  [class.fa-sort-desc]="header.order == 2"></span>
+            <!--<span class="fa" [class.fa-sort-desc]="header.order===2" (click)="sortDesc(i)" ></span>-->
+          </th>
+
+          <th class=" text-center c-w-2 ">
+            <span class="">操作</span>
+            <button class=" btn btn-secondary btn-sm pull-right " *ngIf="setBtn" (click)="showModalSetFunc()"><i
+              class="fa fa-sun-o fa-fw "></i> 设置
+            </button>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let row of data;let i = index"  [class.alert-info]="i%2==0">
+          <td class="text-center"><input type="checkbox" (click)="delChecked()" [(ngModel)]="checkedList[i]"/></td>
+          <td *ngFor="let header of headers"  [hidden]="!header.show" class="text-center">
+            {{row[header.key] | CPipe:header.pipe}}
+          </td>
+          <td class="text-center">
+            <button class="btn btn-info btn-sm" *ngIf="detailsBtn" (click)="details()"><i
+              class="fa fa-search fa-fw"></i> 查看
+            </button>
+            <button class="btn btn-success btn-sm" *ngIf="editBtn" (click)="edit(i)"><i class="fa fa-pencil fa-fw"></i>
+              编辑
+            </button>
+            <button class="btn btn-danger btn-sm" *ngIf="deleteBtn" (click)="showModalDel(i)"><i class="fa fa-trash-o fa-fw"></i>
+              删除
+            </button>
+            <button class="btn btn-warning btn-sm" *ngIf="chartBtn" (click)="chart(i)"><i
+              class="fa fa-area-chart fa-fw"></i> 图表
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <c-pagination #hp total="100" (onDataChanged)="onDataChanged($event)" *ngIf="paginationBtn">
+      </c-pagination>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

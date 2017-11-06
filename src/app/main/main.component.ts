@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
     //用户数据
     mainData: MainData = {
         userData: {
-            userName: '心电管理员',
+            userName: '管理员',
             userAvatar: './assets/img/user-header.png',
             mobilePhone: '1895090***2',
             email: '332557712@qq.com',

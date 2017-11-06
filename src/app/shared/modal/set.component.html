@@ -1,0 +1,31 @@
+<div class="set-modal-content">
+    <button aria-label="Close" class="close set-modal-close" type="button" (click)="close()">
+      <i class="fa fa-close" aria-hidden="true"></i>
+    </button>
+  <br/>
+  <div class="set-modal-header text-primary ">
+    <div class="set-modal-headers text-center">列</div>
+    <div class="set-modal-headers text-center">是否显示</div>
+    <div class="set-modal-headers text-center">列顺序</div>
+  </div>
+
+  <div *ngFor="let header of headersTemp;let i=index;   " class="set-modal-header" >
+    <div class="set-modal-headers text-center">{{header.name}}</div>
+    <input class="set-modal-headers text-center" type="checkbox" [checked]="header.show"
+           (click)="customSetColumn(i,header.show)"/>
+    <div class="fa set-modal-headers text-center set-modal-arrow " [class.fa-arrow-up]="i!=0"  [class.fa-arrow-down]="i==0"
+          (click)="customSetOrder(i,header.index)"></div>
+  </div>
+
+  <div class="text-center c-mb20 c-mt10 set-modal-footer">
+    <button type="button" class="btn set-modal-btn" [ngClass]="config.approveBtnCls" (click)="approve()">
+      {{config.approveBtnTxt}}
+    </button>
+    <button type="button" class="btn c-ml15  set-modal-btn" [ngClass]="config.declineBtnCls" (click)="decline()">
+      {{config.declineBtnTxt}}
+    </button>
+  </div>
+
+</div>
+
+

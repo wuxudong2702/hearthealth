@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, DataType} from '../../../shared/table/table-list.component';
 
 const headers: Array<cell> = [
@@ -167,10 +167,13 @@ export class HhrComponent implements OnInit {
   data: Array<any> = data;
   dataChart1: Array<any>;
 
+  // addBtn: boolean = false;
   deleteBtn: boolean = true;
+  // showAddView: boolean = true;
   downloadBtn: boolean = true;
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
+  // editBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   chartBtn: boolean = true;

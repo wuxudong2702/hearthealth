@@ -1,14 +1,30 @@
-
-
 <c-table-list
   [headers]="headers"
   [data]="data"
-  [chartBtn]="chartBtn"
   [deleteBtn]="deleteBtn"
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
+  [downloadBtn]="downloadBtn"
   [setBtn]="setBtn"
   [addBtn]="addBtn"
-  [paginationBtn]="paginationBtn"
+  [editBtn]="editBtn"
+  [detailsBtn]="detailsBtn"
+  (onDetails)="onDetails($event)"
+  *ngIf="showChartView"
+>
+</c-table-list>
+
+<c-table-list
+  [headers]="subUserHeaders"
+  [data]="subUserData"
+  [deleteBtn]="deleteBtn"
+  [editBtn]="editBtn"
+  [searchBtn]="searchBtn"
+  [backBtn]="backBtn"
+  [deleteAllBtn]="deleteAllBtn"
+  [setBtn]="setBtn"
+  [addBtn]="addBtn"
+  (onDownload)="onDownload()"
+  *ngIf="!showChartView"
 >
 </c-table-list>

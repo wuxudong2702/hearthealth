@@ -183,7 +183,7 @@ export class HhrComponent implements OnInit {
   userName:string='';
 
   onChart(chartId1: number) {
-    this.dataChart1 = JSON.parse(JSON.stringify(dataChart[chartId1]));
+    this.dataChart1 = dataChart[chartId1];
     this.userName = data[chartId1].userName;
     this.showChartView = !this.showChartView;
   }

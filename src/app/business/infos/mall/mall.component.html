@@ -1,3 +1,14 @@
-<p>
-  mall works!
-</p>
+<c-table-list
+  *ngIf="!showChartView"
+  [headers]="headers"
+  [data]="data"
+  [addBtn]="addBtn"
+  [deleteBtn]="deleteBtn"
+  [editBtn]="editBtn"
+  [searchBtn]="searchBtn"
+  [deleteAllBtn]="deleteAllBtn"
+  [setBtn]="setBtn"
+  [paginationBtn]="paginationBtn"
+
+>
+</c-table-list>

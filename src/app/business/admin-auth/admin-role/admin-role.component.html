@@ -1,3 +1,13 @@
-<p>
-  admin-role works!
-</p>
+
+<c-table-list
+  *ngIf="!showChartView"
+  [headers]="headers"
+  [data]="data"
+
+  [addBtn]="addBtn"
+  [deleteBtn]="deleteBtn"
+  [editBtn]="editBtn"
+  [deleteAllBtn]="deleteAllBtn"
+
+>
+</c-table-list>

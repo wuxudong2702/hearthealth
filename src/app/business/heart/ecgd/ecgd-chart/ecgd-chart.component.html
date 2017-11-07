@@ -1,17 +1,7 @@
-<!--<ngx-charts-line-chart-->
-  <!--[view]="view"-->
-  <!--[scheme]="colorScheme"-->
-  <!--[results]="multi"-->
-  <!--[gradient]="gradient"-->
-  <!--[xAxis]="showXAxis"-->
-  <!--[yAxis]="showYAxis"-->
-  <!--[legend]="showLegend"-->
-  <!--[showXAxisLabel]="showXAxisLabel"-->
-  <!--[showYAxisLabel]="showYAxisLabel"-->
-  <!--[xAxisLabel]="xAxisLabel"-->
-  <!--[yAxisLabel]="yAxisLabel"-->
-  <!--[autoScale]="autoScale"-->
-  <!--(select)="onSelect($event)">/-->
-<!--</ngx-charts-line-chart>-->
+<div>
+  <button class="btn btn-success btn-sm" (click)="chartView()">返回</button>
 
-<div echarts [options]="chartOption" class="demo-chart"></div>
+
+  <div echarts [options]="chartOption" class="demo-chart"></div>
+  <h4 class="text-center text-primary" >用户： &nbsp; {{userInfo.userName}} &nbsp;&nbsp;&nbsp; 测量时间：&nbsp;{{ userInfo.acquisitionTime }}</h4>
+</div>

@@ -203,12 +203,12 @@ export class TableListComponent implements OnInit {
   }
 
 
-  chart(id) {
+  chart(id:number) {
     // alert('12121212');
-    // console.log('chart',id);
-    this.onChart.emit({
-      chartId: id,
-    });
+    console.log('chartidtavble',id);
+    this.onChart.emit(
+      id
+    );
   }
 
   sort(i) {

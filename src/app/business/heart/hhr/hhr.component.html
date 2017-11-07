@@ -1,13 +1,16 @@
 
+
 <c-table-list
+  *ngIf="!showChartView"
+  (onChart)="onChart($event)"
   [headers]="headers"
   [data]="data"
   [chartBtn]="chartBtn"
   [deleteBtn]="deleteBtn"
-  [downloadBtn]="downloadBtn"
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
   [paginationBtn]="paginationBtn"
 >
 </c-table-list>
+<app-hhr-chart *ngIf="showChartView" [dataChart1]="dataChart1" [userName]="userName" (onChart)="onChart($event)" ></app-hhr-chart>

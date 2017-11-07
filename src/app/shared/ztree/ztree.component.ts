@@ -31,15 +31,11 @@ export class ZtreeComponent implements AfterViewInit, OnDestroy, OnInit {
     //搜索隐藏
     searchMsgHidden: boolean = true;
 
-
     constructor() {
-
     }
 
     ngOnInit() {
-
     }
-
 
     ngAfterViewInit() {
         let result = this.createTree();
@@ -169,7 +165,7 @@ export class ZtreeComponent implements AfterViewInit, OnDestroy, OnInit {
         }
     }
 
-   
+
 
 
 }

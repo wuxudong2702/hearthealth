@@ -199,9 +199,9 @@ export class TableListComponent implements OnInit {
 
   edit(id) {
     this.editValue = this.data[id];
-    this.onEdit.emit({
-      editValue: this.editValue,
-    });
+    this.onEdit.emit(
+       this.editValue
+    );
   }
 
 

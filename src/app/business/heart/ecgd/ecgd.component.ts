@@ -193,11 +193,9 @@ export class EcgdComponent implements OnInit {
 
   onChart(chartId1: number) {
       console.log('chartId',chartId1, dataChart[chartId1]);
-
-    this.dataChart1= JSON.parse(JSON.stringify(this.dataChart[chartId1]));
-    this.userInfoChart = JSON.parse(JSON.stringify(data[chartId1]));
+    this.dataChart1= this.dataChart[chartId1];
+    this.userInfoChart = data[chartId1];
     // console.log(' this.userInfoChart',  this.userInfoChart)
-
     this.showChartView = !this.showChartView;
   }
 

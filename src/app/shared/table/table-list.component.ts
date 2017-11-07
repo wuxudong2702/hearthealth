@@ -72,7 +72,6 @@ export class TableListComponent implements OnInit {
     this.headers = this.headers.sort((v1, v2) => {
       return v1.index - v2.index;
     });
-    // console.log(this.addBtn)
     // console.log(this.headers)
   }
 
@@ -91,9 +90,11 @@ export class TableListComponent implements OnInit {
   @Input() setBtn: boolean;
   @Input() chartBtn: boolean;
   @Input() paginationBtn: boolean;
+  @Input() backBtn:boolean;
   @Input() setOperate: boolean;
 
-  @Output() onAdd = new EventEmitter<any>();
+
+    @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
   @Output() onDelAll = new EventEmitter<any>();
   @Output() onDownload = new EventEmitter<any>();
@@ -107,7 +108,9 @@ export class TableListComponent implements OnInit {
   isDelAll: boolean = false;
   selectValue: string = '';
   searchValue: string = '';
+
   editValue: Array<any> = [];
+
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
@@ -190,8 +193,8 @@ export class TableListComponent implements OnInit {
     })
   }
 
-  details() {
-    this.onDetails.emit();
+  details(id:number) {
+    this.onDetails.emit(id);
   }
 
   edit(id) {

@@ -113,6 +113,113 @@ const data: Array<any> = [//表格內容列表
 
 ];
 
+//子用户列表。
+const subUserHeaders: Array<cell> = [
+  {
+    key: 'subUserName',
+    show: true,
+    name: '用户名',
+    index: 4,
+    order: SortDirection.NONE,
+    pipe: {type: DataType.NONE, params: ''},
+  },
+  {
+    key: 'relationship',
+    show: true,
+    name: '与主账户关系',
+    index: 0,
+    order: SortDirection.NONE,
+    pipe: {type: DataType.NONE, params: ''},
+  },
+  {
+    key: 'age',
+    show: true,
+    name: '年龄',
+    index: 1,
+    order: SortDirection.NONE,
+    pipe: {type: DataType.NONE, params: ''},
+  },
+  {
+    key: 'sex',
+    show: true,
+    name: '性别',
+    index: 2,
+    order: SortDirection.NONE,
+    pipe: {type: DataType.ENUM, params: {0: '女', 1: '男'}},
+  },
+  {
+    key: 'address',
+    show: true,
+    name: '地区',
+    index: 3,
+    order: SortDirection.NONE,
+    pipe: {type: DataType.NONE, params: ''},
+  },
+  {
+    key: 'telephoneNum',
+    show: true,
+    name: '手机',
+    index: 4,
+    order: SortDirection.NONE,
+    pipe: {type: DataType.NONE, params: ''},
+  },
+  {
+    key: 'height',
+    show: true,
+    name: '身高',
+    index: 5,
+    order: SortDirection.NONE,
+    pipe: {type: DataType.NONE, params: ''},
+  },
+  {
+    key: 'weight',
+    show: true,
+    name: '体重',
+    index: 6,
+    order: SortDirection.NONE,
+    pipe: {type: DataType.NONE, params: ''},
+  },
+];
+const subUserData:Array<any>=[//表格內容列表
+  {
+    userName: '张文丽',
+    relationship: '父子',
+    age: 12,
+    sex: 0,
+    address: '安徽省',
+    telephoneNum: '18045142702',
+    height:'185',
+    weight:'75',
+  },
+  {
+    userName: '张倩倩',
+    relationship: '父子',
+    age: 10,
+    sex: 1,
+    address: '北京市海淀区西二旗',
+    telephoneNum: '18045142702',
+    height:'185',
+    weight:'75',
+  },
+  {
+    userName: '李四',
+    relationship: '父子',
+    age: 22,
+    sex: 0,
+    address: '黑龙江',
+    telephoneNum: '18045142702',
+    height:'185',
+    weight:'75',
+  },
+
+];
+// const subUsersData:Array<any>=[
+//   {
+//     userName:'无序的',
+//     age: '34',
+//     sex:0
+//   },
+//   ['zi yhu 2','子用户10','字用户']]
 
 @Component({
   selector: 'app-app-user',
@@ -129,6 +236,9 @@ export class AppUserComponent implements OnInit {
 
   headers: Array<cell> = headers;
   data: Array<any> = data;
+  subUserHeaders:Array<any>=subUserHeaders;
+  subUserData:Array<any>=subUserData;
+
   addBtn:boolean=true;
   deleteBtn: boolean = true;
   downloadBtn: boolean = true;
@@ -136,10 +246,24 @@ export class AppUserComponent implements OnInit {
   detailsBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setBtn: boolean = true;
-  chartBtn: boolean = true;
-  paginationBtn: boolean = true;
+  editBtn:boolean=true;
+  backBtn:boolean=true;
   setOperate: boolean = true;
 
-  showChartView: boolean = false;
+  // paginationBtn: boolean = true;
+  showChartView: boolean = true;
   userName: string = '';
+  onDetails(id){
+    // this.
+    this.showChartView=!this.showChartView;
+
+    // this.detailsBtn=false;
+    // this.downloadBtn=true;
+    //
+    // this.headers=this.subUserHeaders;
+    // this.data=this.subUserData;
+  }
+  onDownload(){
+    this.showChartView=!this.showChartView;
+  }
 }

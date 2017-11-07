@@ -79,4 +79,9 @@ export class AdminRoleComponent implements OnInit {
   editBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setOperate: boolean = true;
+  showZTreeView: boolean = false;
+
+  onEdit(id:number) {
+      this.showZTreeView = !this.showZTreeView;
+  }
 }

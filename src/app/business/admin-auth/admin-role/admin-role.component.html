@@ -1,6 +1,6 @@
-
 <c-table-list
-  *ngIf="!showChartView"
+  *ngIf="!showZTreeView"
+  (onEdit)="onEdit($event)"
   [headers]="headers"
   [data]="data"
   (onSort)="onSort()"
@@ -9,5 +9,5 @@
   [editBtn]="editBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setOperate]="setOperate"
->
 </c-table-list>
+<app-admin-ztree *ngIf="showZTreeView" (onEdit)="onEdit($event)"></app-admin-ztree>

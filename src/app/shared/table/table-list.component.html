@@ -58,7 +58,7 @@
             <!--<span class="fa" [class.fa-sort-desc]="header.order===2" (click)="sortDesc(i)" ></span>-->
           </th>
 
-          <th class=" text-center c-w-2 ">
+          <th class=" text-center c-w-2 " *ngIf="setOperate">
             <span class="">操作</span>
             <button class=" btn btn-secondary btn-sm pull-right " *ngIf="setBtn" (click)="showModalSetFunc()"><i
               class="fa fa-sun-o fa-fw "></i> 设置
@@ -72,7 +72,7 @@
           <td *ngFor="let header of headers"  [hidden]="!header.show" class="text-center">
             {{row[header.key] | CPipe:header.pipe}}
           </td>
-          <td class="text-center">
+          <td class="text-center"  *ngIf="setOperate">
             <button class="btn btn-info btn-sm" *ngIf="detailsBtn" (click)="details()"><i
               class="fa fa-search fa-fw"></i> 查看
             </button>

@@ -187,7 +187,7 @@ export class EcgdComponent implements OnInit {
   setBtn: boolean = true;
   chartBtn: boolean = true;
   paginationBtn: boolean = true;
-
+  setOperate: boolean = true;
 
   showChartView: boolean = false;
 

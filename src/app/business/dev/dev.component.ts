@@ -140,5 +140,5 @@ export class DevComponent implements OnInit {
   deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   paginationBtn: boolean = true;
-
+  setOperate: boolean = true;
 }

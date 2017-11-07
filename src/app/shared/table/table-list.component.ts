@@ -91,7 +91,7 @@ export class TableListComponent implements OnInit {
   @Input() setBtn: boolean;
   @Input() chartBtn: boolean;
   @Input() paginationBtn: boolean;
-
+  @Input() setOperate: boolean;
 
   @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
@@ -108,7 +108,6 @@ export class TableListComponent implements OnInit {
   selectValue: string = '';
   searchValue: string = '';
   editValue: Array<any> = [];
-
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];

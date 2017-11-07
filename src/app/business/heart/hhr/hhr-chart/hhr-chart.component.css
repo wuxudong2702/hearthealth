@@ -15,3 +15,9 @@
 .dateInputStyle {
   margin-left:20px;
 }
+button:focus {
+    background-color: #f0bd0a;
+}
+h4 {
+    font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+}

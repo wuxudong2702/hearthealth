@@ -32,7 +32,7 @@ const headers: Array<cell> = [
     name: '历史检测次数',
     index: 3,
     order: SortDirection.NONE,
-    pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
+    pipe: {type: DataType.NONE, params: ''},
   },
   {
     key: 'earliest',
@@ -56,7 +56,7 @@ const data: Array<any> = [
     userName: 'user1',
     accountType: '子帐户',
     relationship: '父子',
-    historicalTests: '3',
+    historicalTests: 3,
     earliest: '2017-8-1 18:09:00',
     latest: '2017-10-1 10:20:00',
   },
@@ -64,7 +64,7 @@ const data: Array<any> = [
     userName: 'user1',
     accountType: '子帐户',
     relationship: '父子',
-    historicalTests: '3',
+    historicalTests: 3,
     earliest: '2017-8-1 18:09:00',
     latest: '2017-10-1 10:20:00',
   },
@@ -72,7 +72,7 @@ const data: Array<any> = [
     userName: 'user1',
     accountType: '子帐户',
     relationship: '父子',
-    historicalTests: '3',
+    historicalTests: 3,
     earliest: '2017-8-1 18:09:00',
     latest: '2017-10-1 10:20:00',
   },
@@ -80,7 +80,7 @@ const data: Array<any> = [
     userName: 'user1',
     accountType: '子帐户',
     relationship: '父子',
-    historicalTests: '3',
+    historicalTests: 3,
     earliest: '2017-8-1 18:09:00',
     latest: '2017-10-1 10:20:00',
   },
@@ -88,7 +88,7 @@ const data: Array<any> = [
     userName: 'user1',
     accountType: '子帐户',
     relationship: '父子',
-    historicalTests: '3',
+    historicalTests: 3,
     earliest: '2017-8-1 18:09:00',
     latest: '2017-10-1 10:20:00',
   },
@@ -178,6 +178,7 @@ export class HhrComponent implements OnInit {
   setBtn: boolean = true;
   chartBtn: boolean = true;
   paginationBtn: boolean = true;
+  setOperate: boolean = true;
 
   showChartView: boolean = false;
   userName:string='';

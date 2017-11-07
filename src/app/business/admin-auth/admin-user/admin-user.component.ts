@@ -76,4 +76,5 @@ export class AdminUserComponent implements OnInit {
   deleteBtn: boolean = true;
   editBtn: boolean = true;
   deleteAllBtn: boolean = true;
+  setOperate: boolean = true;
 }

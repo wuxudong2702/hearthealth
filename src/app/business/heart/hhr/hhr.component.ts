@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {cell, SortDirection, DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
 const headers: Array<cell> = [
   {
@@ -187,5 +187,10 @@ export class HhrComponent implements OnInit {
     this.dataChart1 = dataChart[chartId1];
     this.userName = data[chartId1].userName;
     this.showChartView = !this.showChartView;
+  }
+  onSort(sort:sortObj){
+    let id=sort.id;
+    let order=sort.order;
+
   }
 }

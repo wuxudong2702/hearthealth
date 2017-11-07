@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {cell, SortDirection, DataType} from '../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,DataType} from '../../shared/table/table-list.component';
 
 const headers: Array<cell> = [
     {
@@ -57,9 +57,15 @@ export class LogComponent implements OnInit {
 
   ngOnInit() {
   }
+  // setOperate
   headers: Array<cell> = headers;
   data: Array<any> = data;
   searchBtn: boolean = true;
   paginationBtn: boolean = true;
   setOperate: boolean = false;
+  onSort(sort:sortObj){
+    let id=sort.id;
+    let order=sort.order;
+
+  }
 }

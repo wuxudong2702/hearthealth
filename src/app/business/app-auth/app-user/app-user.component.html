@@ -3,22 +3,22 @@
 <c-table-list
   [headers]="headers"
   [data]="data"
-  [chartBtn]="chartBtn"
   [deleteBtn]="deleteBtn"
+  (onSort)="onSort()"
+  (onDetails)="onDetails()"
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
-  [downloadBtn]="downloadBtn"
   [setBtn]="setBtn"
   [addBtn]="addBtn"
   [editBtn]="editBtn"
   [detailsBtn]="detailsBtn"
   [setOperate]="setOperate"
-  (onDetails)="onDetails($event)"
-  *ngIf="showChartView"
+  *ngIf="subUsers"
 >
 </c-table-list>
 
 <c-table-list
+
   [headers]="subUserHeaders"
   [data]="subUserData"
   [deleteBtn]="deleteBtn"
@@ -28,7 +28,7 @@
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
   [addBtn]="addBtn"
-  (onDownload)="onDownload()"
-  *ngIf="!showChartView"
+  (onBack)="onBack()"
+  *ngIf="!subUsers"
 >
 </c-table-list>

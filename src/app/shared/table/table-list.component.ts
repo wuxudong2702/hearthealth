@@ -24,6 +24,11 @@ export enum DataType {
   NONE,
 }
 
+export class sortObj {
+  order: SortDirection;
+  id: string;
+}
+
 export class pipe {
   type: DataType;
   params: any;
@@ -90,11 +95,11 @@ export class TableListComponent implements OnInit {
   @Input() setBtn: boolean;
   @Input() chartBtn: boolean;
   @Input() paginationBtn: boolean;
-  @Input() backBtn:boolean;
+  @Input() backBtn: boolean;
   @Input() setOperate: boolean;
+  @Input() uploadBtn: boolean;
 
-
-    @Output() onAdd = new EventEmitter<any>();
+  @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
   @Output() onDelAll = new EventEmitter<any>();
   @Output() onDownload = new EventEmitter<any>();
@@ -103,6 +108,8 @@ export class TableListComponent implements OnInit {
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDetails = new EventEmitter<any>();
   @Output() onChart = new EventEmitter<any>();
+  @Output() onSort = new EventEmitter<any>();
+  @Output() onBack = new EventEmitter<any>();
 
   url: string = '';
   isDelAll: boolean = false;
@@ -193,7 +200,7 @@ export class TableListComponent implements OnInit {
     })
   }
 
-  details(id:number) {
+  details(id: number) {
     this.onDetails.emit(id);
   }
 
@@ -205,9 +212,9 @@ export class TableListComponent implements OnInit {
   }
 
 
-  chart(id:number) {
+  chart(id: number) {
     // alert('12121212');
-    console.log('chartidtavble',id);
+    console.log('chartidtavble', id);
     this.onChart.emit(
       id
     );
@@ -215,13 +222,16 @@ export class TableListComponent implements OnInit {
 
   sort(i) {
     this.headers[i].order = this.headers[i].order === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC;
-    this.onChart.emit({
-      sortOrder: this.headers[i].order,
-      index: i,
-    });
-
+    this.onSort.emit(
+      {
+        sortOrder: this.headers[i].order,
+        id: i,
+      }
+    );
   }
-
+  back(){
+    this.onBack.emit();
+  }
   openError(errorInfo) {
     let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
     this.toastService.toast(toastCfg);

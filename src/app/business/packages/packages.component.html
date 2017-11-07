@@ -1,3 +1,12 @@
-<p>
-  packages works!
-</p>
+
+<c-table-list
+  *ngIf="!showChartView"
+  (onSort)="onSort()"
+  [headers]="headers"
+  [data]="data"
+  [deleteBtn]="deleteBtn"
+  [uploadBtn]="upload"
+  [deleteAllBtn]="deleteAllBtn"
+  [setOperate]="setOperate"
+>
+</c-table-list>

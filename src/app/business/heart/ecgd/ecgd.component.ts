@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {cell, SortDirection, DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
 const headers: Array<cell> = [
   {
@@ -198,5 +198,9 @@ export class EcgdComponent implements OnInit {
     // console.log(' this.userInfoChart',  this.userInfoChart)
     this.showChartView = !this.showChartView;
   }
+  onSort(sort:sortObj){
+      let id=sort.id;
+      let order=sort.order;
 
+  }
 }

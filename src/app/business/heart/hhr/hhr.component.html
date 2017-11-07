@@ -3,6 +3,7 @@
 <c-table-list
   *ngIf="!showChartView"
   (onChart)="onChart($event)"
+  (onSort)="onSort()"
   [headers]="headers"
   [data]="data"
   [chartBtn]="chartBtn"

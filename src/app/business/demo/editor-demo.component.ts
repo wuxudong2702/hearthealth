@@ -1,53 +1,107 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import {Component, Inject, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {DomSanitizer} from "@angular/platform-browser";
+import {AppService} from '../../app.service';
+import {DOCUMENT} from '@angular/common';
 
-import { AppService } from '../../app.service';
+export class UEditorHtml {
+  htmlValue: string;
+  textValue: string;
+  delta: string;
+  source: string;
+}
 
+const htmlH: string = "<!DOCTYPE html>\n" +
+  "<html>\n" +
+  "<head>\n" +
+  "  <meta charset=\"UTF-8\">\n" +
+  "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\">\n" +
+  "</head>\n" +
+  "<body>\n" +
 
+  "<div class=\"article-title\">\n" +
+  "  <h1 class=\"title\">我是预览页面</h1>\n" +
+  "</div>\n" +
+  "<div class=\"article-content\">";
 
+const htmlL: string = "</div>\n" +
+  "\t\n" +
+  "</body>\n" +
+  "</html>";
 
 @Component({
   selector: 'c-editor-demo',
+  styleUrls: ['./editor-demo.component.css', './editor-demo.component1.css'],
   template: `
-    <div class="c-content-inner">
-       <div class="row">
-          <div  class="col-md-12">
-              <p class="c-line-title">示例</p>
-              <c-editor [(ngModel)]="text" [style]="{'height':'320px'}"></c-editor> 
-              <br/>
-              <c-editor [(ngModel)]="text2" [style]="{'height':'320px'}">
-                <c-header-tpl>
-                   <select class="ql-size">
-                      <option value="small"></option>
-                      <option selected></option>
-                      <option value="large"></option>
-                      <option value="huge"></option>
-                    </select>
-                   
-                    <button class="ql-bold"></button>
-                    <button class="ql-script" value="sub"></button>
-                    <button class="ql-script" value="super"></button>
-                </c-header-tpl>
-              </c-editor>        
-          </div>
+    <div class="c-content-inner " [hidden]="!previews">
+      <div class="row editorDocument">
+        <div class="col-md-12">
+          <c-editor [(ngModel)]="text" (onTextChange)="onTextChange($event)" [style]="{'height':'400px'}"></c-editor>
+          <br/>
         </div>
-        <div class="row">
-          <div  class="col-md-12">
-            <div class="c-mt15">
-              <p class="c-line-title">说明</p>
-                  组件目录:src/app/modules/shared/editor
-             </div>
-           </div>
-        </div>
+      </div>
+      <div class=" buttons">
+        <button class="">发表</button>
+        <button class="">保存</button>
+        <button class=""(click)="preview()">预览</button>
+      </div>
     </div>
+    <div class="preview-layer" [hidden]="previews" (click)="noPreviews()">
+      <div class="preview-bg"></div>
+      <div class="preview-phone prephone"  >
+        <iframe #iframe class="iframe1" ></iframe>
+      </div>
+    </div>
+
+
   `
 })
-export class EditorDemoComponent {
-  text: string='这里面是内容..';
-  text2:string='这里面是内容..';
 
-   constructor(private appService: AppService) {
-    
+
+export class EditorDemoComponent implements OnInit {
+  @ViewChild('iframe') iframe: ElementRef;
+
+  text: string = '这里面是内容..';
+  htmlValue: string = '';
+  textValue: string = '';
+  delta: string = '';
+  source: string = '';
+  articleContent: string = '';
+  previews: boolean = true;
+  html5: string = '';
+  secHtml5;
+  ifr_document: any;
+  htmlElement: HTMLElement;
+  prePhone:boolean=false;
+  constructor(private appService: AppService, private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
+
     this.appService.titleEventEmitter.emit("富文本编辑器");
+  }
+
+  ngOnInit() {
+  }
+
+  onTextChange(html: UEditorHtml) {
+    console.log(html.htmlValue, '8888');
+    this.htmlValue = html.htmlValue;
+    // this.textValue = html.textValue;
+    // this.delta = html.delta;
+    // this.source = html.source;
+  }
+
+  preview() {
+    this.previews = false;
+    // this.prePhone=true;
+    if (this.htmlValue) {
+      this.html5 = this.htmlValue;
+    }
+    let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
+    doc.open();
+    doc.write(htmlH + this.html5 + htmlL);
+    doc.close();
+  }
+
+  noPreviews(){
+    this.previews = true;
   }
 
 }

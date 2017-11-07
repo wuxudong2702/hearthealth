@@ -2,6 +2,7 @@
 <c-table-list
   *ngIf="!showChartView"
   [headers]="headers"
+  (onSort)="onSort()"
   [data]="data"
   [addBtn]="addBtn"
   [deleteBtn]="deleteBtn"

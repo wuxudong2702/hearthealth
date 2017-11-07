@@ -3,7 +3,7 @@
   *ngIf="!showChartView"
   [headers]="headers"
   [data]="data"
-
+  (onSort)="onSort()"
   [addBtn]="addBtn"
   [deleteBtn]="deleteBtn"
   [editBtn]="editBtn"

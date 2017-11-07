@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
 const headers: Array<cell> = [
   {
@@ -241,7 +241,6 @@ export class AppUserComponent implements OnInit {
 
   addBtn:boolean=true;
   deleteBtn: boolean = true;
-  downloadBtn: boolean = true;
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
   deleteAllBtn: boolean = true;
@@ -251,11 +250,11 @@ export class AppUserComponent implements OnInit {
   setOperate: boolean = true;
 
   // paginationBtn: boolean = true;
-  showChartView: boolean = true;
+  subUsers: boolean = true;
   userName: string = '';
   onDetails(id){
     // this.
-    this.showChartView=!this.showChartView;
+    this.subUsers=!this.subUsers;
 
     // this.detailsBtn=false;
     // this.downloadBtn=true;
@@ -263,7 +262,16 @@ export class AppUserComponent implements OnInit {
     // this.headers=this.subUserHeaders;
     // this.data=this.subUserData;
   }
-  onDownload(){
-    this.showChartView=!this.showChartView;
+  // onDownload(){
+  //   this.showChartView=!this.showChartView;
+  // }
+  onBack(){
+    this.subUsers=!this.subUsers;
+  }
+
+  onSort(sort:sortObj){
+    let id=sort.id;
+    let order=sort.order;
+
   }
 }

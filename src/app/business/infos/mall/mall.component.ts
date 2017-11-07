@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
 const headers: Array<cell> = [
   {
@@ -118,4 +118,9 @@ export class MallComponent implements OnInit {
   deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   paginationBtn: boolean = true;
+  onSort(sort:sortObj){
+    let id=sort.id;
+    let order=sort.order;
+
+  }
 }

@@ -1,0 +1,17 @@
+.demo-chart {
+    height: 400px;
+}
+
+.dateInput {
+  width:130px;
+  display:inline;
+
+}
+
+.chartFileBtns button{
+    margin:0 3px;
+}
+
+.dateInputStyle {
+  margin-left:20px;
+}

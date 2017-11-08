@@ -176,11 +176,16 @@ input:-ms-input-placeholder{color:#FFF;font-size:14px;
 
 /*}*/
 .iframe1{
-  width:89%;
-  height:86%;
-  margin:0 auto;
+  position: fixed;
+  width: 363px;
+  height: 636px;
+  left: 40%;
   background: white;
-  /*margin-top:24%;*/
+  text-align: center;
+  z-index: 9999;
+  margin-left: 23px;
+  margin-top: 100px;
+
 }
 
 /*.editorDocument{*/

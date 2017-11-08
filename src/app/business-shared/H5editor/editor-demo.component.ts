@@ -10,14 +10,21 @@ export class UEditorHtml {
   source: string;
 }
 
-const htmlH: string = "<!DOCTYPE html>\n" +
+const htmlH: string ="<!DOCTYPE html>\n" +
   "<html>\n" +
   "<head>\n" +
   "  <meta charset=\"UTF-8\">\n" +
   "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\">\n" +
   "</head>\n" +
   "<body>\n" +
-
+  "<style>\n" +
+  "  .article-content{font-size: 1.1em;padding: 10px 10px 30px;color: #000000;}\n" +
+  "\n" +
+  "  .article-content p{\n" +
+  "    word-wrap: break-word;line-height: 1.2em;margin: 20px 0 0 0;text-indent: 1.8em;\n" +
+  "  }\n" +
+  "  .article-content img {max-width: 100%;display: block;margin: 0 auto;border-radius: 4px;}\n" +
+  "</style>\n" +
   "<div class=\"article-title\">\n" +
   "  <h1 class=\"title\">我是预览页面</h1>\n" +
   "</div>\n" +
@@ -84,7 +91,6 @@ export class EditorDemoComponent implements OnInit {
   }
 
   onTextChange(html: UEditorHtml) {
-    console.log(html.htmlValue, '8888');
     this.htmlValue = html.htmlValue;
     // this.textValue = html.textValue;
     // this.delta = html.delta;

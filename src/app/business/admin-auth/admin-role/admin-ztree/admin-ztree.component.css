@@ -1,31 +1,24 @@
 .container {
-    min-height:100%;
-    position: relative;
     height: 100%;
-
 }
-.ztree-tittle {
+.tittle {
     margin-bottom: 15px;
-    font-size: 25px;
-    border-left: 3px solid ;
+    font-size: 22px;
+    border-left: 3px solid #10a2e9;
     padding-left:8px;
     font-weight: bold;
-    color:#00abff;
+    color:#555555;
     font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
 }
-.p {
-
+.content {
+    height: 460px;
+    overflow-y: auto
 }
 .ztree-align {
-    margin-top: 2%;
     margin-left: 40%;
-    padding-bottom: 30px;
 }
 .footer {
-    text-align: center;
-    margin-top: -32px; /* Footer 高度的负值 */
-    bottom:0;
-    /*float:right;*/
+   margin-left: 36%;
 }
 .footer button{
     width: 120px;

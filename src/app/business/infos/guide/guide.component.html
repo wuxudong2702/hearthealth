@@ -1,7 +1,8 @@
 
 <c-table-list
-  *ngIf="!showChartView"
-  (onSort)="onSort()"
+  *ngIf="!editor"
+  (onSort)="onSort($event)"
+  (onEdit)="onEdit($event)"
   [headers]="headers"
   [data]="data"
   [addBtn]="addBtn"
@@ -11,6 +12,10 @@
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
   [paginationBtn]="paginationBtn"
-
+ [setOperate]="setOperate"
 >
 </c-table-list>
+<c-editor-h5 *ngIf="editor"   (onEditBack)="onEditBack($event)"
+ >
+
+</c-editor-h5>

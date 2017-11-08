@@ -118,9 +118,21 @@ export class MallComponent implements OnInit {
   deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   paginationBtn: boolean = true;
+  setOperate: boolean = true;
+  editor:boolean=false;
+
   onSort(sort:sortObj){
     let id=sort.id;
     let order=sort.order;
+
+  }
+  onEdit(id:any){
+    // console.log(this.editor,id);
+    this.editor=true;
+
+  }
+  onEditBack(id:number){
+    this.editor=false;
 
   }
 }

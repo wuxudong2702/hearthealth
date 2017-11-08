@@ -204,7 +204,7 @@ export class TableListComponent implements OnInit {
     this.onDetails.emit(id);
   }
 
-  edit(id) {
+  edit(id:number) {
     this.editValue = this.data[id];
     this.onEdit.emit(
        this.editValue
@@ -213,8 +213,6 @@ export class TableListComponent implements OnInit {
 
 
   chart(id: number) {
-    // alert('12121212');
-    console.log('chartidtavble', id);
     this.onChart.emit(
       id
     );

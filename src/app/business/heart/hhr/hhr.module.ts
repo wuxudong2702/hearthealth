@@ -23,6 +23,7 @@ import { HhrChartComponent } from './hhr-chart/hhr-chart.component';//日期i18n
         FormsModule
     ],
     declarations: [HhrComponent, HhrChartComponent]
+
 })
 export class HhrModule {
 }

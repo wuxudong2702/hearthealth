@@ -66,7 +66,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor {
 
         this.quill.on('text-change', (delta, oldContents, source) => {
             let html = editorElement.children[0].innerHTML;
-
+                console.log(html,'html222');
             let text = this.quill.getText();
             if (html == '<p><br></p>') {
                 html = null;

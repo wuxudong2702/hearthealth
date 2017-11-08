@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild, ElementRef,Input,Output,EventEmitter} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {AppService} from '../../app.service';
 import {DOCUMENT} from '@angular/common';
@@ -36,8 +36,8 @@ const htmlL: string = "</div>\n" +
   "</html>";
 
 @Component({
-  selector: 'c-editor-demo',
-  styleUrls: ['./editor-demo.component.css', './editor-demo.component1.css'],
+  selector: 'c-editor-h5',
+  styleUrls: ['./editorh5.component.css'],
   template: `
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
@@ -50,6 +50,7 @@ const htmlL: string = "</div>\n" +
         <button class="">发表</button>
         <button class="">保存</button>
         <button class=""(click)="preview()">预览</button>
+        <button class=""(click)="editBack()">返回</button>
       </div>
     </div>
     <div style="height: 840px; overflow: auto">
@@ -67,9 +68,9 @@ const htmlL: string = "</div>\n" +
 })
 
 
-export class EditorDemoComponent implements OnInit {
+export class Editorh5Component implements OnInit {
   @ViewChild('iframe') iframe: ElementRef;
-
+  @Output() onEditBack = new EventEmitter<any>();
   text: string = '这里面是内容..';
   htmlValue: string = '';
   textValue: string = '';
@@ -112,5 +113,7 @@ export class EditorDemoComponent implements OnInit {
   noPreviews(){
     this.previews = true;
   }
-
+  editBack(){
+    this.onEditBack.emit(1);
+  }
 }

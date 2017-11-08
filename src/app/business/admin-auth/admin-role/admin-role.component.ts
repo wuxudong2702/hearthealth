@@ -84,4 +84,7 @@ export class AdminRoleComponent implements OnInit {
   onEdit(id:number) {
       this.showZTreeView = !this.showZTreeView;
   }
+  onSort(id:number){
+
+  }
 }

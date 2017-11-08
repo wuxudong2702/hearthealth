@@ -74,9 +74,19 @@ export class GuideComponent implements OnInit {
   deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   paginationBtn: boolean = true;
+  setOperate:boolean=true;
+  editor:boolean=false;
+
   onSort(sort:sortObj){
     let id=sort.id;
     let order=sort.order;
+  }
+  onEdit(id:any){
+      this.editor=true;
+
+  }
+  onEditBack(id:number){
+    this.editor=false;
 
   }
 }

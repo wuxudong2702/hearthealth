@@ -62,7 +62,6 @@ import { NgBootstrapDemoComponent } from './ng-bootstrap-demo.component';
 import { BootstrapDemoComponent } from './bootstrap-demo.component';
 import { StorageDemoComponent } from './storage-demo.component';
 import { PageBrowserDemoComponent } from './page-browser-demo.component';
-import { EditorDemoComponent } from '../../business-shared/H5editor/editor-demo.component';
 import { AgGridDemoComponent } from './ag-grid-demo.component';
 import { SimpleDataTableDemoComponent } from './simple-data-table-demo.component';
 import { ColorPickerDemoComponent } from './color-picker-demo.component';
@@ -136,7 +135,6 @@ import { QrcodeDemoComponent } from './qrcode-demo.component';
      BootstrapDemoComponent,
      StorageDemoComponent,
      PageBrowserDemoComponent,
-     EditorDemoComponent,
      AgGridDemoComponent,
      SimpleDataTableDemoComponent,
      ColorPickerDemoComponent,

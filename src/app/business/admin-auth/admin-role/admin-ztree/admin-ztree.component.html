@@ -1,8 +1,12 @@
-<h4>请选择权限</h4>
-<div class=" ztree-align ">
-  <c-ztree  #ztreeInstance [setting]="setting" [zNodes]="nodes"></c-ztree>
-</div>
-<div class=" buttons ">
-  <button class="btn btn-primary btn-md" (click)="getCheckedData()">确定</button>
-  <button class="btn btn-success btn-md" (click)="onBack()">返回</button>
+<div class="container">
+  <p class="ztree-tittle">请选择权限</p>
+  <div style="height: 500px; overflow-y: auto">
+    <div class="ztree-align ">
+      <c-ztree  #ztreeInstance [setting]="setting" [zNodes]="nodes"></c-ztree>
+    </div>
+  </div>
+  <div class=" footer ">
+    <button class="btn btn-primary btn-md" (click)="getCheckedData()">确定</button>
+    <button class="btn btn-success btn-md" (click)="onBack()">返回</button>
+  </div>
 </div>

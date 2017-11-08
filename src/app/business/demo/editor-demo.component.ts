@@ -34,23 +34,26 @@ const htmlL: string = "</div>\n" +
   template: `
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
-        <div class="col-md-12">
-          <c-editor [(ngModel)]="text" (onTextChange)="onTextChange($event)" [style]="{'height':'400px'}"></c-editor>
+        <div class="col-md-12" >
+          <c-editor [(ngModel)]="text" (onTextChange)="onTextChange($event)" [style]="{'height':'60vh'}"></c-editor>
           <br/>
         </div>
       </div>
-      <div class=" buttons">
+      <div class="buttons">
         <button class="">发表</button>
         <button class="">保存</button>
         <button class=""(click)="preview()">预览</button>
       </div>
     </div>
-    <div class="preview-layer" [hidden]="previews" (click)="noPreviews()">
-      <div class="preview-bg"></div>
-      <div class="preview-phone prephone"  >
-        <iframe #iframe class="iframe1" ></iframe>
+    <div style="height: 840px; overflow: auto">
+      <div class="preview-layer" [hidden]="previews" (click)="noPreviews()">
+        <div class="preview-bg"></div>
+        <div class="preview-phone prephone"  >
+          <iframe #iframe class="iframe1" ></iframe>
+        </div>
       </div>
     </div>
+
 
 
   `

@@ -1,16 +1,26 @@
-h4 {
-    font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+.container {
+    height: 100%;
+}
+.tittle {
+    margin-bottom: 15px;
+    font-size: 22px;
+    border-left: 3px solid #10a2e9;
+    padding-left:8px;
     font-weight: bold;
-    margin-top: 0.5%;
-    margin-left: 32%;
-    float: left;
+    color:#555555;
+    font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+}
+.content {
+    height: 460px;
+    overflow-y: auto
 }
 .ztree-align {
-    margin-top: 5%;
-    margin-left: 30%;
+    margin-left: 40%;
 }
-.buttons {
-    margin-right: 3%;
-    float:right;
+.footer {
+   margin-left: 36%;
+}
+.footer button{
+    width: 120px;
 }
 

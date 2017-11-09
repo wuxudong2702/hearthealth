@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 import {HttpClient} from "@angular/common/http";
+import {ApiService} from '../../../business-service/api/api.service';
+import 'rxjs/add/operator/toPromise';
 
 // const headers: Array<cell> = [
 //   {
@@ -62,35 +64,20 @@ import {HttpClient} from "@angular/common/http";
 @Component({
   selector: 'app-admin-user',
   templateUrl: './admin-user.component.html',
-  styleUrls: ['./admin-user.component.css']
+  styleUrls: ['./admin-user.component.css'],
+  providers:[ApiService]
 })
 export class AdminUserComponent implements OnInit {
 
-  constructor(private http: HttpClient) {
-
-  }
+    constructor(private http: ApiService) {}
 
   ngOnInit() {
-      this.http.get("assets/hearthealthData/admin-user-data.json")
-          .subscribe(
-              (data) =>{
-                  this.headersList = data['headers'];
-                  this.dataList = data['data'];
-                  this.headers = this.headersList;
-                  this.data = this.dataList;
-                  console.log( 'headersList:',this.headers);
-                  console.log( 'data:',this.data);
-              },
-              err => {
-                  console.log('Something went wrong!');
-              }
-          )
+
   }
+
 
   headers: Array<cell> = [];
   data: Array<any> = [];
-  headersList: Array<cell>;
-  dataList: Array<any>;
   addBtn: boolean = true;
   deleteBtn: boolean = true;
   editBtn: boolean = true;

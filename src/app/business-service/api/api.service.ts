@@ -42,7 +42,27 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
-
+  getAdminRoleHeader(): Promise<any> {
+    const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-headers.json';
+    return this.httpClient.get(url)
+        .toPromise()
+        .then(data => data)
+        .catch(this.handleError);
+  }
+  getAdminRoleData(): Promise<any> {
+      const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-data.json';
+      return this.httpClient.get(url)
+        .toPromise()
+        .then(data => data)
+        .catch(this.handleError);
+  }
+  getZtreeNodes(): Promise<any> {
+      const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-ztreeNodes.json';
+      return this.httpClient.get(url)
+          .toPromise()
+          .then(data => data)
+          .catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

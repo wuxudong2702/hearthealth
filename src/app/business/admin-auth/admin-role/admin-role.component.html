@@ -11,4 +11,4 @@
   [setOperate]="setOperate"
 >
 </c-table-list>
-<app-admin-ztree *ngIf="showZTreeView" (onEdit)="onEdit($event)"></app-admin-ztree>
+<app-admin-ztree *ngIf="showZTreeView" (onEdit)="onEdit($event)" [nodes]="nodes"></app-admin-ztree>

@@ -155,8 +155,6 @@ export class AdminRoleComponent implements OnInit {
       });
       this.showZTreeView = !this.showZTreeView;
   }
-  onSort(id:number){
 
-  }
 
 }

@@ -30,6 +30,7 @@ import {HttpPaginationComponent} from '../../shared/pagination/http-pagination.c
            </div>
         </div>
     </div>
+
   `
 })
 export class HttpPaginationDemoComponent {
@@ -65,7 +66,6 @@ export class HttpPaginationDemoComponent {
      
      this.hp.search();
   }
-
 
 
 }

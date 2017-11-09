@@ -74,6 +74,7 @@ export class CPipePipe implements PipeTransform {
 export class TableListComponent implements OnInit {
 
   ngOnInit(): void {
+    console.log(this.headers,'tablelist');
     this.headers = this.headers.sort((v1, v2) => {
       return v1.index - v2.index;
     });

@@ -23,7 +23,7 @@ const htmlH: string ="<!DOCTYPE html>\n" +
   "  .article-content p{\n" +
   "    word-wrap: break-word;line-height: 1.2em;margin: 20px 0 0 0;text-indent: 1.8em;\n" +
   "  }\n" +
-  "  .article-content img {max-width: 100%;display: block;margin: 0 auto;border-radius: 4px;}\n" +
+  "  .article-content img {max-width: 30%;display: block;margin: 0 auto;border-radius: 4px; float:right;}\n" +
   "</style>\n" +
   "<div class=\"article-title\">\n" +
   "  <h1 class=\"title\">我是预览页面</h1>\n" +

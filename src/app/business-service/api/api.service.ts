@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, RequestOptionsArgs } from '@angular/http';
+import {Http, RequestOptionsArgs} from '@angular/http';
 import {SpinService} from '../../shared/spin/spin.service';
 import {HttpClient} from "@angular/common/http";
 import 'rxjs/add/operator/toPromise';
@@ -43,6 +43,32 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+
+
+  getEcgdData(): Promise<any> {
+    const url: string = '../../../assets/ecgd-data.json';
+    return this.httpClient.get(url,{})
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
+
+  getEcgdDataChart(): Promise<any> {
+    const url: string = '../../../assets/ecgd-dataChart.json';
+    return this.httpClient.get(url,{})
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
+
+  postEcgdSort(headersId,order): Promise<any> {
+    // console.log(headersId,order,'api service Sort');
+    const url: string = '../../../assets/ecgd-data.json';
+    return this.httpClient.get(url)
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {cell, SortDirection, sortObj, DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, searchObj, DataType} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -7,13 +7,13 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-ecgd',
   templateUrl: './ecgd.component.html',
   styleUrls: ['./ecgd.component.css'],
-  providers:[ApiService]
+  providers: [ApiService]
 })
 
 
 export class EcgdComponent implements OnInit {
 
-  constructor( private cdr: ChangeDetectorRef, private http: ApiService) {
+  constructor(private cdr: ChangeDetectorRef, private http: ApiService) {
 
   }
 
@@ -26,10 +26,11 @@ export class EcgdComponent implements OnInit {
     });
 
   }
-  headers: Array<cell>=[] ;
-  data: Array<any>[] ;
+
+  headers: Array<cell> = [];
+  data: Array<any>[];
   result: Array<any> = [];
-  dataChart: Array<any>=[] ;
+  dataChart: Array<any> = [];
   dataChart1: Array<any> = [];
 
   userInfoChart: object;
@@ -44,6 +45,8 @@ export class EcgdComponent implements OnInit {
   paginationBtn: boolean = true;
   setOperate: boolean = true;
   showChartView: boolean = false;
+  // searchValue: string = '';
+  // selectValue: string = '';
 
   onChart(chartId: number) {
     // console.log('chartId',chartId, dataChart[chartId]);
@@ -56,13 +59,21 @@ export class EcgdComponent implements OnInit {
   }
 
   onSort(sort: sortObj) {
-    // console.log(sort,'3456789');
-    this.http.postEcgdSort(sort.id,sort.order).then(data=>{
-        console.log(data,'data90098980980');
-        this.data=data['data'];
+       console.log(sort,'3456789');
+      this.http.postEcgdSort(sort.id, sort.order).then(data => {
+      // console.log(data,'data90098980980');
+      this.data = data['data'];
     });
   }
-  onSearch(obj:any){
 
+
+  onSearch(searchObj: searchObj) {
+    console.log(searchObj,'ecgd Search searchObj');
+    // this.selectValue = searchObj.selectValue;
+    // this.searchValue = searchObj.searchValue;
+    this.http.postEcgdSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+      console.log(data,'ecgd Search result');
+      this.data = data['data'];
+    });
   }
 }

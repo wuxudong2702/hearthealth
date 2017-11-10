@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../shared/table/table-list.component';
 
-const headers: Array<cell> = [
-  {
-    key: 'versions',
-    show: true,
-    name: '版本',
-    index: 0,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'updateInfo',
-    show: true,
-    name: '更新说明',
-    index: 1,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  }
-];
+// const headers: Array<cell> = [
+//   {
+//     key: 'versions',
+//     show: true,
+//     name: '版本',
+//     index: 0,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'updateInfo',
+//     show: true,
+//     name: '更新说明',
+//     index: 1,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   }
+// ];
+
+
 const data: Array<any> = [
   {
     versions: 'v1.0',
@@ -46,7 +48,7 @@ export class PackagesComponent implements OnInit {
 
   ngOnInit() {
   }
-  headers: Array<cell> = headers;
+  headers: Array<cell> = [];
   data: Array<any> = data;
   setOperate: boolean = true;
   deleteBtn: boolean = true;

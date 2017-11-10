@@ -1,34 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
-const headers: Array<cell> = [
-  {
-    key: 'newsTitle',
-    show: true,
-    name: '标题',
-    index: 0,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'author',
-    show: true,
-    name: '作者',
-    index: 1,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-
-  {
-    key: 'releaseDate',
-    show: true,
-    name: '发布日期',
-    index: 2,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
-  },
-
-];
+// const headers: Array<cell> = [
+//   {
+//     key: 'newsTitle',
+//     show: true,
+//     name: '标题',
+//     index: 0,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'author',
+//     show: true,
+//     name: '作者',
+//     index: 1,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//
+//   {
+//     key: 'releaseDate',
+//     show: true,
+//     name: '发布日期',
+//     index: 2,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
+//   },
+//
+// ];
 const data: Array<any> = [//表格內容列表
   {
     newsTitle: '秋季养生妙招',
@@ -93,7 +93,7 @@ export class NewsComponent implements OnInit {
   ngOnInit() {
   }
 
-  headers: Array<cell> = headers;
+  headers: Array<cell> = [];
   data: Array<any> = data;
   addBtn:boolean = true;
   deleteBtn: boolean = true;

@@ -24,10 +24,23 @@ export enum DataType {
   NONE,
 }
 
+export enum INPUTTYPE {
+  INPUT = 0,
+  SELECT,
+  DATETIME,
+}
+
+
 export class sortObj {
   order: SortDirection;
   id: string;
 }
+
+export class searchObj {
+  selectValue: string;
+  searchValue: string;
+}
+
 
 export class pipe {
   type: DataType;
@@ -36,11 +49,17 @@ export class pipe {
 
 export class cell {
   key: string;
-  show: boolean
+  show: boolean;
   name: string;
   index: number;
   order: SortDirection;
   pipe: pipe;
+  val: any;
+  selectVal:Array<any>;
+  invalidInfo: string;
+  required: boolean;
+  pattern: string;
+  inputType: INPUTTYPE;
 }
 
 
@@ -116,13 +135,13 @@ export class TableListComponent implements OnInit {
   isDelAll: boolean = false;
   selectValue: string = '';
   searchValue: string = '';
-
+  tableAdd: boolean = false;
   editValue: Array<any> = [];
 
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
-
+  submitData:object;
   delAllChecked() {
     if (!this.isDelAll) {
       this.checkedList = this.data.map(v => true);
@@ -136,7 +155,25 @@ export class TableListComponent implements OnInit {
   }
 
   add() {// 添加成功之后返回添加的数据
+    this.tableAdd = true;
+
     this.onAdd.emit();
+  }
+
+  onCancle() {
+    // console.log('table-list',i);
+    this.tableAdd = !this.tableAdd;
+  }
+
+  onSubmit(submitData:object) {
+    // console.log('table-list',i);
+    console.log('table-list-submit Data',submitData);
+    // this.submitData=submitData;
+    if(submitData){
+      this.onAdd.emit(submitData);
+    }
+    this.tableAdd = !this.tableAdd;
+
   }
 
   del(id) {
@@ -163,6 +200,7 @@ export class TableListComponent implements OnInit {
     } else if (!this.searchValue) {
       this.openError('请输入关键字！');
     } else {
+      console.log('table-list search selectValue searchValue', this.selectValue, this.searchValue);
       this.onSearch.emit({
         selectValue: this.selectValue,
         searchValue: this.searchValue,
@@ -205,10 +243,10 @@ export class TableListComponent implements OnInit {
     this.onDetails.emit(id);
   }
 
-  edit(id:number) {
+  edit(id: number) {
     this.editValue = this.data[id];
     this.onEdit.emit(
-       this.editValue
+      this.editValue
     );
   }
 
@@ -220,7 +258,7 @@ export class TableListComponent implements OnInit {
   }
 
   sort(i) {
-    console.log(i);
+    // console.log(i);
     this.headers[i].order = this.headers[i].order === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC;
     this.onSort.emit(
       {
@@ -228,11 +266,13 @@ export class TableListComponent implements OnInit {
         id: i,
       }
     );
-    console.log('table-list sort id',i,this.headers[i].order);
+    // console.log('table-list sort id',i,this.headers[i].order);
   }
-  back(){
+
+  back() {
     this.onBack.emit();
   }
+
   openError(errorInfo) {
     let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
     this.toastService.toast(toastCfg);

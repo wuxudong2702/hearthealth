@@ -1,122 +1,108 @@
-import { Component, OnInit } from '@angular/core';
-import {cell, SortDirection, sortObj,DataType} from '../../shared/table/table-list.component';
+import {Component, OnInit} from '@angular/core';
+import {cell, SortDirection, sortObj, DataType, INPUTTYPE} from '../../shared/table/table-list.component';
 
 const headers: Array<cell> = [
-  {
-    key: 'userName',
-    show: true,
-    name: '用户名',
-    index: 4,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'accountBind',
-    show: true,
-    name: '绑定账户',
-    index: 3,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
+    {
+      key: 'userName',
+      show: true,
+      name: '用户名',
+      index: 4,
+      order: SortDirection.NONE,
+      pipe: {type: DataType.NONE, params: ''},
+      val: '',
+      selectVal:[],
+      invalidInfo: '需要填写用户名！',
+      required: true,
+      pattern: '^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$\n',
+      inputType: INPUTTYPE.INPUT
 
-
-  {
-    key: 'isBinding',
-    show: true,
-    name: '是否绑定',
-    index: 2,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.ENUM, params: {0:'是',1:'否'}},
-  },
-  {
-    key: 'devNumber',
-    show: true,
-    name: '设备号',
-    index: 0,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'devType',
-    show: true,
-    name: '设备类型',
-    index: 1,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.ENUM, params: {0:'卡片式',1:'佩戴市'}},
-  },
-];
+    },
+    {
+      key: 'accountBind',
+      show: true,
+      name: '绑定账户',
+      index: 3,
+      order: SortDirection.NONE,
+      pipe: {type: DataType.NONE, params: ''},
+      val: '',
+      selectVal:[],
+      invalidInfo: '需要填写绑定的账户！',
+      required: true,
+      pattern: '',
+      inputType: INPUTTYPE.INPUT
+    },
+    {
+      key: 'isBinding',
+      show:
+        true,
+      name:
+        '是否绑定',
+      index:
+        2,
+      order:
+      SortDirection.NONE,
+      pipe:
+        {
+          type: DataType.ENUM, params: {0: '是', 1: '否'}
+        },
+      val: '是',
+      selectVal:['是', '否'],
+      invalidInfo: '请选择是否绑定！',
+      required: false,
+      pattern: '',
+      inputType: INPUTTYPE.SELECT
+    }
+    ,
+    {
+      key: 'devNumber',
+      show:
+        true,
+      name:
+        '设备号',
+      index:
+        0,
+      order:
+      SortDirection.NONE,
+      pipe:
+        {
+          type: DataType.NONE, params:
+          ''
+        }
+      ,
+      val: '',
+      selectVal:[],
+      invalidInfo: '需要填写用户名',
+      required: true,
+      pattern: '',
+      inputType: INPUTTYPE.INPUT
+    }
+    ,
+   {
+      key: 'devType',
+      show: true,
+      name: '设备类型',
+      index: 1,
+      order: SortDirection.NONE,
+      pipe: {type: DataType.ENUM, params: {0: '卡片式', 1: '佩戴市'}},
+      val: '卡片式',
+     selectVal:['卡片式', '佩戴市'],
+      invalidInfo: '请填写设备类型！',
+      required: false,
+      pattern: '',
+      inputType: INPUTTYPE.SELECT
+    }
+    ,
+  ]
+;
 const data: Array<any> = [//表格內容列表
   {
     userName: '张文丽',
     accountBind: '小名',
     isBinding: 1,
-    heartDataLength:2,
-    devNumber:'123456789',
-    devType:0,
-    sex: 0,
-    age: 23,
-  },
-  {
-    userName: '伍子胥',
-    accountBind: '小名',
-    isBinding: 1,
-    heartDataLength:2,
-    devNumber:'123456789',
-    devType:0,
-    sex: 1,
-    age: 23,
-  },
-  {
-    userName: '李文龙',
-    accountBind: '小名',
-    isBinding: 1,
-    heartDataLength:2,
-    devNumber:'45675789',
-    devType:1,
-    sex: 0,
-    age: 23,
-  },
-  {
-    userName: 'user1',
-    accountBind: '小名',
-    isBinding: 1,
-    heartDataLength:2,
-    devNumber:'123456789',
-    devType:0,
-    sex: 0,
-    age: 23,
-  },
-  {
-    userName: 'user1',
-    accountBind: '明明',
-    isBinding: 0,
-    heartDataLength:2,
-    devNumber:'12353',
-    devType:1,
-    sex: 1,
-    age: 12,
-  },
-  {
-    userName: 'user1',
-    accountBind: '小名',
-    isBinding: 1,
-    heartDataLength:2,
-    devNumber:'123456789',
-    devType:0,
-    sex: 0,
-    age: 23,
-  },
-  {
-    userName: 'user1',
-    accountBind: '小花',
-    isBinding: 0,
-    heartDataLength:2,
-    devNumber:'123456789',
-    devType:1,
-    sex: 0,
-    age: 28,
-  },
-
+    heartDataLength: 2,
+    devNumber: '123456789',
+    devType: 0,
+  }
 ];
 
 @Component({
@@ -126,23 +112,25 @@ const data: Array<any> = [//表格內容列表
 })
 export class DevComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
   headers: Array<cell> = headers;
   data: Array<any> = data;
-  addBtn:boolean = true;
+  addBtn: boolean = true;
   deleteBtn: boolean = true;
   searchBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   paginationBtn: boolean = true;
   setOperate: boolean = true;
-  onSort(sort:sortObj){
-    let id=sort.id;
-    let order=sort.order;
+
+  onSort(sort: sortObj) {
+    let id = sort.id;
+    let order = sort.order;
 
   }
 }

@@ -1,48 +1,48 @@
 import {Component, OnInit} from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
-const headers: Array<cell> = [
-  {
-    key: 'productNUm',
-    show: true,
-    name: '商品编号',
-    index: 0,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'productName',
-    show: true,
-    name: '商品名称',
-    index: 1,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'introduction',
-    show: true,
-    name: '简介',
-    index: 2,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'address',
-    show: true,
-    name: '购买地址',
-    index: 3,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'show',
-    show: true,
-    name: '是否显示',
-    index: 4,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.ENUM, params: {0: '是', 1: '否'}},
-  },
-];
+// const headers: Array<cell> = [
+//   {
+//     key: 'productNUm',
+//     show: true,
+//     name: '商品编号',
+//     index: 0,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'productName',
+//     show: true,
+//     name: '商品名称',
+//     index: 1,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'introduction',
+//     show: true,
+//     name: '简介',
+//     index: 2,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'address',
+//     show: true,
+//     name: '购买地址',
+//     index: 3,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'show',
+//     show: true,
+//     name: '是否显示',
+//     index: 4,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.ENUM, params: {0: '是', 1: '否'}},
+//   },
+// ];
 const data: Array<any> = [//表格內容列表
   {
     productName: '大衣',
@@ -109,7 +109,7 @@ export class MallComponent implements OnInit {
   ngOnInit() {
   }
 
-  headers: Array<cell> = headers;
+  headers: Array<cell> = [];
   data: Array<any> = data;
   addBtn: boolean = true;
   deleteBtn: boolean = true;

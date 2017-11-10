@@ -1,32 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../shared/table/table-list.component';
 
-const headers: Array<cell> = [
-    {
-        key: 'userName',
-        show: true,
-        name: '用户名',
-        index: 0,
-        order: SortDirection.NONE,
-        pipe: {type: DataType.NONE, params: ''},
-    },
-    {
-        key: 'operate',
-        show: true,
-        name: '操作',
-        index: 1,
-        order: SortDirection.NONE,
-        pipe: {type: DataType.NONE, params: ''},
-    },
-    {
-        key: 'operateTime',
-        show: true,
-        name: '时间',
-        index: 2,
-        order: SortDirection.NONE,
-        pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
-    }
-];
+// const headers: Array<cell> = [
+//   {
+//     key: 'userName',
+//     show: true,
+//     name: '用户名',
+//     index: 0,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'operate',
+//     show: true,
+//     name: '操作',
+//     index: 1,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'operateTime',
+//     show: true,
+//     name: '时间',
+//     index: 2,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
+//   }
+// ];
 const data: Array<any> = [
     {
         userName: 'user1',
@@ -58,7 +58,7 @@ export class LogComponent implements OnInit {
   ngOnInit() {
   }
   // setOperate
-  headers: Array<cell> = headers;
+  headers: Array<cell> = [];
   data: Array<any> = data;
   searchBtn: boolean = true;
   paginationBtn: boolean = true;

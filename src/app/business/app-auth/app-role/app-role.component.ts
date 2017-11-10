@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
-const headers: Array<cell> = [
-  {
-    key: 'appRole',
-    show: true,
-    name: '账户角色',
-    index: 0,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.ENUM, params: {0:'子账户',1:'主账户'}},
-  },
-  {
-    key: 'subUsersMaxNum',
-    show: true,
-    name: '最大子用户个数',
-    index: 1,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-
-];
+// const headers: Array<cell> = [
+//   {
+//     key: 'appRole',
+//     show: true,
+//     name: '账户角色',
+//     index: 0,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.ENUM, params: {0:'子账户',1:'主账户'}},
+//
+//   },
+//   {
+//     key: 'subUsersMaxNum',
+//     show: true,
+//     name: '最大子用户个数',
+//     index: 1,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//
+// ];
 const data: Array<any> = [//表格內容列表
   {
     subUsersMaxNum: 12,
@@ -63,7 +64,7 @@ export class AppRoleComponent implements OnInit {
 
   ngOnInit() {
   }
-  headers: Array<cell> = headers;
+  headers: Array<cell> = [];
   data: Array<any> = data;
   addBtn: boolean = true;
   deleteBtn: boolean = true;

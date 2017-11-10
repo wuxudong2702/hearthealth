@@ -1,56 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
-const headers: Array<cell> = [
-  {
-    key: 'userName',
-    show: true,
-    name: '用户名',
-    index: 1,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'accountType',
-    show: true,
-    name: '帐户类型',
-    index: 0,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'relationship',
-    show: true,
-    name: '与主账户关系',
-    index: 2,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'historicalTests',
-    show: true,
-    name: '历史检测次数',
-    index: 3,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-  {
-    key: 'earliest',
-    show: true,
-    name: '最早检测时间',
-    index: 3,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
-  },
-  {
-    key: 'latest',
-    show: true,
-    name: '最晚检测时间',
-    index: 4,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
-  },
-];
+// const headers: Array<cell> = [
+//   {
+//     key: 'userName',
+//     show: true,
+//     name: '用户名',
+//     index: 1,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'accountType',
+//     show: true,
+//     name: '帐户类型',
+//     index: 0,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'relationship',
+//     show: true,
+//     name: '与主账户关系',
+//     index: 2,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'historicalTests',
+//     show: true,
+//     name: '历史检测次数',
+//     index: 3,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//   {
+//     key: 'earliest',
+//     show: true,
+//     name: '最早检测时间',
+//     index: 3,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
+//   },
+//   {
+//     key: 'latest',
+//     show: true,
+//     name: '最晚检测时间',
+//     index: 4,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
+//   },
+// ];
 const data: Array<any> = [
   {
     userName: 'user1',
@@ -163,7 +163,7 @@ export class HhrComponent implements OnInit {
   }
 
   dataChart: Array<any> = dataChart;
-  headers: Array<cell> = headers;
+  headers: Array<cell> = [];
   data: Array<any> = data;
   dataChart1: Array<any>;
 

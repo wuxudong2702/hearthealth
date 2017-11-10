@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
 
-const headers: Array<cell> = [
-  {
-    key: 'version',
-    show: true,
-    name: '版本名称',
-    index: 0,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.NONE, params: ''},
-  },
-
-
-  {
-    key: 'acquisitionTime',
-    show: true,
-    name: '发布日期',
-    index: 1,
-    order: SortDirection.NONE,
-    pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
-  },
-
-];
+// const headers: Array<cell> = [
+//   {
+//     key: 'version',
+//     show: true,
+//     name: '版本名称',
+//     index: 0,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.NONE, params: ''},
+//   },
+//
+//
+//   {
+//     key: 'acquisitionTime',
+//     show: true,
+//     name: '发布日期',
+//     index: 1,
+//     order: SortDirection.NONE,
+//     pipe: {type: DataType.DATATIME, params: 'yyyyMMdd'},
+//   },
+//
+// ];
 const data: Array<any> = [//表格內容列表
   {
     version: 'V1.0',
@@ -65,7 +65,7 @@ export class GuideComponent implements OnInit {
 
   ngOnInit() {
   }
-  headers: Array<cell> = headers;
+  headers: Array<cell> = [];
   data: Array<any> = data;
   addBtn:boolean = true;
   deleteBtn: boolean = true;

@@ -69,6 +69,14 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
+  postEcgdSearch(selectValue,searchValue): Promise<any> {
+    const url: string = '../../../assets/ecgd-data.json';
+    return this.httpClient.get(url)
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
+
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

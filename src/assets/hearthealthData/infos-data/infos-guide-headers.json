@@ -17,4 +17,5 @@
       "pipe": {"type": "DataType.DATATIME", "params": "yyyyMMdd"}
     }
   ]
+
 }

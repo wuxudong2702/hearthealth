@@ -41,4 +41,5 @@
       "pipe": {"type": "DataType.ENUM", "params": {"0": "是", "1": "否"}}
     }
   ]
+
 }

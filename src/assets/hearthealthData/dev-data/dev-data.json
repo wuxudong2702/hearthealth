@@ -1,0 +1,20 @@
+{
+  "data":[
+    {
+      "userName": "张文丽",
+      "accountBind": "小名",
+      "isBinding": 1,
+      "heartDataLength":2,
+      "devNumber":"123456789",
+      "devType":"0"
+    },
+    {
+      "userName": "伍子胥",
+      "accountBind": "小名",
+      "isBinding": "1",
+      "heartDataLength":2,
+      "devNumber":"123456789",
+      "devType":"0"
+    }
+  ]
+}

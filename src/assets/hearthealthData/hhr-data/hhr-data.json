@@ -1,0 +1,44 @@
+{
+  "data":[
+    {
+      "userName": "user1",
+      "accountType": "子帐户",
+      "relationship": "父子",
+      "historicalTests": 3,
+      "earliest": "2017-8-1 18:09:00",
+      "latest": "2017-10-1 10:20:00"
+    },
+    {
+      "userName": "user1",
+      "accountType": "子帐户",
+      "relationship": "父子",
+      "historicalTests": 3,
+      "earliest": "2017-8-1 18:09:00",
+      "latest": "2017-10-1 10:20:00"
+    },
+    {
+      "userName": "user1",
+      "accountType": "子帐户",
+      "relationship": "父子",
+      "historicalTests": 3,
+      "earliest": "2017-8-1 18:09:00",
+      "latest": "2017-10-1 10:20:00"
+    },
+    {
+      "userName": "user1",
+      "accountType": "子帐户",
+      "relationship": "父子",
+      "historicalTests": 3,
+      "earliest": "2017-8-1 18:09:00",
+      "latest": "2017-10-1 10:20:00"
+    },
+    {
+      "userName": "user1",
+      "accountType": "子帐户",
+      "relationship": "父子",
+      "historicalTests": 3,
+      "earliest": "2017-8-1 18:09:00",
+      "latest": "2017-10-1 10:20:00"
+    }
+  ]
+}

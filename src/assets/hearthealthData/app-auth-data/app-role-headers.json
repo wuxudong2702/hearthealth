@@ -1,0 +1,20 @@
+{
+  "headers":[
+    {
+      "key": "appRole",
+      "show": true,
+      "name": "账户角色",
+      "index": 0,
+      "order": "SortDirection.NONE",
+      "pipe": {"type": "DataType.ENUM", "params": {"0":"子账户","1":"主账户"}}
+    },
+    {
+      "key": "subUsersMaxNum",
+      "show": true,
+      "name": "最大子用户个数",
+      "index": 1,
+      "order": "SortDirection.NONE",
+      "pipe": {"type": "DataType.NONE", "params": ""}
+    }
+  ]
+}

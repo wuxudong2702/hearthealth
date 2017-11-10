@@ -1,0 +1,32 @@
+{
+  "data":[
+    {
+      "version": "V1.0",
+      "acquisitionTime": "2017-1-1 18:09:00"
+    },
+    {
+      "version": "V1.6",
+      "acquisitionTime": "2017-8-1 18:09:00"
+    },
+    {
+      "version": "V1.0",
+      "acquisitionTime": "2017-8-1 18:09:00"
+    },
+    {
+      "version": "V1.8",
+      "acquisitionTime": "2017-8-10 18:09:00"
+    },
+    {
+      "version": "V2.1",
+      "acquisitionTime": "2017-8-12 18:09:00"
+    },
+    {
+      "version": "V3.0",
+      "acquisitionTime": "2017-8-25 18:09:00"
+    },
+    {
+      "version": "V2.0",
+      "acquisitionTime": "2017-9-7 18:09:00"
+    }
+  ]
+}

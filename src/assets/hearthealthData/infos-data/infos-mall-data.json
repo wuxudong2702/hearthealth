@@ -1,0 +1,18 @@
+{
+  "data":[
+    {
+      "productName": "大衣",
+      "productNUm": "00112225",
+      "address": "www.taobao.com",
+      "show": 1,
+      "introduction": "好，真好"
+    },
+    {
+      "productName": "user1",
+      "productNUm": "钱一",
+      "address": "www.jingdong.com",
+      "show": 1,
+      "introduction": "看见对方案例看似简单我打卡机AK"
+    }
+  ]
+}

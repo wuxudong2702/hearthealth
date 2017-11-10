@@ -1,0 +1,24 @@
+{
+  "data":[
+    {
+      "subUserName": "张倩倩",
+      "relationship": "父子",
+      "age": 10,
+      "sex": "1",
+      "address": "北京市海淀区西二旗",
+      "telephoneNum": 18045142702,
+      "height":185,
+      "weight":75
+    },
+    {
+      "subUserName": "李四",
+      "relationship": "父子",
+      "age": 22,
+      "sex": "0",
+      "address": "黑龙江",
+      "telephoneNum": 18045142702,
+      "height":185,
+      "weight":75
+    }
+  ]
+}

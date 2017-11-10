@@ -1,0 +1,20 @@
+{
+    "headers":[
+        {
+          "key": "administratorPermissions",
+          "show": true,
+          "name": "管理员角色",
+          "index": 1,
+          "order": "SortDirection.NONE",
+          "pipe": {"type": "DataType.NONE", "params":""}
+        },
+        {
+          "key": "Permissions",
+          "show": true,
+          "name": "管理员权限",
+          "index": 0,
+          "order": "SortDirection.NONE",
+          "pipe": {"type": "DataType.NONE", "params": ""}
+        }
+    ]
+}

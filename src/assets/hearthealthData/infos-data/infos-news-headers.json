@@ -1,0 +1,29 @@
+{
+  "headers":[
+    {
+      "key": "newsTitle",
+      "show": true,
+      "name": "标题",
+      "index": 0,
+      "order": "SortDirection.NONE",
+      "pipe": {"type":" DataType.NONE", "params": ""}
+    },
+    {
+      "key": "author",
+      "show": true,
+      "name": "作者",
+      "index": 1,
+      "order": "SortDirection.NONE",
+      "pipe": {"type":"DataType.NONE", "params": ""}
+    },
+
+    {
+      "key": "releaseDate",
+      "show": true,
+      "name": "发布日期",
+      "index": 2,
+      "order": "SortDirection.NONE",
+      "pipe": {"type": "DataType.DATATIME", "params": "yyyyMMdd"}
+    }
+  ]
+}

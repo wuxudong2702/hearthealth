@@ -1,0 +1,16 @@
+{
+  "data":[
+    {
+      "versions": "v1.0",
+      "updateInfo": "我什么都没有改。。。。"
+    },
+    {
+      "versions": "v2.0",
+      "updateInfo": "我改了一点点"
+    },
+    {
+      "versions": "v3.0",
+      "updateInfo": "反正不是我改的"
+    }
+  ]
+}

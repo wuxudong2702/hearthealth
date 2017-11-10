@@ -1,13 +1,15 @@
 <c-table-list
   *ngIf="!showZTreeView"
   (onEdit)="onEdit($event)"
+  (onSort)="onSort($event)"
+  (onDel)="onDel($event)"
+  (onDelAll)="onDelAll($event)"
   [headers]="headers"
   [data]="data"
-  (onSort)="onSort()"
   [addBtn]="addBtn"
   [deleteBtn]="deleteBtn"
-  [editBtn]="editBtn"
   [deleteAllBtn]="deleteAllBtn"
+  [editBtn]="editBtn"
   [setOperate]="setOperate"
 >
 </c-table-list>

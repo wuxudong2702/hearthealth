@@ -1,11 +1,11 @@
-
-
 <c-table-list
   [headers]="headers"
   [data]="data"
   [deleteBtn]="deleteBtn"
-  (onSort)="onSort()"
   (onDetails)="onDetails()"
+  (onSort)="onSort($event)"
+  (onDel)="onDel($event)"
+  (onDelAll)="onDelAll($event)"
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
@@ -18,7 +18,9 @@
 </c-table-list>
 
 <c-table-list
-
+        (onSort)="onSubSort($event)"
+        (onDel)="onSubDel($event)"
+        (onDelAll)="onSubDelAll($event)"
   [headers]="subUserHeaders"
   [data]="subUserData"
   [deleteBtn]="deleteBtn"

@@ -7,7 +7,6 @@ import { AdminZtreeComponent } from './admin-ztree/admin-ztree.component';
 import  { ZtreeModule}            from '../../../shared/ztree/ztree.module';//ztree
 import {HttpClientModule} from '@angular/common/http';
 
-
 @NgModule({
     imports: [
         CommonModule,

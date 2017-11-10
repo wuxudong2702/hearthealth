@@ -1,0 +1,10 @@
+.addInputValue {
+  width: 400px;
+}
+
+.invalidInfo {
+  height: 33px;
+  margin-left: 20px;
+  width: 200px;
+  padding-top: 5px;
+}

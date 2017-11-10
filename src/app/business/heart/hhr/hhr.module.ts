@@ -9,6 +9,7 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import {FormsModule} from '@angular/forms';
 import  { DatepickerI18nModule} from '../../../shared/datepickerI18n/datepickerI18n.module';
 import { HhrChartComponent } from './hhr-chart/hhr-chart.component';//日期i18n
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HhrChartComponent } from './hhr-chart/hhr-chart.component';//日期i18n
         DpDatePickerModule,
         DatepickerI18nModule,
         AngularEchartsModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
     declarations: [HhrComponent, HhrChartComponent]
 

@@ -2,6 +2,8 @@
 <c-table-list
   *ngIf="!editor"
   (onSort)="onSort($event)"
+  (onDel)="onDel($event)"
+  (onDelAll)="onDelAll($event)"
   (onEdit)="onEdit($event)"
   [headers]="headers"
   [data]="data"

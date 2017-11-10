@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../shared/table/table-list.component';
+import {ApiService} from '../../business-service/api/api.service';
+import 'rxjs/add/operator/toPromise';
 
 // const headers: Array<cell> = [
 //   {
@@ -19,44 +21,64 @@ import {cell, SortDirection, sortObj,DataType} from '../../shared/table/table-li
 //     pipe: {type: DataType.NONE, params: ''},
 //   }
 // ];
-
-
-const data: Array<any> = [
-  {
-    versions: 'v1.0',
-    updateInfo: '我什么都没有改。。。。',
-  },
-  {
-    versions: 'v2.0',
-    updateInfo: '我改了一点点',
-  },
-  {
-    versions: 'v3.0',
-    updateInfo: '反正不是我改的',
-  },
-
-];
+// const data: Array<any> = [
+//   {
+//     versions: 'v1.0',
+//     updateInfo: '我什么都没有改。。。。',
+//   },
+//   {
+//     versions: 'v2.0',
+//     updateInfo: '我改了一点点',
+//   },
+//   {
+//     versions: 'v3.0',
+//     updateInfo: '反正不是我改的',
+//   },
+//
+// ];
 
 @Component({
   selector: 'app-packages',
   templateUrl: './packages.component.html',
-  styleUrls: ['./packages.component.css']
+  styleUrls: ['./packages.component.css'],
+  providers:[ApiService]
 })
 export class PackagesComponent implements OnInit {
 
-  constructor() { }
+    constructor(private http: ApiService) {}
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.http.getPackagesHeader().then(data => {
+            this.headers = data['headers'];
+        });
+        this.http.getPackagesData().then(data => {
+            this.data = data['data'];
+        });
+    }
+
   headers: Array<cell> = [];
-  data: Array<any> = data;
+  data: Array<any> = [];
   setOperate: boolean = true;
   deleteBtn: boolean = true;
   deleteAllBtn: boolean = true;
   upload:boolean=true;
-  onSort(sort:sortObj){
-    let id=sort.id;
-    let order=sort.order;
 
-  }
+    onDel(id:number){
+        this.http.postPackagesDel(id).then(data=>{
+            console.log(data,'删除');
+            this.data=data['data'];
+        });
+    }
+    onDelAll(checkedList:any){
+        this.http.postPackagesDelAll(checkedList).then(data=>{
+            console.log(data,'删除全部');
+            this.data=data['data'];
+        });
+    }
+    onSort(sort: sortObj) {
+        this.http.postPackagesSort(sort.id,sort.order).then(data=>{
+            console.log(data,'排序');
+            this.data=data['data'];
+        });
+    }
 }

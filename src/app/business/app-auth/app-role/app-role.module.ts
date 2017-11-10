@@ -3,12 +3,14 @@ import {CommonModule} from '@angular/common';
 import {AppRoleComponent} from './app-role.component';
 import {AppRoleRoutingModule} from './app-role-routing.module';
 import {UserModule} from '../../../shared/table/table.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     AppRoleRoutingModule,
-    UserModule
+    UserModule,
+    HttpClientModule
   ],
   declarations: [AppRoleComponent]
 })

@@ -1,0 +1,46 @@
+{
+  "headers":[
+    {
+     "key": "userName",
+     "show": true,
+     "name": "用户名",
+     "index": 4,
+     "order": "SortDirection.NONE",
+     "pipe": {"type": "DataType.NONE", "params": ""}
+    },
+    {
+     "key": "accountBind",
+     "show": true,
+     "name": "绑定账户",
+     "index": 3,
+     "order": "SortDirection.NONE",
+     "pipe": {"type": "DataType.NONE", "params": ""}
+    },
+
+
+    {
+     "key": "isBinding",
+     "show": true,
+     "name": "是否绑定",
+     "index": 2,
+     "order": "SortDirection.NONE",
+     "pipe": {"type": "DataType.ENUM", "params": {"0":"是","1":"否"}}
+    },
+    {
+     "key": "devNumber",
+     "show": true,
+     "name": "设备号",
+     "index": 0,
+     "order": "SortDirection.NONE",
+     "pipe": {"type": "DataType.NONE", "params": ""}
+    },
+    {
+     "key": "devType",
+     "show": true,
+     "name": "设备类型",
+     "index": 1,
+     "order": "SortDirection.NONE",
+     "pipe": {"type": "DataType.ENUM", "params": {"0":"卡片式","1":"佩戴市"}}
+    }
+  ]
+}

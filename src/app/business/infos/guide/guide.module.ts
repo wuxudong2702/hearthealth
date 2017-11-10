@@ -4,6 +4,7 @@ import {GuideComponent} from './guide.component';
 import {GuideRoutingModule} from './guide-routing.module';
 import {UserModule} from '../../../shared/table/table.module';
 import {Editorh5Module} from '../../../business-shared/H5editor/editorh5.module'
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import {Editorh5Module} from '../../../business-shared/H5editor/editorh5.module'
     GuideRoutingModule,
     UserModule,
     Editorh5Module,
+    HttpClientModule
   ],
   declarations: [GuideComponent]
 })

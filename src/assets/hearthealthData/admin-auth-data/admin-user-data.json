@@ -1,0 +1,12 @@
+{
+  "data":[
+    {
+      "administrator": "admin",
+      "character": "管理员"
+    },
+    {
+      "administrator": "admin2",
+      "character": "超级管理员"
+    }
+  ]
+}

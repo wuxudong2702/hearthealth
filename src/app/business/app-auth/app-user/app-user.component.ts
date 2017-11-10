@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
+import {ApiService} from '../../../business-service/api/api.service';
+import 'rxjs/add/operator/toPromise';
 
 // const headers: Array<cell> = [
 //   {
@@ -76,43 +78,42 @@ import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table
 //   },
 //
 // ];
-const data: Array<any> = [//表格內容列表
-  {
-    userName: '张文丽',
-    accountType: 1,
-    age: 12,
-    sex: 0,
-    address: '安徽省',
-    telephoneNum: '18045142702',
-    height:'185',
-    weight:'75',
-    subUsersNum:20,
-  },
-  {
-    userName: '张倩倩',
-    accountType: 0,
-    age: 10,
-    sex: 1,
-    address: '北京市海淀区西二旗',
-    telephoneNum: '18045142702',
-    height:'185',
-    weight:'75',
-    subUsersNum:20,
-  },
-  {
-    userName: '李四',
-    accountType: 0,
-    age: 22,
-    sex: 0,
-    address: '黑龙江',
-    telephoneNum: '18045142702',
-    height:'185',
-    weight:'75',
-    subUsersNum:10,
-  },
-
-];
-
+// const data: Array<any> = [//表格內容列表
+//   {
+//     userName: '张文丽',
+//     accountType: 1,
+//     age: 12,
+//     sex: 0,
+//     address: '安徽省',
+//     telephoneNum: '18045142702',
+//     height:'185',
+//     weight:'75',
+//     subUsersNum:20,
+//   },
+//   {
+//     userName: '张倩倩',
+//     accountType: 0,
+//     age: 10,
+//     sex: 1,
+//     address: '北京市海淀区西二旗',
+//     telephoneNum: '18045142702',
+//     height:'185',
+//     weight:'75',
+//     subUsersNum:20,
+//   },
+//   {
+//     userName: '李四',
+//     accountType: 0,
+//     age: 22,
+//     sex: 0,
+//     address: '黑龙江',
+//     telephoneNum: '18045142702',
+//     height:'185',
+//     weight:'75',
+//     subUsersNum:10,
+//   },
+//
+// ];
 //子用户列表。
 // const subUserHeaders: Array<cell> = [
 //   {
@@ -180,64 +181,63 @@ const data: Array<any> = [//表格內容列表
 //     pipe: {type: DataType.NONE, params: ''},
 //   },
 // ];
-const subUserData:Array<any>=[//表格內容列表
-  {
-    userName: '张文丽',
-    relationship: '父子',
-    age: 12,
-    sex: 0,
-    address: '安徽省',
-    telephoneNum: '18045142702',
-    height:'185',
-    weight:'75',
-  },
-  {
-    userName: '张倩倩',
-    relationship: '父子',
-    age: 10,
-    sex: 1,
-    address: '北京市海淀区西二旗',
-    telephoneNum: '18045142702',
-    height:'185',
-    weight:'75',
-  },
-  {
-    userName: '李四',
-    relationship: '父子',
-    age: 22,
-    sex: 0,
-    address: '黑龙江',
-    telephoneNum: '18045142702',
-    height:'185',
-    weight:'75',
-  },
-
-];
-// const subUsersData:Array<any>=[
+// const subUserData:Array<any>=[//表格內容列表
 //   {
-//     userName:'无序的',
-//     age: '34',
-//     sex:0
+//     userName: '张文丽',
+//     relationship: '父子',
+//     age: 12,
+//     sex: 0,
+//     address: '安徽省',
+//     telephoneNum: '18045142702',
+//     height:'185',
+//     weight:'75',
 //   },
-//   ['zi yhu 2','子用户10','字用户']]
+//   {
+//     userName: '张倩倩',
+//     relationship: '父子',
+//     age: 10,
+//     sex: 1,
+//     address: '北京市海淀区西二旗',
+//     telephoneNum: '18045142702',
+//     height:'185',
+//     weight:'75',
+//   },
+//   {
+//     userName: '李四',
+//     relationship: '父子',
+//     age: 22,
+//     sex: 0,
+//     address: '黑龙江',
+//     telephoneNum: '18045142702',
+//     height:'185',
+//     weight:'75',
+//   },
+//
+// ];
 
 @Component({
   selector: 'app-app-user',
   templateUrl: './app-user.component.html',
-  styleUrls: ['./app-user.component.css']
+  styleUrls: ['./app-user.component.css'],
+  providers:[ApiService]
 })
 export class AppUserComponent implements OnInit {
 
-  constructor() {
-  }
+  constructor(private http: ApiService) {}
 
   ngOnInit() {
+      this.http.getAppUserHeader().then(data => {
+          this.headers = data['headers'];
+      });
+      this.http.getAppUserData().then(data => {
+          this.data = data['data'];
+      });
   }
 
   headers: Array<cell> = [];
-  data: Array<any> = data;
+  data: Array<any> = [];
   subUserHeaders:Array<any>=[];
-  subUserData:Array<any>=subUserData;
+  subUserData:Array<any>=[];
 
   addBtn:boolean=true;
   deleteBtn: boolean = true;
@@ -261,6 +261,12 @@ export class AppUserComponent implements OnInit {
     //
     // this.headers=this.subUserHeaders;
     // this.data=this.subUserData;
+    this.http.getAppUserSubHeader().then(data => {
+        this.subUserHeaders = data['headers'];
+    });
+    this.http.getAppUserSubData().then(data => {
+        this.subUserData = data['data'];
+    });
   }
   // onDownload(){
   //   this.showChartView=!this.showChartView;
@@ -268,10 +274,42 @@ export class AppUserComponent implements OnInit {
   onBack(){
     this.subUsers=!this.subUsers;
   }
-  //
-  // onSort(sort:sortObj){
-  //   let id=sort.id;
-  //   let order=sort.order;
-  //
-  // }
+
+  onDel(id:number){
+      this.http.postAppUserDel(id).then(data=>{
+          console.log(data,'删除');
+          this.data=data['data'];
+      });
+  }
+  onDelAll(checkedList:any){
+      this.http.postAppUserDelAll(checkedList).then(data=>{
+          console.log(data,'删除全部');
+          this.data=data['data'];
+      });
+  }
+  onSort(sort: sortObj) {
+      this.http.postAppUserSort(sort.id,sort.order).then(data=>{
+          console.log(data,'排序');
+          this.data=data['data'];
+      });
+  }
+
+  onSubDel(id:number){
+      this.http.postAppUserSubDel(id).then(data=>{
+          console.log(data,'删除');
+          this.subUserData=data['data'];
+      });
+  }
+  onSubDelAll(checkedList:any){
+      this.http.postAppUserSubDelAll(checkedList).then(data=>{
+          console.log(data,'删除全部');
+          this.subUserData=data['data'];
+      });
+  }
+  onSubSort(sort: sortObj) {
+      this.http.postAppUserSubSort(sort.id,sort.order).then(data=>{
+          console.log(data,'排序');
+          this.subUserData=data['data'];
+      });
+  }
 }

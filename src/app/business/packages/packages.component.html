@@ -1,7 +1,9 @@
 
 <c-table-list
   *ngIf="!showChartView"
-  (onSort)="onSort()"
+  (onSort)="onSort($event)"
+  (onDel)="onDel($event)"
+  (onDelAll)="onDelAll($event)"
   [headers]="headers"
   [data]="data"
   [deleteBtn]="deleteBtn"

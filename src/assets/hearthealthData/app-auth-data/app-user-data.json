@@ -1,0 +1,37 @@
+{
+  "data":[
+    {
+      "userName": "张文丽",
+      "accountType": "1",
+      "age": 12,
+      "sex": "0",
+      "address": "安徽省",
+      "telephoneNum": 18045142702,
+      "height":185,
+      "weight":75,
+      "subUsersNum":20
+    },
+    {
+      "userName": "张倩倩",
+      "accountType": "0",
+      "age": 10,
+      "sex": "1",
+      "address": "北京市海淀区西二旗",
+      "telephoneNum": 18045142702,
+      "height":185,
+      "weight":75,
+      "subUsersNum":20
+    },
+    {
+      "userName": "李四",
+      "accountType": "0",
+      "age": 22,
+      "sex": "0",
+      "address": "黑龙江",
+      "telephoneNum": 18045142702,
+      "height":185,
+      "weight":75,
+      "subUsersNum":10
+    }
+  ]
+}

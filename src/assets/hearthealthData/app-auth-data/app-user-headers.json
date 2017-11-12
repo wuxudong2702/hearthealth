@@ -6,7 +6,16 @@
       "name": "用户名",
       "index": 4,
       "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.NONE", "params": ""}
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal": "",
+      "validExample": "武旭东",
+      "required": true,
+      "pattern": "",
+      "inputType": "0"
     },
     {
       "key": "accountType",
@@ -14,7 +23,19 @@
       "name": "账户类型",
       "index": 0,
       "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.ENUM", "params": {"0": "子账户", "1": "主账户"}}
+      "pipe": {
+        "type": "DataType.ENUM",
+        "params": {
+          "0": "子账户",
+          "1": "主账户"
+        }
+      },
+      "val": "0",
+      "selectVal": ["子账户","主账户"],
+      "validExample": "",
+      "required": false,
+      "pattern": "",
+      "inputType": "1"
     },
     {
       "key": "age",
@@ -22,15 +43,36 @@
       "name": "年龄",
       "index": 1,
       "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.NONE", "params": ""}
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal": "",
+      "validExample": "23",
+      "required": true,
+      "pattern": "[0-9]+$",
+      "inputType": "0"
     },
     {
-      "key":"sex",
+      "key": "sex",
       "show": true,
       "name": "性别",
       "index": 2,
       "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.ENUM", "params": {"0": "女", "1": "男"}}
+      "pipe": {
+        "type": "DataType.ENUM",
+        "params": {
+          "0": "女",
+          "1": "男"
+        }
+      },
+      "val": "0",
+      "selectVal": ["女","男"],
+      "validExample": "",
+      "required": false,
+      "pattern": "",
+      "inputType": "1"
     },
     {
       "key": "address",
@@ -38,15 +80,16 @@
       "name": "地区",
       "index": 3,
       "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.NONE", "params": ""}
-    },
-    {
-      "key": "telephoneNum",
-      "show": true,
-      "name": "手机",
-      "index": 4,
-      "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.NONE", "params": ""}
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal": "",
+      "validExample": "黑龙江哈尔滨南岗区",
+      "required": true,
+      "pattern": "",
+      "inputType": "0"
     },
     {
       "key": "height",
@@ -54,7 +97,33 @@
       "name": "身高",
       "index": 5,
       "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.NONE", "params": ""}
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal": "",
+      "validExample": "185",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "inputType": "0"
+    },
+    {
+      "key": "telephoneNum",
+      "show": true,
+      "name": "手机",
+      "index": 4,
+      "order": "SortDirection.NONE",
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal": "",
+      "validExample": "18045142702",
+      "required": true,
+      "pattern": "1[3|4|5|8][0-9]{9}",
+      "inputType": "0"
     },
     {
       "key": "weight",
@@ -62,7 +131,16 @@
       "name": "体重",
       "index": 6,
       "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.NONE", "params": ""}
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal": "",
+      "validExample": "65",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "inputType": "0"
     },
     {
       "key": "subUsersNum",
@@ -70,7 +148,17 @@
       "name": "子用户个数",
       "index": 7,
       "order": "SortDirection.NONE",
-      "pipe": {"type": "DataType.NONE", "params": ""}
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+
+      "val": "",
+      "selectVal": "",
+      "validExample": "15",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "inputType": "0"
     }
   ]
 }

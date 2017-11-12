@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MallComponent} from './mall.component';
 import {MallRoutingModule} from './mall-routing.module';
-import {UserModule} from '../../../shared/table/table.module';
+import {TableModule} from '../../../shared/table/table.module';
 import {Editorh5Module} from '../../../business-shared/H5editor/editorh5.module'
 import {HttpClientModule} from '@angular/common/http';
 
@@ -10,7 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     CommonModule,
     MallRoutingModule,
-    UserModule,
+    TableModule,
     Editorh5Module,
     HttpClientModule
   ],

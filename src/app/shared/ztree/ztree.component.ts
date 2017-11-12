@@ -7,7 +7,7 @@ declare var $: any;
     selector: 'c-ztree',
     template: `
        <div [hidden]="searchMsgHidden" class="c-ztree-search-box">搜索的数据不存在...</div>
-       <div #ztree [hidden]="!searchMsgHidden"></div>
+       <div #ztree [hidden]="!searchMsgHidden"  ></div>
   `,
   styleUrls:['./ztree.component.scss']
 })
@@ -68,7 +68,7 @@ export class ZtreeComponent implements AfterViewInit, OnDestroy, OnInit {
         this.ztreeInstance = $.fn.zTree.init($('#' + ztreeId), this.setting, this.zNodes);
         return true;
     }
-    
+
     /**
      * 获得树id
      */
@@ -78,7 +78,7 @@ export class ZtreeComponent implements AfterViewInit, OnDestroy, OnInit {
 
     /**
      * 重置树
-     * @param nodes 
+     * @param nodes
      */
     private resetTree(nodes: any) {
         $.fn.zTree.init($('#' + this.getTreeId()), this.setting, nodes);
@@ -86,8 +86,8 @@ export class ZtreeComponent implements AfterViewInit, OnDestroy, OnInit {
 
     /**
      * 检查节点是否存在
-     * @param searchNodes 
-     * @param curNode 
+     * @param searchNodes
+     * @param curNode
      */
     private  checkSearchTreeExists(searchNodes:Array<any>,curNode:any){
         for(let node of searchNodes){
@@ -120,7 +120,7 @@ export class ZtreeComponent implements AfterViewInit, OnDestroy, OnInit {
 
     /**
      * 搜索节点
-     * @param searchTxt 
+     * @param searchTxt
      */
     searchTree(searchTxt: string = '') {
         searchTxt = searchTxt.trim();
@@ -143,7 +143,7 @@ export class ZtreeComponent implements AfterViewInit, OnDestroy, OnInit {
             if (nodes && nodes.length > 0) {
                 this.resetTree(nodes);
             }else{
-               this.searchMsgHidden = false; 
+               this.searchMsgHidden = false;
             }
 
         }
@@ -151,7 +151,7 @@ export class ZtreeComponent implements AfterViewInit, OnDestroy, OnInit {
 
     /**
      * 选择节点
-     * @param nodeArray 
+     * @param nodeArray
      */
     checkedNodes(nodeArray:Array<any>){
         for(let node of this.ztreeInstance.transformToArray(this.zNodes)){

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,news,DataType} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -99,11 +99,13 @@ export class NewsComponent implements OnInit {
         });
         this.http.getNewsData().then(data => {
             this.data = data['data'];
+            console.log('0000',this.data);
         });
     }
 
   headers: Array<cell> = [];
   data: Array<any> = [];
+  dataEditor: news;
   addBtn:boolean = true;
   deleteBtn: boolean = true;
   searchBtn: boolean = true;
@@ -114,10 +116,11 @@ export class NewsComponent implements OnInit {
   setOperate:boolean=true;
   editor:boolean=false;
 
-  onEdit(id:any){
-    // console.log(this.editor,id);
+  onEdit(id:number){
+     console.log('infos news id',this.editor,id);
+    this.dataEditor=this.data[id];
     this.editor=true;
-
+   console.log('infos news dataEditor',this.dataEditor);
   }
   onEditBack(id:number){
     this.editor=false;
@@ -141,5 +144,9 @@ export class NewsComponent implements OnInit {
             console.log(data,'排序');
             this.data=data['data'];
         });
+    }
+    onAdd(){
+      console.log('212132323');
+      this.editor=true;
     }
 }

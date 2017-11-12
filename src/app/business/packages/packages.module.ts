@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {PackagesComponent} from './packages.component';
 import {PackagesRoutingModule} from './packages-routing.module';
-import {UserModule} from '../../shared/table/table.module';
+import {TableModule} from '../../shared/table/table.module';
 import {HttpClientModule} from '@angular/common/http';
 
 
@@ -10,7 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     CommonModule,
     PackagesRoutingModule,
-    UserModule,
+    TableModule,
     HttpClientModule
   ],
   declarations: [PackagesComponent]

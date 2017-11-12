@@ -3,14 +3,16 @@ import {cell} from "../../table-list.component";
 import {FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css']
+  selector: 'app-input-edit',
+  templateUrl: './input-edit.component.html',
+  styleUrls: ['./input-edit.component.css']
 })
-export class InputComponent implements OnInit {
+export class InputEditComponent implements OnInit {
 
   @Input() field: cell;
   @Input() form: FormGroup;
+  @Input() editId: number;
+  @Input() data: Array<any>;
 
   get isValid() {
     return this.form.controls[this.field.key].valid;
@@ -23,7 +25,9 @@ export class InputComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // console.log(this.data[this.editId]);
+  }
 
 
   datePickerConfig = {

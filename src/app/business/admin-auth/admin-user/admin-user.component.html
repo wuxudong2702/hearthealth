@@ -4,6 +4,7 @@
   (onSort)="onSort($event)"
   (onDel)="onDel($event)"
   (onDelAll)="onDelAll($event)"
+  (onEdit)="onEdit($event)"
   [headers]="headers"
   [data]="data"
   [addBtn]="addBtn"
@@ -13,3 +14,4 @@
   [setOperate]="setOperate"
 >
 </c-table-list>
+<app-admin-ztree *ngIf="showZTreeView" (onEdit)="onEdit($event)" [nodes]="nodes"></app-admin-ztree>

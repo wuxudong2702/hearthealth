@@ -6,7 +6,13 @@
           "name": "管理员角色",
           "index": 1,
           "order": "SortDirection.NONE",
-          "pipe": {"type": "DataType.NONE", "params":""}
+          "pipe": {"type": "DataType.NONE", "params":""},
+          "val": "",
+          "selectVal":"",
+          "validExample": "",
+          "required": false,
+          "pattern": "",
+          "inputType": "1"
         },
         {
           "key": "Permissions",
@@ -14,7 +20,13 @@
           "name": "管理员权限",
           "index": 0,
           "order": "SortDirection.NONE",
-          "pipe": {"type": "DataType.NONE", "params": ""}
+          "pipe": {"type": "DataType.NONE", "params": ""},
+          "val": "",
+          "selectVal":"",
+          "validExample": "",
+          "required": false,
+          "pattern": "",
+          "inputType": "1"
         }
     ]
 }

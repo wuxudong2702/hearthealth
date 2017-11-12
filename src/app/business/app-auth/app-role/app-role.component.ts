@@ -75,29 +75,74 @@ export class AppRoleComponent implements OnInit {
     }
 
   headers: Array<cell> = [];
+  headerAdd:Array<cell>=[];
+  headerEdit:Array<cell>=[];
+
   data: Array<any> = [];
+
+  editId: number;
+
   addBtn: boolean = true;
   deleteBtn: boolean = true;
   editBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setOperate: boolean = true;
 
-    onDel(id:number){
+  addView:boolean=false;
+  editView:boolean=false;
+  tableView:boolean=true;
+
+    del(id:number){
         this.http.postAppRoleDel(id).then(data=>{
             console.log(data,'删除');
             this.data=data['data'];
         });
     }
-    onDelAll(checkedList:any){
+    delAll(checkedList:any){
         this.http.postAppRoleDelAll(checkedList).then(data=>{
             console.log(data,'删除全部');
             this.data=data['data'];
         });
     }
-    onSort(sort: sortObj) {
+    sort(sort: sortObj) {
         this.http.postAppRoleSort(sort.id,sort.order).then(data=>{
             console.log(data,'排序');
             this.data=data['data'];
         });
     }
+  add(){
+    this.addView=true;
+    this.editView=false;
+    this.tableView=false;
+    this.headerAdd=this.headers;
+  }
+
+  edit(id:number){
+    this.editId=id;
+    this.addView=false;
+    this.editView=true;
+    this.tableView=false;
+    this.headerEdit=this.headers;
+
+  }
+
+  onBack(){
+    this.addView=false;
+    this.editView=false;
+    this.tableView=true;
+  }
+  cancle(){
+    this.addView=false;
+    this.editView=false;
+    this.tableView=true;
+  }
+
+
+  Submit(submitData:string){
+
+
+    this.addView=false;
+    this.editView=false;
+    this.tableView=true;
+  }
 }

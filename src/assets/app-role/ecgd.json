@@ -13,7 +13,7 @@
       } ,
       "val": "",
       "selectVal":[],
-      "invalidInfo": "需要填写用户名",
+      "validExample": "需要填写用户名",
       "required": true,
       "pattern": "",
       "inputType": "INPUTTYPE.INPUT"
@@ -31,7 +31,7 @@
       } ,
       "val": "",
       "selectVal":[],
-      "invalidInfo": "需要填写用户名",
+      "validExample": "需要填写用户名",
       "required": true,
       "pattern": "",
       "inputType": "INPUTTYPE.INPUT"
@@ -48,7 +48,7 @@
       },
       "val": "",
       "selectVal":[],
-      "invalidInfo": "需要填写用户名",
+      "validExample": "需要填写用户名",
       "required": true,
       "pattern": "",
       "inputType": "INPUTTYPE.INPUT"
@@ -65,7 +65,7 @@
       },
       "val": "",
       "selectVal":[],
-      "invalidInfo": "需要填写用户名",
+      "validExample": "需要填写用户名",
       "required": true,
       "pattern": "",
       "inputType": "INPUTTYPE.INPUT"
@@ -82,7 +82,7 @@
       },
       "val": "",
       "selectVal":[],
-      "invalidInfo": "需要填写用户名",
+      "validExample": "需要填写用户名",
       "required": true,
       "pattern": "",
       "inputType": "INPUTTYPE.INPUT"
@@ -99,7 +99,7 @@
       },
       "val": "",
       "selectVal":[],
-      "invalidInfo": "需要填写用户名",
+      "validExample": "需要填写用户名",
       "required": true,
       "pattern": "",
       "inputType": "INPUTTYPE.INPUT"
@@ -116,7 +116,7 @@
       },
       "val": "",
       "selectVal":[],
-      "invalidInfo": "需要填写用户名",
+      "validExample": "需要填写用户名",
       "required": true,
       "pattern": "",
       "inputType": "INPUTTYPE.INPUT"

@@ -6,7 +6,13 @@
         "name": "管理员姓名",
         "index": 4,
         "order": "SortDirection.NONE",
-        "pipe": {"type": "DataType.NONE", "params": ""}
+        "pipe": {"type": "DataType.NONE", "params": ""},
+        "val": "",
+        "selectVal":"",
+        "validExample": "武旭东",
+        "required": true,
+        "pattern": "",
+        "inputType": "0"
       },
       {
         "key": "character",
@@ -14,7 +20,13 @@
         "name": "角色",
         "index": 3,
         "order": "SortDirection.NONE",
-        "pipe": {"type": "DataType.NONE", "params": ""}
+        "pipe": {"type": "DataType.NONE", "params": ""},
+        "val": "",
+        "selectVal":"",
+        "validExample": "",
+        "required": false,
+        "pattern": "",
+        "inputType": "1"
       }
     ]
 }

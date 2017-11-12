@@ -183,7 +183,10 @@ export class ApiService {
         const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-headers.json';
         return this.httpClient.get(url)
             .toPromise()
-            .then(data => data)
+            .then(data => {
+              console.log(data,'21233243443');
+              return data;
+            })
             .catch(this.handleError);
     }
 
@@ -420,7 +423,10 @@ export class ApiService {
         const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
         return this.httpClient.get(url)
             .toPromise()
-            .then(data => data)
+            .then(data =>{
+              console.log('getNewsData',data);
+              return data;
+            } )
             .catch(this.handleError);
     }
 
@@ -482,6 +488,13 @@ export class ApiService {
     }
 
     postDevSort(headersId,order): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+  postDevSubmit(addData): Promise<any> {
         const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
         return this.httpClient.get(url)
             .toPromise()

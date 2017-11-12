@@ -30,4 +30,4 @@ import { UserInfoComponent} from './user-info.component';
   ],
   providers: []
 })
-export class UserModule { }
+export class TableModule { }

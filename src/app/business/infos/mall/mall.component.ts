@@ -158,4 +158,8 @@ export class MallComponent implements OnInit {
             this.data=data['data'];
         });
     }
+  onAdd(){
+    console.log('212132323');
+    this.editor=true;
+  }
 }

@@ -2,6 +2,7 @@ import {Component, Inject, OnInit, ViewChild, ElementRef,Input,Output,EventEmitt
 import {DomSanitizer} from "@angular/platform-browser";
 import {AppService} from '../../app.service';
 import {DOCUMENT} from '@angular/common';
+import {news} from '../../shared/table/table-list.component';
 
 export class UEditorHtml {
   htmlValue: string;
@@ -42,7 +43,7 @@ const htmlL: string = "</div>\n" +
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
         <div class="col-md-12" >
-          <c-editor [(ngModel)]="text" (onTextChange)="onTextChange($event)" [style]="{'height':'60vh'}"></c-editor>
+          <c-editor [dataEditor]="dataEditor" (onTextChange)="onTextChange($event)" [style]="{'height':'60vh'}"></c-editor>
           <br/>
         </div>
       </div>
@@ -70,8 +71,10 @@ const htmlL: string = "</div>\n" +
 
 export class Editorh5Component implements OnInit {
   @ViewChild('iframe') iframe: ElementRef;
+  @Input() dataEditor:news;
+
   @Output() onEditBack = new EventEmitter<any>();
-  text: string = '这里面是内容..';
+
   htmlValue: string = '';
   textValue: string = '';
   delta: string = '';
@@ -85,10 +88,12 @@ export class Editorh5Component implements OnInit {
   prePhone:boolean=false;
   constructor(private appService: AppService, private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
 
-    this.appService.titleEventEmitter.emit("富文本编辑器");
   }
 
   ngOnInit() {
+    this.appService.titleEventEmitter.emit("富文本编辑器");
+    console.log('富文本编辑框传给编辑的数据',this.dataEditor);
+
   }
 
   onTextChange(html: UEditorHtml) {

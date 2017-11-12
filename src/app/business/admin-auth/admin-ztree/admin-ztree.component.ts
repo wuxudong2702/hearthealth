@@ -1,6 +1,6 @@
 import { Component, OnInit , ViewChild , Input , Output , EventEmitter} from '@angular/core';
-import { ZtreeComponent } from '../../../../shared/ztree/ztree.component'
-import {ApiService} from '../../../../business-service/api/api.service';
+import { ZtreeComponent } from '../../../shared/ztree/ztree.component'
+import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -20,6 +20,7 @@ export class AdminZtreeComponent implements OnInit {
   ngOnInit() {}
 
   @ViewChild('ztreeInstance') ztreeInstance: ZtreeComponent;
+
 
   // nodes:any = this.nodes2;
   setting: any = {

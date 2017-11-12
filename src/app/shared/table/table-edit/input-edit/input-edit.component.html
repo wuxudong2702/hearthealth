@@ -1,0 +1,38 @@
+<div [formGroup]="form" class="form-inline" >
+
+  <label style="width: 100px" for="name">{{field.name+":"}}</label>
+  <input
+    type="text"
+    class="form-control addInputValue"
+    id="name"
+    name="name"
+    *ngIf="field.inputType == 0"
+    [(ngModel)]="field.val"
+    [formControlName]="field.key"
+    placeholder="请输入"
+    onfocus="this.placeholder=''"
+    onblur="this.placeholder='请输入'"
+  >
+
+
+  <select class="form-control addInputValue"
+          *ngIf="field.inputType==1" name={{field.key}}
+          [(ngModel)]="field.val"
+          [formControlName]="field.key">
+    <option *ngFor="let val of field.selectVal;"  value={{val}}>{{val}}</option>
+  </select>
+
+  <input [dpDayPicker]="datePickerConfig"
+         name={{field.key}}
+         [theme]="'dp-material'"
+         [mode]="'day'"
+         [(ngModel)]="field.val"
+         *ngIf="field.inputType==2"
+         class="form-control dateInput dateInputStyle addInputValue "
+         placeholder="请选择日期"/>
+  <div class=" " *ngIf="!isValid  && isDirty ">
+     <div *ngIf="field.required==true&&field.val==''" class="alert-danger validExample ">{{field.name+'是必填项！'}}</div>
+    <div *ngIf="field.val!=''" class="alert-danger validExample " >请输入正确的格式，例如： {{field.validExample}}</div>
+
+  </div>
+</div>

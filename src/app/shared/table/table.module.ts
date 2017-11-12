@@ -8,16 +8,8 @@ import { TableAddComponent } from './table-add/table-add.component';
 import {DpDatePickerModule} from 'ng2-date-picker';
 import  { DatepickerI18nModule} from '../datepickerI18n/datepickerI18n.module';
 import { InputComponent } from './table-add/input/input.component';
-import { environment } from '../../../environments/environment';
-// import { enableProdMode } from '@angular/core';
-// if (environment.production) {
-//   enableProdMode();
-// }
-// import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-//
-// import { AppModule } from '../../app.module';
-// // import { environment } from './environments/environment';
-// platformBrowserDynamic().bootstrapModule(AppModule);
+import { InputEditComponent } from './table-edit/input-edit/input-edit.component';
+import { TableEditComponent } from './table-edit/table-edit.component';
 
 @NgModule({
   imports: [
@@ -32,10 +24,12 @@ import { environment } from '../../../environments/environment';
     CPipePipe,
     TableListComponent,
     TableAddComponent,
-    InputComponent
+    InputComponent,
+    InputEditComponent,
+    TableEditComponent
   ],
-  exports: [TableListComponent],
+  exports: [TableListComponent,TableEditComponent,TableAddComponent],
   providers: []
 })
-export class UserModule {
+export class TableModule {
 }

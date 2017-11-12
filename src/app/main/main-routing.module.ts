@@ -12,7 +12,7 @@ const mainRoutes: Routes = [
         children: [
             {path: 'home', loadChildren: 'app/business/home/home.module#HomeModule'},
             {path: 'demo', loadChildren: 'app/business/demo/demo.module#DemoModule'},
-            {path: 'user', loadChildren: 'app/business/user/user.module#UserModule'},
+            // {path: 'user', loadChildren: 'app/business/user/user.module#UserModule'},
             {path: 'role', loadChildren: 'app/business/role/role.module#RoleModule'},
 
             {path: 'adminRole', loadChildren: 'app/business/admin-auth/admin-role/admin-role.module#AdminRoleModule'},

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HhrComponent} from './hhr.component';
 import {HhrRoutingModule} from './hhr-routing.module';
-import {UserModule} from '../../../shared/table/table.module';
+import {TableModule} from '../../../shared/table/table.module';
 import {AngularEchartsModule} from 'ngx-echarts';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DpDatePickerModule} from 'ng2-date-picker';
@@ -16,7 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
     imports: [
         CommonModule,
         HhrRoutingModule,
-        UserModule,
+        TableModule,
         NgbModule,
         DpDatePickerModule,
         DatepickerI18nModule,

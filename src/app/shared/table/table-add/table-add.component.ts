@@ -16,10 +16,11 @@ export class TableAddComponent implements OnInit {
   @Input() tableAdd: boolean;
   @Input() headers: Array<cell>;
 
-  @Output() onCancle = new EventEmitter<any>();
+
+  @Output() onAddCancle = new EventEmitter<any>();
   @Output() onSubmit = new EventEmitter<any>();
 
-  submitData: object;
+  submitData: string;
   checkValue: boolean = false;
   form: FormGroup;
 
@@ -27,42 +28,23 @@ export class TableAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let group: any = {};
-    // this.headers.forEach(header => {
-    //   group[header.key] = header.required ? new FormControl(header.pattern || '', Validators.required)
-    //     : new FormControl(header.pattern || '');
-    // });
-    // console.log('table-add group',group);
-    // this.form = new FormGroup(group);
+
     this.form=this.fcs.toFormGroup(this.headers);
-    console.log(this.form,'000---------------')
-
-    console.log(this.headers);
-
-  }
+}
 
   datePickerConfig = {
     locale: 'zh-CN'
   };
 
   submit() {
-    console.log('table-add submit headers.val Array', this.headers)
-    let len = this.headers.length;
-    for (let i = 0; i < len; i++) {
-      this.submitData[this.headers[i].key] = this.headers[i].val;
-    }
+    this.submitData=JSON.stringify(this.form.value);
     this.onSubmit.emit(this.submitData);
-    console.log(this.submitData);
   }
 
-  cancle() {
-    this.onCancle.emit();
+  addCancle() {
+    this.onAddCancle.emit();
   }
 
-  onBlur(i) {
-    // event.target.placeholder='请输入关键字' ;
-    // this.checkValue=true;
-  }
 }
 
 

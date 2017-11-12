@@ -142,7 +142,7 @@ export class DevComponent implements OnInit {
 
   headers: Array<cell> = [];
   data: Array<any> = [];
-  addBtn:boolean = true;
+  addCommonBtn:boolean = true;
   deleteBtn: boolean = true;
   searchBtn: boolean = true;
   deleteAllBtn: boolean = true;
@@ -167,5 +167,11 @@ export class DevComponent implements OnInit {
             console.log(data,'排序');
             this.data=data['data'];
         });
+    }
+    onAddSubmit(AddData:string){
+        console.log('dev 添加数据',AddData);
+      this.http.postDevSubmit(AddData).then(data=>{
+        this.data=data['data'];
+      });
     }
 }

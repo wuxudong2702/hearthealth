@@ -1,10 +1,14 @@
 
 <c-table-list
-  *ngIf="!showChartView"
+  *ngIf="tableView"
+
   [headers]="headers"
-  (onSort)="onSort($event)"
-  (onDel)="onDel($event)"
-  (onDelAll)="onDelAll($event)"
+  (onSort)="sort($event)"
+  (onDel)="del($event)"
+  (onDelAll)="delAll($event)"
+  (onEdit)="edit($event)"
+  (onAdd)="add($event)"
+
   [data]="data"
   [addBtn]="addBtn"
   [deleteBtn]="deleteBtn"
@@ -13,3 +17,24 @@
   [setOperate]="setOperate"
 >
 </c-table-list>
+
+
+<app-table-add
+  [headers]="headerAdd"
+  (onAddCancle)="cancle($event)"
+  (onSubmit)="Submit($event)"
+
+  *ngIf="addView"
+>
+</app-table-add>
+
+<app-table-edit
+  [headers]="headerEdit"
+  [editId]="editId"
+  [data]="data"
+  (onEditCancle)="cancle($event)"
+  (onSubmit)="Submit($event)"
+
+  *ngIf="editView"
+>
+</app-table-edit>

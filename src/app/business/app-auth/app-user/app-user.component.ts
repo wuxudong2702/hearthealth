@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, DataType} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -69,7 +69,7 @@ import 'rxjs/add/operator/toPromise';
 //     pipe: {type: DataType.NONE, params: ''},
 //   },
 //   {
-//     key: 'subUsersNum',
+//     key: 'subUsersViewNum',
 //     show: true,
 //     name: '子用户个数',
 //     index: 7,
@@ -88,7 +88,7 @@ import 'rxjs/add/operator/toPromise';
 //     telephoneNum: '18045142702',
 //     height:'185',
 //     weight:'75',
-//     subUsersNum:20,
+//     subUsersViewNum:20,
 //   },
 //   {
 //     userName: '张倩倩',
@@ -99,7 +99,7 @@ import 'rxjs/add/operator/toPromise';
 //     telephoneNum: '18045142702',
 //     height:'185',
 //     weight:'75',
-//     subUsersNum:20,
+//     subUsersViewNum:20,
 //   },
 //   {
 //     userName: '李四',
@@ -110,7 +110,7 @@ import 'rxjs/add/operator/toPromise';
 //     telephoneNum: '18045142702',
 //     height:'185',
 //     weight:'75',
-//     subUsersNum:10,
+//     subUsersViewNum:10,
 //   },
 //
 // ];
@@ -219,97 +219,189 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-app-user',
   templateUrl: './app-user.component.html',
   styleUrls: ['./app-user.component.css'],
-  providers:[ApiService]
+  providers: [ApiService]
 })
 export class AppUserComponent implements OnInit {
 
-  constructor(private http: ApiService) {}
+  constructor(private http: ApiService) {
+  }
 
   ngOnInit() {
-      this.http.getAppUserHeader().then(data => {
-          this.headers = data['headers'];
-      });
-      this.http.getAppUserData().then(data => {
-          this.data = data['data'];
-      });
+    this.http.getAppUserHeader().then(data => {
+      this.headers = data['headers'];
+    });
+    this.http.getAppUserData().then(data => {
+      this.data = data['data'];
+    });
   }
 
   headers: Array<cell> = [];
   data: Array<any> = [];
-  subUserHeaders:Array<any>=[];
-  subUserData:Array<any>=[];
 
-  addBtn:boolean=true;
+  headerAdd: Array<cell> = [];
+  subUsersheaderAdd: Array<cell> = [];
+
+  subUserHeaders: Array<any> = [];
+  subUserData: Array<any> = [];
+
+  editId: number;
+
+  addBtn: boolean = true;
   deleteBtn: boolean = true;
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setBtn: boolean = true;
-  editBtn:boolean=true;
-  backBtn:boolean=true;
+  editBtn: boolean = true;
+  backBtn: boolean = true;
   setOperate: boolean = true;
-
-  // paginationBtn: boolean = true;
-  subUsers: boolean = true;
   userName: string = '';
-  onDetails(id){
-    // this.
-    this.subUsers=!this.subUsers;
 
-    // this.detailsBtn=false;
-    // this.downloadBtn=true;
-    //
-    // this.headers=this.subUserHeaders;
-    // this.data=this.subUserData;
+  addView: boolean = false;
+  tableView: boolean = true;
+
+  addSubUserView: boolean = false;
+  subUsersView: boolean = false;
+
+  del(id: number) {
+    this.http.postAppUserDel(id).then(data => {
+      console.log(data, '删除');
+      this.data = data['data'];
+    });
+  }
+
+  delAll(checkedList: any) {
+    this.http.postAppUserDelAll(checkedList).then(data => {
+      console.log(data, '删除全部');
+      this.data = data['data'];
+    });
+  }
+
+  sort(sort: sortObj) {
+    this.http.postAppUserSort(sort.id, sort.order).then(data => {
+      console.log(data, '排序');
+      this.data = data['data'];
+    });
+  }
+
+  add(id: number) {
+    if (id >= 0) {
+      this.editId = id;
+      this.headerAdd = this.headers.map(d => {
+        d.val = this.data[id][d.key];
+        return d;
+      });
+    } else {
+      this.headerAdd = this.headers.map(d => {
+        d.val = '';
+        return d;
+      });
+
+    }
+    this.addView = true;
+    this.subUsersView = false;
+    this.tableView = false;
+    this.addSubUserView = false;
+
+  }
+
+  cancle() {
+    this.addView = false;
+    this.subUsersView = false;
+    this.tableView = true;
+    this.addSubUserView = false;
+
+  }
+
+  submit(submitData: string) {
+
+
+    this.addSubUserView = false;
+    this.addView = false;
+    this.subUsersView = false;
+    this.tableView = true;
+  }
+
+
+
+  details(id: number) {
+    this.addView = false;
+    this.subUsersView = true;
+    this.tableView = false;
+    this.addSubUserView = false;
+
+    // this.headerAdd=this.headers;
     this.http.getAppUserSubHeader().then(data => {
-        this.subUserHeaders = data['headers'];
+      console.log('appuser getAppUserSubHeaders header', data);
+      this.subUserHeaders = data['headers'];
     });
     this.http.getAppUserSubData().then(data => {
-        this.subUserData = data['data'];
+      this.subUserData = data['data'];
+
     });
   }
-  // onDownload(){
-  //   this.showChartView=!this.showChartView;
-  // }
-  onBack(){
-    this.subUsers=!this.subUsers;
+
+  subUsersDel(id: number) {
+    this.http.postAppUserSubDel(id).then(data => {
+      console.log(data, '删除');
+      this.subUserData = data['data'];
+    });
   }
 
-  onDel(id:number){
-      this.http.postAppUserDel(id).then(data=>{
-          console.log(data,'删除');
-          this.data=data['data'];
-      });
-  }
-  onDelAll(checkedList:any){
-      this.http.postAppUserDelAll(checkedList).then(data=>{
-          console.log(data,'删除全部');
-          this.data=data['data'];
-      });
-  }
-  onSort(sort: sortObj) {
-      this.http.postAppUserSort(sort.id,sort.order).then(data=>{
-          console.log(data,'排序');
-          this.data=data['data'];
-      });
+  subUsersDelAll(checkedList: any) {
+    this.http.postAppUserSubDelAll(checkedList).then(data => {
+      console.log(data, '删除全部');
+      this.subUserData = data['data'];
+    });
   }
 
-  onSubDel(id:number){
-      this.http.postAppUserSubDel(id).then(data=>{
-          console.log(data,'删除');
-          this.subUserData=data['data'];
-      });
+  subUsersSort(sort: sortObj) {
+    this.http.postAppUserSubSort(sort.id, sort.order).then(data => {
+      console.log(data, '排序');
+      this.subUserData = data['data'];
+    });
   }
-  onSubDelAll(checkedList:any){
-      this.http.postAppUserSubDelAll(checkedList).then(data=>{
-          console.log(data,'删除全部');
-          this.subUserData=data['data'];
+
+  subUsersAdd(id: number) {
+    if (id >= 0) {
+      this.editId = id;
+      this.subUsersheaderAdd = this.subUserHeaders.map(d => {
+        d.val = this.subUserData[id][d.key];
+        return d;
       });
+    } else {
+      this.subUsersheaderAdd = this.subUserHeaders.map(d => {
+        d.val = '';
+        return d;
+      });
+
+    }
+    this.addView = false;
+    this.subUsersView = false;
+    this.tableView = false;
+    this.addSubUserView = true;
   }
-  onSubSort(sort: sortObj) {
-      this.http.postAppUserSubSort(sort.id,sort.order).then(data=>{
-          console.log(data,'排序');
-          this.subUserData=data['data'];
-      });
+
+  subUsersback() {
+    this.addView = false;
+    this.subUsersView = false;
+    this.tableView = true;
+    this.addSubUserView = false;
+  }
+
+  subUserSubmit() {
+
+
+    this.addView = false;
+    this.subUsersView = true;
+    this.tableView = false;
+    this.addSubUserView = false;
+  }
+
+  subUsersCancle() {
+    this.addView = false;
+    this.subUsersView = true;
+    this.tableView = false;
+    this.addSubUserView = false;
   }
 }

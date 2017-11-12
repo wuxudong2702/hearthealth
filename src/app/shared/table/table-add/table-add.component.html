@@ -1,3 +1,46 @@
+
+<div class=" tableAdd">
+  <h2 class="tittle ">添加</h2>
+  <div class="">
+
+    <form class="addForm " [formGroup]="form" >
+      <div class=" form-inline formCenter " *ngFor="let header of headers">
+      <app-input [field]="header" [form]="form" ></app-input>
+
+      </div>
+      <div class="form-button ">
+        <button type="button" class="btn btn-success"  (click)="submit()" [disabled]="!form.valid">提交</button>
+        <button type="button" class="btn btn-default" (click)="addCancle()">取消</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--<div class="tableAdd">-->
 <!--<form class=" addForm " >-->
 
@@ -20,21 +63,3 @@
 
 <!--</form>-->
 <!--</div>-->
-
-
-<div class=" tableAdd">
-  <h2 class="tittle ">添加</h2>
-  <div class="">
-
-    <form class="addForm " [formGroup]="form" >
-      <div class=" form-inline formCenter " *ngFor="let header of headers">
-      <app-input [field]="header" [form]="form" ></app-input>
-
-      </div>
-      <div class="form-button ">
-        <button type="button" class="btn btn-success" [disabled]="!form.valid" (click)="submit()">提交</button>
-        <button type="button" class="btn btn-default" (click)="cancle()">取消</button>
-      </div>
-    </form>
-  </div>
-</div>

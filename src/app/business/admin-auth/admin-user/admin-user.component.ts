@@ -26,7 +26,7 @@ export class AdminUserComponent implements OnInit {
       });
 
   }
-
+  nodes:any;
   headers: Array<cell> = [];
   data: Array<any> = [];
   addBtn: boolean = true;
@@ -34,7 +34,7 @@ export class AdminUserComponent implements OnInit {
   editBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setOperate: boolean = true;
-
+  showZTreeView: boolean = false;
   onDel(id:number){
       this.http.postAdminUserDel(id).then(data=>{
           console.log(data,'删除');
@@ -53,4 +53,12 @@ export class AdminUserComponent implements OnInit {
           this.data=data['data'];
       });
   }
+  onEdit(id:number) {
+    console.log('4213 213er');
+    this.http.getZtreeNodes().then(data => {
+      this.nodes = data['nodes'];
+    });
+    this.showZTreeView = !this.showZTreeView;
+  }
+
 }

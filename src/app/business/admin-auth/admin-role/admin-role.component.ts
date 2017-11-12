@@ -14,10 +14,10 @@ export class AdminRoleComponent implements OnInit {
   constructor(private http: ApiService) {}
 
   ngOnInit() {
-      this.http.getAppUserHeader().then(data => {
+      this.http.getAdminRoleHeader().then(data => {
           this.headers = data['headers'];
       });
-      this.http.getAppUserData().then(data => {
+      this.http.getAdminRoleData().then(data => {
           this.data = data['data'];
       });
   }
@@ -110,6 +110,7 @@ export class AdminRoleComponent implements OnInit {
   deleteAllBtn: boolean = true;
   setOperate: boolean = true;
   showZTreeView: boolean = false;
+
 
   onEdit(id:number) {
       this.http.getZtreeNodes().then(data => {

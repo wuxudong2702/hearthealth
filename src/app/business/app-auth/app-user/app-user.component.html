@@ -2,10 +2,6 @@
   [headers]="headers"
   [data]="data"
   [deleteBtn]="deleteBtn"
-  (onDetails)="onDetails()"
-  (onSort)="onSort($event)"
-  (onDel)="onDel($event)"
-  (onDelAll)="onDelAll($event)"
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
@@ -13,14 +9,41 @@
   [editBtn]="editBtn"
   [detailsBtn]="detailsBtn"
   [setOperate]="setOperate"
-  *ngIf="subUsers"
+
+  (onDetails)="details()"
+  (onSort)="sort($event)"
+  (onDel)="del($event)"
+  (onAdd)="add($event)"
+  (onDelAll)="delAll($event)"
+
+
+  *ngIf="tableView"
 >
 </c-table-list>
 
+<app-table-add
+  [headers]="headerAdd"
+  (onAddCancle)="cancle($event)"
+  (onSubmit)="submit($event)"
+
+  *ngIf="addView"
+>
+</app-table-add>
+
+
+
+
+
+<!--子用戶信息-->
 <c-table-list
-        (onSort)="onSubSort($event)"
-        (onDel)="onSubDel($event)"
-        (onDelAll)="onSubDelAll($event)"
+  (onSort)="subUsersSort($event)"
+  (onDel)="subUsersDel($event)"
+  (onDelAll)="subUsersDelAll($event)"
+  (onBack)="subUsersback()"
+
+  (onAdd)="subUsersAdd($event)"
+
+  [setOperate]="setOperate"
   [headers]="subUserHeaders"
   [data]="subUserData"
   [deleteBtn]="deleteBtn"
@@ -30,7 +53,46 @@
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
   [addBtn]="addBtn"
-  (onBack)="onBack()"
-  *ngIf="!subUsers"
+
+  *ngIf="subUsersView"
 >
 </c-table-list>
+<!--子用户添加和编辑-->
+<app-table-add
+  [headers]="subUsersheaderAdd"
+  (onAddCancle)="subUsersCancle($event)"
+  (onSubmit)="subUserSubmit($event)"
+
+  *ngIf="addSubUserView"
+>
+</app-table-add>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<app-table-edit-->
+<!--[headers]="headerEdit"-->
+<!--[editId]="editId"-->
+<!--[data]="data"-->
+<!--(onEditCancle)="cancle($event)"-->
+<!--(onSubmit)="Submit($event)"-->
+
+<!--*ngIf="editView"-->
+<!--&gt;-->
+<!--</app-table-edit>-->

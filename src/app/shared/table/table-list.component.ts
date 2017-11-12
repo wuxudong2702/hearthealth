@@ -8,7 +8,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {ToastService} from '../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../toast/toast-model';
 
-
 export enum SortDirection {
   NONE = 0,
   ASC,
@@ -30,7 +29,6 @@ export enum INPUTTYPE {
   DATETIME,
 }
 
-
 export class sortObj {
   order: SortDirection;
   id: string;
@@ -41,6 +39,12 @@ export class searchObj {
   searchValue: string;
 }
 
+
+export class news {
+  newsTitle: string;
+  content: string;
+  author
+}
 
 export class pipe {
   type: DataType;
@@ -56,12 +60,11 @@ export class cell {
   pipe: pipe;
   val: any;
   selectVal:Array<any>;
-  invalidInfo: string;
+  validExample: string;
   required: boolean;
   pattern: string;
   inputType: INPUTTYPE;
 }
-
 
 @Pipe({name: 'CPipe'})
 export class CPipePipe implements PipeTransform {
@@ -111,6 +114,7 @@ export class TableListComponent implements OnInit {
   @Input() searchBtn: boolean;
   @Input() detailsBtn: boolean;
   @Input() editBtn: boolean;
+  @Input() editCommonBtn: boolean;
   @Input() deleteAllBtn: boolean;
   @Input() setBtn: boolean;
   @Input() chartBtn: boolean;
@@ -118,7 +122,10 @@ export class TableListComponent implements OnInit {
   @Input() backBtn: boolean;
   @Input() setOperate: boolean;
   @Input() uploadBtn: boolean;
+  @Input() addCommonBtn: boolean;
 
+
+  // @Output() onAddSubmit = new EventEmitter<any>();
   @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
   @Output() onDelAll = new EventEmitter<any>();
@@ -136,12 +143,12 @@ export class TableListComponent implements OnInit {
   selectValue: string = '';
   searchValue: string = '';
   tableAdd: boolean = false;
-  editValue: Array<any> = [];
-
+  tableEdit:boolean = false;
+  editId:number;
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
-  submitData:object;
+  // submitData:object;
   delAllChecked() {
     if (!this.isDelAll) {
       this.checkedList = this.data.map(v => true);
@@ -154,26 +161,16 @@ export class TableListComponent implements OnInit {
     this.isDelAll = false;
   }
 
-  add() {// 添加成功之后返回添加的数据
-    this.tableAdd = true;
-
+  add(){
     this.onAdd.emit();
   }
 
-  onCancle() {
-    // console.log('table-list',i);
-    this.tableAdd = !this.tableAdd;
-  }
 
-  onSubmit(submitData:object) {
-    // console.log('table-list',i);
-    console.log('table-list-submit Data',submitData);
-    // this.submitData=submitData;
-    if(submitData){
-      this.onAdd.emit(submitData);
-    }
-    this.tableAdd = !this.tableAdd;
 
+  edit(id: number) {
+    console.log('table-list-edit id',id);
+
+    this.onAdd.emit(id);
   }
 
   del(id) {
@@ -243,12 +240,6 @@ export class TableListComponent implements OnInit {
     this.onDetails.emit(id);
   }
 
-  edit(id: number) {
-    this.editValue = this.data[id];
-    this.onEdit.emit(
-      this.editValue
-    );
-  }
 
 
   chart(id: number) {

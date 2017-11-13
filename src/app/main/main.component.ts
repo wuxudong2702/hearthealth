@@ -39,98 +39,56 @@ export class MainComponent implements OnInit {
         },
         menuData: [
             {
-                'id': '33',
+                'id': '1',
                 'parentId': '0',
                 'name': '心电数据',
-                'keyWord': 'ecgd',
+                'keyWord': 'ecgd-data-show',
                 'icon': 'fa-heart',
                 'isExpend': false,
                 'children': [
                     {
-                        'id': '34',
-                        'parentId': '33',
+                        'id': '11',
+                        'parentId': '1',
                         'name': '心电波形',
-                        'keyWord': 'ecg',
+                        'keyWord': 'ecgd-chart-show',
                         'icon': 'fa-heartbeat',
-                        'url': '/app/ecgd'
+                        'url': '/app/ecgd-chart-show'
                     }, {
-                        'id': '35',
-                        'parentId': '33',
+                        'id': '12',
+                        'parentId': '1',
                         'name': '健康档案',
-                        'keyWord': 'hhr',
+                        'keyWord': 'hhr-show',
                         'icon': 'fa-files-o',
-                        'url': '/app/hhr'
+                        'url': '/app/hhr-show'
                     }
                 ]
-            }, {
-                'id': '39',
-                'parentId': '0',
-                'name': '设备管理',
-                'keyWord': 'dev',
-                'icon': 'fa-microchip',
-                'children': [{
-                    'id': '40',
-                    'parentId': '39',
-                    'name': '心电设备',
-                    'keyWord': 'devices',
-                    'icon': 'fa-gear',
-                    'url': '/app/devices'
-                }]
             },
             {
-                'id': '40',
+                'id': '2',
+                'parentId': '0',
+                'name': '心电设备',
+                'keyWord': 'heart-dev-show',
+                'icon': 'fa-gear',
+                'url': '/app/heart-dev-show',
+            },
+            {
+                'id': '3',
                 'parentId': '0',
                 'name': '信息管理',
-                'keyWord': 'info',
+                'keyWord': 'info-show',
                 'icon': 'fa-info',
-                'isExpend': false,
-                'children': [
-                    {
-                        'id': '41',
-                        'parentId': '40',
-                        'name': '公共信息',
-                        'keyWord': 'publicInfo',
-                        'icon': 'fa-info-circle',
-                        'url': '/app/guide'
-                    }, {
-                        'id': '42',
-                        'parentId': '40',
-                        'name': '健康咨询',
-                        'keyWord': 'hnews',
-                        'icon': 'fa-newspaper-o',
-                        'url': '/app/news'
-                    }
-                    , {
-                        'id': '43',
-                        'parentId': '40',
-                        'name': '商城信息',
-                        'keyWord': 'mall',
-                        'icon': 'fa-shopping-cart',
-                        'url': '/app/mall'
-                    }
-                ]
+                'url':'/app/info-show'
             },
-
             {
-                'id': '43',
+                'id': '4',
                 'parentId': '0',
                 'name': 'APP升级',
-                'keyWord': 'app-update',
-                'icon': 'fa-android',
-                'isExpend': false,
-                'children': [
-                    {
-                        'id': '44',
-                        'parentId': '43',
-                        'name': 'APP包管理',
-                        'keyWord': 'packages',
-                        'icon': 'fa-gear',
-                        'url': '/app/packages'
-                    }
-                ]
+                'keyWord': 'app-upgrade-show',
+                'icon': 'fa-gear',
+                'url': '/app/app-upgrade-show'
             },
             {
-                'id': '36',
+                'id': '5',
                 'parentId': '0',
                 'name': 'APP权限',
                 'keyWord': 'app-auth',
@@ -138,373 +96,55 @@ export class MainComponent implements OnInit {
                 'isExpend': false,
                 'children': [
                     {
-                        'id': '37',
-                        'parentId': '36',
+                        'id': '51',
+                        'parentId': '5',
                         'name': 'APP用户',
-                        'keyWord': 'appUser',
+                        'keyWord': 'app-user-show',
                         'icon': 'fa-user-circle-o',
-                        'url': '/app/appUser'
+                        'url': '/app/app-user-show'
                     }, {
-                        'id': '38',
-                        'parentId': '36',
+                        'id': '52',
+                        'parentId': '5',
                         'name': 'APP角色',
-                        'keyWord': 'appRole',
+                        'keyWord': 'app-role-show',
                         'icon': 'fa-users',
-                        'url': '/app/appRole'
+                        'url': '/app/app-role-show'
                     }
                 ]
             },
             {
-                'id': '45',
+                'id': '6',
                 'parentId': '0',
                 'name': '后台权限',
-                'keyWord': 'admin-auth',
+                'keyWord': 'admin-show',
                 'icon': 'fa-user',
                 'isExpend': false,
                 'children': [
                     {
-                        'id': '46',
-                        'parentId': '45',
+                        'id': '61',
+                        'parentId': '6',
                         'name': '后台用户',
-                        'keyWord': 'adminUser',
+                        'keyWord': 'admin-user-show',
                         'icon': 'fa-user-circle-o',
-                        'url': '/app/adminUser'
+                        'url': '/app/admin-user-show'
                     }, {
-                        'id': '47',
-                        'parentId': '45',
+                        'id': '62',
+                        'parentId': '6',
                         'name': '后台角色',
-                        'keyWord': 'adminRole',
+                        'keyWord': 'admin-role-show',
                         'icon': 'fa-users',
-                        'url': '/app/adminRole'
+                        'url': '/app/admin-role-show'
                     }
                 ]
             },
             {
-                'id': '31',
+                'id': '7',
                 'parentId': '0',
-                'name': '日志管理',
+                'name': '系统日志',
                 'keyWord': 'log',
                 'icon': 'fa-cube',
-                'children': [{
-                    'id': '32',
-                    'parentId': '32',
-                    'name': '系统日志',
-                    'keyWord': 'log',
-                    'icon': 'fa-file',
-                    'url': '/app/log'
-                }]
-            },
-            {
-                'id': '1',
-                'parentId': '0',
-                'name': '组件示例',
-                'keyWord': 'demo',
-                'icon': 'fa-wrench',
-                'isExpend': false,
-                'children': [
-                    {
-                        'id': '2',
-                        'parentId': '1',
-                        'name': '消息框',
-                        'keyWord': 'mtk',
-                        'icon': 'fa-columns',
-                        'url': '/app/demo/toastDemo'
-                    }, {
-                        'id': '3',
-                        'parentId': '1',
-                        'name': '模态框',
-                        'keyWord': 'modal',
-                        'icon': 'fa-columns',
-                        'url': '/app/demo/modalDemo'
-                    }, {
-                        'id': '4',
-                        'parentId': '1',
-                        'name': '图表',
-                        'keyWord': 'chart',
-                        'icon': 'fa-pie-chart',
-                        'url': '/app/demo/ngxChartsDemo'
-                    }, {
-                        'id': '5',
-                        'parentId': '1',
-                        'name': '下拉',
-                        'keyWord': 'selectDemo',
-                        'icon': 'fa-circle',
-                        'url': '/app/demo/selectDemo'
-                    }, {
-                        'id': '6',
-                        'parentId': '1',
-                        'name': '层次图',
-                        'keyWord': 'hierarchyView',
-                        'icon': 'fa-css3',
-                        'url': '/app/demo/hierarchyViewDemo'
-                    }, {
-                        'id': '7',
-                        'parentId': '1',
-                        'name': '图片裁剪',
-                        'keyWord': 'imgCropper',
-                        'icon': 'fa-file-picture-o',
-                        'url': '/app/demo/imgCropperDemo'
-                    }, {
-                        'id': '8',
-                        'parentId': '1',
-                        'name': '分页',
-                        'keyWord': 'pagination',
-                        'icon': 'fa-pagelines',
-                        'url': '/app/demo/paginationDemo'
-                    }, {
-                        'id': '9',
-                        'parentId': '1',
-                        'name': 'http分页',
-                        'keyWord': 'httpPagination',
-                        'icon': 'fa-pagelines',
-                        'url': '/app/demo/httpPaginationDemo'
-                    }, {
-                        'id': '10',
-                        'parentId': '1',
-                        'name': '开关按钮',
-                        'keyWord': 'switch',
-                        'icon': 'fa-toggle-on',
-                        'url': '/app/demo/switchDemo'
-                    }, {
-                        'id': '12',
-                        'parentId': '1',
-                        'name': '日期选择',
-                        'keyWord': 'datepicker',
-                        'icon': 'fa-calendar',
-                        'url': '/app/demo/datepickerDemo'
-                    }, {
-                        'id': '13',
-                        'parentId': '1',
-                        'name': '树与下拉树',
-                        'keyWord': 'tree',
-                        'icon': 'fa-tree',
-                        'url': '/app/demo/treeDemo'
-                    }, {
-                        'id': '13',
-                        'parentId': '1',
-                        'name': 'ztree',
-                        'keyWord': 'ztree',
-                        'icon': 'fa-tree',
-                        'url': '/app/demo/ztreeDemo'
-                    }, {
-                        'id': '15',
-                        'parentId': '1',
-                        'name': '图片转换成base64',
-                        'keyWord': 'imgSelectToBase',
-                        'icon': 'fa-upload',
-                        'url': '/app/demo/imgSelectToBaseDemo'
-                    }, {
-                        'id': '14',
-                        'parentId': '1',
-                        'name': '文件上传',
-                        'keyWord': 'fileUpload',
-                        'icon': 'fa-upload',
-                        'url': '/app/demo/fileUploadDemo'
-                    }, {
-                        'id': '15',
-                        'parentId': '1',
-                        'name': '模拟滚动条',
-                        'keyWord': 'customScrollbarDemo',
-                        'icon': 'fa-sliders',
-                        'url': '/app/demo/customScrollbarDemo'
-                    }, {
-                        'id': '16',
-                        'parentId': '1',
-                        'name': '图片查看器',
-                        'keyWord': 'imageViewerDemo',
-                        'icon': 'fa-image',
-                        'url': '/app/demo/imageViewerDemo'
-                    }, {
-                        'id': '17',
-                        'parentId': '1',
-                        'name': '旋转动画',
-                        'keyWord': 'spinDemo',
-                        'icon': 'fa-spinner',
-                        'url': '/app/demo/spinDemo'
-                    }, {
-                        'id': '20',
-                        'parentId': '1',
-                        'name': '本地存储服务',
-                        'keyWord': 'storageDemo',
-                        'icon': 'fa-database',
-                        'url': '/app/demo/storageDemo'
-                    }, {
-                        'id': '21',
-                        'parentId': '1',
-                        'name': '页面浏览器',
-                        'keyWord': 'pageBrowserDemo',
-                        'icon': 'fa-circle-thin',
-                        'url': '/app/demo/pageBrowserDemo'
-                    }, {
-                        'id': '22',
-                        'parentId': '1',
-                        'name': '富文本编辑器',
-                        'keyWord': 'editorDemo',
-                        'icon': 'fa-file-o',
-                        'url': '/app/demo/editorDemo'
-                    }, {
-                        'id': '23',
-                        'parentId': '1',
-                        'name': 'ag-grid',
-                        'keyWord': 'agGridDemo',
-                        'icon': 'fa-table',
-                        'url': '/app/demo/agGridDemo'
-                    }, {
-                        'id': '24',
-                        'parentId': '1',
-                        'name': '简单数据表格',
-                        'keyWord': 'simpleDataTableDemo',
-                        'icon': 'fa-table',
-                        'url': '/app/demo/simpleDataTableDemo'
-                    }, {
-                        'id': '25',
-                        'parentId': '1',
-                        'name': '颜色选择器',
-                        'keyWord': 'colorPickerDemo',
-                        'icon': 'fa-life-ring',
-                        'url': '/app/demo/colorPickerDemo'
-                    },
-                    {
-                        'id': '26',
-                        'parentId': '1',
-                        'name': '步骤条',
-                        'keyWord': 'stepDemoComponent',
-                        'icon': 'fa-list',
-                        'url': '/app/demo/stepDemo'
-                    },
-                    {
-                        'id': '27',
-                        'parentId': '1',
-                        'name': '验证器',
-                        'keyWord': 'validatorDemo',
-                        'icon': 'fa-life-ring',
-                        'url': '/app/demo/validatorDemo'
-                    },
-                    {
-                        'id': '28',
-                        'parentId': '1',
-                        'name': '二维码',
-                        'keyWord': 'qrcodeDemo',
-                        'icon': 'fa-qrcode',
-                        'url': '/app/demo/qrcodeDemo'
-                    }
-                ]
-
-            },
-            {
-                'id': '020',
-                'parentId': '0',
-                'name': '样式示例',
-                'keyWord': 'yssl',
-                'icon': 'fa-cubes',
-                'isExpend': false,
-                'children': [
-                    {
-                        'id': '021',
-                        'parentId': '020',
-                        'name': 'ng-bootstrap样式',
-                        'keyWord': 'ngBootstrapDemo',
-                        'icon': 'fa-cubes',
-                        'url': '/app/demo/ngBootstrapDemo'
-                    }, {
-                        'id': '022',
-                        'parentId': '020',
-                        'name': 'bootstrap样式',
-                        'keyWord': 'bootstrapDemo',
-                        'icon': 'fa-cubes',
-                        'url': '/app/demo/bootstrapDemo'
-                    },
-                    {
-                        'id': '023',
-                        'parentId': '020',
-                        'name': '时间轴样式',
-                        'keyWord': 'timeline',
-                        'icon': 'fa-clock-o',
-                        'url': '/app/demo/timelineDemo'
-                    }
-                ]
-            },
-            {
-                'id': '20',
-                'parentId': '0',
-                'name': '权限管理',
-                'keyWord': 'qxgl',
-                'icon': 'fa-user',
-                'isExpend': false,
-                'children': [{
-                    'id': '21',
-                    'parentId': '20',
-                    'name': '用户管理',
-                    'keyWord': 'yhgl',
-                    'icon': 'fa-user-circle-o',
-                    'isExpend': false,
-                    'children': [{
-                        'id': '22',
-                        'parentId': '21',
-                        'name': '用户添加',
-                        'keyWord': 'yhtj',
-                        'icon': 'fa-pencil-square-o',
-                        'url': '/app/user/userAdd'
-                    }, {
-                        'id': '23',
-                        'parentId': '21',
-                        'name': '用户列表',
-                        'keyWord': 'yhlb',
-                        'icon': 'fa-list-alt',
-                        'url': '/app/user/userList'
-                    }]
-                }, {
-                    'id': '24',
-                    'parentId': '20',
-                    'name': '角色管理',
-                    'keyWord': 'jsgl',
-                    'icon': 'fa-users',
-                    'children': [{
-                        'id': '25',
-                        'parentId': '24',
-                        'name': '角色添加',
-                        'keyWord': 'jstj',
-                        'icon': 'fa-plus-circle',
-                        'url': '/app/role/roleAdd'
-                    }, {
-                        'id': '26',
-                        'parentId': '24',
-                        'name': '角色查询',
-                        'keyWord': 'jscx',
-                        'icon': 'fa-search',
-                        'url': '/app/role/roleList'
-                    }, {
-                        'id': '27',
-                        'parentId': '24',
-                        'name': '角色分配',
-                        'keyWord': 'jsfp',
-                        'icon': 'fa-cogs',
-                        'url': '/app/role/roleDis'
-                    }]
-                }, {
-                    'id': '28',
-                    'parentId': '20',
-                    'name': '菜单管理',
-                    'keyWord': 'cdgl',
-                    'icon': 'fa-tree',
-                    'children': [{
-                        'id': '29',
-                        'parentId': '28',
-                        'name': '菜单添加',
-                        'keyWord': 'cdtj',
-                        'icon': 'fa-plus-circle',
-                        'url': 'menuAdd'
-                    }, {
-                        'id': '30',
-                        'parentId': '28',
-                        'name': '菜单查询',
-                        'keyWord': 'cdcx',
-                        'icon': 'fa-search',
-                        'url': 'menuList'
-                    }]
-                }
-                ]
-            },
+                'url': '/app/log'
+            }
         ]
     };
 

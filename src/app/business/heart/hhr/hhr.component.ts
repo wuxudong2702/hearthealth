@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,DataType,searchObj} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -219,6 +219,15 @@ export class HhrComponent implements OnInit {
         this.http.postHhrSort(sort.id,sort.order).then(data=>{
             console.log(data,'排序');
             this.data=data['data'];
+        });
+    }
+    onSearch(searchObj: searchObj) {
+        console.log('hhr searchObj:',searchObj);
+        // this.selectValue = searchObj.selectValue;
+        // this.searchValue = searchObj.searchValue;
+        this.http.postHhrSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+            console.log('hhr Search result:',data);
+            this.data = data['data'];
         });
     }
 

@@ -87,9 +87,7 @@ export class AppRoleComponent implements OnInit {
   editBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setOperate: boolean = true;
-
   addView: boolean = false;
-  editView: boolean = false;
   tableView: boolean = true;
 
   del(id: number) {
@@ -145,14 +143,15 @@ export class AppRoleComponent implements OnInit {
 
   cancle() {
     this.addView = false;
-    this.editView = false;
     this.tableView = true;
   }
 
   submit(submitData: string) {
-
+    this.http.postAppRoleSubmit(submitData).then(data => {
+        console.log(data, '提交');
+        this.data = data['data'];
+    });
     this.addView = false;
-    this.editView = false;
     this.tableView = true;
   }
 }

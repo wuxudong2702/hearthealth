@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, DataType} from '../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, DataType,searchObj} from '../../shared/table/table-list.component';
 import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -195,5 +195,15 @@ export class DevComponent implements OnInit {
   cancle() {
     this.addView = false;
     this.tableView = true;
+  }
+
+  Search(searchObj: searchObj) {
+      console.log('dev searchObj:',searchObj);
+      // this.selectValue = searchObj.selectValue;
+      // this.searchValue = searchObj.searchValue;
+      this.http.postDevSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+          console.log('dev Search result:',data);
+          this.data = data['data'];
+      });
   }
 }

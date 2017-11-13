@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, DataType, INPUTTYPE} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, DataType,searchObj,INPUTTYPE} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {_switch} from "rxjs/operator/switch";
@@ -334,13 +334,25 @@ export class AppUserComponent implements OnInit {
 
   submit(submitData: string) {
 
-
+    this.http.postAppUserSubmit(submitData).then(data => {
+        console.log(data, '提交');
+        this.data = data['data'];
+    });
     this.addSubUserView = false;
     this.addView = false;
     this.subUsersView = false;
     this.tableView = true;
   }
 
+  Search(searchObj: searchObj) {
+      console.log('app-user searchObj:',searchObj);
+      // this.selectValue = searchObj.selectValue;
+      // this.searchValue = searchObj.searchValue;
+      this.http.postAppUserSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+          console.log('app-user Search result:',data);
+          this.data = data['data'];
+      });
+  }
 
   details(id: number) {
     this.addView = false;
@@ -426,9 +438,12 @@ export class AppUserComponent implements OnInit {
 
   }
 
-  subUserSubmit() {
+  subUserSubmit(submitData: string) {
 
-
+    this.http.postAppUserSubSubmit(submitData).then(data => {
+        console.log(data, '提交');
+        this.data = data['data'];
+    });
     this.addView = false;
     this.subUsersView = true;
     this.tableView = false;
@@ -440,5 +455,15 @@ export class AppUserComponent implements OnInit {
     this.subUsersView = true;
     this.tableView = false;
     this.addSubUserView = false;
+  }
+
+  subUserSearch(searchObj: searchObj) {
+      console.log('app-user-sub searchObj:',searchObj);
+      // this.selectValue = searchObj.selectValue;
+      // this.searchValue = searchObj.searchValue;
+      this.http.postAppUserSubSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+          console.log('app-user-sub Search result:',data);
+          this.data = data['data'];
+      });
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {cell, SortDirection, sortObj,news,DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,news,DataType,searchObj} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -148,5 +148,14 @@ export class NewsComponent implements OnInit {
     onAdd(){
       console.log('212132323');
       this.editor=true;
+    }
+    onSearch(searchObj: searchObj) {
+        console.log('news searchObj:',searchObj);
+        // this.selectValue = searchObj.selectValue;
+        // this.searchValue = searchObj.searchValue;
+        this.http.postNewsSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+            console.log('news Search result:',data);
+            this.data = data['data'];
+        });
     }
 }

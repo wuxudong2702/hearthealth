@@ -122,6 +122,15 @@ export class ApiService {
           .then(data => data)
           .catch(this.handleError);
   }
+
+    postAdminRoleSubmit(submitData): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
 //admin-user
   getAdminUserHeader(): Promise<any> {
       const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-user-headers.json';
@@ -161,6 +170,15 @@ export class ApiService {
           .then(data => data)
           .catch(this.handleError);
   }
+
+  postAdminUserSubmit(submitData): Promise<any> {
+      const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-user-data.json';
+      return this.httpClient.get(url)
+          .toPromise()
+          .then(data => data)
+          .catch(this.handleError);
+  }
+
 
 //app-user
     getAppUserHeader(): Promise<any> {
@@ -222,6 +240,22 @@ export class ApiService {
             .catch(this.handleError);
     }
 
+    postAppUserSubmit(submitData): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    postAppUserSearch(selectValue,searchValue): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
     postAppUserSubDel(id): Promise<any> {
         const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
         return this.httpClient.get(url)
@@ -239,6 +273,22 @@ export class ApiService {
     }
 
     postAppUserSubSort(headersId,order): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    postAppUserSubSubmit(submitData): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    postAppUserSubSearch(selectValue,searchValue): Promise<any> {
         const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
         return this.httpClient.get(url)
             .toPromise()
@@ -280,6 +330,14 @@ export class ApiService {
     }
 
     postAppRoleSort(headersId,order): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/app-auth-data/app-role-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    postAppRoleSubmit(submitData): Promise<any> {
         const url: string = '../../../assets/hearthealthData/app-auth-data/app-role-data.json';
         return this.httpClient.get(url)
             .toPromise()
@@ -369,6 +427,14 @@ export class ApiService {
             .catch(this.handleError);
     }
 
+    postGuideSearch(selectValue,searchValue): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/infos-data/infos-guide-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
 //infos-mall
     getMallHeader(): Promise<any> {
         const url: string = '../../../assets/hearthealthData/infos-data/infos-mall-headers.json';
@@ -403,6 +469,14 @@ export class ApiService {
     }
 
     postMallSort(headersId,order): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/infos-data/infos-mall-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    postMallSearch(selectValue,searchValue): Promise<any> {
         const url: string = '../../../assets/hearthealthData/infos-data/infos-mall-data.json';
         return this.httpClient.get(url)
             .toPromise()
@@ -454,6 +528,14 @@ export class ApiService {
             .catch(this.handleError);
     }
 
+    postNewsSearch(selectValue,searchValue): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
 //dev
     getDevHeader(): Promise<any> {
         const url: string = '../../../assets/hearthealthData/dev-data/dev-headers.json';
@@ -495,6 +577,14 @@ export class ApiService {
             .catch(this.handleError);
     }
   postDevSubmit(addData): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    postDevSearch(selectValue,searchValue): Promise<any> {
         const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
         return this.httpClient.get(url)
             .toPromise()
@@ -551,6 +641,14 @@ export class ApiService {
             .catch(this.handleError);
     }
 
+    postHhrSearch(selectValue,searchValue): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/hhr-data/hhr-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
 //log
     getLogHeader(): Promise<any> {
         const url: string = '../../../assets/hearthealthData/log-data/log-headers.json';
@@ -569,6 +667,14 @@ export class ApiService {
     }
 
     postLogSort(headersId,order): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/log-data/log-data.json';
+        return this.httpClient.get(url)
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    postLogSearch(selectValue,searchValue): Promise<any> {
         const url: string = '../../../assets/hearthealthData/log-data/log-data.json';
         return this.httpClient.get(url)
             .toPromise()

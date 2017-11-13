@@ -148,6 +148,7 @@ export class AdminRoleComponent implements OnInit {
 
   addData(){
 
+      // this.addView=false;
 
     this.tableView = true;
     this.addView=false;

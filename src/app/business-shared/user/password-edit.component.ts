@@ -5,6 +5,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../shared/toast/toast.service';
 import { ToastConfig, ToastType } from '../../shared/toast/toast-model';
 import { CustomValidators } from '../../shared/custom-validator/custom-validator'
+import {ApiService} from '../../business-service/api/api.service';
+import {Router} from '@angular/router';
 
 /**
  * 修改密码组件
@@ -12,14 +14,15 @@ import { CustomValidators } from '../../shared/custom-validator/custom-validator
 @Component({
     selector: 'c-password-edit',
     templateUrl: './password-edit.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+   providers:[]
 })
 export class PasswordEditComponent {
 
     passwordEditForm: FormGroup;
 
 
-    constructor(public activeModal: NgbActiveModal, private toastService: ToastService,private formBuilder: FormBuilder) {
+    constructor(private router: Router,public activeModal: NgbActiveModal, private toastService: ToastService,private formBuilder: FormBuilder,private api:ApiService) {
         let oldPasswordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(15)]));
         let passwordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(15)]));
         let certainPasswordFc  = new FormControl('',CustomValidators.equalTo(passwordFc));
@@ -36,10 +39,30 @@ export class PasswordEditComponent {
      */
     ok(): void {
         if(this.passwordEditForm.valid){
-             console.info(this.passwordEditForm.value);
-             const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '修改密码成功!', 2000);
-             this.toastService.toast(toastCfg);
-             this.close();
+            let that = this;
+            this.api.reset(this.passwordEditForm.get('oldPassword').value, this.passwordEditForm.get('password').value,this.passwordEditForm.get('certainPassword').value).then(data => {
+              console.log(data,'qqqqqqqqqqqqq');
+              if (data.status == 'ok') {
+                const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '修改成功!', 3000);
+                that.toastService.toast(toastCfg);
+                that.router.navigate(['/app/home']);
+
+                // console.log('++++++++++++++++++++++++++++++++++++++++++++++++',this.api.getToken());
+              } else {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                that.toastService.toast(toastCfg);
+                that.router.navigate(['/reset']);
+              }
+            }).catch(err => {
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+              that.toastService.toast(toastCfg);
+            });
+
+             //
+             // console.info(this.passwordEditForm.value);
+             // const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '000000000000000000000000000000000', 2000);
+             // this.toastService.toast(toastCfg);
+             // this.close();
         }
     }
 

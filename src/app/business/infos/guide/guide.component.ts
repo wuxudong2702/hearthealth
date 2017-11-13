@@ -60,7 +60,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-guide',
   templateUrl: './guide.component.html',
   styleUrls: ['./guide.component.css'],
-  providers:[ApiService]
+  providers:[]
 })
 export class GuideComponent implements OnInit {
 

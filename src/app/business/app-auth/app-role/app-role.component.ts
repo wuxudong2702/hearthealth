@@ -58,7 +58,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-app-role',
   templateUrl: './app-role.component.html',
   styleUrls: ['./app-role.component.css'],
-  providers: [ApiService]
+  providers: []
 
 })
 export class AppRoleComponent implements OnInit {

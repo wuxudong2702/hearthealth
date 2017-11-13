@@ -21,13 +21,13 @@ import { MainRoutingModule } from './main-routing.module';
  */
 @NgModule({
   imports:      [
-     CommonModule, 
+     CommonModule,
      FormsModule,
      NgbModule,
      MainRoutingModule,
      UserSharedModule,
      CustomScrollbarModule,
-     ModalModule
+     ModalModule,
   ],
   declarations: [
      MainComponent,

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-ecgd',
   templateUrl: './ecgd.component.html',
   styleUrls: ['./ecgd.component.css'],
-  providers: [ApiService]
+  providers: []
 })
 
 

@@ -1,7 +1,11 @@
 import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import {Validators, FormControl, FormGroup, FormBuilder} from '@angular/forms';
+import {HttpService} from '../shared/http/http.service';
+import {ApiService} from '../business-service/api/api.service';
+import {ToastService} from '../shared/toast/toast.service';
+import {ToastConfig, ToastType} from '../shared/toast/toast-model';
 
 import {MainData} from '../main/main-model';
 import {ModalService} from '../shared/modal/modal.service';
@@ -11,13 +15,15 @@ import {AvatarCropperComponent} from '../business-shared/user/avatar-cropper.com
 import {PasswordEditComponent} from '../business-shared/user/password-edit.component';
 import {AppService} from '../app.service';
 
+
 /**
  * 主体组件
  */
 @Component({
     selector: 'c-main',
     templateUrl: './main.component.html',
-    styleUrls: ['.//main.component.scss']
+    styleUrls: ['.//main.component.scss'],
+  providers:[]
 })
 export class MainComponent implements OnInit {
 
@@ -150,13 +156,23 @@ export class MainComponent implements OnInit {
 
     title: string = '首页';
 
+    resetForm: FormGroup;
 
-    constructor(private router: Router, private modalService: ModalService, private ngbModalService: NgbModal, private appService: AppService) {
-        this.appService.titleEventEmitter.subscribe((value: string) => {
-            if (value) {
-                this.title = value;
-            }
-        });
+    constructor(private api: ApiService, private toastService: ToastService, private httpService: HttpService, private formBuilder: FormBuilder,private router: Router, private modalService: ModalService, private ngbModalService: NgbModal,  private appService: AppService) {
+      this.appService.titleEventEmitter.subscribe((value: string) => {
+        if (value) {
+          this.title = value;
+        }
+      });
+      let oldPasswordFc = new FormControl('admin', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)]));
+      let passwordFc = new FormControl('admin', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)]));
+      let certainPasswordFc = new FormControl('admin', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(15)]));
+
+      this.resetForm = this.formBuilder.group({
+        oldpassword: oldPasswordFc,
+        password: passwordFc,
+        certainPassword: certainPasswordFc
+      });
     }
 
 
@@ -208,7 +224,9 @@ export class MainComponent implements OnInit {
      * 修改密码
      */
     passwordEdit() {
-        this.ngbModalService.open(PasswordEditComponent, {size: 'lg'}).result.then((result) => {
+
+      this.ngbModalService.open(PasswordEditComponent, {size: 'lg'}).result.then((result) => {
+
 
         }, (reason) => {
 

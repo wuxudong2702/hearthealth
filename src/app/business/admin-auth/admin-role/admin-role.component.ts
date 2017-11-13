@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-admin-role',
   templateUrl: './admin-role.component.html',
   styleUrls: ['./admin-role.component.css'],
-  providers:[ApiService]
+  providers:[]
 })
 export class AdminRoleComponent implements OnInit {
 

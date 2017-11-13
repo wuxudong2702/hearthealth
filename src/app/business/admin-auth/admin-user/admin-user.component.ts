@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-admin-user',
   templateUrl: './admin-user.component.html',
   styleUrls: ['./admin-user.component.css'],
-  providers:[ApiService]
+  providers:[]
 })
 
 export class AdminUserComponent implements OnInit {

@@ -1,25 +1,47 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {cell, SortDirection, sortObj, DataType,searchObj} from '../../shared/table/table-list.component';
 import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
+import {ToastConfig, ToastType} from "../../shared/toast/toast-model";
+import {ToastService} from '../../shared/toast/toast.service';
 
 @Component({
   selector: 'app-dev',
   templateUrl: './dev.component.html',
   styleUrls: ['./dev.component.css'],
-  providers: [ApiService]
+  providers: []
 })
 export class DevComponent implements OnInit {
 
-  constructor(private http: ApiService) {
+  constructor(private http: ApiService,private toastService: ToastService,private router:Router) {
   }
 
   ngOnInit() {
     this.http.getDevHeader().then(data => {
-      this.headers = data['headers'];
+
+      if (data.status == 'ok') {
+        this.headers=data['headers'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+        // this.router.navigate(['/login']);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
     this.http.getDevData().then(data => {
-      this.data = data['data'];
+      if (data.status == 'ok') {
+        this.data = data['data'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+        // this.router.navigate(['/login']);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
   }
 

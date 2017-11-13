@@ -220,7 +220,7 @@ import {_switch} from "rxjs/operator/switch";
   selector: 'app-app-user',
   templateUrl: './app-user.component.html',
   styleUrls: ['./app-user.component.css'],
-  providers: [ApiService]
+  providers: []
 })
 export class AppUserComponent implements OnInit {
 
@@ -396,8 +396,6 @@ export class AppUserComponent implements OnInit {
       this.addEditTitle = '编辑';
       this.editId = id;
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
-        // console.log('______',this.data[id][d.key],d.key);
-        console.log('-------', d.inputType);
         switch(d.inputType)
         {
           case INPUTTYPE.INPUT:
@@ -406,7 +404,6 @@ export class AppUserComponent implements OnInit {
           case INPUTTYPE.SELECT:
             let val = this.subUserData[id][d.key];
             d.val = d.selectVal[val];
-            console.log('----+++++++++---', val, d.selectVal[val]);
             break;
           default:
             d.val = this.subUserData[id][d.key];

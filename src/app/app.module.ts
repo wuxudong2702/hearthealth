@@ -35,7 +35,9 @@ import  { AppRoutingModule } from './app-routing.module';
 import {SelectivePreloadingStrategy} from "./selective-preloading-strategy";
 
 
+import {HttpClientModule} from '@angular/common/http';
 
+import {ApiService} from './business-service/api/api.service';
 
 
 
@@ -49,7 +51,8 @@ import {SelectivePreloadingStrategy} from "./selective-preloading-strategy";
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -60,6 +63,7 @@ import {SelectivePreloadingStrategy} from "./selective-preloading-strategy";
   ],
   providers: [
     AppService,
+    ApiService,
     ToastService,
     HttpService,
     SpinService,

@@ -102,7 +102,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-mall',
   templateUrl: './mall.component.html',
   styleUrls: ['./mall.component.css'],
-  providers:[ApiService]
+  providers:[]
 })
 export class MallComponent implements OnInit {
 

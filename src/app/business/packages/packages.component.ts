@@ -41,7 +41,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-packages',
   templateUrl: './packages.component.html',
   styleUrls: ['./packages.component.css'],
-  providers:[ApiService]
+  providers:[]
 })
 export class PackagesComponent implements OnInit {
 

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-admin-ztree',
   templateUrl: './admin-ztree.component.html',
   styleUrls: ['./admin-ztree.component.css'],
-  providers:[ApiService]
+  providers:[]
 
 })
 export class AdminZtreeComponent implements OnInit {

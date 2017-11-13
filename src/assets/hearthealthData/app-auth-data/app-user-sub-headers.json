@@ -26,7 +26,7 @@
       "validExample": "",
       "required": false,
       "pattern": "",
-      "inputType": 1
+      "inputType": 0
     },
     {
       "key": "age",
@@ -34,13 +34,13 @@
       "name": "年龄",
       "index": 1,
       "order": "SortDirection.NONE",
-      "pipe": {"type": 5, "params": ""},
+      "pipe": {"type": 0, "params": ""},
       "val": "",
       "selectVal":"",
       "validExample": "15",
       "required": true,
       "pattern": "^[0-9]+$",
-      "inputType": 0
+      "inputType": 1
     },
     {
       "key": "sex",

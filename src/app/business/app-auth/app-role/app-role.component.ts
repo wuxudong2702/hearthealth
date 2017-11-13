@@ -86,6 +86,7 @@ export class AppRoleComponent implements OnInit {
   editBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setOperate: boolean = true;
+  paginationBtn: boolean = true;
   addView: boolean = false;
   tableView: boolean = true;
 

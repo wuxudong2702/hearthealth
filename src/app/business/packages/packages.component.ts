@@ -62,25 +62,28 @@ export class PackagesComponent implements OnInit {
   deleteBtn: boolean = true;
   deleteAllBtn: boolean = true;
   uploadBtn:boolean=true;
+  paginationBtn: boolean = true;
 
-    del(id:number){
-        this.http.postPackagesDel(id).then(data=>{
-            console.log(data,'删除');
-            this.data=data['data'];
-        });
-    }
-    delAll(checkedList:any){
-        this.http.postPackagesDelAll(checkedList).then(data=>{
-            console.log(data,'删除全部');
-            this.data=data['data'];
-        });
-    }
-    sort(sort: sortObj) {
-        this.http.postPackagesSort(sort.id,sort.order).then(data=>{
-            console.log(data,'排序');
-            this.data=data['data'];
-        });
-    }
+  del(id:number){
+      this.http.postPackagesDel(id).then(data=>{
+          console.log(data,'删除');
+          this.data=data['data'];
+      });
+  }
+
+  delAll(checkedList:any){
+      this.http.postPackagesDelAll(checkedList).then(data=>{
+          console.log(data,'删除全部');
+          this.data=data['data'];
+      });
+  }
+
+  sort(sort: sortObj) {
+      this.http.postPackagesSort(sort.id,sort.order).then(data=>{
+          console.log(data,'排序');
+          this.data=data['data'];
+      });
+  }
   upload(){
 
   }

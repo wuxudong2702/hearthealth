@@ -76,4 +76,9 @@ export class EcgdComponent implements OnInit {
       this.data = data['data'];
     });
   }
+
+  onUpload(){
+      console.log('upload');
+
+  }
 }

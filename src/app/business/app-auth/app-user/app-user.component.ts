@@ -256,6 +256,7 @@ export class AppUserComponent implements OnInit {
   editBtn: boolean = true;
   backBtn: boolean = true;
   setOperate: boolean = true;
+  paginationBtn: boolean = true;
   userName: string = '';
 
   addView: boolean = false;

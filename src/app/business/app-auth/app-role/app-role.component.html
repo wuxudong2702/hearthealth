@@ -2,13 +2,12 @@
 <c-table-list
   *ngIf="tableView"
 
-  [headers]="headers"
   (onSort)="sort($event)"
   (onDel)="del($event)"
   (onDelAll)="delAll($event)"
-  (onEdit)="edit($event)"
   (onAdd)="add($event)"
 
+  [headers]="headers"
   [data]="data"
   [addBtn]="addBtn"
   [deleteBtn]="deleteBtn"
@@ -21,20 +20,12 @@
 
 <app-table-add
   [headers]="headerAdd"
+  [addEditTitle]="addEditTitle"
+
   (onAddCancle)="cancle($event)"
-  (onSubmit)="Submit($event)"
+  (onSubmit)="submit($event)"
 
   *ngIf="addView"
 >
 </app-table-add>
 
-<app-table-edit
-  [headers]="headerEdit"
-  [editId]="editId"
-  [data]="data"
-  (onEditCancle)="cancle($event)"
-  (onSubmit)="Submit($event)"
-
-  *ngIf="editView"
->
-</app-table-edit>

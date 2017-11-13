@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {cell, SortDirection, sortObj,DataType} from '../../shared/table/table-list.component';
+import {Component, OnInit} from '@angular/core';
+import {cell, SortDirection, sortObj, DataType} from '../../shared/table/table-list.component';
 import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -125,24 +125,29 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-dev',
   templateUrl: './dev.component.html',
   styleUrls: ['./dev.component.css'],
-  providers:[ApiService]
+  providers: [ApiService]
 })
 export class DevComponent implements OnInit {
 
-    constructor(private http: ApiService) {}
+  constructor(private http: ApiService) {
+  }
 
-    ngOnInit() {
-        this.http.getDevHeader().then(data => {
-            this.headers = data['headers'];
-        });
-        this.http.getDevData().then(data => {
-            this.data = data['data'];
-        });
-    }
+  ngOnInit() {
+    this.http.getDevHeader().then(data => {
+      this.headers = data['headers'];
+    });
+    this.http.getDevData().then(data => {
+      this.data = data['data'];
+    });
+  }
 
   headers: Array<cell> = [];
+  headerAdd: Array<cell> = [];
   data: Array<any> = [];
-  addCommonBtn:boolean = true;
+
+  addEditTitle: string = '添加';
+
+  addBtn: boolean = true;
   deleteBtn: boolean = true;
   searchBtn: boolean = true;
   deleteAllBtn: boolean = true;
@@ -150,28 +155,45 @@ export class DevComponent implements OnInit {
   paginationBtn: boolean = true;
   setOperate: boolean = true;
 
-    onDel(id:number){
-        this.http.postDevDel(id).then(data=>{
-            console.log(data,'删除');
-            this.data=data['data'];
-        });
-    }
-    onDelAll(checkedList:any){
-        this.http.postDevDelAll(checkedList).then(data=>{
-            console.log(data,'删除全部');
-            this.data=data['data'];
-        });
-    }
-    onSort(sort: sortObj) {
-        this.http.postDevSort(sort.id,sort.order).then(data=>{
-            console.log(data,'排序');
-            this.data=data['data'];
-        });
-    }
-    onAddSubmit(AddData:string){
-        console.log('dev 添加数据',AddData);
-      this.http.postDevSubmit(AddData).then(data=>{
-        this.data=data['data'];
-      });
-    }
+  tableView: boolean = true;
+  addView: boolean = false;
+
+  add() {
+    this.addView = true;
+    this.tableView = false;
+  }
+
+  del(id: number) {
+    this.http.postDevDel(id).then(data => {
+      console.log(data, '删除');
+      this.data = data['data'];
+    });
+  }
+
+  delAll(checkedList: any) {
+    this.http.postDevDelAll(checkedList).then(data => {
+      console.log(data, '删除全部');
+      this.data = data['data'];
+    });
+  }
+
+  sort(sort: sortObj) {
+    this.http.postDevSort(sort.id, sort.order).then(data => {
+      console.log(data, '排序');
+      this.data = data['data'];
+    });
+  }
+
+  submit(AddData: string) {
+    this.http.postDevSubmit(AddData).then(data => {
+      this.data = data['data'];
+    });
+    this.addView = false;
+    this.tableView = true;
+  }
+
+  cancle() {
+    this.addView = false;
+    this.tableView = true;
+  }
 }

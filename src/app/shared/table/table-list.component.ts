@@ -75,6 +75,7 @@ export class CPipePipe implements PipeTransform {
       case DataType.DATATIME:
         return (new DatePipe('zh-CN')).transform(originalValue, pipe.params);
       case DataType.ENUM:
+        console.log('----------',pipe,);
         return pipe.params[originalValue];
       case DataType.NONE:
       default:
@@ -114,7 +115,7 @@ export class TableListComponent implements OnInit {
   @Input() searchBtn: boolean;
   @Input() detailsBtn: boolean;
   @Input() editBtn: boolean;
-  @Input() editCommonBtn: boolean;
+  // @Input() editCommonBtn: boolean;
   @Input() deleteAllBtn: boolean;
   @Input() setBtn: boolean;
   @Input() chartBtn: boolean;
@@ -122,7 +123,7 @@ export class TableListComponent implements OnInit {
   @Input() backBtn: boolean;
   @Input() setOperate: boolean;
   @Input() uploadBtn: boolean;
-  @Input() addCommonBtn: boolean;
+  // @Input() addCommonBtn: boolean;
 
 
   // @Output() onAddSubmit = new EventEmitter<any>();
@@ -137,6 +138,7 @@ export class TableListComponent implements OnInit {
   @Output() onChart = new EventEmitter<any>();
   @Output() onSort = new EventEmitter<any>();
   @Output() onBack = new EventEmitter<any>();
+  @Output() onUpload = new EventEmitter<any>();
 
   url: string = '';
   isDelAll: boolean = false;
@@ -263,7 +265,9 @@ export class TableListComponent implements OnInit {
   back() {
     this.onBack.emit();
   }
-
+  upload(){
+    this.onUpload.emit();
+  }
   openError(errorInfo) {
     let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
     this.toastService.toast(toastCfg);

@@ -1,18 +1,34 @@
 
 <c-table-list
-  *ngIf="!showChartView"
+  *ngIf="tableView"
+
   [headers]="headers"
   [data]="data"
-  [addCommonBtn]="addCommonBtn"
   [deleteBtn]="deleteBtn"
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
-  (onSort)="onSort($event)"
-  (onDel)="onDel($event)"
-  (onDelAll)="onDelAll($event)"
-  (onAddSubmit)="onAddSubmit($event)"
   [setBtn]="setBtn"
   [paginationBtn]="paginationBtn"
   [setOperate]="setOperate"
+  [addBtn]="addBtn"
+
+  (onSort)="sort($event)"
+  (onDel)="del($event)"
+  (onDelAll)="delAll($event)"
+  (onAddSubmit)="submit($event)"
+  (onAdd)="add($event)"
+
 >
 </c-table-list>
+
+
+<app-table-add
+  [headers]="headers"
+  [addEditTitle]="addEditTitle"
+
+  (onAddCancle)="cancle($event)"
+  (onSubmit)="submit($event)"
+
+  *ngIf="addView"
+>
+</app-table-add>

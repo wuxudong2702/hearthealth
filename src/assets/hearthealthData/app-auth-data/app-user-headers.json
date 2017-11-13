@@ -7,7 +7,7 @@
       "index": 4,
       "order": "SortDirection.NONE",
       "pipe": {
-        "type": "DataType.NONE",
+        "type": 5,
         "params": ""
       },
       "val": "",
@@ -15,7 +15,7 @@
       "validExample": "武旭东",
       "required": true,
       "pattern": "",
-      "inputType": "0"
+      "inputType": 0
     },
     {
       "key": "accountType",
@@ -24,27 +24,27 @@
       "index": 0,
       "order": "SortDirection.NONE",
       "pipe": {
-        "type": "DataType.ENUM",
+        "type": 0,
         "params": {
           "0": "子账户",
           "1": "主账户"
         }
       },
-      "val": "0",
+      "val": "",
       "selectVal": ["子账户","主账户"],
       "validExample": "",
       "required": false,
       "pattern": "",
-      "inputType": "1"
+      "inputType": 1
     },
     {
       "key": "age",
       "show": true,
       "name": "年龄",
       "index": 1,
-      "order": "SortDirection.NONE",
+      "order": 5,
       "pipe": {
-        "type": "DataType.NONE",
+        "type": 5,
         "params": ""
       },
       "val": "",
@@ -52,7 +52,7 @@
       "validExample": "23",
       "required": true,
       "pattern": "[0-9]+$",
-      "inputType": "0"
+      "inputType": 0
     },
     {
       "key": "sex",
@@ -61,18 +61,18 @@
       "index": 2,
       "order": "SortDirection.NONE",
       "pipe": {
-        "type": "DataType.ENUM",
+        "type": 0,
         "params": {
           "0": "女",
           "1": "男"
         }
       },
-      "val": "0",
+      "val": "",
       "selectVal": ["女","男"],
       "validExample": "",
       "required": false,
       "pattern": "",
-      "inputType": "1"
+      "inputType": 1
     },
     {
       "key": "address",
@@ -81,7 +81,7 @@
       "index": 3,
       "order": "SortDirection.NONE",
       "pipe": {
-        "type": "DataType.NONE",
+        "type": 5,
         "params": ""
       },
       "val": "",
@@ -89,7 +89,7 @@
       "validExample": "黑龙江哈尔滨南岗区",
       "required": true,
       "pattern": "",
-      "inputType": "0"
+      "inputType": 0
     },
     {
       "key": "height",
@@ -98,7 +98,7 @@
       "index": 5,
       "order": "SortDirection.NONE",
       "pipe": {
-        "type": "DataType.NONE",
+        "type": 5,
         "params": ""
       },
       "val": "",
@@ -106,7 +106,7 @@
       "validExample": "185",
       "required": true,
       "pattern": "^[0-9]+$",
-      "inputType": "0"
+      "inputType": 0
     },
     {
       "key": "telephoneNum",
@@ -115,7 +115,7 @@
       "index": 4,
       "order": "SortDirection.NONE",
       "pipe": {
-        "type": "DataType.NONE",
+        "type": 5,
         "params": ""
       },
       "val": "",
@@ -123,7 +123,7 @@
       "validExample": "18045142702",
       "required": true,
       "pattern": "1[3|4|5|8][0-9]{9}",
-      "inputType": "0"
+      "inputType": 0
     },
     {
       "key": "weight",
@@ -132,7 +132,7 @@
       "index": 6,
       "order": "SortDirection.NONE",
       "pipe": {
-        "type": "DataType.NONE",
+        "type": 5,
         "params": ""
       },
       "val": "",
@@ -140,7 +140,7 @@
       "validExample": "65",
       "required": true,
       "pattern": "^[0-9]+$",
-      "inputType": "0"
+      "inputType": 0
     },
     {
       "key": "subUsersNum",
@@ -149,7 +149,7 @@
       "index": 7,
       "order": "SortDirection.NONE",
       "pipe": {
-        "type": "DataType.NONE",
+        "type": 5,
         "params": ""
       },
 
@@ -158,7 +158,7 @@
       "validExample": "15",
       "required": true,
       "pattern": "^[0-9]+$",
-      "inputType": "0"
+      "inputType": 0
     }
   ]
 }

@@ -15,6 +15,7 @@ export class TableAddComponent implements OnInit {
 
   @Input() tableAdd: boolean;
   @Input() headers: Array<cell>;
+  @Input() addEditTitle:string;
 
 
   @Output() onAddCancle = new EventEmitter<any>();

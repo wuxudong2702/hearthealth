@@ -1,13 +1,16 @@
 
 <c-table-list
   *ngIf="!showChartView"
-  (onSort)="onSort($event)"
-  (onDel)="onDel($event)"
-  (onDelAll)="onDelAll($event)"
+
+  (onSort)="sort($event)"
+  (onDel)="del($event)"
+  (onDelAll)="delAll($event)"
+  (onUpload)="upload($event)"
+
   [headers]="headers"
   [data]="data"
   [deleteBtn]="deleteBtn"
-  [uploadBtn]="upload"
+  [uploadBtn]="uploadBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setOperate]="setOperate"
 >

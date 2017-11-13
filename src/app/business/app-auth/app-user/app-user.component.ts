@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, DataType, INPUTTYPE} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
+import {_switch} from "rxjs/operator/switch";
 
 // const headers: Array<cell> = [
 //   {
@@ -245,7 +246,7 @@ export class AppUserComponent implements OnInit {
   subUserData: Array<any> = [];
 
   editId: number;
-
+  addEditTitle: string = '添加';
   addBtn: boolean = true;
   deleteBtn: boolean = true;
   searchBtn: boolean = true;
@@ -286,12 +287,30 @@ export class AppUserComponent implements OnInit {
 
   add(id: number) {
     if (id >= 0) {
+      this.addEditTitle = '编辑';
       this.editId = id;
       this.headerAdd = this.headers.map(d => {
-        d.val = this.data[id][d.key];
+        // console.log('______',this.data[id][d.key],d.key);
+        // console.log('-------', d.inputType);
+        switch(d.inputType)
+        {
+          case INPUTTYPE.INPUT:
+            d.val = this.data[id][d.key];
+            break;
+          case INPUTTYPE.SELECT:
+            let val = this.data[id][d.key];
+            d.val = d.selectVal[val];
+            // console.log('----+++++++++---', val, d.selectVal[val]);
+            break;
+          default:
+            d.val = this.data[id][d.key];
+        }
+
         return d;
       });
-    } else {
+    }
+    else {
+      this.addEditTitle = '添加';
       this.headerAdd = this.headers.map(d => {
         d.val = '';
         return d;
@@ -323,13 +342,11 @@ export class AppUserComponent implements OnInit {
   }
 
 
-
   details(id: number) {
     this.addView = false;
     this.subUsersView = true;
     this.tableView = false;
     this.addSubUserView = false;
-
     // this.headerAdd=this.headers;
     this.http.getAppUserSubHeader().then(data => {
       console.log('appuser getAppUserSubHeaders header', data);
@@ -364,12 +381,30 @@ export class AppUserComponent implements OnInit {
 
   subUsersAdd(id: number) {
     if (id >= 0) {
+      this.addEditTitle = '编辑';
       this.editId = id;
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
-        d.val = this.subUserData[id][d.key];
+        // console.log('______',this.data[id][d.key],d.key);
+        // console.log('-------', d.inputType);
+        switch(d.inputType)
+        {
+          case INPUTTYPE.INPUT:
+            d.val = this.subUserData[id][d.key];
+            break;
+          case INPUTTYPE.SELECT:
+            let val = this.subUserData[id][d.key];
+            d.val = d.selectVal[val];
+            // console.log('----+++++++++---', val, d.selectVal[val]);
+            break;
+          default:
+            d.val = this.subUserData[id][d.key];
+        }
+
         return d;
       });
-    } else {
+    }
+    else {
+      this.addEditTitle = '添加';
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
         d.val = '';
         return d;
@@ -387,6 +422,8 @@ export class AppUserComponent implements OnInit {
     this.subUsersView = false;
     this.tableView = true;
     this.addSubUserView = false;
+    this.addEditTitle = '添加';
+
   }
 
   subUserSubmit() {

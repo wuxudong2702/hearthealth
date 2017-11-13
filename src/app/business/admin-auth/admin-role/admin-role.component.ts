@@ -109,33 +109,47 @@ export class AdminRoleComponent implements OnInit {
   editBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setOperate: boolean = true;
-  showZTreeView: boolean = false;
 
-
-  onEdit(id:number) {
+  tableView: boolean = true;
+  addView: boolean = false;
+  add(id:number) {
       this.http.getZtreeNodes().then(data => {
           this.nodes = data['nodes'];
       });
-      this.showZTreeView = !this.showZTreeView;
+    this.tableView = false;
+    this.addView=true;
   }
 
-  onDel(id:number){
+  del(id:number){
+    console.log('0000000000000000000000');
       this.http.postAppRoleDel(id).then(data=>{
           console.log(data,'删除');
           this.data=data['data'];
       });
   }
-  onDelAll(checkedList:any){
+  delAll(checkedList:any){
      this.http.postAppRoleDelAll(checkedList).then(data=>{
          console.log(data,'删除全部');
          this.data=data['data'];
      });
   }
-  onSort(sort: sortObj) {
+  sort(sort: sortObj) {
      this.http.postAppRoleSort(sort.id,sort.order).then(data=>{
          console.log(data,'排序');
          this.data=data['data'];
      });
   }
 
+
+  back(){
+    this.tableView = true;
+    this.addView=false;
+  }
+
+  addData(){
+
+
+    this.tableView = true;
+    this.addView=false;
+  }
 }

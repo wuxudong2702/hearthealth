@@ -23,7 +23,9 @@ export class InputComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // console.log('add and edit field ',this.field)
+  }
 
 
   datePickerConfig = {

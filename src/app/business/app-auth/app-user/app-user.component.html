@@ -9,7 +9,6 @@
   [editBtn]="editBtn"
   [detailsBtn]="detailsBtn"
   [setOperate]="setOperate"
-
   (onDetails)="details()"
   (onSort)="sort($event)"
   (onDel)="del($event)"
@@ -23,6 +22,8 @@
 
 <app-table-add
   [headers]="headerAdd"
+  [addEditTitle]="addEditTitle"
+
   (onAddCancle)="cancle($event)"
   (onSubmit)="submit($event)"
 
@@ -60,6 +61,8 @@
 <!--子用户添加和编辑-->
 <app-table-add
   [headers]="subUsersheaderAdd"
+  [addEditTitle]="addEditTitle"
+
   (onAddCancle)="subUsersCancle($event)"
   (onSubmit)="subUserSubmit($event)"
 

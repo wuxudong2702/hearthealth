@@ -12,12 +12,12 @@
           </button>
           <button class="btn btn-primary btn-sm" *ngIf="addBtn" (click)="add()"><i class="fa fa-plus fa-fw"></i>添加
           </button>
-          <!--<button class="btn btn-primary btn-sm" *ngIf="addCommonBtn" (click)="addCommon()"><i class="fa fa-plus fa-fw"></i>添加-->
+          <!--<button class="btn btn-primary btn-sm" *ngIf="addBtn" (click)="addCommon()"><i class="fa fa-plus fa-fw"></i>添加-->
           <!--</button>-->
           <button class="btn btn-danger btn-sm" *ngIf="deleteAllBtn" (click)="showModalDelAll()"><i
             class="fa fa-trash-o fa-fw"></i> 删除
           </button>
-          <button class="btn btn-primary btn-sm" *ngIf="uploadBtn" (click)="showModalDelAll()"><i
+          <button class="btn btn-primary btn-sm" *ngIf="uploadBtn" (click)="upload()"><i
             class="fa fa-upload fa-fw"></i>上传
           </button>
         </div>

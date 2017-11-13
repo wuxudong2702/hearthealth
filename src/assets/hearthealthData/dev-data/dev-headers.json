@@ -6,13 +6,13 @@
      "name": "用户名",
      "index": 4,
      "order": "SortDirection.NONE",
-     "pipe": {"type": "DataType.NONE", "params": ""},
+     "pipe": {"type": 5, "params": ""},
       "val": "",
       "selectVal":"",
       "validExample": "武旭东",
       "required": true,
       "pattern": "",
-      "inputType": "0"
+      "inputType": 0
     },
     {
      "key": "accountBind",
@@ -20,13 +20,13 @@
      "name": "绑定账户",
      "index": 3,
      "order": "SortDirection.NONE",
-     "pipe": {"type": "DataType.NONE", "params": ""},
+     "pipe": {"type": 5, "params": ""},
       "val": "",
       "selectVal":"",
       "validExample": "12344567890",
       "required": true,
       "pattern": "[0-9]+$",
-      "inputType": "0"
+      "inputType": 0
     },
 
     {
@@ -35,13 +35,13 @@
      "name": "是否绑定",
      "index": 2,
      "order": "SortDirection.NONE",
-     "pipe": {"type": "DataType.ENUM", "params": {"0":"是","1":"否"}},
+     "pipe": {"type": 0, "params": {"0":"是","1":"否"}},
       "val": "shi",
       "selectVal":["是","否"],
       "validExample": "",
       "required": false,
       "pattern": "",
-      "inputType": "1"
+      "inputType": 1
     },
     {
      "key": "devNumber",
@@ -49,13 +49,13 @@
      "name": "设备号",
      "index": 0,
      "order": "SortDirection.NONE",
-     "pipe": {"type": "DataType.NONE", "params": ""},
+     "pipe": {"type": 5, "params": ""},
       "val": "",
       "selectVal":"",
       "validExample": "1234567890",
       "required": true,
       "pattern": "[0-9]+$",
-      "inputType": "0"
+      "inputType": 0
     },
     {
      "key": "devType",
@@ -63,13 +63,13 @@
      "name": "设备类型",
      "index": 1,
      "order": "SortDirection.NONE",
-     "pipe": {"type": "DataType.ENUM", "params": {"0":"卡片式","1":"佩戴市"}},
+     "pipe": {"type": 0, "params": {"0":"卡片式","1":"佩戴市"}},
       "val": "kapianshi",
       "selectVal":["卡片式","佩带式"],
       "validExample": "",
       "required": false,
       "pattern": "",
-      "inputType": "1"
+      "inputType": 1
     }
   ]
 }

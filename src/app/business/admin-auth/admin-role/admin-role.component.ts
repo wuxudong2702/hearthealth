@@ -118,7 +118,6 @@ export class AdminRoleComponent implements OnInit {
   editView: boolean = false;
 
   editZTree(id:number) {
-
     this.http.getZtreeNodes().then(data => {
        this.nodes = data['nodes'];
        console.log(this.nodes);
@@ -168,10 +167,10 @@ export class AdminRoleComponent implements OnInit {
      this.http.postAdminRoleSubmit(submitData).then(data => {
          console.log(data, '提交');
          this.data = data['data'];
+         this.addView = false;
+         this.editView=false;
+         this.tableView = true;
      });
-     this.addView = false;
-     this.editView=false;
-     this.tableView = true;
   }
 
   back(){

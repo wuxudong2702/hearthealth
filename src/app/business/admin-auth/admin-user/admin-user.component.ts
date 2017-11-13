@@ -46,18 +46,21 @@ export class AdminUserComponent implements OnInit {
           this.data=data['data'];
       });
   }
+
   onDelAll(checkedList:any){
       this.http.postAdminUserDelAll(checkedList).then(data=>{
           console.log(data,'删除全部');
           this.data=data['data'];
       });
   }
+
   onSort(sort: sortObj) {
       this.http.postAdminUserSort(sort.id,sort.order).then(data=>{
           console.log(data,'排序');
           this.data=data['data'];
       });
   }
+
   add(id: number) {
       if (id >= 0) {
           this.addEditTitle = '编辑';

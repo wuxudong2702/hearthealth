@@ -122,6 +122,7 @@ export class NewsComponent implements OnInit {
     this.editor=true;
    console.log('infos news dataEditor',this.dataEditor);
   }
+
   onEditBack(id:number){
     this.editor=false;
 
@@ -133,22 +134,26 @@ export class NewsComponent implements OnInit {
             this.data=data['data'];
         });
     }
+
     onDelAll(checkedList:any){
         this.http.postNewsDelAll(checkedList).then(data=>{
             console.log(data,'删除全部');
             this.data=data['data'];
         });
     }
+
     onSort(sort: sortObj) {
         this.http.postNewsSort(sort.id,sort.order).then(data=>{
             console.log(data,'排序');
             this.data=data['data'];
         });
     }
+
     onAdd(){
       console.log('212132323');
       this.editor=true;
     }
+
     onSearch(searchObj: searchObj) {
         console.log('news searchObj:',searchObj);
         // this.selectValue = searchObj.selectValue;

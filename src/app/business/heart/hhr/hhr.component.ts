@@ -209,12 +209,14 @@ export class HhrComponent implements OnInit {
             this.data=data['data'];
         });
     }
+
     onDelAll(checkedList:any){
         this.http.postHhrDelAll(checkedList).then(data=>{
             console.log(data,'删除全部');
             this.data=data['data'];
         });
     }
+
     onSort(sort: sortObj) {
         this.http.postHhrSort(sort.id,sort.order).then(data=>{
             console.log(data,'排序');

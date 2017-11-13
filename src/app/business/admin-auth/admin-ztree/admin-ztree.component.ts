@@ -48,8 +48,9 @@ export class AdminZtreeComponent implements OnInit {
       this.onBack.emit(1);
   };
 
+  //确定按钮
   getCheckedData() {
-      //确定按钮
+
       //通过ZtreeComponent抛出来的getZtreeInstance()方法访问ztree函数
      this.CheckedNodes = this.ztreeInstance.getTreeInstance().getCheckedNodes(true);
      // console.info('选择的数据：',this.CheckedNodes);

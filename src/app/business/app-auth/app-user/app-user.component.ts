@@ -439,7 +439,6 @@ export class AppUserComponent implements OnInit {
   }
 
   subUserSubmit(submitData: string) {
-
     this.http.postAppUserSubSubmit(submitData).then(data => {
         console.log(data, '提交');
         this.data = data['data'];

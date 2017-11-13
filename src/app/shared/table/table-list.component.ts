@@ -288,4 +288,5 @@ export class TableListComponent implements OnInit {
   onDataChanged($event) {
     console.info($event);
   }
+
 }

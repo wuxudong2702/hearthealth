@@ -16,13 +16,15 @@
 >
 </c-table-list>
 <app-table-add
+  *ngIf="addView"
+
   [headers]="headerAdd"
   [addEditTitle]="addEditTitle"
 
   (onAddCancle)="cancle($event)"
   (onSubmit)="submit($event)"
 
-  *ngIf="addView"
+
 >
 </app-table-add>
 

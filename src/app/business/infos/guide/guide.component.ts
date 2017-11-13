@@ -90,6 +90,7 @@ export class GuideComponent implements OnInit {
   onEdit(id:any){
       this.editor=true;
   }
+
   onEditBack(id:number){
     this.editor=false;
   }
@@ -100,22 +101,26 @@ export class GuideComponent implements OnInit {
           this.data=data['data'];
       });
   }
+
   onDelAll(checkedList:any){
       this.http.postGuideDelAll(checkedList).then(data=>{
           console.log(data,'删除全部');
           this.data=data['data'];
       });
   }
+
   onSort(sort: sortObj) {
       this.http.postGuideSort(sort.id,sort.order).then(data=>{
           console.log(data,'排序');
           this.data=data['data'];
       });
   }
+
   onAdd(){
     console.log('212132323');
     this.editor=true;
   }
+
   onSearch(searchObj: searchObj) {
       console.log('guide searchObj:',searchObj);
       // this.selectValue = searchObj.selectValue;

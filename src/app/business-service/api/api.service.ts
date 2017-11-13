@@ -18,14 +18,6 @@ export class ApiService {
     constructor(private http: Http, private spinService: SpinService, private httpClient: HttpClient, private toastService: ToastService,) {
     }
 
-
-    postLogSort(headersId, order): Promise<any> {
-        const url: string = '../../../assets/hearthealthData/log-data/log-data.json';
-        return this.httpClient.get(url)
-            .toPromise()
-            .then(data => data)
-            .catch(this.handleError);
-    }
     /**
      * 处理请求失败事件
      * @param url
@@ -174,14 +166,6 @@ export class ApiService {
             .catch(this.handleError);
     }
 
-  postAdminRoleSort(headersId,order): Promise<any> {
-      const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-data.json';
-      return this.httpClient.get(url)
-          .toPromise()
-          .then(data => data)
-          .catch(this.handleError);
-  }
-
     postAdminRoleSubmit(submitData): Promise<any> {
         const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-data.json';
         return this.httpClient.get(url)
@@ -241,13 +225,13 @@ export class ApiService {
 
 
 //app-user
-    getAppUserHeader(): Promise<any> {
-        const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-headers.json';
-        return this.httpClient.get(url)
-            .toPromise()
-            .then(data => data)
-            .catch(this.handleError);
-    }
+  getAppUserHeader(): Promise<any> {
+      const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-headers.json';
+      return this.httpClient.get(url)
+          .toPromise()
+          .then(data => data)
+          .catch(this.handleError);
+  }
 
     getAppUserData(): Promise<any> {
         const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';

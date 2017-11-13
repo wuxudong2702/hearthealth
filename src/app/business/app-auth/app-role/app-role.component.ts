@@ -77,7 +77,6 @@ export class AppRoleComponent implements OnInit {
 
   headers: Array<cell> = [];
   headerAdd: Array<cell> = [];
-
   data: Array<any> = [];
 
   editId: number;

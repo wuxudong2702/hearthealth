@@ -139,29 +139,32 @@ export class MallComponent implements OnInit {
 
   }
 
-
     onDel(id:number){
         this.http.postMallDel(id).then(data=>{
             console.log(data,'删除');
             this.data=data['data'];
         });
     }
+
     onDelAll(checkedList:any){
         this.http.postMallDelAll(checkedList).then(data=>{
             console.log(data,'删除全部');
             this.data=data['data'];
         });
     }
+
     onSort(sort: sortObj) {
         this.http.postMallSort(sort.id,sort.order).then(data=>{
             console.log(data,'排序');
             this.data=data['data'];
         });
     }
+
   onAdd(){
     console.log('212132323');
     this.editor=true;
   }
+
   onSearch(searchObj: searchObj) {
       console.log('mall searchObj:',searchObj);
       // this.selectValue = searchObj.selectValue;

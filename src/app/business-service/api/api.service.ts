@@ -102,7 +102,6 @@ export class ApiService {
             .then(data => {
                 if (data['status'] == 'ok') {
                     this.perms = data['data'];
-                    console.log('权限列表', this.perms);
                 } else {
                     console.error('获取用户权限错误：', data);
                 }

@@ -10,6 +10,9 @@ import {ConfirmConfig} from '../shared/modal/modal-model';
 import {AvatarCropperComponent} from '../business-shared/user/avatar-cropper.component';
 import {PasswordEditComponent} from '../business-shared/user/password-edit.component';
 import {AppService} from '../app.service';
+import {ApiService} from '../business-service/api/api.service';
+import {ToastService} from '../shared/toast/toast.service';
+import {ToastConfig, ToastType} from '../shared/toast/toast-model';
 
 /**
  * 主体组件
@@ -27,15 +30,15 @@ export class MainComponent implements OnInit {
     //切换导航标识
     navClose: boolean = false;
 
+    defatltImage: string = './assets/img/user-header.png';
+
 
     //用户数据
     mainData: MainData = {
         userData: {
-            userName: '管理员',
-            userAvatar: './assets/img/user-header.png',
-            mobilePhone: '1895090***2',
-            email: '332557712@qq.com',
-            positions: 'Java工程师、打杂工程师',
+            name:'admin',
+            user_name: '管理员',
+            avator: './assets/img/user-header.png',
         },
         menuData: [
             {
@@ -77,7 +80,7 @@ export class MainComponent implements OnInit {
                 'name': '信息管理',
                 'keyWord': 'info-show',
                 'icon': 'fa-info',
-                'url':'/app/info-show'
+                'url': '/app/info-show'
             },
             {
                 'id': '4',
@@ -150,20 +153,42 @@ export class MainComponent implements OnInit {
 
     title: string = '首页';
 
-
-    constructor(private router: Router, private modalService: ModalService, private ngbModalService: NgbModal, private appService: AppService) {
-        this.appService.titleEventEmitter.subscribe((value: string) => {
-            if (value) {
-                this.title = value;
+    constructor(private router: Router, private modalService: ModalService, private ngbModalService: NgbModal, private apiService: ApiService, private toastService: ToastService) {
+        // this.appService.titleEventEmitter.subscribe((value: string) => {
+        //     if (value) {
+        //         this.title = value;
+        //     }
+        // });
+        this.apiService.getMenu().then(data => {
+            if (data['status'] == 'ok') {
+                this.mainData.menuData = data['data'];
+            } else {
+                this.router.navigate(['/login']);
             }
         });
-    }
 
+        this.apiService.me().then(data => {
+            if (data.status == 'ok') {
+                this.mainData.userData = data['data'];
+                if(data['data']['avator'] == null){
+                    this.mainData.userData.avator = this.defatltImage;
+                }
+            } else {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '获取用户信息失败', data.message, 3000);
+                this.toastService.toast(toastCfg);
+                this.router.navigate(['/login']);
+            }
+        }).catch(err => {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '获取用户异常', err, 3000);
+            this.toastService.toast(toastCfg);
+        });
+    }
 
     /**
      * 初始化
      */
     ngOnInit() {
+
     }
 
     /**

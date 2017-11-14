@@ -14,7 +14,6 @@ import {ApiService} from '../business-service/api/api.service';
   selector: 'c-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [ApiService]
 })
 export class LoginComponent implements OnInit {
 
@@ -50,15 +49,13 @@ export class LoginComponent implements OnInit {
           const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '登录成功!', 3000);
           that.toastService.toast(toastCfg);
           that.router.navigate(['/app/home']);
-
-          console.log(this.api.getToken());
         } else {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          const toastCfg = new ToastConfig(ToastType.ERROR, '登录失败', data.message, 3000);
           that.toastService.toast(toastCfg);
           that.router.navigate(['/login']);
         }
       }).catch(err => {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        const toastCfg = new ToastConfig(ToastType.ERROR, '登录异常', err, 3000);
         that.toastService.toast(toastCfg);
       });
 

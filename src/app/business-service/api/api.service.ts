@@ -15,7 +15,7 @@ import {ToastService} from '../../shared/toast/toast.service';
 export class ApiService {
     token: string = '';
 
-    constructor(private http: Http, private spinService: SpinService, private httpClient: HttpClient, private toastService: ToastService,) {
+    constructor(private http: Http, private spinService: SpinService, private httpClient: HttpClient, private toastService: ToastService) {
     }
 
 
@@ -25,25 +25,6 @@ export class ApiService {
             .toPromise()
             .then(data => data)
             .catch(this.handleError);
-    }
-    /**
-     * 处理请求失败事件
-     * @param url
-     * @param options
-     * @param err
-     */
-    private requestFailed(err) {
-        let msg = '请求发生异常', status = err.status;
-        if (status === 0) {
-            msg = '请求失败，请求响应出错';
-        } else if (status === 404) {
-            msg = '请求失败，未找到请求地址';
-        } else if (status === 500) {
-            msg = '请求失败，服务器出错，请稍后再试';
-        } else {
-            msg = '未知错误，请检查网络';
-        }
-        return msg;
     }
 
     private handleError(error: any): Promise<any> {
@@ -58,7 +39,7 @@ export class ApiService {
         } else {
             msg = '未知错误，请检查网络';
         }
-        return Promise.reject( msg || error.message || error );
+        return Promise.reject(msg || error.message || error);
     }
 
 
@@ -79,8 +60,31 @@ export class ApiService {
             .catch(this.handleError);
     }
 
-    getToken(): string {
-        return this.token;
+
+    me(): Promise<any> {
+        const url: string = '/api/admin/auth/me';
+        return this.httpClient.post(url, {
+            token: this.token,
+        })
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    getMenu(): Promise<any> {
+        const url: string = '/api/admin/menu';
+        return this.httpClient.post(url, {
+            token: this.token,
+        }).toPromise()
+            .then(data => {
+                if (data['status'] == 'error') {
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', data['message'], 3000);
+                    this.toastService.toast(toastCfg);
+                    console.error(data);
+                }
+                return data;
+            })
+            .catch(this.handleError);
     }
 
     getEcgd(): Promise<any> {

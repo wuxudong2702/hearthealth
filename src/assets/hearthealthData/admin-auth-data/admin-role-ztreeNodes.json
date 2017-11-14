@@ -40,7 +40,7 @@
               {"id": "app-role-edit","name": "编辑功能" ,"checked": true }
             ]}
           ]},
-          {"id": "auth-show","name": "后台权限"  ,"checked": true ,"open":true ,"children":[
+          {"id": "admin-show","name": "后台权限"  ,"checked": true ,"open":true ,"children":[
             {"id": "admin-user-show","name": "后台用户" ,"checked": true ,"children":[
               {"id": "admin-user-add","name": "添加功能" ,"checked": true },
               {"id": "admin-user-edit","name": "编辑功能" ,"checked": true },

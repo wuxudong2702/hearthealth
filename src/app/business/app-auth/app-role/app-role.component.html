@@ -2,16 +2,11 @@
   *ngIf="tableView"
 
   (onSort)="sort($event)"
-  (onDel)="del($event)"
-  (onDelAll)="delAll($event)"
   (onAdd)="add($event)"
 
   [headers]="headers"
   [data]="data"
-  [addBtn]="addBtn"
-  [deleteBtn]="deleteBtn"
   [editBtn]="editBtn"
-  [deleteAllBtn]="deleteAllBtn"
   [setOperate]="setOperate"
   [paginationBtn]="paginationBtn"
 >

@@ -3,14 +3,14 @@
   (onSort)="onSort($event)"
   (onDel)="onDel($event)"
   (onDelAll)="onDelAll($event)"
-  (onEdit)="onEdit($event)"
+  (onEditH5)="onEditH5($event)"
   (onAdd)="onAdd($event)"
   (onSearch)="onSearch($event)"
   [headers]="headers"
   [data]="data"
   [addBtn]="addBtn"
   [deleteBtn]="deleteBtn"
-  [editBtn]="editBtn"
+  [editH5Btn]="editH5Btn"
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
@@ -18,6 +18,10 @@
   [setOperate]="setOperate"
 >
 </c-table-list>
-<c-editor-h5 *ngIf="editor"  [dataEditor]="dataEditor" (onEditBack)="onEditBack($event)" [H5Type]="H5Type"
+<c-editor-h5 *ngIf="editor"
+             [dataEditor]="dataEditor"
+             (onEditBack)="onEditBack($event)"
+             [H5Type]="H5Type"
+             [isSelectShow]="isSelectShow"
 >
 </c-editor-h5>

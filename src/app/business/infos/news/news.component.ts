@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, news, DataType, searchObj} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, news, DataType, searchObj,INFOTYPE} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -27,59 +27,65 @@ export class NewsComponent implements OnInit {
   headers: Array<cell> = [];
   data: Array<any> = [];
   H5Type: Array<any> = [
-    {key:1,value:"用户注册协议"},
-    {key:2,value:"新手指南"},
-    {key:3,value:"启动页"},
-    {key:4,value:"关于我们"},
-    {key:5,value:"健康资讯"}
+     {key:INFOTYPE.GUIDE,value:"新手指南"},
+     {key:INFOTYPE.STARTPAGE,value:"启动页"},
+     {key:INFOTYPE.ABOUTUS,value:"关于我们"},
+     {key:INFOTYPE.PROTOCOL,value:"用户注册协议"},
+     {key:INFOTYPE.HEALTH,value:"健康资讯"}
   ];
   dataEditor: news;
-  addBtn: boolean = true;
-  deleteBtn: boolean = true;
+  isSelectShow: boolean = false;
+
+  del: boolean = this.http.isHavePerm('info-del');
+  add: boolean = this.http.isHavePerm('info-add');
+  edit: boolean = this.http.isHavePerm('info-edit');
+  deleteBtn: boolean = this.del;
+  deleteAllBtn: boolean = this.del;
+  addBtn: boolean = this.add;
+  editH5Btn: boolean = this.edit;
+
   searchBtn: boolean = true;
-  editBtn: boolean = true;
-  deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   paginationBtn: boolean = true;
   setOperate: boolean = true;
   editor: boolean = false;
 
-  onEdit(id: number) {
-    console.log('infos news id', this.editor, id);
+  onEditH5(id: number) {
+    console.log('---------------------------',this.isSelectShow);
     this.dataEditor = this.data[id];
     this.editor = true;
-    console.log('infos news dataEditor', this.dataEditor);
+    this.isSelectShow = false;
+    console.log('----------------------------',this.isSelectShow);
   }
 
   onEditBack(id: number) {
     this.editor = false;
+    this.isSelectShow = false;
+    console.log('返回',this.isSelectShow);
 
   }
 
   onDel(id: number) {
     this.http.postNewsDel(id).then(data => {
-      console.log(data, '删除');
       this.data = data['data'];
     });
   }
 
   onDelAll(checkedList: any) {
     this.http.postNewsDelAll(checkedList).then(data => {
-      console.log(data, '删除全部');
       this.data = data['data'];
     });
   }
 
   onSort(sort: sortObj) {
     this.http.postNewsSort(sort.id, sort.order).then(data => {
-      console.log(data, '排序');
       this.data = data['data'];
     });
   }
 
   onAdd() {
-    console.log('212132323');
     this.editor = true;
+    this.isSelectShow = true;
   }
 
   onSearch(searchObj: searchObj) {

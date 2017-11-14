@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
     valueList: Array<any> = [];
     chartOption: object = {};
     constructor(private http: ApiService){
-
     }
 
     ngOnInit() {
@@ -28,12 +27,9 @@ export class HomeComponent implements OnInit {
             this.dateList = this.dataChart.map(function (item) {
                 return item[0];
             });
-            console.log(this.dateList);
             this.valueList = this.dataChart.map(function (item) {
                 return item[1];
             });
-            console.log(this.valueList);
-
             this.chartOption = {
                 color: ['#3398DB'],
                 tooltip : {

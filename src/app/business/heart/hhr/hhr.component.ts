@@ -30,14 +30,13 @@ export class HhrComponent implements OnInit {
   data: Array<any> = [];
   dataChart1: Array<any>;
 
-  // addBtn: boolean = false;
-  deleteBtn: boolean = true;
-  // showAddView: boolean = true;
-  downloadBtn: boolean = true;
+  del: boolean = this.http.isHavePerm('hhr-del');
+  deleteBtn: boolean = this.del;
+  deleteAllBtn: boolean = this.del;
+
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
   // editBtn: boolean = true;
-  deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   chartBtn: boolean = true;
   paginationBtn: boolean = true;

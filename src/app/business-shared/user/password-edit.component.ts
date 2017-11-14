@@ -23,8 +23,8 @@ export class PasswordEditComponent {
 
 
     constructor(private router: Router,public activeModal: NgbActiveModal, private toastService: ToastService,private formBuilder: FormBuilder,private api:ApiService) {
-        let oldPasswordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(15)]));
-        let passwordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(15)]));
+        let oldPasswordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(5),Validators.maxLength(15)]));
+        let passwordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(5),Validators.maxLength(15)]));
         let certainPasswordFc  = new FormControl('',CustomValidators.equalTo(passwordFc));
 
         this.passwordEditForm=this.formBuilder.group({
@@ -46,8 +46,7 @@ export class PasswordEditComponent {
                 const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '修改成功!', 3000);
                 that.toastService.toast(toastCfg);
                 that.router.navigate(['/app/home']);
-
-                // console.log('++++++++++++++++++++++++++++++++++++++++++++++++',this.api.getToken());
+                this.close();
               } else {
                 const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                 that.toastService.toast(toastCfg);
@@ -57,12 +56,6 @@ export class PasswordEditComponent {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
               that.toastService.toast(toastCfg);
             });
-
-             //
-             // console.info(this.passwordEditForm.value);
-             // const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '000000000000000000000000000000000', 2000);
-             // this.toastService.toast(toastCfg);
-             // this.close();
         }
     }
 

@@ -13,7 +13,10 @@ import {ToastService} from '../../shared/toast/toast.service';
  */
 @Injectable()
 export class ApiService {
+
     token: string = '';
+
+    perms: Array<string>;
 
     constructor(private http: Http, private spinService: SpinService, private httpClient: HttpClient, private toastService: ToastService,) {
     }
@@ -42,7 +45,9 @@ export class ApiService {
         return Promise.reject(msg || error.message || error);
     }
 
-
+    /*
+    登录
+     */
     login(userName: string, password: string): Promise<any> {
         const url: string = '/api/admin/auth/login';
         return this.httpClient.post(url, {
@@ -53,6 +58,7 @@ export class ApiService {
             .then(data => {
                     if (data['status'] == 'ok') {
                         this.token = data['data']['token'];
+                        this.getPerm();
                     }
                     return data;
                 }
@@ -60,7 +66,9 @@ export class ApiService {
             .catch(this.handleError);
     }
 
-
+    /*
+    获取个人信息
+     */
     me(): Promise<any> {
         const url: string = '/api/admin/auth/me';
         return this.httpClient.post(url, {
@@ -71,20 +79,44 @@ export class ApiService {
             .catch(this.handleError);
     }
 
+    /*
+    获取菜单
+     */
     getMenu(): Promise<any> {
         const url: string = '/api/admin/menu';
         return this.httpClient.post(url, {
             token: this.token,
         }).toPromise()
-            .then(data => {
-                if (data['status'] == 'error') {
-                    const toastCfg = new ToastConfig(ToastType.ERROR, '', data['message'], 3000);
-                    this.toastService.toast(toastCfg);
-                    console.error(data);
-                }
-                return data;
-            })
+            .then(data => data)
             .catch(this.handleError);
+    }
+
+    /*
+    获取权限
+     */
+    getPerm(): Promise<any> {
+        const url: string = '/api/admin/perm';
+        return this.httpClient.post(url, {
+            token: this.token,
+        }).toPromise()
+            .then(data => {
+                if (data['status'] == 'ok') {
+                    this.perms = data['data'];
+                    console.log('权限列表', this.perms);
+                } else {
+                    console.error('获取用户权限错误：', data);
+                }
+            })
+            .catch( err => {
+                let msg = this.handleError(err);
+                console.error('获取用户权限异常', err)
+            });
+    }
+
+    isHavePerm(perm): boolean {
+        return this.perms.some(val => {
+            return val == perm;
+        });
     }
 
     reset(oldPassword: string, password: string, certainPassword: string): Promise<any> {

@@ -23,7 +23,7 @@ import {ToastConfig, ToastType} from '../shared/toast/toast-model';
     selector: 'c-main',
     templateUrl: './main.component.html',
     styleUrls: ['.//main.component.scss'],
-  providers:[]
+    providers: []
 })
 export class MainComponent implements OnInit {
 
@@ -39,7 +39,7 @@ export class MainComponent implements OnInit {
     //用户数据
     mainData: MainData = {
         userData: {
-            name:'admin',
+            name: 'admin',
             user_name: '管理员',
             avator: './assets/img/user-header.png',
         },
@@ -166,25 +166,29 @@ export class MainComponent implements OnInit {
             if (data['status'] == 'ok') {
                 this.mainData.menuData = data['data'];
             } else {
+                console.error('获取用户菜单失败', data.message )
                 this.router.navigate(['/login']);
             }
+        }).catch(err => {
+            console.error('获取用户菜单异常', err)
+            this.router.navigate(['/login']);
         });
 
         this.apiService.me().then(data => {
             if (data.status == 'ok') {
                 this.mainData.userData = data['data'];
-                if(data['data']['avator'] == null){
+                if (data['data']['avator'] == null) {
                     this.mainData.userData.avator = this.defatltImage;
                 }
             } else {
-                const toastCfg = new ToastConfig(ToastType.ERROR, '获取用户信息失败', data.message, 3000);
-                this.toastService.toast(toastCfg);
+                console.error('获取用户信息失败', data.message );
                 this.router.navigate(['/login']);
             }
         }).catch(err => {
-            const toastCfg = new ToastConfig(ToastType.ERROR, '获取用户异常', err, 3000);
-            this.toastService.toast(toastCfg);
+            console.error('获取用户异常', err );
+            this.router.navigate(['/login']);
         });
+
     }
 
 

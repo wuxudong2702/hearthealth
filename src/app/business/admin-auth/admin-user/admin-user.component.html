@@ -1,11 +1,9 @@
-
 <c-table-list
   *ngIf="tableView"
   (onSort)="onSort($event)"
   (onDel)="onDel($event)"
   (onDelAll)="onDelAll($event)"
   (onAdd)="add($event)"
-
   [headers]="headers"
   [data]="data"
   [addBtn]="addBtn"
@@ -15,4 +13,11 @@
   [setOperate]="setOperate"
 >
 </c-table-list>
-<app-admin-ztree *ngIf="addView" (onAdd)="addData($event)" (onBack)="back($event)"  [nodes]="nodes"></app-admin-ztree>
+<app-table-add
+        [headers]="headerAdd"
+        [addEditTitle]="addEditTitle"
+        (onAddCancle)="cancle($event)"
+        (onSubmit)="submit($event)"
+        *ngIf="addView"
+>
+</app-table-add>

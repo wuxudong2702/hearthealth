@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, DataType, INPUTTYPE} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, DataType,searchObj,INPUTTYPE} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {_switch} from "rxjs/operator/switch";
@@ -220,7 +220,7 @@ import {_switch} from "rxjs/operator/switch";
   selector: 'app-app-user',
   templateUrl: './app-user.component.html',
   styleUrls: ['./app-user.component.css'],
-  providers: [ApiService]
+  providers: []
 })
 export class AppUserComponent implements OnInit {
 
@@ -256,6 +256,7 @@ export class AppUserComponent implements OnInit {
   editBtn: boolean = true;
   backBtn: boolean = true;
   setOperate: boolean = true;
+  paginationBtn: boolean = true;
   userName: string = '';
 
   addView: boolean = false;
@@ -334,13 +335,25 @@ export class AppUserComponent implements OnInit {
 
   submit(submitData: string) {
 
-
+    this.http.postAppUserSubmit(submitData).then(data => {
+        console.log(data, '提交');
+        this.data = data['data'];
+    });
     this.addSubUserView = false;
     this.addView = false;
     this.subUsersView = false;
     this.tableView = true;
   }
 
+  Search(searchObj: searchObj) {
+      console.log('app-user searchObj:',searchObj);
+      // this.selectValue = searchObj.selectValue;
+      // this.searchValue = searchObj.searchValue;
+      this.http.postAppUserSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+          console.log('app-user Search result:',data);
+          this.data = data['data'];
+      });
+  }
 
   details(id: number) {
     this.addView = false;
@@ -384,8 +397,6 @@ export class AppUserComponent implements OnInit {
       this.addEditTitle = '编辑';
       this.editId = id;
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
-        // console.log('______',this.data[id][d.key],d.key);
-        console.log('-------', d.inputType);
         switch(d.inputType)
         {
           case INPUTTYPE.INPUT:
@@ -394,7 +405,6 @@ export class AppUserComponent implements OnInit {
           case INPUTTYPE.SELECT:
             let val = this.subUserData[id][d.key];
             d.val = d.selectVal[val];
-            console.log('----+++++++++---', val, d.selectVal[val]);
             break;
           default:
             d.val = this.subUserData[id][d.key];
@@ -426,9 +436,11 @@ export class AppUserComponent implements OnInit {
 
   }
 
-  subUserSubmit() {
-
-
+  subUserSubmit(submitData: string) {
+    this.http.postAppUserSubSubmit(submitData).then(data => {
+        console.log(data, '提交');
+        this.data = data['data'];
+    });
     this.addView = false;
     this.subUsersView = true;
     this.tableView = false;
@@ -440,5 +452,15 @@ export class AppUserComponent implements OnInit {
     this.subUsersView = true;
     this.tableView = false;
     this.addSubUserView = false;
+  }
+
+  subUserSearch(searchObj: searchObj) {
+      console.log('app-user-sub searchObj:',searchObj);
+      // this.selectValue = searchObj.selectValue;
+      // this.searchValue = searchObj.searchValue;
+      this.http.postAppUserSubSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+          console.log('app-user-sub Search result:',data);
+          this.data = data['data'];
+      });
   }
 }

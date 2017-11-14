@@ -1,4 +1,3 @@
-
 <c-table-list
   *ngIf="!editor"
   (onSort)="onSort($event)"
@@ -6,10 +5,9 @@
   (onDelAll)="onDelAll($event)"
   (onEdit)="onEdit($event)"
   (onAdd)="onAdd($event)"
+  (onSearch)="onSearch($event)"
 
   [headers]="headers"
-
-
   [data]="data"
   [addBtn]="addBtn"
   [deleteBtn]="deleteBtn"
@@ -23,5 +21,4 @@
 </c-table-list>
 <c-editor-h5 *ngIf="editor"   (onEditBack)="onEditBack($event)"
  >
-
 </c-editor-h5>

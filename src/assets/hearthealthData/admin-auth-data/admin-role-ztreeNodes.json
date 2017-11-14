@@ -6,74 +6,53 @@
         "open":true,
         "name": "心电后台管理系统",
         "children": [
-          { "id": "2", "name": "心电数据", "checked": true , "open":true , "children":[
-            { "id": "3","name": "心电波形" ,"checked": true,"children":[
-              { "id": "4","name": "删除功能" ,"checked": true },
-              { "id": "5","name": "下载功能" ,"checked": true }
+          { "id": "ecgd-data-show", "name": "心电数据", "checked": true , "open":true , "children":[
+            { "id": "ecgd-chart-show","name": "心电波形" ,"checked": true,"children":[
+              { "id": "ecgd-del","name": "删除功能" ,"checked": true },
+              { "id": "ecgd-download","name": "下载功能" ,"checked": true }
             ]},
-            {"id": "6","name": "健康档案" ,"checked": true ,"children":[
-              {"id": "7","name": "删除功能" ,"checked": true }
+            {"id": "hhr-show","name": "健康档案" ,"checked": true ,"children":[
+              {"id": "hhr-del","name": "删除功能" ,"checked": true }
             ]}
           ]},
-          {"id": "8","name": "设备管理"  ,"checked": true ,"open":true ,"children":[
-            {"id": "9","name": "心电设备" ,"checked": true ,"children":[
-              {"id": "10","name": "添加功能" ,"checked": true },
-              {"id": "11","name": "编辑功能" ,"checked": true },
-              {"id": "12","name": "删除功能" ,"checked": true }
-            ]}
+          {"id": "heart-dev-show","name": "设备管理"  ,"checked": true ,"open":false ,"children":[
+              {"id": "heart-dev-add","name": "添加功能" ,"checked": true },
+              {"id": "heart-dev-edit","name": "编辑功能" ,"checked": true },
+              {"id": "heart-dev-del","name": "删除功能" ,"checked": true }
           ]},
-          {"id": "13","name": "信息管理"  ,"checked": true ,"open":true ,"children":[
-            {"id": "14","name": "公共信息" ,"checked": true ,"children":[
-              {"id": "15","name": "添加功能" ,"checked": true },
-              {"id": "16","name": "编辑功能" ,"checked": true },
-              {"id": "17","name": "删除功能" ,"checked": true }
+          {"id": "info-show","name": "信息管理"  ,"checked": true ,"open":false ,"children":[
+              {"id": "info-add","name": "添加功能" ,"checked": true },
+              {"id": "info-edit","name": "编辑功能" ,"checked": true },
+              {"id": "info-del","name": "删除功能" ,"checked": true }
+          ]},
+          {"id": "app-upgrade-show","name": "APP升级"  ,"checked": true ,"open":false ,"children":[
+              {"id": "app-upgrade-add","name": "添加功能" ,"checked": true },
+              {"id": "app-upgrade-edit","name": "编辑功能" ,"checked": true },
+              {"id": "app-upgrade-del","name": "删除功能" ,"checked": true }
+          ]},
+          {"id": "app-auth-show","name": "App权限" ,"checked": true ,"open":true ,"children":[
+            {"id": "app-user-show","name": "App用户" ,"checked": true ,"children":[
+              {"id": "app-user-add","name": "添加功能" ,"checked": true },
+              {"id": "app-user-edit","name": "编辑功能" ,"checked": true },
+              {"id": "app-user-del","name": "删除功能" ,"checked": true }
             ]},
-            {"id": "18","name": "健康资讯" ,"checked": true ,"children":[
-              {"id": "19","name": "添加功能" ,"checked": true },
-              {"id": "20","name": "编辑功能" ,"checked": true },
-              {"id": "21","name": "删除功能" ,"checked": true }
+            {"id": "app-role-show","name": "App角色" ,"checked": true ,"children":[
+              {"id": "app-role-edit","name": "编辑功能" ,"checked": true }
+            ]}
+          ]},
+          {"id": "auth-show","name": "后台权限"  ,"checked": true ,"open":true ,"children":[
+            {"id": "admin-user-show","name": "后台用户" ,"checked": true ,"children":[
+              {"id": "admin-user-add","name": "添加功能" ,"checked": true },
+              {"id": "admin-user-edit","name": "编辑功能" ,"checked": true },
+              {"id": "admin-user-del","name": "删除功能" ,"checked": true }
             ]},
-            {"id": "22","name": "商城信息" ,"checked": true ,"children":[
-              {"id": "23","name": "添加功能" ,"checked": true },
-              {"id": "24","name": "编辑功能" ,"checked": true },
-              {"id": "25","name": "删除功能" ,"checked": true }
+            {"id": "admin-role-show","name": "后台角色" ,"checked": true ,"children":[
+              {"id": "admin-role-add","name": "添加功能" ,"checked": true },
+              {"id": "admin-role-edit","name": "编辑功能" ,"checked": true },
+              {"id": "admin-role-del","name": "删除功能" ,"checked": true }
             ]}
           ]},
-          {"id": "26","name": "APP升级"  ,"checked": true ,"open":true ,"children":[
-            {"id": "28","name": "App包管理" ,"checked": true ,"children":[
-              {"id": "29","name": "添加功能" ,"checked": true },
-              {"id": "30","name": "编辑功能" ,"checked": true },
-              {"id": "31","name": "删除功能" ,"checked": true }
-            ]}
-          ]},
-          {"id": "32","name": "App权限" ,"checked": true ,"open":true ,"children":[
-            {"id": "33","name": "App用户" ,"checked": true ,"children":[
-              {"id": "34","name": "添加功能" ,"checked": true },
-              {"id": "35","name": "编辑功能" ,"checked": true },
-              {"id": "36","name": "删除功能" ,"checked": true }
-            ]},
-            {"id": "37","name": "App角色" ,"checked": true ,"children":[
-              {"id": "38","name": "添加功能" ,"checked": true },
-              {"id": "39","name": "编辑功能" ,"checked": true },
-              {"id": "40","name": "删除功能" ,"checked": true }
-            ]}
-          ]},
-          {"id": "41","name": "后台权限"  ,"checked": true ,"open":true ,"children":[
-            {"id": "42","name": "后台用户" ,"checked": true ,"children":[
-              {"id": "43","name": "添加功能" ,"checked": true },
-              {"id": "44","name": "编辑功能" ,"checked": true },
-              {"id": "45","name": "删除功能" ,"checked": true }
-            ]},
-            {"id": "46","name": "后台角色" ,"checked": true ,"children":[
-              {"id": "47","name": "添加功能" ,"checked": true },
-              {"id": "48","name": "编辑功能" ,"checked": true },
-              {"id": "49","name": "删除功能" ,"checked": true }
-            ]}
-          ]},
-          {"id": "50","name": "日志管理"  ,"checked": true ,"open":true ,"children":[
-            {"id": "51","name": "系统日志" ,"checked": true ,"children":[
-              {"id": "52","name": "查询功能" ,"checked": true }
-            ]}
+          {"id": "log","name": "日志管理"  ,"checked": true ,"open":true ,"children":[
           ]}
         ]
       }

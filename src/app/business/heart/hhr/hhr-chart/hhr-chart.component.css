@@ -21,3 +21,7 @@ button:focus {
 h4 {
     font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
 }
+.chartStyle{
+   background: white;
+   padding:20px;
+ }

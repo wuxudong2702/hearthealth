@@ -58,7 +58,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-app-role',
   templateUrl: './app-role.component.html',
   styleUrls: ['./app-role.component.css'],
-  providers: [ApiService]
+  providers: []
 
 })
 export class AppRoleComponent implements OnInit {
@@ -77,7 +77,6 @@ export class AppRoleComponent implements OnInit {
 
   headers: Array<cell> = [];
   headerAdd: Array<cell> = [];
-
   data: Array<any> = [];
 
   editId: number;
@@ -87,9 +86,8 @@ export class AppRoleComponent implements OnInit {
   editBtn: boolean = true;
   deleteAllBtn: boolean = true;
   setOperate: boolean = true;
-
+  paginationBtn: boolean = true;
   addView: boolean = false;
-  editView: boolean = false;
   tableView: boolean = true;
 
   del(id: number) {
@@ -145,14 +143,15 @@ export class AppRoleComponent implements OnInit {
 
   cancle() {
     this.addView = false;
-    this.editView = false;
     this.tableView = true;
   }
 
   submit(submitData: string) {
-
+    this.http.postAppRoleSubmit(submitData).then(data => {
+        console.log(data, '提交');
+        this.data = data['data'];
+    });
     this.addView = false;
-    this.editView = false;
     this.tableView = true;
   }
 }

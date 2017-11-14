@@ -40,6 +40,12 @@ const htmlL: string = "</div>\n" +
   selector: 'c-editor-h5',
   styleUrls: ['./editorh5.component.css'],
   template: `
+    <div class="select">
+      <select class="form-control" [(ngModel)]="selectValue">
+        <option value="" style="display:none">请选择</option>
+        <option *ngFor="let type of H5Type" >{{type.value}}</option>
+      </select>
+    </div>
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
         <div class="col-md-12" >
@@ -72,6 +78,7 @@ const htmlL: string = "</div>\n" +
 export class Editorh5Component implements OnInit {
   @ViewChild('iframe') iframe: ElementRef;
   @Input() dataEditor:news;
+  @Input() H5Type:Array<any>;
 
   @Output() onEditBack = new EventEmitter<any>();
 
@@ -82,6 +89,7 @@ export class Editorh5Component implements OnInit {
   articleContent: string = '';
   previews: boolean = true;
   html5: string = '';
+  selectValue: string = '';
   secHtml5;
   ifr_document: any;
   htmlElement: HTMLElement;

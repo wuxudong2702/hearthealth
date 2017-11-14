@@ -50,7 +50,7 @@
       "order": "SortDirection.NONE",
       "pipe": {"type": 0, "params": {"0": "女", "1": "男"}},
       "val": "",
-      "selectVal":"",
+      "selectVal":["男","女"],
       "validExample": "",
       "required": true,
       "pattern": "",

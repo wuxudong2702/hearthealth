@@ -1,7 +1,11 @@
 import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import {Validators, FormControl, FormGroup, FormBuilder} from '@angular/forms';
+import {HttpService} from '../shared/http/http.service';
+import {ApiService} from '../business-service/api/api.service';
+import {ToastService} from '../shared/toast/toast.service';
+import {ToastConfig, ToastType} from '../shared/toast/toast-model';
 
 import {MainData} from '../main/main-model';
 import {ModalService} from '../shared/modal/modal.service';
@@ -14,13 +18,15 @@ import {ApiService} from '../business-service/api/api.service';
 import {ToastService} from '../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../shared/toast/toast-model';
 
+
 /**
  * 主体组件
  */
 @Component({
     selector: 'c-main',
     templateUrl: './main.component.html',
-    styleUrls: ['.//main.component.scss']
+    styleUrls: ['.//main.component.scss'],
+  providers:[]
 })
 export class MainComponent implements OnInit {
 
@@ -183,6 +189,7 @@ export class MainComponent implements OnInit {
             this.toastService.toast(toastCfg);
         });
     }
+
 
     /**
      * 初始化

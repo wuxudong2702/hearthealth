@@ -7,13 +7,13 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-admin-ztree',
   templateUrl: './admin-ztree.component.html',
   styleUrls: ['./admin-ztree.component.css'],
-  providers:[ApiService]
+  providers:[]
 
 })
 export class AdminZtreeComponent implements OnInit {
 
   @Input() nodes :any ;
-  @Output() onAdd = new EventEmitter<any>();
+  @Output() onZTreeSubmit = new EventEmitter<any>();
   @Output() onBack = new EventEmitter<any>();
 
   constructor(private http: ApiService) {}
@@ -22,8 +22,7 @@ export class AdminZtreeComponent implements OnInit {
 
   @ViewChild('ztreeInstance') ztreeInstance: ZtreeComponent;
 
-
-  // nodes:any = this.nodes2;
+  CheckedNodes: Array<any> =[];//存放被选择的数据
   setting: any = {
       check: {
           enable: true
@@ -43,19 +42,21 @@ export class AdminZtreeComponent implements OnInit {
           }
       }
   };
-  CheckedNodes: Array<any> =[];//存放被选择的数据
+
   back() {
       //返回按钮
       this.onBack.emit(1);
   };
 
+  //确定按钮
   getCheckedData() {
-      //确定按钮
+
       //通过ZtreeComponent抛出来的getZtreeInstance()方法访问ztree函数
      this.CheckedNodes = this.ztreeInstance.getTreeInstance().getCheckedNodes(true);
-     console.info('选择的数据：',this.CheckedNodes);
-     this.onAdd.emit(2);
+     // console.info('选择的数据：',this.CheckedNodes);
+     this.onZTreeSubmit.emit({
+         CheckedNodes: this.CheckedNodes
+     });
   }
-
 
 }

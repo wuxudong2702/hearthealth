@@ -3,16 +3,29 @@
   (onSort)="sort($event)"
   (onDel)="del($event)"
   (onDelAll)="delAll($event)"
+  (onEditZTree)="editZTree($event)"
   (onAdd)="add($event)"
-
   [headers]="headers"
   [data]="data"
   [addBtn]="addBtn"
   [deleteBtn]="deleteBtn"
   [deleteAllBtn]="deleteAllBtn"
-  [editBtn]="editBtn"
+  [editZTreeBtn]="editZTreeBtn"
   [setOperate]="setOperate"
 >
 </c-table-list>
-<!--<app-admin-ztree *ngIf="showZTreeView" (onEdit)="edit($event)" [nodes]="nodes"></app-admin-ztree>-->
-<app-admin-ztree *ngIf="addView" (onAdd)="addData($event)" (onBack)="back($event)"  [nodes]="nodes"></app-admin-ztree>
+<app-admin-ztree
+        *ngIf="editView"
+        (onZTreeSubmit)="zTreeSubmit($event)"
+        (onBack)="back($event)"
+        [nodes]="nodes"
+>
+</app-admin-ztree>
+<app-table-add
+        [headers]="headerAdd"
+        [addEditTitle]="addEditTitle"
+        (onAddCancle)="cancle($event)"
+        (onSubmit)="submit($event)"
+        *ngIf="addView"
+>
+</app-table-add>

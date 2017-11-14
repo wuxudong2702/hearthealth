@@ -1,143 +1,47 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, DataType} from '../../shared/table/table-list.component';
+import {Router} from '@angular/router';
+import {cell, SortDirection, sortObj, DataType,searchObj} from '../../shared/table/table-list.component';
 import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
-
-// const headers: Array<cell> = [
-//   {
-//     key: 'userName',
-//     show: true,
-//     name: '用户名',
-//     index: 4,
-//     order: SortDirection.NONE,
-//     pipe: {type: DataType.NONE, params: ''},
-//   },
-//   {
-//     key: 'accountBind',
-//     show: true,
-//     name: '绑定账户',
-//     index: 3,
-//     order: SortDirection.NONE,
-//     pipe: {type: DataType.NONE, params: ''},
-//   },
-//
-//
-//   {
-//     key: 'isBinding',
-//     show: true,
-//     name: '是否绑定',
-//     index: 2,
-//     order: SortDirection.NONE,
-//     pipe: {type: DataType.ENUM, params: {0:'是',1:'否'}},
-//   },
-//   {
-//     key: 'devNumber',
-//     show: true,
-//     name: '设备号',
-//     index: 0,
-//     order: SortDirection.NONE,
-//     pipe: {type: DataType.NONE, params: ''},
-//   },
-//   {
-//     key: 'devType',
-//     show: true,
-//     name: '设备类型',
-//     index: 1,
-//     order: SortDirection.NONE,
-//     pipe: {type: DataType.ENUM, params: {0:'卡片式',1:'佩戴市'}},
-//   },
-// ];
-// const data: Array<any> = [//表格內容列表
-//   {
-//     userName: '张文丽',
-//     accountBind: '小名',
-//     isBinding: 1,
-//     heartDataLength:2,
-//     devNumber:'123456789',
-//     devType:0,
-//     sex: 0,
-//     age: 23,
-//   },
-//   {
-//     userName: '伍子胥',
-//     accountBind: '小名',
-//     isBinding: 1,
-//     heartDataLength:2,
-//     devNumber:'123456789',
-//     devType:0,
-//     sex: 1,
-//     age: 23,
-//   },
-//   {
-//     userName: '李文龙',
-//     accountBind: '小名',
-//     isBinding: 1,
-//     heartDataLength:2,
-//     devNumber:'45675789',
-//     devType:1,
-//     sex: 0,
-//     age: 23,
-//   },
-//   {
-//     userName: 'user1',
-//     accountBind: '小名',
-//     isBinding: 1,
-//     heartDataLength:2,
-//     devNumber:'123456789',
-//     devType:0,
-//     sex: 0,
-//     age: 23,
-//   },
-//   {
-//     userName: 'user1',
-//     accountBind: '明明',
-//     isBinding: 0,
-//     heartDataLength:2,
-//     devNumber:'12353',
-//     devType:1,
-//     sex: 1,
-//     age: 12,
-//   },
-//   {
-//     userName: 'user1',
-//     accountBind: '小名',
-//     isBinding: 1,
-//     heartDataLength:2,
-//     devNumber:'123456789',
-//     devType:0,
-//     sex: 0,
-//     age: 23,
-//   },
-//   {
-//     userName: 'user1',
-//     accountBind: '小花',
-//     isBinding: 0,
-//     heartDataLength:2,
-//     devNumber:'123456789',
-//     devType:1,
-//     sex: 0,
-//     age: 28,
-//   },
-//
-// ];
+import {ToastConfig, ToastType} from "../../shared/toast/toast-model";
+import {ToastService} from '../../shared/toast/toast.service';
 
 @Component({
   selector: 'app-dev',
   templateUrl: './dev.component.html',
   styleUrls: ['./dev.component.css'],
-  providers: [ApiService]
+  providers: []
 })
 export class DevComponent implements OnInit {
 
-  constructor(private http: ApiService) {
+  constructor(private http: ApiService,private toastService: ToastService,private router:Router) {
   }
 
   ngOnInit() {
     this.http.getDevHeader().then(data => {
-      this.headers = data['headers'];
+
+      if (data.status == 'ok') {
+        this.headers=data['headers'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+        // this.router.navigate(['/login']);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
     this.http.getDevData().then(data => {
-      this.data = data['data'];
+      if (data.status == 'ok') {
+        this.data = data['data'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+        // this.router.navigate(['/login']);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
   }
 
@@ -195,5 +99,15 @@ export class DevComponent implements OnInit {
   cancle() {
     this.addView = false;
     this.tableView = true;
+  }
+
+  Search(searchObj: searchObj) {
+      console.log('dev searchObj:',searchObj);
+      // this.selectValue = searchObj.selectValue;
+      // this.searchValue = searchObj.searchValue;
+      this.http.postDevSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+          console.log('dev Search result:',data);
+          this.data = data['data'];
+      });
   }
 }

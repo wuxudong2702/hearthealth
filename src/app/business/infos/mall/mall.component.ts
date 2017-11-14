@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj,DataType} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj,DataType,searchObj} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -102,7 +102,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-mall',
   templateUrl: './mall.component.html',
   styleUrls: ['./mall.component.css'],
-  providers:[ApiService]
+  providers:[]
 })
 export class MallComponent implements OnInit {
 
@@ -139,27 +139,40 @@ export class MallComponent implements OnInit {
 
   }
 
-
     onDel(id:number){
         this.http.postMallDel(id).then(data=>{
             console.log(data,'删除');
             this.data=data['data'];
         });
     }
+
     onDelAll(checkedList:any){
         this.http.postMallDelAll(checkedList).then(data=>{
             console.log(data,'删除全部');
             this.data=data['data'];
         });
     }
+
     onSort(sort: sortObj) {
         this.http.postMallSort(sort.id,sort.order).then(data=>{
             console.log(data,'排序');
             this.data=data['data'];
         });
     }
+
   onAdd(){
     console.log('212132323');
     this.editor=true;
   }
+
+  onSearch(searchObj: searchObj) {
+      console.log('mall searchObj:',searchObj);
+      // this.selectValue = searchObj.selectValue;
+      // this.searchValue = searchObj.searchValue;
+      this.http.postMallSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+          console.log('mall Search result:',data);
+          this.data = data['data'];
+      });
+  }
+
 }

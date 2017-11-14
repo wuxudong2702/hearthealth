@@ -9,12 +9,13 @@
   [editBtn]="editBtn"
   [detailsBtn]="detailsBtn"
   [setOperate]="setOperate"
+  [paginationBtn]="paginationBtn"
   (onDetails)="details()"
   (onSort)="sort($event)"
   (onDel)="del($event)"
   (onAdd)="add($event)"
   (onDelAll)="delAll($event)"
-
+  (onSearch)="Search($event)"
 
   *ngIf="tableView"
 >
@@ -31,17 +32,13 @@
 >
 </app-table-add>
 
-
-
-
-
 <!--子用戶信息-->
 <c-table-list
   (onSort)="subUsersSort($event)"
   (onDel)="subUsersDel($event)"
   (onDelAll)="subUsersDelAll($event)"
   (onBack)="subUsersback()"
-
+  (onSearch)="subUserSearch($event)"
   (onAdd)="subUsersAdd($event)"
 
   [setOperate]="setOperate"

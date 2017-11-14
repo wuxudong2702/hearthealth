@@ -115,7 +115,7 @@ export class TableListComponent implements OnInit {
   @Input() searchBtn: boolean;
   @Input() detailsBtn: boolean;
   @Input() editBtn: boolean;
-  // @Input() editCommonBtn: boolean;
+  @Input() editZTreeBtn: boolean;
   @Input() deleteAllBtn: boolean;
   @Input() setBtn: boolean;
   @Input() chartBtn: boolean;
@@ -139,6 +139,8 @@ export class TableListComponent implements OnInit {
   @Output() onSort = new EventEmitter<any>();
   @Output() onBack = new EventEmitter<any>();
   @Output() onUpload = new EventEmitter<any>();
+  @Output() onEditZTree = new EventEmitter<any>();
+
 
   url: string = '';
   isDelAll: boolean = false;
@@ -173,6 +175,11 @@ export class TableListComponent implements OnInit {
     console.log('table-list-edit id',id);
 
     this.onAdd.emit(id);
+  }
+  editZTree(id:number){
+
+    console.log('editZTree',id);
+    this.onEditZTree.emit(id);
   }
 
   del(id) {
@@ -281,4 +288,5 @@ export class TableListComponent implements OnInit {
   onDataChanged($event) {
     console.info($event);
   }
+
 }

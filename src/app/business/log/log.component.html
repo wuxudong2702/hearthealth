@@ -1,8 +1,9 @@
 <c-table-list
   (onSort)="onSort($event)"
-        [headers]="headers"
-        [data]="data"
-        [searchBtn]="searchBtn"
-        [paginationBtn]="paginationBtn"
-        [setOperate]="setOperate"
+  (onSearch)="onSearch($event)"
+  [headers]="headers"
+  [data]="data"
+  [searchBtn]="searchBtn"
+  [paginationBtn]="paginationBtn"
+  [setOperate]="setOperate"
 >

@@ -1,12 +1,15 @@
-<div>
-  <button class="btn btn-success btn-md back" (click)="chartView()">返回</button>
-</div>
-<div class="text-center text-primary">
-  <h4>用户：&nbsp;{{userName}}</h4>
-</div>
-<div echarts [options]="chartOption" class="demo-chart"></div>
+<div class="chartStyle">
 
-<div class="text-center chartFileBtns">
+
+  <div>
+    <button class="btn btn-success btn-md back" (click)="chartView()">返回</button>
+  </div>
+  <div class="text-center text-primary">
+    <h4>用户：&nbsp;{{userName}}</h4>
+  </div>
+  <div echarts [options]="chartOption" class="demo-chart"></div>
+
+  <div class="text-center chartFileBtns">
     <button class="btn btn-primary btn-md" (click)="indicator1()">心率指标1
     </button>
     <button class="btn btn-primary btn-md" (click)="indicator2()">指标2
@@ -17,8 +20,9 @@
     </button>
     <button class="btn btn-primary btn-md" (click)="indicator5()">指标5
     </button>
-  <input [(ngModel)]="selectedDateStart" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
-         class="form-control dateInput dateInputStyle " placeholder="开始时间"/>
-  <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
-         class="form-control dateInput" placeholder="结束时间"/>
+    <input [(ngModel)]="selectedDateStart" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
+           class="form-control dateInput dateInputStyle " placeholder="开始时间"/>
+    <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
+           class="form-control dateInput" placeholder="结束时间"/>
+  </div>
 </div>

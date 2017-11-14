@@ -6,6 +6,8 @@
   (onDelAll)="onDelAll($event)"
   (onAdd)="onAdd($event)"
   (onEdit)="onEdit($event)"
+  (onSearch)="onSearch($event)"
+
   [headers]="headers"
   [data]="data"
   [addBtn]="addBtn"
@@ -15,10 +17,9 @@
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
   [paginationBtn]="paginationBtn"
-[setOperate]="setOperate"
+  [setOperate]="setOperate"
 >
 </c-table-list>
 <c-editor-h5 *ngIf="editor"   (onEditBack)="onEditBack($event)"
 >
-
 </c-editor-h5>

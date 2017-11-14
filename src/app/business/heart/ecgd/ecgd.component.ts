@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-ecgd',
   templateUrl: './ecgd.component.html',
   styleUrls: ['./ecgd.component.css'],
-  providers: [ApiService]
+  providers: []
 })
 
 
@@ -75,5 +75,10 @@ export class EcgdComponent implements OnInit {
       console.log(data,'ecgd Search result');
       this.data = data['data'];
     });
+  }
+
+  onUpload(){
+      console.log('upload');
+
   }
 }

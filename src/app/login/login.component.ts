@@ -14,6 +14,7 @@ import {ApiService} from '../business-service/api/api.service';
   selector: 'c-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  providers: []
 })
 export class LoginComponent implements OnInit {
 

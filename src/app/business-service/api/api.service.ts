@@ -789,6 +789,13 @@ export class ApiService {
             .then(data => data)
             .catch(this.handleError);
     }
-
+    //home
+    getHomeDataChart(): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/home-data/home-dataChart.json';
+        return this.httpClient.get(url, {})
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
 
 }

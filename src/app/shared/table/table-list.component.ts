@@ -29,6 +29,14 @@ export enum INPUTTYPE {
   DATETIME,
 }
 
+export enum INFOTYPE {
+    PROTOCOL = 0,
+    GUIDE,
+    STARTPAGE,
+    ABOUTUS,
+    HEALTH
+}
+
 export class sortObj {
   order: SortDirection;
   id: string;
@@ -115,6 +123,7 @@ export class TableListComponent implements OnInit {
   @Input() searchBtn: boolean;
   @Input() detailsBtn: boolean;
   @Input() editBtn: boolean;
+  @Input() editH5Btn: boolean;
   @Input() editZTreeBtn: boolean;
   @Input() deleteAllBtn: boolean;
   @Input() setBtn: boolean;
@@ -140,6 +149,7 @@ export class TableListComponent implements OnInit {
   @Output() onBack = new EventEmitter<any>();
   @Output() onUpload = new EventEmitter<any>();
   @Output() onEditZTree = new EventEmitter<any>();
+  @Output() onEditH5 = new EventEmitter<any>();
 
 
   url: string = '';
@@ -169,13 +179,15 @@ export class TableListComponent implements OnInit {
     this.onAdd.emit();
   }
 
-
-
   edit(id: number) {
-    console.log('table-list-edit id',id);
-
     this.onAdd.emit(id);
   }
+
+  editH5(id:number){
+     console.log('editH5',id);
+     this.onEditH5.emit(id);
+  }
+
   editZTree(id:number){
 
     console.log('editZTree',id);

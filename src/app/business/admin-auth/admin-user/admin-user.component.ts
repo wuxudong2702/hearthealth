@@ -18,11 +18,9 @@ export class AdminUserComponent implements OnInit {
   ngOnInit() {
       this.http.getAdminUserData().then(data => {
           this.data = data['data'];
-          console.log('233',this.data);
       });
       this.http.getAdminUserHeader().then(data => {
           this.headers = data['headers'];
-          console.log('233',this.headers);
       });
 
   }
@@ -30,33 +28,35 @@ export class AdminUserComponent implements OnInit {
   headers: Array<cell> = [];
   headerAdd: Array<any> = [];
   data: Array<any> = [];
-  addBtn: boolean = true;
-  deleteBtn: boolean = true;
-  editBtn: boolean = true;
-  deleteAllBtn: boolean = true;
-  setOperate: boolean = true;
   addEditTitle: string = '添加';
   editId: number;
+
+  adminUserDel: boolean = this.http.isHavePerm('admin-user-del');
+  adminUserAdd: boolean = this.http.isHavePerm('admin-user-add');
+  adminUserEdit: boolean = this.http.isHavePerm('admin-user-edit');
+  deleteBtn: boolean = this.adminUserDel;
+  deleteAllBtn: boolean = this.adminUserDel;
+  addBtn: boolean = this.adminUserAdd;
+  editBtn: boolean = this.adminUserEdit;
+  setOperate: boolean = true;
+
   tableView: boolean = true;
   addView: boolean = false;
 
   onDel(id:number){
       this.http.postAdminUserDel(id).then(data=>{
-          console.log(data,'删除');
           this.data=data['data'];
       });
   }
 
   onDelAll(checkedList:any){
       this.http.postAdminUserDelAll(checkedList).then(data=>{
-          console.log(data,'删除全部');
           this.data=data['data'];
       });
   }
 
   onSort(sort: sortObj) {
       this.http.postAdminUserSort(sort.id,sort.order).then(data=>{
-          console.log(data,'排序');
           this.data=data['data'];
       });
   }
@@ -98,7 +98,6 @@ export class AdminUserComponent implements OnInit {
 
   submit(submitData: string) {
       this.http.postAdminUserSubmit(submitData).then(data => {
-          console.log(data, '提交');
           this.data = data['data'];
       });
       this.addView = false;

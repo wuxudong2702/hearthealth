@@ -11,7 +11,7 @@
                     <span ngbDropdownToggle>{{mainData.userData.user_name}}</span>
                 </div>
                 <div ngbDropdownMenu  class="dropdown-menu animated fadeIn">
-                    <button class="dropdown-item" (click)="userInfo()"><i class="fa  fa-user-circle-o  fa-fw"></i> 个人资料</button>
+                    <!--<button class="dropdown-item" (click)="userInfo()"><i class="fa  fa-user-circle-o  fa-fw"></i> 个人资料</button>-->
                     <button class="dropdown-item" (click)="passwordEdit()"><i class="fa  fa-key fa-fw"></i> 修改密码</button>
                     <button class="dropdown-item" (click)="exitSys()"><i class="fa  fa-sign-out fa-fw"></i> 退出系统</button>
                 </div>
@@ -36,17 +36,17 @@
                     <li class="c-item" (click)="toHome()">
                         <i class="fa fa-home fa-fw"></i> 首页
                     </li>
-                    <li class="c-user" ngbDropdown>
-                        <div ngbDropdownToggle class="d-inline-block">
-                            <img class="rounded-circle" [src]="mainData.userData.avator" />
-                            <span>{{mainData.userData.user_name}}</span>
-                        </div>
-                        <div ngbDropdownMenu class="animated fadeIn">
-                            <button class="dropdown-item"  (click)="userInfo()"><i class="fa  fa-user-circle-o  fa-fw"></i> 个人资料</button>
-                            <button class="dropdown-item"  (click)="passwordEdit()"><i class="fa  fa-key fa-fw"></i> 修改密码</button>
-                            <button class="dropdown-item"  (click)="exitSys()"><i class="fa  fa-sign-out fa-fw"></i> 退出系统</button>
-                        </div>
-                    </li>
+                    <!--<li class="c-user" ngbDropdown>-->
+                        <!--<div ngbDropdownToggle class="d-inline-block">-->
+                            <!--<img class="rounded-circle" [src]="mainData.userData.avator" />-->
+                            <!--<span>{{mainData.userData.user_name}}</span>-->
+                        <!--</div>-->
+                        <!--<div ngbDropdownMenu class="animated fadeIn">-->
+                            <!--<button class="dropdown-item"  (click)="userInfo()"><i class="fa  fa-user-circle-o  fa-fw"></i> 个人资料</button>-->
+                            <!--<button class="dropdown-item"  (click)="passwordEdit()"><i class="fa  fa-key fa-fw"></i> 修改密码</button>-->
+                            <!--<button class="dropdown-item"  (click)="exitSys()"><i class="fa  fa-sign-out fa-fw"></i> 退出系统</button>-->
+                        <!--</div>-->
+                    <!--</li>-->
                 </ul>
             </div>
         </div>

@@ -66,6 +66,17 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+  logout() {
+    const url: string = '/api/admin/auth/logout';
+    return this.httpClient.post(url, {
+      token: this.token
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
+
+
   /*
   获取个人信息
    */
@@ -121,7 +132,7 @@ export class ApiService {
   reset(oldPassword: string, password: string, certainPassword: string): Promise<any> {
     const url: string = '/api/admin/auth/reset';
     return this.httpClient.post(url, {
-      token:this.token,
+      token: this.token,
       password: oldPassword,
       new_password: password,
       new_password_confirmation: certainPassword

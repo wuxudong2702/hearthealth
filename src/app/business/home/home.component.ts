@@ -35,13 +35,16 @@ export class HomeComponent implements OnInit {
                 tooltip : {
                     trigger: 'axis',
                     axisPointer : {
-                        type : 'shadow'
+                        type : 'shadow',
+                        shadowStyle:{
+                            color:'rgba(230,204,255,0.3)'
+                        }
                     }
                 },
                 grid: {
-                    left: '5%',
-                    right: '7%',
-                    bottom: '3%',
+                    left: '8%',
+                    right: '10%',
+                    bottom: '2%',
                     containLabel: true,
                 },
                 xAxis : [
@@ -55,7 +58,8 @@ export class HomeComponent implements OnInit {
                 ],
                 yAxis : [
                     {
-                        type : 'value'
+                        type : 'value',
+                        // splitLine:{show: false}
                     }
                 ],
                 series : [

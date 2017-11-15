@@ -14,7 +14,10 @@ export class PackagesComponent implements OnInit {
     constructor(private http: ApiService) {}
 
     ngOnInit() {
-      this.headers= this.http.getHeader('app-upgrades');
+            this.headers =this.http.getHeader('app-upgrades');
+        this.http.getPackagesData().then(data => {
+            this.data = data['data'];
+        });
     }
 
   headers: Array<cell> = [];
@@ -59,14 +62,14 @@ export class PackagesComponent implements OnInit {
           this.addEditTitle = '编辑';
           this.editId = id;
           this.headerAdd = this.headers.map(d => {
-              switch(d.inputType)
+              switch(d.input_type)
               {
                   case INPUTTYPE.INPUT:
                       d.val = this.data[id][d.key];
                       break;
                   case INPUTTYPE.SELECT:
                       let val = this.data[id][d.key];
-                      d.val = d.selectVal[val];
+                      d.val = d.select_val[val];
                       break;
                   default:
                       d.val = this.data[id][d.key];

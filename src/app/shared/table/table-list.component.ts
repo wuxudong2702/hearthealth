@@ -15,12 +15,11 @@ export enum SortDirection {
 }
 
 export enum DataType {
-  ENUM = 0,
+  NONE = 0,
+  ENUM,
   DATATIME,
-  AGE,
   MONEY,
   NAME,
-  NONE,
 }
 
 export enum INPUTTYPE {
@@ -30,11 +29,11 @@ export enum INPUTTYPE {
 }
 
 export enum INFOTYPE {
-    PROTOCOL = 0,
-    GUIDE,
-    STARTPAGE,
-    ABOUTUS,
-    HEALTH
+  PROTOCOL = 0,
+  GUIDE,
+  STARTPAGE,
+  ABOUTUS,
+  HEALTH
 }
 
 export class sortObj {
@@ -47,6 +46,17 @@ export class searchObj {
   searchValue: string;
 }
 
+export class paginationObj {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+  to: number;
+  first_page_url: string;
+  last_page_url: string;
+  next_page_url: string;
+  prev_page_url: string;
+}
 
 export class news {
   newsTitle: string;
@@ -60,32 +70,36 @@ export class pipe {
 }
 
 export class cell {
+
+
   key: string;
   show: boolean;
   name: string;
   index: number;
   order: SortDirection;
-  pipe: pipe;
+  pipe_type: number;
+  pipe_params: any;
+
   val: any;
-  selectVal:Array<any>;
-  validExample: string;
+  select_val: Array<any>;
+  valid_example: string;
   required: boolean;
   pattern: string;
-  inputType: INPUTTYPE;
+  input_type: INPUTTYPE;
+
+
 }
 
 @Pipe({name: 'CPipe'})
 export class CPipePipe implements PipeTransform {
-  transform(originalValue: any, pipe: pipe): any {
-    switch (pipe.type) {
-      case DataType.AGE:
+  transform(originalValue: any, pipe_type: number, pipe_params: any): any {
+    switch (pipe_type) {
+      case DataType.NONE:
         return originalValue;
       case DataType.DATATIME:
-        return (new DatePipe('zh-CN')).transform(originalValue, pipe.params);
+        return (new DatePipe('zh-CN')).transform(originalValue, pipe_params);
       case DataType.ENUM:
-        console.log('----------',pipe,);
-        return pipe.params[originalValue];
-      case DataType.NONE:
+        return pipe_params[originalValue];
       default:
         return originalValue;
     }
@@ -132,6 +146,10 @@ export class TableListComponent implements OnInit {
   @Input() backBtn: boolean;
   @Input() setOperate: boolean;
   @Input() uploadBtn: boolean;
+
+  @Input() pagination: paginationObj;
+
+
   // @Input() addCommonBtn: boolean;
 
 
@@ -150,6 +168,7 @@ export class TableListComponent implements OnInit {
   @Output() onUpload = new EventEmitter<any>();
   @Output() onEditZTree = new EventEmitter<any>();
   @Output() onEditH5 = new EventEmitter<any>();
+  @Output() onPaginationChange = new EventEmitter<any>();
 
 
   url: string = '';
@@ -157,11 +176,12 @@ export class TableListComponent implements OnInit {
   selectValue: string = '';
   searchValue: string = '';
   tableAdd: boolean = false;
-  tableEdit:boolean = false;
-  editId:number;
+  tableEdit: boolean = false;
+  editId: number;
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
+
   // submitData:object;
   delAllChecked() {
     if (!this.isDelAll) {
@@ -175,7 +195,7 @@ export class TableListComponent implements OnInit {
     this.isDelAll = false;
   }
 
-  add(){
+  add() {
     this.onAdd.emit();
   }
 
@@ -183,14 +203,14 @@ export class TableListComponent implements OnInit {
     this.onAdd.emit(id);
   }
 
-  editH5(id:number){
-     console.log('editH5',id);
-     this.onEditH5.emit(id);
+  editH5(id: number) {
+    console.log('editH5', id);
+    this.onEditH5.emit(id);
   }
 
-  editZTree(id:number){
+  editZTree(id: number) {
 
-    console.log('editZTree',id);
+    console.log('editZTree', id);
     this.onEditZTree.emit(id);
   }
 
@@ -261,8 +281,6 @@ export class TableListComponent implements OnInit {
     this.onDetails.emit(id);
   }
 
-
-
   chart(id: number) {
     this.onChart.emit(
       id
@@ -270,7 +288,6 @@ export class TableListComponent implements OnInit {
   }
 
   sort(i) {
-    // console.log(i);
     this.headers[i].order = this.headers[i].order === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC;
     this.onSort.emit(
       {
@@ -278,15 +295,16 @@ export class TableListComponent implements OnInit {
         id: i,
       }
     );
-    // console.log('table-list sort id',i,this.headers[i].order);
   }
 
   back() {
     this.onBack.emit();
   }
-  upload(){
+
+  upload() {
     this.onUpload.emit();
   }
+
   openError(errorInfo) {
     let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
     this.toastService.toast(toastCfg);
@@ -299,6 +317,10 @@ export class TableListComponent implements OnInit {
 
   onDataChanged($event) {
     console.info($event);
+  }
+
+  paginationChange(parmas) {
+    this.onPaginationChange.emit(parmas);
   }
 
 }

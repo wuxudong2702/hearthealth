@@ -6,7 +6,7 @@
     class="form-control addInputValue"
     id="name"
     name="name"
-    *ngIf="field.inputType == 0"
+    *ngIf="field.input_type == 0"
     [(ngModel)]="field.val"
     [formControlName]="field.key"
     placeholder="请输入"
@@ -16,10 +16,10 @@
 
 
   <select class="form-control addInputValue"
-          *ngIf="field.inputType==1" name={{field.key}}
+          *ngIf="field.input_type==1" name={{field.key}}
           [(ngModel)]="field.val"
           [formControlName]="field.key">
-    <option *ngFor="let val of field.selectVal;"  value={{val}}>{{val}}</option>
+    <option *ngFor="let val of field.select_val;"  value={{val}}>{{val}}</option>
   </select>
 
   <input [dpDayPicker]="datePickerConfig"
@@ -27,7 +27,7 @@
          [theme]="'dp-material'"
          [mode]="'day'"
          [(ngModel)]="field.val"
-         *ngIf="field.inputType==2"
+         *ngIf="field.input_type==2"
          class="form-control dateInput dateInputStyle addInputValue "
          placeholder="请选择日期"/>
   <div class=" " *ngIf="!isValid  && isDirty ">

@@ -80,14 +80,14 @@ export class AppUserComponent implements OnInit {
       this.headerAdd = this.headers.map(d => {
         // console.log('______',this.data[id][d.key],d.key);
         // console.log('-------', d.inputType);
-        switch(d.inputType)
+        switch(d.input_type)
         {
           case INPUTTYPE.INPUT:
             d.val = this.data[id][d.key];
             break;
           case INPUTTYPE.SELECT:
             let val = this.data[id][d.key];
-            d.val = d.selectVal[val];
+            d.val = d.select_val[val];
             // console.log('----+++++++++---', val, d.selectVal[val]);
             break;
           default:
@@ -184,14 +184,14 @@ export class AppUserComponent implements OnInit {
       this.addEditTitle = '编辑';
       this.editId = id;
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
-        switch(d.inputType)
+        switch(d.input_type)
         {
           case INPUTTYPE.INPUT:
             d.val = this.subUserData[id][d.key];
             break;
           case INPUTTYPE.SELECT:
             let val = this.subUserData[id][d.key];
-            d.val = d.selectVal[val];
+            d.val = d.select_val[val];
             break;
           default:
             d.val = this.subUserData[id][d.key];

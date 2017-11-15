@@ -61,13 +61,13 @@ export class AdminUserComponent implements OnInit {
           this.addEditTitle = '编辑';
           this.editId = id;
           this.headerAdd = this.headers.map(d => {
-              switch (d.inputType) {
+              switch (d.input_type) {
                   case INPUTTYPE.INPUT:
                       d.val = this.data[id][d.key];
                       break;
                   case INPUTTYPE.SELECT:
                       let val = this.data[id][d.key];
-                      d.val = d.selectVal[val];
+                      d.val = d.select_val[val];
                       break;
                   default:
                       d.val = this.data[id][d.key];
@@ -100,3 +100,5 @@ export class AdminUserComponent implements OnInit {
     }
 
 }
+
+

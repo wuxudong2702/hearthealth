@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
    * 登录
    */
   login() {
-    console.info(this.loginForm);
     if (this.loginForm.valid) {
       let that = this;
       this.api.login(this.loginForm.get('userName').value, this.loginForm.get('password').value).then(data => {

@@ -1,0 +1,667 @@
+{
+  "admins": [
+    {
+      "key": "administratorPermissions",
+      "show": true,
+      "name": "管理员角色",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "管理员",
+        "1": "普通用户"
+      },
+      "val": "",
+      "select_val": [
+        "管理员",
+        "普通用户"
+      ],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 1
+    },
+    {
+      "key": "administrator",
+      "show": true,
+      "name": "管理员姓名",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "武旭东",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    }
+  ],
+  "app-roles": [
+    {
+      "key": "appRole",
+      "show": true,
+      "name": "账户角色",
+      "index": 0,
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "子账户",
+        "1": "主账户"
+      },
+      "val": "",
+      "select_val": [
+        "子账户",
+        "主账户"
+      ],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 1
+    },
+    {
+      "key": "subUsersMaxNum",
+      "show": true,
+      "name": "最大子用户个数",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": 12,
+      "required": true,
+      "pattern": "[0-9]+$",
+      "input_type": 0
+    }
+  ],
+  "app-upgrades": [
+    {
+      "key": "version",
+      "show": true,
+      "name": "版本名称",
+      "index": 0,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "V.1",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "updateInfo",
+      "show": true,
+      "name": "更新说明",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "本次更新了...",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    }
+  ],
+  "devs": [
+    {
+      "key": "userName",
+      "show": true,
+      "name": "用户名",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "武旭东",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "accountBind",
+      "show": true,
+      "name": "绑定账户",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "12344567890",
+      "required": true,
+      "pattern": "[0-9]+$",
+      "input_type": 0
+    },
+    {
+      "key": "isBinding",
+      "show": true,
+      "name": "是否绑定",
+      "index": "2",
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "是",
+        "1": "否"
+      },
+      "val": "",
+      "select_val": [
+        "是",
+        "否"
+      ],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 1
+    },
+    {
+      "key": "devType",
+      "show": true,
+      "name": "设备类型",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "卡片式",
+        "1": "佩戴市"
+      },
+      "val": "",
+      "select_val": [
+        "卡片式",
+        "佩带式"
+      ],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 1
+    },
+    {
+      "key": "devID",
+      "show": true,
+      "name": "设备ID",
+      "index": 6,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "123456789",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "input_type": 3
+    }
+  ],
+  "heart-data": [
+    {
+      "key": "userName",
+      "show": true,
+      "name": "用户名",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "武旭东",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "relationship",
+      "show": true,
+      "name": "与主账户关系",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "父子",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "birthDate",
+      "show": true,
+      "name": "出生日期",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-17",
+      "required": true,
+      "pattern": "yyyy-mm-dd",
+      "input_type": 2
+    },
+    {
+      "key": "acquisitionTime",
+      "show": true,
+      "name": "心跳数据采集时间",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "heartDataLength",
+      "show": true,
+      "name": "心跳数据长度",
+      "index": 5,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": " ",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "devNumber",
+      "show": true,
+      "name": "采集设备号",
+      "index": 6,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "123456789",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "input_type": 0
+    },
+    {
+      "table_id": 0,
+      "show": true,
+      "name": "心率",
+      "index": 7,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": " ",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    }
+  ],
+  "infos": [
+    {
+      "key": "name",
+      "show": true,
+      "name": "名称",
+      "index": 0,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "infoType",
+      "show": true,
+      "name": "类型",
+      "index": "1",
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "监控咨询",
+        "1": "用户协议",
+        "2": "指南",
+        "3": "启动页",
+        "4": "关于我们"
+      },
+      "val": "",
+      "select_val": [
+        "监控咨询",
+        "用户协议",
+        "指南",
+        "启动页",
+        "关于我们"
+      ],
+      "valid_example": "武旭东",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "date",
+      "show": true,
+      "name": "日期",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "yyyyMMdd",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-14",
+      "required": true,
+      "pattern": "",
+      "input_type": 2
+    }
+  ],
+  "reports": [
+    {
+      "key": "userName",
+      "show": true,
+      "name": "用户名",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "武旭东",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "relationship",
+      "show": true,
+      "name": "与主账户关系",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "父子",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "accountType",
+      "show": true,
+      "name": "账户类型",
+      "index": 0,
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "子账户",
+        "1": "主账户"
+      },
+      "val": "",
+      "select_val": [
+        "子账户",
+        "主账户"
+      ],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": "1"
+    },
+    {
+      "key": "earliest",
+      "show": true,
+      "name": "最早检测时间",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-14",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "latest",
+      "show": true,
+      "name": "最晚检测时间",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-14",
+      "required": true,
+      "pattern": "",
+      "input_type": 2
+    },
+    {
+      "key": "historicalTests",
+      "show": true,
+      "name": "历史检测次数",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "input_type": 0
+    }
+  ],
+  "roles": [
+    {
+      "key": "administratorPermissions",
+      "show": true,
+      "name": "管理员角色",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "管理员",
+        "1": "普通用户"
+      },
+      "val": "",
+      "select_val": [
+        "管理员",
+        "普通用户"
+      ],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 1
+    },
+    {
+      "key": "devID",
+      "show": "true",
+      "name": "备注",
+      "index": 6,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    }
+  ],
+  "users": [
+    {
+      "key": "userName",
+      "show": true,
+      "name": "用户名",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "武旭东",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "accountType",
+      "show": true,
+      "name": "账户类型",
+      "index": 0,
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "子账户",
+        "1": "主账户"
+      },
+      "val": "",
+      "select_val": [
+        "子账户",
+        "主账户"
+      ],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 1
+    },
+    {
+      "id": "9",
+      "key": "relationship",
+      "table_id": 0,
+      "show": true,
+      "name": "与主账户关系",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "父子",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "birthDate",
+      "show": true,
+      "name": "出生日期",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-17",
+      "required": true,
+      "pattern": "yyyy-mm-dd",
+      "input_type": 2
+    },
+    {
+      "key": "sex",
+      "show": true,
+      "name": "性别",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "0": "女",
+        "1": "男"
+      },
+      "val": "",
+      "select_val": [
+        "女",
+        "男"
+      ],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 1
+    },
+    {
+      "key": "address",
+      "show": true,
+      "name": "地区",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "黑龙江哈尔滨南岗区",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "height",
+      "show": true,
+      "name": "身高",
+      "index": 5,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "185",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "input_type": 0
+    },
+    {
+      "key": "telephoneNum",
+      "show": true,
+      "name": "手机",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "18045142702",
+      "required": true,
+      "pattern": "1[3|4|5|8][0-9][9]",
+      "input_type": 0
+    },
+    {
+      "key": "weight",
+      "show": true,
+      "name": "体重",
+      "index": 6,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "65",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "input_type": 0
+    },
+    {
+      "key": "subUsersNum",
+      "show": true,
+      "name": "子用户个数",
+      "index": 7,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "15",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "input_type": 0
+    }
+  ]
+}

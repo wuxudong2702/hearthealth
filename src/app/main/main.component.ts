@@ -222,9 +222,9 @@ export class MainComponent implements OnInit {
     /**
      * 个人资料
      */
-    userInfo() {
-        this.router.navigate(['/app/user/userInfo']);
-    }
+    // userInfo() {
+    //     this.router.navigate(['/app/user/userInfo']);
+    // }
 
     /**
      * 头像更换
@@ -256,8 +256,21 @@ export class MainComponent implements OnInit {
         let exitSysCfg = new ConfirmConfig('您确定退出系统吗？');
         this.modalService.confirm(exitSysCfg).then((result) => {
             if (result.status == 'approved') {
-              // this.api.logOut().then().catch();
-                this.router.navigate(['/login']);
+              let that = this;
+              this.apiService.logout().then(data => {
+                if (data.status == 'ok') {
+                  this.router.navigate(['/login']);
+                } else {
+                  console.log('data.message',data.message);
+                  const toastCfg = new ToastConfig(ToastType.ERROR, ' ', data.message, 3000);
+                  that.toastService.toast(toastCfg);
+                }
+              }).catch(err => {
+                console.log('err',err);
+                const toastCfg = new ToastConfig(ToastType.ERROR, ' ', err, 3000);
+                that.toastService.toast(toastCfg);
+              });
+
             }
         }, (reason) => {
         });

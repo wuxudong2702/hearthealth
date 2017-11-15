@@ -17,7 +17,6 @@
           ]},
           {"id": "heart-dev-show","name": "设备管理"  ,"checked": true ,"open":false ,"children":[
               {"id": "heart-dev-add","name": "添加功能" ,"checked": true },
-              {"id": "heart-dev-edit","name": "编辑功能" ,"checked": true },
               {"id": "heart-dev-del","name": "删除功能" ,"checked": true }
           ]},
           {"id": "info-show","name": "信息管理"  ,"checked": true ,"open":false ,"children":[

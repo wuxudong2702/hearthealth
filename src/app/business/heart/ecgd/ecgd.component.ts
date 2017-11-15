@@ -36,11 +36,11 @@ export class EcgdComponent implements OnInit {
     userInfoChart: object;
 
     del: boolean = this.http.isHavePerm('ecgd-del');
-
+    download: boolean = this.http.isHavePerm('ecgd-download');
     deleteBtn: boolean = this.del;
     deleteAllBtn: boolean = this.del;
+    downloadBtn: boolean = this.download;
 
-    downloadBtn: boolean = true;
     searchBtn: boolean = true;
     detailsBtn: boolean = true;
     setBtn: boolean = true;

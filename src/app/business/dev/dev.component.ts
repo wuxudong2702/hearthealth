@@ -48,13 +48,15 @@ export class DevComponent implements OnInit {
   headers: Array<cell> = [];
   headerAdd: Array<cell> = [];
   data: Array<any> = [];
-
   addEditTitle: string = '添加';
 
-  addBtn: boolean = true;
-  deleteBtn: boolean = true;
+  devDel: boolean = this.http.isHavePerm('heart-dev-del');
+  devAdd: boolean = this.http.isHavePerm('heart-dev-add');
+  deleteBtn: boolean = this.devDel;
+  deleteAllBtn: boolean = this.devDel;
+  addBtn: boolean = this.devAdd;
+
   searchBtn: boolean = true;
-  deleteAllBtn: boolean = true;
   setBtn: boolean = true;
   paginationBtn: boolean = true;
   setOperate: boolean = true;

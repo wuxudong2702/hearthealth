@@ -116,6 +116,7 @@ export class ApiService {
         }).toPromise()
             .then(data => {
                 if (data['status'] == 'ok') {
+                  // console.log('api service getperm data',data);
                     this.perms = data['data'];
                 } else {
                     console.error('获取用户权限错误：', data);
@@ -199,7 +200,9 @@ export class ApiService {
         })
             .toPromise()
             .then(data => {
-                if(data['status'] == 'ok'){
+              console.log("apiservicve setHeaders data",data);
+
+              if(data['status'] == 'ok'){
                     this.getHeaders();
                 }else{
                     console.error('设置表头错误',  data['message']);

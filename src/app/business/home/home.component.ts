@@ -43,8 +43,9 @@ export class HomeComponent implements OnInit {
                 },
                 grid: {
                     left: '8%',
-                    right: '10%',
-                    bottom: '2%',
+                    // right: '10%',
+                    // bottom: '2%',
+                    top:'10%',
                     containLabel: true,
                 },
                 xAxis : [

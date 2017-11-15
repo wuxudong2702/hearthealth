@@ -14,12 +14,7 @@ export class AdminRoleComponent implements OnInit {
   constructor(private http: ApiService) {}
 
   ngOnInit() {
-      this.http.getAdminRoleHeader().then(data => {
-          this.headers = data['headers'];
-      });
-      this.http.getAdminRoleData().then(data => {
-          this.data = data['data'];
-      });
+    this.headers= this.http.getHeader('roles');
   }
 
   nodes:any;

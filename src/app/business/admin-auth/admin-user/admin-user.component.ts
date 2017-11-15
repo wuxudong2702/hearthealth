@@ -16,12 +16,7 @@ export class AdminUserComponent implements OnInit {
   constructor(private http: ApiService) {}
 
   ngOnInit() {
-      this.http.getAdminUserData().then(data => {
-          this.data = data['data'];
-      });
-      this.http.getAdminUserHeader().then(data => {
-          this.headers = data['headers'];
-      });
+    this.headers= this.http.getHeader('admins');
 
   }
   nodes:any;

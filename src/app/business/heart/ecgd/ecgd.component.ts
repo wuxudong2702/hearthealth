@@ -18,12 +18,7 @@ export class EcgdComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.http.getEcgd().then(data => {
-            this.headers = data['headers'];
-        });
-        this.http.getEcgdData().then(data => {
-            this.data = data['data'];
-        });
+      this.headers= this.http.getHeader('heart-data');
 
     }
 

@@ -16,12 +16,7 @@ export class AppUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.getAppUserHeader().then(data => {
-      this.headers = data['headers'];
-    });
-    this.http.getAppUserData().then(data => {
-      this.data = data['data'];
-    });
+    this.headers= this.http.getHeader('users');
   }
 
   headers: Array<cell> = [];

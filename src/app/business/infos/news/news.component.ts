@@ -15,13 +15,7 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.getNewsHeader().then(data => {
-      this.headers = data['headers'];
-    });
-    this.http.getNewsData().then(data => {
-      this.data = data['data'];
-      console.log('0000', this.data);
-    });
+    this.headers= this.http.getHeader('infos');
   }
 
   headers: Array<cell> = [];

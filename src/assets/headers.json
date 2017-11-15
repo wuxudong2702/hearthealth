@@ -663,5 +663,55 @@
       "pattern": "^[0-9]+$",
       "input_type": 0
     }
+  ],
+  "logs": [
+    {
+      "key": "userName",
+      "show": true,
+      "name": "用户名",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+
+    {
+      "id": "9",
+      "key": "operating",
+      "table_id": 0,
+      "show": true,
+      "name": "操作",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "date",
+      "show": true,
+      "name": "时间",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-17",
+      "required": true,
+      "pattern": "yyyy-mm-dd",
+      "input_type": 2
+    }
   ]
 }

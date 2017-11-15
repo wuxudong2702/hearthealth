@@ -17,12 +17,7 @@ export class AppRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.getAppRoleHeader().then(data => {
-      this.headers = data['headers'];
-    });
-    this.http.getAppRoleData().then(data => {
-      this.data = data['data'];
-    });
+    this.headers= this.http.getHeader('app-roles');
   }
 
   headers: Array<cell> = [];

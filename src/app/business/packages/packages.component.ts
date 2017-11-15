@@ -14,12 +14,7 @@ export class PackagesComponent implements OnInit {
     constructor(private http: ApiService) {}
 
     ngOnInit() {
-        this.http.getPackagesHeader().then(data => {
-            this.headers = data['headers'];
-        });
-        this.http.getPackagesData().then(data => {
-            this.data = data['data'];
-        });
+      this.headers= this.http.getHeader('app-upgrades');
     }
 
   headers: Array<cell> = [];

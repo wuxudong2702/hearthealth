@@ -21,6 +21,8 @@
 <c-editor-h5 *ngIf="editor"
              [dataEditor]="dataEditor"
              (onEditBack)="onEditBack($event)"
+             (onPost)="onPost($event)"
+             (onSave)="onSave($event)"
              [H5Type]="H5Type"
              [isSelectShow]="isSelectShow"
 >

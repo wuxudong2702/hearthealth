@@ -51,18 +51,24 @@ export class NewsComponent implements OnInit {
   editor: boolean = false;
 
   onEditH5(id: number) {
-    console.log('---------------------------',this.isSelectShow);
     this.dataEditor = this.data[id];
     this.editor = true;
     this.isSelectShow = false;
-    console.log('----------------------------',this.isSelectShow);
   }
 
   onEditBack(id: number) {
     this.editor = false;
     this.isSelectShow = false;
-    console.log('返回',this.isSelectShow);
+  }
 
+  onSave(selectValue:any) {
+      this.editor = false;
+      this.isSelectShow = false;
+  }
+
+  onPost(selectValue:any) {
+      this.editor = false;
+      this.isSelectShow = false;
   }
 
   onDel(id: number) {

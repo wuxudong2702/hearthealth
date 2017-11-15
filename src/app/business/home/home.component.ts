@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
                 return item[1];
             });
             this.chartOption = {
-                color: ['#3398DB'],
+                color: ['#3aafdb'],
                 tooltip : {
                     trigger: 'axis',
                     axisPointer : {
@@ -39,10 +39,10 @@ export class HomeComponent implements OnInit {
                     }
                 },
                 grid: {
-                    left: '3%',
-                    right: '4%',
+                    left: '5%',
+                    right: '7%',
                     bottom: '3%',
-                    containLabel: true
+                    containLabel: true,
                 },
                 xAxis : [
                     {
@@ -60,14 +60,12 @@ export class HomeComponent implements OnInit {
                 ],
                 series : [
                     {
-                        name:'直接访问',
                         type:'bar',
-                        barWidth: '60%',
+                        barWidth: '50%',
                         data:this.valueList
                     }
                 ]
             };
         });
     }
-
 }

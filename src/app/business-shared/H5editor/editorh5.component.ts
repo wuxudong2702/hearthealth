@@ -3,6 +3,8 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {AppService} from '../../app.service';
 import {DOCUMENT} from '@angular/common';
 import {news} from '../../shared/table/table-list.component';
+import {ToastService} from '../../shared/toast/toast.service';
+import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
 
 export class UEditorHtml {
   htmlValue: string;
@@ -40,11 +42,12 @@ const htmlL: string = "</div>\n" +
   selector: 'c-editor-h5',
   styleUrls: ['./editorh5.component.css'],
   template: `      
-
-    <select class="form-control col-md-4" [(ngModel)]="selectValue" [hidden]="!isSelectShow">
-        <option value="" style="display:none">请选择</option>
-        <option *ngFor="let type of H5Type" >{{type.value}}</option>
-    </select>
+    <div class="col-md-2 h5Select">
+        <select class="form-control" [(ngModel)]="selectValue" [hidden]="!isSelectShow">
+            <option value="" style="display:none">请选择类别</option>
+            <option *ngFor="let type of H5Type" value={{type.key}}>{{type.value}}</option>
+        </select>
+    </div>
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
         <div class="col-md-12" >
@@ -53,10 +56,10 @@ const htmlL: string = "</div>\n" +
         </div>
       </div>
       <div class="buttons">
-        <button class="">发表</button>
-        <button class="">保存</button>
-        <button class=""(click)="preview()">预览</button>
-        <button class=""(click)="editBack()">返回</button>
+        <button class="" (click)="post()">发表</button>
+        <button class="" (click)="save()">保存</button>
+        <button class="" (click)="preview()">预览</button>
+        <button class="" (click)="editBack()">返回</button>
       </div>
     </div>
     <div style="height: 840px; overflow: auto">
@@ -73,14 +76,16 @@ const htmlL: string = "</div>\n" +
   `
 })
 
-
 export class Editorh5Component implements OnInit {
+
   @ViewChild('iframe') iframe: ElementRef;
   @Input() dataEditor:news;
   @Input() H5Type:Array<any>;
   @Input() isSelectShow:boolean;
 
   @Output() onEditBack = new EventEmitter<any>();
+  @Output() onPost = new EventEmitter<any>();
+  @Output() onSave = new EventEmitter<any>();
 
   htmlValue: string = '';
   textValue: string = '';
@@ -94,7 +99,8 @@ export class Editorh5Component implements OnInit {
   ifr_document: any;
   htmlElement: HTMLElement;
   prePhone:boolean=false;
-  constructor(private appService: AppService, private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
+
+  constructor(private appService: AppService, private toastService: ToastService , private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
 
   }
 
@@ -126,7 +132,33 @@ export class Editorh5Component implements OnInit {
   noPreviews(){
     this.previews = true;
   }
+
   editBack(){
     this.onEditBack.emit(1);
+  }
+
+  post(){
+      if (!this.selectValue) {
+          this.openError('请选择类别！');
+      } else {
+          this.onPost.emit({
+              selectValue: this.selectValue,
+          });
+      }
+  }
+
+  save(){
+      if (!this.selectValue) {
+          this.openError('请选择类别！');
+      } else {
+          this.onSave.emit({
+              selectValue: this.selectValue,
+          });
+      }
+  }
+
+  openError(errorInfo) {
+      let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
+      this.toastService.toast(toastCfg);
   }
 }

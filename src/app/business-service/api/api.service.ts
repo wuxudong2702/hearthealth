@@ -224,18 +224,7 @@ export class ApiService {
     }
 
 
-    reset(oldPassword: string, password: string, certainPassword: string): Promise<any> {
-        const url: string = '/api/admin/auth/reset';
-        return this.httpClient.post(url, {
-            token: this.token,
-            password: oldPassword,
-            new_password: password,
-            new_password_confirmation: certainPassword
-        })
-            .toPromise()
-            .then(data => data)
-            .catch(this.handleError);
-    }
+
 
   getEcgd(): Promise<any> {
     const url: string = '../../../assets/ecgd.json';

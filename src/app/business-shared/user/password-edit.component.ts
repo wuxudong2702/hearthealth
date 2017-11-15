@@ -35,13 +35,12 @@ export class PasswordEditComponent {
     }
 
     /**
-     * 上传
+     * 上传密码
      */
     ok(): void {
         if(this.passwordEditForm.valid){
             let that = this;
             this.api.reset(this.passwordEditForm.get('oldPassword').value, this.passwordEditForm.get('password').value,this.passwordEditForm.get('certainPassword').value).then(data => {
-              console.log(data,'qqqqqqqqqqqqq');
               if (data.status == 'ok') {
                 const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '修改成功!', 3000);
                 that.toastService.toast(toastCfg);
@@ -50,7 +49,7 @@ export class PasswordEditComponent {
               } else {
                 const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                 that.toastService.toast(toastCfg);
-                that.router.navigate(['/reset']);
+                // that.router.navigate(['/reset']);
               }
             }).catch(err => {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);

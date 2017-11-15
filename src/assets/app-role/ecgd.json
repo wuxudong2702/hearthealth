@@ -2,22 +2,18 @@
   "headers": [
     {
       "key": "userName",
-      "show": "true",
+      "show": true,
       "name": "用户名",
-      "index": "0",
-      "order": "SortDirection.NONE",
-      "pipe": {
-        "type": "DataType.NONE",
-        "params": ""
-
-      } ,
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params":"",
       "val": "",
-      "selectVal":[],
-      "validExample": "需要填写用户名",
+      "select_val": [],
+      "valid_example": "武旭东",
       "required": true,
       "pattern": "",
-      "inputType": "INPUTTYPE.INPUT"
-
+      "input_type": 0
     },
     {
       "key": "relationship",

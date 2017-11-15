@@ -37,15 +37,14 @@ export class HomeComponent implements OnInit {
                     axisPointer : {
                         type : 'shadow',
                         shadowStyle:{
-                            color:'rgba(230,204,255,0.3)'
+                            color:'rgba(224,224,224,0.3)'
                         }
                     }
                 },
                 grid: {
                     left: '8%',
-                    // right: '10%',
-                    // bottom: '2%',
-                    top:'10%',
+                    right: '10%',
+                    top: '30%',
                     containLabel: true,
                 },
                 xAxis : [

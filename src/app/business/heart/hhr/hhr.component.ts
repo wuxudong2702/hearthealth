@@ -3,9 +3,6 @@ import {cell, SortDirection, sortObj,DataType,searchObj} from '../../../shared/t
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 
-
-
-
 @Component({
   selector: 'app-hhr',
   templateUrl: './hhr.component.html',
@@ -30,10 +27,6 @@ export class HhrComponent implements OnInit {
   data: Array<any> = [];
   dataChart1: Array<any>;
 
-  del: boolean = this.http.isHavePerm('hhr-del');
-  deleteBtn: boolean = this.del;
-  deleteAllBtn: boolean = this.del;
-
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
   // editBtn: boolean = true;
@@ -48,7 +41,7 @@ export class HhrComponent implements OnInit {
   onChart(chartId1: number) {
 
       this.http.getHhrDataChart().then(data => {
-        console.log(data);
+          console.log(data);
           this.dataChart =data['dataChart'];
           this.dataChart1 = this.dataChart[chartId1];
           this.userName = this.data[chartId1].userName;
@@ -56,20 +49,6 @@ export class HhrComponent implements OnInit {
       });
 
   }
-
-    onDel(id:number){
-        this.http.postHhrDel(id).then(data=>{
-            console.log(data,'删除');
-            this.data=data['data'];
-        });
-    }
-
-    onDelAll(checkedList:any){
-        this.http.postHhrDelAll(checkedList).then(data=>{
-            console.log(data,'删除全部');
-            this.data=data['data'];
-        });
-    }
 
     onSort(sort: sortObj) {
         this.http.postHhrSort(sort.id,sort.order).then(data=>{

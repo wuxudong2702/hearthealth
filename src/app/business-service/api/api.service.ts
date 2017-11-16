@@ -786,7 +786,7 @@ export class ApiService {
             .catch(this.handleError);
     }
 
-    //hhr
+    //dev
     postDevSearch(selectValue, searchValue): Promise<any> {
         const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
         return this.httpClient.get(url)
@@ -814,6 +814,14 @@ export class ApiService {
 
     getHhrDataChart(): Promise<any> {
         const url: string = '../../../assets/hearthealthData/hhr-data/hhr-dataChart.json';
+        return this.httpClient.get(url, {})
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
+    getHhrDataDetails(): Promise<any> {
+        const url: string = '../../../assets/hearthealthData/hhr-data/hhr-dataDetails.json';
         return this.httpClient.get(url, {})
             .toPromise()
             .then(data => data)

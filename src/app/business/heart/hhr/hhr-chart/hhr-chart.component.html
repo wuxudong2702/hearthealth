@@ -1,13 +1,12 @@
 <div class="chartStyle">
 
-
   <div>
     <button class="btn btn-success btn-md back" (click)="chartView()">返回</button>
   </div>
   <div class="text-center text-primary">
     <h4>用户：&nbsp;{{userName}}</h4>
   </div>
-  <div echarts [options]="chartOption" class="demo-chart"></div>
+  <div echarts [options]="chartOption"  (chartClick) ="chartClick($event)" class="demo-chart" id="myChart"></div>
 
   <div class="text-center chartFileBtns">
     <button class="btn btn-primary btn-md" (click)="indicator1()">心率指标1
@@ -24,5 +23,11 @@
            class="form-control dateInput dateInputStyle " placeholder="开始时间"/>
     <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
            class="form-control dateInput" placeholder="结束时间"/>
+    <button class="btn btn-primary btn-md" (click)="clear($event)">清空用户该次数据</button>
+  </div>
+  <div class="details-panel" *ngIf="isDetails">
+    <hr>
+    <h4 style="text-align: left;margin: 8px 25px">心电数据详情</h4>
+    <label class="details" *ngFor="let data of chartDetailsData" title={{data.name}}>{{data.key }}：&nbsp;{{data.value}}</label>
   </div>
 </div>

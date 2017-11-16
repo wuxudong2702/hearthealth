@@ -1,0 +1,604 @@
+{
+  "data":[
+    {
+      "id":1,
+      "2017-11-15 10:00:22": [
+                  {
+                    "key": "int nTotalDetBeat",
+                    "name": "检测到心跳的总数",
+                    "value": 80
+                  },
+                  {
+                    "key": "int nNormNum",
+                    "name": "正常心跳数",
+                    "value": 82
+                  },
+                  {
+                    "key": "int nPVCNum",
+                    "name": "室性早搏心跳数",
+                    "value": 120
+                  },
+                  {
+                    "key": "int nUnknownNum",
+                    "name": "未能分类的异常心跳数",
+                    "value": 100
+                  },
+                  {
+                    "key": "int nBpmCode",
+                    "name": "心率结论代码",
+                    "value": 1
+                  },
+                  {
+                    "key": "int nArrhythmiaCode",
+                    "name": "心律失常结论代码",
+                    "value": 1
+                  },
+                  {
+                    "key": "float fGoodBeatRate",
+                    "name": "正常心跳占所有检测到心跳的比例",
+                    "value": "3/5"
+                  },
+                  {
+                    "key": "double dBeginTime",
+                    "name": "检测到第一个心跳的时间（秒）",
+                    "value": "2017-10-11 12:00:11"
+                  },
+                  {
+                    "key": "double dEndTime",
+                    "name": "检测到最后一个心跳的时间（秒）",
+                    "value": "2017-10-11 12:00:11"
+                  },
+                  {
+                    "key": "double dBpm",
+                    "name": "dBpm",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_SDNN",
+                    "name": "dHRV_SDNN",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_RMSSD",
+                    "name": "dHRV_RMSSD",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_SDSD",
+                    "name": "dHRV_SDSD",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_pNN50",
+                    "name": "dHRV_pNN50",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_pNN20",
+                    "name": "dHRV_pNN20",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_TP",
+                    "name": "dHRV_TP",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_ULF",
+                    "name": "dHRV_ULF",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_VLF",
+                    "name": "dHRV_VLF",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_LF",
+                    "name": "dHRV_LF",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_HF",
+                    "name": "dHRV_HF",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_LFnorm",
+                    "name": "dHRV_LFnorm",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_HFnorm",
+                    "name": "dHRV_HFnorm",
+                    "value": 90
+                  },
+                  {
+                    "key": "double dHRV_LFHF",
+                    "name": "dHRV_LFHF",
+                    "value": 90
+                  },
+                  {
+                    "key": "d_f1",
+                    "name": "d_f1",
+                    "value": 90
+                  },
+                  {
+                    "key": "d_f2",
+                    "name": "d_f2",
+                    "value": 90
+                  },
+                  {
+                    "key": "d_f3",
+                    "name": "d_f3",
+                    "value": 90
+                  },
+                  {
+                    "key": "d_f4",
+                    "name": "d_f4",
+                    "value": 90
+                  },
+                  {
+                    "key": "d_f5",
+                    "name": "d_f5",
+                    "value": 90
+                  },
+                  {
+                    "key": "d_f6",
+                    "name": "d_f6",
+                    "value": 90
+                  }
+      ]
+    },
+    {
+      "id":2,
+      "2017-11-15 11:00:22": [
+        {
+          "key": "int nTotalDetBeat",
+          "name": "检测到心跳的总数",
+          "value": 290
+        },
+        {
+          "key": "int nNormNum",
+          "name": "正常心跳数",
+          "value": 82
+        },
+        {
+          "key": "int nPVCNum",
+          "name": "室性早搏心跳数",
+          "value": 0
+        },
+        {
+          "key": "int nUnknownNum",
+          "name": "未能分类的异常心跳数",
+          "value": 0
+        },
+        {
+          "key": "int nBpmCode",
+          "name": "心率结论代码",
+          "value": 2
+        },
+        {
+          "key": "int nArrhythmiaCode",
+          "name": "心律失常结论代码",
+          "value": 0
+        },
+        {
+          "key": "float fGoodBeatRate",
+          "name": "正常心跳占所有检测到心跳的比例",
+          "value": "3/3"
+        },
+        {
+          "key": "double dBeginTime",
+          "name": "检测到第一个心跳的时间（秒）",
+          "value": "2017-10-11 12:00:11"
+        },
+        {
+          "key": "double dEndTime",
+          "name": "检测到最后一个心跳的时间（秒）",
+          "value": "2017-10-11 12:00:11"
+        },
+        {
+          "key": "double dBpm",
+          "name": "dBpm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_SDNN",
+          "name": "dHRV_SDNN",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_RMSSD",
+          "name": "dHRV_RMSSD",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_SDSD",
+          "name": "dHRV_SDSD",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_pNN50",
+          "name": "dHRV_pNN50",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_pNN20",
+          "name": "dHRV_pNN20",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_TP",
+          "name": "dHRV_TP",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_ULF",
+          "name": "dHRV_ULF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_VLF",
+          "name": "dHRV_VLF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LF",
+          "name": "dHRV_LF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_HF",
+          "name": "dHRV_HF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LFnorm",
+          "name": "dHRV_LFnorm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_HFnorm",
+          "name": "dHRV_HFnorm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LFHF",
+          "name": "dHRV_LFHF",
+          "value": 90
+        },
+        {
+          "key": "d_f1",
+          "name": "d_f1",
+          "value": 90
+        },
+        {
+          "key": "d_f2",
+          "name": "d_f2",
+          "value": 90
+        },
+        {
+          "key": "d_f3",
+          "name": "d_f3",
+          "value": 90
+        },
+        {
+          "key": "d_f4",
+          "name": "d_f4",
+          "value": 90
+        },
+        {
+          "key": "d_f5",
+          "name": "d_f5",
+          "value": 90
+        },
+        {
+          "key": "d_f6",
+          "name": "d_f6",
+          "value": 90
+        }
+      ]
+    },
+    {
+      "id":3,
+      "2017-11-15 12:00:22": [
+        {
+          "key": "int nTotalDetBeat",
+          "name": "检测到心跳的总数",
+          "value": 500
+        },
+        {
+          "key": "int nNormNum",
+          "name": "正常心跳数",
+          "value": 82
+        },
+        {
+          "key": "int nPVCNum",
+          "name": "室性早搏心跳数",
+          "value": 120
+        },
+        {
+          "key": "int nUnknownNum",
+          "name": "未能分类的异常心跳数",
+          "value": 100
+        },
+        {
+          "key": "int nBpmCode",
+          "name": "心率结论代码",
+          "value": 1
+        },
+        {
+          "key": "int nArrhythmiaCode",
+          "name": "心律失常结论代码",
+          "value": 1
+        },
+        {
+          "key": "float fGoodBeatRate",
+          "name": "正常心跳占所有检测到心跳的比例",
+          "value": "3/5"
+        },
+        {
+          "key": "double dBeginTime",
+          "name": "检测到第一个心跳的时间（秒）",
+          "value": "2017-10-11 12:00:11"
+        },
+        {
+          "key": "double dEndTime",
+          "name": "检测到最后一个心跳的时间（秒）",
+          "value": "2017-10-11 12:00:11"
+        },
+        {
+          "key": "double dBpm",
+          "name": "dBpm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_SDNN",
+          "name": "dHRV_SDNN",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_RMSSD",
+          "name": "dHRV_RMSSD",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_SDSD",
+          "name": "dHRV_SDSD",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_pNN50",
+          "name": "dHRV_pNN50",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_pNN20",
+          "name": "dHRV_pNN20",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_TP",
+          "name": "dHRV_TP",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_ULF",
+          "name": "dHRV_ULF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_VLF",
+          "name": "dHRV_VLF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LF",
+          "name": "dHRV_LF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_HF",
+          "name": "dHRV_HF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LFnorm",
+          "name": "dHRV_LFnorm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_HFnorm",
+          "name": "dHRV_HFnorm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LFHF",
+          "name": "dHRV_LFHF",
+          "value": 90
+        },
+        {
+          "key": "d_f1",
+          "name": "d_f1",
+          "value": 90
+        },
+        {
+          "key": "d_f2",
+          "name": "d_f2",
+          "value": 90
+        },
+        {
+          "key": "d_f3",
+          "name": "d_f3",
+          "value": 90
+        },
+        {
+          "key": "d_f4",
+          "name": "d_f4",
+          "value": 90
+        },
+        {
+          "key": "d_f5",
+          "name": "d_f5",
+          "value": 90
+        },
+        {
+          "key": "d_f6",
+          "name": "d_f6",
+          "value": 90
+        }
+      ]
+    },
+    {
+      "id":4,
+      "2017-11-15 13:00:22": [
+        {
+          "key": "int nTotalDetBeat",
+          "name": "检测到心跳的总数",
+          "value": 600
+        },
+        {
+          "key": "int nNormNum",
+          "name": "正常心跳数",
+          "value": 82
+        },
+        {
+          "key": "int nPVCNum",
+          "name": "室性早搏心跳数",
+          "value": 0
+        },
+        {
+          "key": "int nUnknownNum",
+          "name": "未能分类的异常心跳数",
+          "value": 0
+        },
+        {
+          "key": "int nBpmCode",
+          "name": "心率结论代码",
+          "value": 2
+        },
+        {
+          "key": "int nArrhythmiaCode",
+          "name": "心律失常结论代码",
+          "value": 0
+        },
+        {
+          "key": "float fGoodBeatRate",
+          "name": "正常心跳占所有检测到心跳的比例",
+          "value": "3/3"
+        },
+        {
+          "key": "double dBeginTime",
+          "name": "检测到第一个心跳的时间（秒）",
+          "value": "2017-10-11 12:00:11"
+        },
+        {
+          "key": "double dEndTime",
+          "name": "检测到最后一个心跳的时间（秒）",
+          "value": "2017-10-11 12:00:11"
+        },
+        {
+          "key": "double dBpm",
+          "name": "dBpm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_SDNN",
+          "name": "dHRV_SDNN",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_RMSSD",
+          "name": "dHRV_RMSSD",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_SDSD",
+          "name": "dHRV_SDSD",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_pNN50",
+          "name": "dHRV_pNN50",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_pNN20",
+          "name": "dHRV_pNN20",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_TP",
+          "name": "dHRV_TP",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_ULF",
+          "name": "dHRV_ULF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_VLF",
+          "name": "dHRV_VLF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LF",
+          "name": "dHRV_LF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_HF",
+          "name": "dHRV_HF",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LFnorm",
+          "name": "dHRV_LFnorm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_HFnorm",
+          "name": "dHRV_HFnorm",
+          "value": 90
+        },
+        {
+          "key": "double dHRV_LFHF",
+          "name": "dHRV_LFHF",
+          "value": 90
+        },
+        {
+          "key": "d_f1",
+          "name": "d_f1",
+          "value": 90
+        },
+        {
+          "key": "d_f2",
+          "name": "d_f2",
+          "value": 90
+        },
+        {
+          "key": "d_f3",
+          "name": "d_f3",
+          "value": 90
+        },
+        {
+          "key": "d_f4",
+          "name": "d_f4",
+          "value": 90
+        },
+        {
+          "key": "d_f5",
+          "name": "d_f5",
+          "value": 90
+        },
+        {
+          "key": "d_f6",
+          "name": "d_f6",
+          "value": 90
+        }
+      ]
+    }
+  ]
+}

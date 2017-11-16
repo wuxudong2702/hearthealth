@@ -54,8 +54,8 @@ export class DevComponent implements OnInit {
   data: Array<any> = [];
   addEditTitle: string = '添加';
 
-  devDel: boolean = this.http.isHavePerm('heart-dev-del');
-  devAdd: boolean = this.http.isHavePerm('heart-dev-add');
+  devDel: boolean =  false;//this.http.isHavePerm('heart-dev-del');
+  devAdd: boolean = false;// this.http.isHavePerm('heart-dev-add');
   deleteBtn: boolean = this.devDel;
   deleteAllBtn: boolean = this.devDel;
   addBtn: boolean = this.devAdd;

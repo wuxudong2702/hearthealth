@@ -77,7 +77,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let row of data;let i = index" [class.alert-info]="i%2==0">
-          <td class="text-center" *ngIf="setOperate"><input type="checkbox" (click)="delChecked()"
+          <td class="text-center" *ngIf="setOperate"><input type="checkbox" (click)="delChecked(i)"
                                                             [(ngModel)]="checkedList[i]"/></td>
           <td *ngFor="let header of headers" [hidden]="!header.show" class="text-center">
             {{row[header.key] | CPipe:header.pipe_type | CPipe: header.pipe_params}}
@@ -101,22 +101,22 @@
               class="fa fa-trash-o fa-fw"></i>
               删除
             </button>
-            <button class="btn btn-warning btn-sm" *ngIf="chartBtn" (click)="chart(i)"><i
+            <button class="btn btn-warning btn-sm" *ngIf="chartBtn" (click)="chart(row['heart_data_id'],row['name'],row['sense_time'])"><i
               class="fa fa-area-chart fa-fw"></i> 图表
             </button>
           </td>
         </tr>
         </tbody>
       </table>
-      <c-pagination #hp
+      <!--<c-pagination #hp-->
 
-                    [pagination]="pagination"
-                    [total]="100"
-                    (onDataChanged)="onDataChanged($event)"
-                    (onPaginationChange)="paginationChange($event)"
-                    *ngIf="paginationBtn"
-      >
-      </c-pagination>
+                    <!--[pagination]="pagination"-->
+                    <!--[total]="100"-->
+                    <!--(onDataChanged)="onDataChanged($event)"-->
+                    <!--(onPaginationChange)="paginationChange($event)"-->
+                    <!--*ngIf="paginationBtn"-->
+      <!--&gt;-->
+      <!--</c-pagination>-->
     </div>
   </div>
 </div>

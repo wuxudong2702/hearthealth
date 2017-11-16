@@ -30,9 +30,9 @@ export class NewsComponent implements OnInit {
   dataEditor: news;
   isSelectShow: boolean = false;
 
-  del: boolean = this.http.isHavePerm('info-del');
-  add: boolean = this.http.isHavePerm('info-add');
-  edit: boolean = this.http.isHavePerm('info-edit');
+  del: boolean =  false;//this.http.isHavePerm('info-del');
+  add: boolean = false;// this.http.isHavePerm('info-add');
+  edit: boolean = false;// this.http.isHavePerm('info-edit');
   deleteBtn: boolean = this.del;
   deleteAllBtn: boolean = this.del;
   addBtn: boolean = this.add;

@@ -123,7 +123,7 @@ export class TableListComponent implements OnInit {
     this.headers = this.headers.sort((v1, v2) => {
       return v1.index - v2.index;
     });
-    // console.log(this.headers)
+    // this.checkedList=[];
   }
 
   @ViewChild('hp', undefined) hp: HttpPaginationComponent;
@@ -149,14 +149,11 @@ export class TableListComponent implements OnInit {
 
   @Input() pagination: paginationObj;
 
-
   // @Input() addCommonBtn: boolean;
-
 
   // @Output() onAddSubmit = new EventEmitter<any>();
   @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
-  @Output() onDelAll = new EventEmitter<any>();
   @Output() onDownload = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
   @Output() onSet = new EventEmitter<any>();
@@ -181,18 +178,21 @@ export class TableListComponent implements OnInit {
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
-
+  checkedListIds:Array<number>=[];
   // submitData:object;
   delAllChecked() {
     if (!this.isDelAll) {
       this.checkedList = this.data.map(v => true);
+      // this.checkedListIds = this.data.map(v => v.heart_data_id);
     } else {
       this.checkedList = this.data.map(v => false);
+      // this.checkedListIds = [];
     }
   }
 
-  delChecked(index) {
-    this.isDelAll = false;
+  delChecked(i) {
+      this.isDelAll = false;
+      this.checkedList[i]= !this.checkedList[i];
   }
 
   add() {
@@ -209,30 +209,43 @@ export class TableListComponent implements OnInit {
   }
 
   editZTree(id: number) {
-
-    console.log('editZTree', id);
     this.onEditZTree.emit(id);
   }
 
-  del(id) {
-    this.onDel.emit(id);
-  }
 
   delAll() {
-    this.onDelAll.emit({
-      checkedList: this.checkedList,
-    });
-  }
-
-  click(id) {
-    this.delAllId.push(id);
+    let checkedListIds='';
+    for(let i=0;i<this.checkedList.length;i++){
+         if(this.checkedList[i]){
+           console.log(this.checkedList,this.data);
+           if(i==this.checkedList.length-1){
+             checkedListIds+=this.data[i]['heart_data_id'];
+           }else{
+             checkedListIds+=this.data[i]['heart_data_id']+',';
+           }
+         }
+         this.checkedList[i]=false;
+    }
+    this.isDelAll = false;
+    this.onDel.emit(checkedListIds);
   }
 
   download() {
-    this.onDownload.emit();
+    let checkedListIds='';
+    for(let i=0;i<this.checkedList.length;i++){
+      if(this.checkedList[i]){
+        console.log(this.checkedList,this.data);
+        if(i==this.checkedList.length-1){
+          checkedListIds+=this.data[i]['heart_data_id'];
+        }else{
+          checkedListIds+=this.data[i]['heart_data_id']+',';
+        }
+      }
+    }
+    this.onDownload.emit(checkedListIds);
   }
 
-  search() {
+  search() {//用户点击查询按钮
     if (!this.selectValue) {
       this.openError('请选择搜索项！');
     } else if (!this.searchValue) {
@@ -250,11 +263,13 @@ export class TableListComponent implements OnInit {
     this.onSet.emit({});
   }
 
-  showModalSetFunc() {//模态框
+  showModalSetFunc() {//设置模态框
     let setConfig = new SetConfig('', this.headers);
     let result = this.modalService.set(setConfig);
     result.then(v => {
-      this.headers = v.configHeaders;
+      console.log(v);
+       this.onSet.emit(v.configHeaders);
+      // this.headers = v.configHeaders;
     }).catch(v => {
     });
   }
@@ -268,11 +283,13 @@ export class TableListComponent implements OnInit {
     })
   }
 
-  showModalDel(i) {
+  showModalDel(i:number) {
     let confirmCfg = new ConfirmConfig('您确认删除吗？！');
     let result = this.modalService.confirm(confirmCfg);
     result.then(v => {
-      this.del(i);
+      let id=''+this.data[i]['heart_data_id'];
+      this.onDel.emit(id);
+      this.checkedList[i]=false;
     }).catch(v => {
     })
   }
@@ -281,10 +298,12 @@ export class TableListComponent implements OnInit {
     this.onDetails.emit(id);
   }
 
-  chart(id: number) {
-    this.onChart.emit(
-      id
-    );
+  chart(id: number,name:string,sense_time:any) {
+    this.onChart.emit({
+      id:id,
+      name:name,
+      sense_time:sense_time
+    });
   }
 
   sort(i) {

@@ -26,7 +26,8 @@ export class AppRoleComponent implements OnInit {
   editId: number;
   addEditTitle: string = '添加';
 
-  edit: boolean = this.http.isHavePerm('app-role-edit');
+  edit: boolean = true;
+  // edit: boolean = this.http.isHavePerm('app-role-edit');
   editBtn: boolean = this.edit;
 
   setOperate: boolean = true;

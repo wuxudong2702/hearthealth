@@ -27,7 +27,7 @@ export class HhrComponent implements OnInit {
   data: Array<any> = [];
   dataChart1: Array<any>;
 
-  del: boolean = this.http.isHavePerm('hhr-del');
+  del: boolean =  false;//this.http.isHavePerm('hhr-del');
   deleteBtn: boolean = this.del;
   deleteAllBtn: boolean = this.del;
 

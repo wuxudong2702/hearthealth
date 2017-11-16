@@ -26,9 +26,9 @@ export class AdminUserComponent implements OnInit {
   addEditTitle: string = '添加';
   editId: number;
 
-  adminUserDel: boolean = this.http.isHavePerm('admin-user-del');
-  adminUserAdd: boolean = this.http.isHavePerm('admin-user-add');
-  adminUserEdit: boolean = this.http.isHavePerm('admin-user-edit');
+  adminUserDel: boolean =false;// this.http.isHavePerm('admin-user-del');
+  adminUserAdd: boolean = false;//this.http.isHavePerm('admin-user-add');
+  adminUserEdit: boolean = false;//this.http.isHavePerm('admin-user-edit');
   deleteBtn: boolean = this.adminUserDel;
   deleteAllBtn: boolean = this.adminUserDel;
   addBtn: boolean = this.adminUserAdd;

@@ -8,9 +8,10 @@ import {Component, OnInit, NgModule, Input, Output, EventEmitter} from '@angular
 export class EcgdChartComponent implements OnInit {
 
   @Input() dataChart1: Array<any>;
-  @Input() userInfoChart: object;
+  @Input() userName: string;
+  @Input() sense_time: any;
 
-  @Output() onChart = new EventEmitter<any>();
+  @Output() back = new EventEmitter<any>();
 
   dateList: Array<any>;
   valueList: Array<any>;
@@ -21,12 +22,18 @@ export class EcgdChartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dateList = this.dataChart1.map(function (item) {
-      return item[0];
-    });
-    this.valueList = this.dataChart1.map(function (item) {
-      return item[1];
-    });
+    // this.dateList = this.dataChart1.map(function (item) {
+    //   return item[0];
+    // });
+    // this.valueList = this.dataChart1.map(function (item) {
+    //   return item[1];
+    // });
+
+    this.valueList=this.dataChart1;
+    this.dateList=this.dataChart1.map(function (item,index) {
+        return index+1;
+      });
+
     this.chartOption = {
 
       // Make gradient line here
@@ -94,113 +101,11 @@ export class EcgdChartComponent implements OnInit {
       }
       ]
     };
-    this.userInfo=this.userInfoChart;
-    // console.log(this.userInfo)
   }
 
    chartView(){
-     this.onChart.emit(1);
+     this.back.emit(1);
    }
-
-  single: any[];
-  multi: any[];
-
-  // view: any[] = [700, 400];
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  legendTitle = "图例";
-  showXAxisLabel = true;
-  xAxisLabel = '图家';
-  showYAxisLabel = true;
-  yAxisLabel = '人口';
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-
-
-  // chartOption = {
-  //   title: {
-  //     text: '堆叠区域图'
-  //   },
-  //   tooltip : {
-  //     trigger: 'axis'
-  //   },
-  //   legend: {
-  //     data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
-  //   },
-  //   toolbox: {
-  //     feature: {
-  //       saveAsImage: {}
-  //     }
-  //   },
-  //   grid: {
-  //     left: '3%',
-  //     right: '4%',
-  //     bottom: '3%',
-  //     containLabel: true
-  //   },
-  //   xAxis : [
-  //     {
-  //       type : 'category',
-  //       boundaryGap : false,
-  //       data : ['周一','周二','周三','周四','周五','周六','周日']
-  //     }
-  //   ],
-  //   yAxis : [
-  //     {
-  //       type : 'value'
-  //     }
-  //   ],
-  //   series : [
-  //     {
-  //       name:'邮件营销',
-  //       type:'line',
-  //       stack: '总量',
-  //       areaStyle: {normal: {}},
-  //       data:[120, 132, 101, 134, 90, 230, 210]
-  //     },
-  //     {
-  //       name:'联盟广告',
-  //       type:'line',
-  //       stack: '总量',
-  //       areaStyle: {normal: {}},
-  //       data:[220, 182, 191, 234, 290, 330, 310]
-  //     },
-  //     {
-  //       name:'视频广告',
-  //       type:'line',
-  //       stack: '总量',
-  //       areaStyle: {normal: {}},
-  //       data:[150, 232, 201, 154, 190, 330, 410]
-  //     },
-  //     {
-  //       name:'直接访问',
-  //       type:'line',
-  //       stack: '总量',
-  //       areaStyle: {normal: {}},
-  //       data:[320, 332, 301, 334, 390, 330, 320]
-  //     },
-  //     {
-  //       name:'搜索引擎',
-  //       type:'line',
-  //       stack: '总量',
-  //       label: {
-  //         normal: {
-  //           show: true,
-  //           position: 'top'
-  //         }
-  //       },
-  //       areaStyle: {normal: {}},
-  //       data:[820, 932, 901, 934, 1290, 1330, 1320]
-  //     }
-  //   ]
-  // }
-
 
 }
 

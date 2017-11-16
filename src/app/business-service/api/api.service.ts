@@ -6,6 +6,8 @@ import 'rxjs/add/operator/toPromise';
 import {HttpClient} from '@angular/common/http';
 import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
 import {ToastService} from '../../shared/toast/toast.service';
+import {SessionStorageService} from '../../shared/storage/session-storage.service';
+import {promise} from "selenium-webdriver";
 
 
 /**
@@ -22,8 +24,17 @@ export class ApiService {
 
   headerConfig: any;
 
-  constructor(private http: Http, private spinService: SpinService, private httpClient: HttpClient, private toastService: ToastService,) {
+  constructor(private http: Http, private spinService: SpinService, private httpClient: HttpClient, private toastService: ToastService, private sessionStorageService: SessionStorageService) {
     this.getHeaders();
+    let perm = this.sessionStorageService.getObject('perm');
+    let headerConfig = this.sessionStorageService.getObject('headerConfig');
+    let headers = this.sessionStorageService.getObject('headers');
+
+    if (perm && headerConfig && headers) {
+      this.perms = perm;
+      this.headerConfig = headerConfig;
+      this.headers = headers;
+    }
   }
 
 
@@ -62,6 +73,7 @@ export class ApiService {
       .then(data => {
           if (data['status'] == 'ok') {
             this.token = data['data']['token'];
+            this.sessionStorageService.set('token', this.token);
             this.getPerm();
             this.getHeaderConfig();
           }
@@ -74,10 +86,16 @@ export class ApiService {
   logout() {
     const url: string = '/api/admin/auth/logout';
     return this.httpClient.post(url, {
-      token: this.token
+      token: this.sessionStorageService.get('token')
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        this.sessionStorageService.remove('perm');
+        this.sessionStorageService.remove('headerConfig');
+        this.sessionStorageService.remove('headers');
+        this.sessionStorageService.remove('token');
+        return data;
+      })
       .catch(this.handleError);
   }
 
@@ -87,7 +105,7 @@ export class ApiService {
   me(): Promise<any> {
     const url: string = '/api/admin/auth/me';
     return this.httpClient.post(url, {
-      token: this.token,
+      token: this.sessionStorageService.get('token')
     })
       .toPromise()
       .then(data => data)
@@ -100,9 +118,12 @@ export class ApiService {
   getMenu(): Promise<any> {
     const url: string = '/api/admin/menu';
     return this.httpClient.post(url, {
-      token: this.token,
+      token: this.sessionStorageService.get('token'),
     }).toPromise()
-      .then(data => data)
+      .then(data => {
+        this.sessionStorageService.setObject('menu', data);
+        return data;
+      })
       .catch(this.handleError);
   }
 
@@ -112,12 +133,12 @@ export class ApiService {
   private getPerm(): Promise<any> {
     const url: string = '/api/admin/perm';
     return this.httpClient.post(url, {
-      token: this.token,
+      token: this.sessionStorageService.get('token'),
     }).toPromise()
       .then(data => {
         if (data['status'] == 'ok') {
-          // console.log('api service getperm data',data);
           this.perms = data['data'];
+          this.sessionStorageService.setObject('perm', data);
         } else {
           console.error('获取用户权限错误：', data);
         }
@@ -128,10 +149,30 @@ export class ApiService {
       });
   }
 
-  isHavePerm(perm): boolean {
-    return this.perms.some(val => {
-      return val == perm;
+  private checkPerm(perm: string): Promise<any> {
+    return new Promise((fulfill, reject) => {
+      try {
+        let val = this.perms.some(val => {
+          return val == perm;
+        });
+        fulfill(val);
+      } catch (error) {
+        reject("获取权限失败");
+      }
     });
+  }
+
+  isHavePerm(perm: string): Promise<any> {
+    if (this.perms) {
+      return this.getPerm().then(v => {
+        let val = this.perms.some(val => {
+          return val == perm;
+        });
+        return val;
+      });
+    } else {
+      return this.checkPerm(perm);
+    }
   }
 
   private getHeaders(): void {
@@ -140,6 +181,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.headers = data;
+        this.sessionStorageService.setObject('headers', data);
       })
       .catch(err => {
         let msg = this.handleError(err);
@@ -150,12 +192,13 @@ export class ApiService {
   getHeaderConfig(): any {
     const url: string = '/api/admin/header';
     return this.httpClient.post(url, {
-      token: this.token,
+      token: this.sessionStorageService.get('token'),
     })
       .toPromise()
       .then(data => {
         if (data['status'] == 'ok') {
           this.headerConfig = data['data'];
+          this.sessionStorageService.setObject('headerConfig', data);
         } else {
           console.error('获取表头配置错误', data['message']);
         }
@@ -194,14 +237,13 @@ export class ApiService {
   setHeader(table: string, set: string): any {
     const url: string = '/api/admin/header/set';
     return this.httpClient.post(url, {
-      token: this.token,
+      token: this.sessionStorageService.get('token'),
       table: table,
       set: set
     })
       .toPromise()
       .then(data => {
         console.log("apiservicve setHeaders data", data);
-
         if (data['status'] == 'ok') {
           this.getHeaders();
         } else {
@@ -216,7 +258,7 @@ export class ApiService {
   reset(oldPassword: string, password: string, certainPassword: string): Promise<any> {
     const url: string = '/api/admin/auth/reset';
     return this.httpClient.post(url, {
-      token: this.token,
+      token: this.sessionStorageService.get('token'),
       password: oldPassword,
       new_password: password,
       new_password_confirmation: certainPassword
@@ -227,19 +269,9 @@ export class ApiService {
   }
 
 
-  // getEcgd(): Promise<any> {
-  //   const url: string = '/api/admin/heart/index';
-  //   return this.httpClient.post(url,{
-  //     token:this.token
-  //   })
-  //     .toPromise()
-  //     .then(data => data)
-  //     .catch(this.handleError);
-  // }
-
-  getEcgdData( url:string = '/api/admin/heart/index',count:string = '1', find_key:string = null, find_val:string = null): Promise<any> {
+  getEcgdData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null): Promise<any> {
     return this.httpClient.post(url, {
-      token: this.token,
+      token: this.sessionStorageService.get('token'),
       count: count,
       find_key: find_key,
       find_val: find_val,
@@ -251,16 +283,18 @@ export class ApiService {
       });
   }
 
-  getEcgdDataChart(): Promise<any> {
-    const url: string = '../../../assets/ecgd-dataChart.json';
-    return this.httpClient.get(url, {})
+  getEcgdDataChart(chartId: number): Promise<any> {
+    const url: string = '/api/admin/heart/data';
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      heart_data_id: chartId
+    })
       .toPromise()
       .then(data => data)
       .catch(this.handleError);
   }
 
   postEcgdSort(headersId, order): Promise<any> {
-    // console.log(headersId,order,'api service Sort');
     const url: string = '../../../assets/ecgd-data.json';
     return this.httpClient.get(url)
       .toPromise()
@@ -273,6 +307,24 @@ export class ApiService {
     return this.httpClient.get(url)
       .toPromise()
       .then(data => data)
+      .catch(this.handleError);
+  }
+
+  ecgdDelData(ids: string): Promise<any> {
+    const url: string = '/api/admin/heart/del';
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      heart_data_id: ids
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
+  ecgdDownloadData(ids: string) {
+    console.log(ids);
+    const url: string = '/api/admin/heart/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + ids;
+    return this.http.get(url)
+      .map(res => new Blob([res.text()],{ type: 'txt/plain' }))
       .catch(this.handleError);
   }
 
@@ -382,7 +434,6 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
-
 
 //app-user
   getAppUserHeader(): Promise<any> {

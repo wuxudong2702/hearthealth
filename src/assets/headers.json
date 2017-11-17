@@ -213,6 +213,36 @@
       "input_type": 0
     },
     {
+      "key": "qq",
+      "show": true,
+      "name": "qq",
+      "index": 7,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "qq",
+      "required": true,
+      "pattern": "[1-9][0-9]{4,14}",
+      "input_type": 0
+    },
+    {
+      "key": "weixin",
+      "show": true,
+      "name": "微信",
+      "index": 8,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "微信",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
       "key": "relationship",
       "show": true,
       "name": "与主账户关系",
@@ -249,7 +279,7 @@
       "index": 3,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "",
+      "pipe_params": "yyyy-mm-dd",
       "val": "",
       "select_val": [],
       "valid_example": "",
@@ -288,7 +318,7 @@
       "pattern": "",
       "input_type": 0
     }
-    , {
+  , {
       "key":"mobile",
       "show": true,
       "name": "手机号码",
@@ -365,10 +395,24 @@
   ],
   "reports": [
     {
-      "key": "userName",
+      "key": "id",
+      "show": false,
+      "name": "id",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    }, {
+      "key": "name",
       "show": true,
       "name": "用户名",
-      "index": 4,
+      "index": 0,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -378,18 +422,47 @@
       "required": true,
       "pattern": "",
       "input_type": 0
-    },
-    {
-      "key": "relationship",
+    }, {
+      "key":"mobile",
       "show": true,
-      "name": "与主账户关系",
-      "index": 1,
+      "name": "手机号码",
+      "index": 8,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "父子",
+      "valid_example": " ",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "qq",
+      "show": true,
+      "name": "qq",
+      "index": 6,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "qq",
+      "required": true,
+      "pattern": "[1-9][0-9]{4,14}",
+      "input_type": 0
+    },
+    {
+      "key": "weixin",
+      "show": true,
+      "name": "微信",
+      "index": 7,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "微信",
       "required": true,
       "pattern": "",
       "input_type": 0
@@ -398,7 +471,7 @@
       "key": "accountType",
       "show": true,
       "name": "账户类型",
-      "index": 0,
+      "index": 2,
       "order": 0,
       "pipe_type": 1,
       "pipe_params": {
@@ -415,6 +488,21 @@
       "pattern": "",
       "input_type": "1"
     },
+    { "key": "historicalTests",
+      "show": true,
+      "name": "历史检测次数",
+      "index": 5,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "^[0-9]+$",
+      "input_type": 0
+    },
+
     {
       "key": "earliest",
       "show": true,
@@ -422,7 +510,7 @@
       "index": 3,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "",
+      "pipe_params": "yyyy-mm-dd",
       "val": "",
       "select_val": [],
       "valid_example": "2018-11-14",
@@ -437,29 +525,16 @@
       "index": 4,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "",
+      "pipe_params": "yyyy-mm-dd",
       "val": "",
       "select_val": [],
       "valid_example": "2018-11-14",
       "required": true,
       "pattern": "",
       "input_type": 2
-    },
-    {
-      "key": "historicalTests",
-      "show": true,
-      "name": "历史检测次数",
-      "index": 3,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": true,
-      "pattern": "^[0-9]+$",
-      "input_type": 0
     }
+
+
   ],
   "roles": [
     {
@@ -706,7 +781,7 @@
       "index": 1,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "",
+      "pipe_params": "yyyy-mm-dd",
       "val": "",
       "select_val": [],
       "valid_example": "2018-11-17",

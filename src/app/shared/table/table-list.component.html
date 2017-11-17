@@ -80,7 +80,7 @@
           <td class="text-center" *ngIf="setOperate"><input type="checkbox" (click)="delChecked(i)"
                                                             [(ngModel)]="checkedList[i]"/></td>
           <td *ngFor="let header of headers" [hidden]="!header.show" class="text-center">
-            {{row[header.key] | CPipe:header.pipe_type | CPipe: header.pipe_params}}
+            {{row[header.key] | CPipe:header.pipe_type : header.pipe_params}}
           </td>
           <td class="text-center" *ngIf="setOperate">
             <button class="btn btn-info btn-sm" *ngIf="detailsBtn" (click)="details(i)"><i

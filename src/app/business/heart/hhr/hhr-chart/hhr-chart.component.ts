@@ -90,6 +90,7 @@ export class HhrChartComponent implements OnInit {
 
   indicator1() {
     this.dataChart = this.dataChart1[0];
+    this.chartToggle( this.dataChart);
   }
 
   indicator2() {

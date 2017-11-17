@@ -318,7 +318,7 @@
       "pattern": "",
       "input_type": 0
     }
-    , {
+  , {
       "key":"mobile",
       "show": true,
       "name": "手机号码",

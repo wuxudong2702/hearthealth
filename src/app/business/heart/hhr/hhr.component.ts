@@ -32,6 +32,9 @@ export class HhrComponent implements OnInit {
   headers: Array<cell> = [];
   data: Array<any> = [];
   dataChart1: Array<any>;
+  start_time: any;
+  end_time: any;
+  field: string;
 
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
@@ -43,18 +46,20 @@ export class HhrComponent implements OnInit {
 
   showChartView: boolean = false;
   userName: string = '';
+  chartId: number;
   pagination: paginationObj = new paginationObj();
 
-  onChart(chartId1: number) {
-
-    this.http.getHhrDataChart().then(data => {
-      console.log('data', data);
-      this.dataChart = data['dataChart'];
-      this.dataChart1 = this.dataChart[0];
-      this.userName = this.data[0].userName;
+  onChart(params) {
+    // this.http.getHhrDataChart().then(data => {
+    //   console.log('data', data);
+    //   this.dataChart = data['dataChart'];
+    //   this.dataChart1 = this.dataChart[0];
+    //   this.userName = this.data[0].userName;
+    // });
+      console.log(params,'params');
+      this.userName = params['name'];
+      this.chartId = params['id'];
       this.showChartView = !this.showChartView;
-    });
-
   }
 
   onSort(sort: sortObj) {

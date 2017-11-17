@@ -3,6 +3,8 @@ import {NgbDatepickerI18n} from '@ng-bootstrap/ng-bootstrap';
 import {DatepickerI18n, DatepickerI18nType} from '../../../../shared/datepickerI18n/datepickerI18n';
 import {ApiService} from '../../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
+import {ToastService} from '../../../../shared/toast/toast.service';
+import {ToastConfig, ToastType} from '../../../../shared/toast/toast-model';
 
 @Component({
   selector: 'app-hhr-chart',
@@ -14,14 +16,18 @@ export class HhrChartComponent implements OnInit {
 
   @Input() dataChart1: Array<any>;
   @Input() userName: string;
+  @Input() chartId: number;
 
   @Output() onChart = new EventEmitter<any>();
+  @Output() onTime = new EventEmitter<any>();
+  @Output() onIndicators = new EventEmitter<any>();
   @Output() onDelDetails = new EventEmitter<any>();
 
   dateList: Array<any>;
   valueList: Array<any>;
   chartOption: object = {};
   userInfo: string;
+  field: string;
   dataChart: Array<any>;
   chartDetailsData: Array<any>;
   isDetails: boolean = false;
@@ -30,7 +36,7 @@ export class HhrChartComponent implements OnInit {
   chartDetailsId: string;
   selectedDateStart;
   selectedDateEnd;
-  constructor(private http: ApiService) {
+  constructor(private http: ApiService, private toastService: ToastService) {
   }
 
   chartToggle(dataChart: Array<any>) {
@@ -88,29 +94,55 @@ export class HhrChartComponent implements OnInit {
     this.onChart.emit();
   }
 
+  startTime(){
+      if(this.selectedDateStart && this.selectedDateEnd){
+          this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
+              console.log(data,'data');
+              console.log('-----',this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field);
+              if (data['status'] == 'ok') {
+                  this.dataChart1 = data['data'];
+                  console.log(this.dataChart1,'dataChart1');
+              } else {
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                  this.toastService.toast(toastCfg);
+              }
+          }).catch(err => {
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+              console.error(err);
+              this.toastService.toast(toastCfg);
+          });
+      }
+  }
+
   indicator1() {
     this.dataChart = this.dataChart1[0];
     this.chartToggle( this.dataChart);
+    this.field='n_total_detbeat';
   }
 
   indicator2() {
     this.dataChart = this.dataChart1[1];
     this.chartToggle( this.dataChart);
+      this.field='indicator2';
+
   }
 
   indicator3() {
     this.dataChart = this.dataChart1[2];
     this.chartToggle( this.dataChart);
+      this.field='indicator3';
   }
 
   indicator4() {
     this.dataChart = this.dataChart1[3];
     this.chartToggle( this.dataChart);
+      this.field='indicator4';
   }
 
   indicator5() {
     this.dataChart = this.dataChart1[4];
     this.chartToggle( this.dataChart);
+      this.field='indicator5';
   }
 
   clear(){

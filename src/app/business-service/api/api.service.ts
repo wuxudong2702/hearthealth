@@ -242,7 +242,7 @@ export class ApiService {
   // historicalTests,true,5;'
   setHeader(table: string, set: string): Promise<any> {
     const url: string = '/api/admin/header/set';
-    console.log(set, 'setHeader2');
+    console.log(set,'setHeader2');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       table: table,
@@ -291,7 +291,7 @@ export class ApiService {
   }
 
   getEcgdDataChart(chartId: number): Promise<any> {
-    const url: string = '/api/admin/heart/data';
+    const url: string = ' /api/admin/heart/data';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       heart_data_id: chartId
@@ -327,14 +327,14 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
-
   ecgdDownloadData(ids: string) {
     console.log(ids);
     const url: string = '/api/admin/heart/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + ids;
     return this.http.get(url)
-      .map(res => new Blob([res.text()], {type: 'txt/plain'}))
+      .map(res => new Blob([res.text()],{ type: 'txt/plain' }))
       .catch(this.handleError);
   }
+
 
 // admin-role
   getAdminRoleHeader(): Promise<any> {
@@ -879,15 +879,22 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getHhrDataChart(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-dataChart.json';
-    return this.httpClient.get(url, {})
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
+    getHhrDataChart(chartId: number,start_time:any,end_time:any,field:string): Promise<any> {
+        const url: string = '/api/admin/report/series';
+        return this.httpClient.post(url, {
+            token: this.sessionStorageService.get('token'),
+            start_time: start_time,
+            end_time: end_time,
+            field: field,
+            heart_data_id: chartId
+        })
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
 
-  getHhrDataDetails(): Promise<any> {
+
+    getHhrDataDetails(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/hhr-data/hhr-dataDetails.json';
     return this.httpClient.get(url, {})
       .toPromise()

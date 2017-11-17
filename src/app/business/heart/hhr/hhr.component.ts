@@ -102,6 +102,7 @@ export class HhrComponent implements OnInit {
   }
 
   set (set: string) {
+    console.log(set);
     this.http.setHeader('reports', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('reports');
     });

@@ -242,7 +242,6 @@ export class ApiService {
   // historicalTests,true,5;'
   setHeader(table: string, set: string): Promise<any> {
     const url: string = '/api/admin/header/set';
-    console.log(set,'setHeader2');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       table: table,

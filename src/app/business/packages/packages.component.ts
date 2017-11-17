@@ -14,9 +14,7 @@ export class PackagesComponent implements OnInit {
     constructor(private http: ApiService) {}
 
     ngOnInit() {
-        this.http.getPackagesHeader().then(data => {
-            this.headers = data['headers'];
-        });
+            this.headers =this.http.getHeader('app-upgrades');
         this.http.getPackagesData().then(data => {
             this.data = data['data'];
         });
@@ -30,9 +28,9 @@ export class PackagesComponent implements OnInit {
   addView: boolean = false;
   tableView: boolean = true;
 
-  PDel: boolean = this.http.isHavePerm('app-upgrade-del');
-  PAdd: boolean = this.http.isHavePerm('app-upgrade-add');
-  PEdit: boolean = this.http.isHavePerm('app-upgrade-edit');
+  PDel: boolean = false;//this.http.isHavePerm('app-upgrade-del');
+  PAdd: boolean = false;//this.http.isHavePerm('app-upgrade-add');
+  PEdit: boolean = false;//this.http.isHavePerm('app-upgrade-edit');
   deleteBtn: boolean = this.PDel;
   deleteAllBtn: boolean = this.PDel;
   addBtn: boolean = this.PAdd;
@@ -64,14 +62,14 @@ export class PackagesComponent implements OnInit {
           this.addEditTitle = '编辑';
           this.editId = id;
           this.headerAdd = this.headers.map(d => {
-              switch(d.inputType)
+              switch(d.input_type)
               {
                   case INPUTTYPE.INPUT:
                       d.val = this.data[id][d.key];
                       break;
                   case INPUTTYPE.SELECT:
                       let val = this.data[id][d.key];
-                      d.val = d.selectVal[val];
+                      d.val = d.select_val[val];
                       break;
                   default:
                       d.val = this.data[id][d.key];

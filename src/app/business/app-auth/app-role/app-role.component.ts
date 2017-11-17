@@ -17,12 +17,7 @@ export class AppRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.getAppRoleHeader().then(data => {
-      this.headers = data['headers'];
-    });
-    this.http.getAppRoleData().then(data => {
-      this.data = data['data'];
-    });
+    this.headers= this.http.getHeader('app-roles');
   }
 
   headers: Array<cell> = [];
@@ -31,7 +26,8 @@ export class AppRoleComponent implements OnInit {
   editId: number;
   addEditTitle: string = '添加';
 
-  edit: boolean = this.http.isHavePerm('app-role-edit');
+  edit: boolean = true;
+  // edit: boolean = this.http.isHavePerm('app-role-edit');
   editBtn: boolean = this.edit;
 
   setOperate: boolean = true;
@@ -53,13 +49,13 @@ export class AppRoleComponent implements OnInit {
       this.addEditTitle = '编辑';
       this.editId = id;
       this.headerAdd = this.headers.map(d => {
-        switch (d.inputType) {
+        switch (d.input_type) {
           case INPUTTYPE.INPUT:
             d.val = this.data[id][d.key];
             break;
           case INPUTTYPE.SELECT:
             let val = this.data[id][d.key];
-            d.val = d.selectVal[val];
+            d.val = d.select_val[val];
             break;
           default:
             d.val = this.data[id][d.key];

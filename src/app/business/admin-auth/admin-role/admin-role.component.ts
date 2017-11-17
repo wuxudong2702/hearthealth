@@ -14,12 +14,7 @@ export class AdminRoleComponent implements OnInit {
   constructor(private http: ApiService) {}
 
   ngOnInit() {
-      this.http.getAdminRoleHeader().then(data => {
-          this.headers = data['headers'];
-      });
-      this.http.getAdminRoleData().then(data => {
-          this.data = data['data'];
-      });
+    this.headers= this.http.getHeader('roles');
   }
 
   nodes:any;
@@ -27,9 +22,9 @@ export class AdminRoleComponent implements OnInit {
   data: Array<any> =[];
   headerAdd: Array<cell> = [];
 
-  adminRoleDel: boolean = this.http.isHavePerm('admin-role-del');
-  adminRoleAdd: boolean = this.http.isHavePerm('admin-role-add');
-  adminRoleEdit: boolean = this.http.isHavePerm('admin-role-edit');
+  adminRoleDel: boolean = false;//this.http.isHavePerm('admin-role-del');
+  adminRoleAdd: boolean = false;// this.http.isHavePerm('admin-role-add');
+  adminRoleEdit: boolean =  false;//this.http.isHavePerm('admin-role-edit');
   deleteBtn: boolean = this.adminRoleDel;
   deleteAllBtn: boolean = this.adminRoleDel;
   addBtn: boolean = this.adminRoleAdd;

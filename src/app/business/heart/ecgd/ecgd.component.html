@@ -4,6 +4,8 @@
   (onSort)="onSort($event)"
   (onSearch)="onSearch($event)"
   (onUpload)="onUpload($event)"
+  (onDel)="onDel($event)"
+  (onDownload)="download($event)"
 
   [headers]="headers"
   [data]="data"
@@ -15,6 +17,10 @@
   [setBtn]="setBtn"
   [paginationBtn]="paginationBtn"
   [setOperate]="setOperate"
+
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
+
 >
 </c-table-list>
-<app-ecgd-chart *ngIf="showChartView" [dataChart1]="dataChart1" [userInfoChart]="userInfoChart" (onChart)="onChart($event)" ></app-ecgd-chart>
+<app-ecgd-chart *ngIf="showChartView" [dataChart1]="dataChart1" [userName]="userName" (back)="back($event)" ></app-ecgd-chart>

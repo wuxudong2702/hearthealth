@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
+import  { ModalService } from '../../shared/modal/modal.service';
+import { TodoObjData, NeedReadObjData, NoticeObjData, CommonFuncData } from '../home/home-model';
+import  { PasswordEditComponent} from '../../business-shared/user/password-edit.component';
 
 @Component({
     selector: 'c-home',

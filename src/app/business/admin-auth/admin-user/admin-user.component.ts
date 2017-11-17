@@ -16,12 +16,7 @@ export class AdminUserComponent implements OnInit {
   constructor(private http: ApiService) {}
 
   ngOnInit() {
-      this.http.getAdminUserData().then(data => {
-          this.data = data['data'];
-      });
-      this.http.getAdminUserHeader().then(data => {
-          this.headers = data['headers'];
-      });
+    this.headers= this.http.getHeader('admins');
 
   }
   nodes:any;
@@ -31,9 +26,9 @@ export class AdminUserComponent implements OnInit {
   addEditTitle: string = '添加';
   editId: number;
 
-  adminUserDel: boolean = this.http.isHavePerm('admin-user-del');
-  adminUserAdd: boolean = this.http.isHavePerm('admin-user-add');
-  adminUserEdit: boolean = this.http.isHavePerm('admin-user-edit');
+  adminUserDel: boolean =false;// this.http.isHavePerm('admin-user-del');
+  adminUserAdd: boolean = false;//this.http.isHavePerm('admin-user-add');
+  adminUserEdit: boolean = false;//this.http.isHavePerm('admin-user-edit');
   deleteBtn: boolean = this.adminUserDel;
   deleteAllBtn: boolean = this.adminUserDel;
   addBtn: boolean = this.adminUserAdd;
@@ -66,13 +61,13 @@ export class AdminUserComponent implements OnInit {
           this.addEditTitle = '编辑';
           this.editId = id;
           this.headerAdd = this.headers.map(d => {
-              switch (d.inputType) {
+              switch (d.input_type) {
                   case INPUTTYPE.INPUT:
                       d.val = this.data[id][d.key];
                       break;
                   case INPUTTYPE.SELECT:
                       let val = this.data[id][d.key];
-                      d.val = d.selectVal[val];
+                      d.val = d.select_val[val];
                       break;
                   default:
                       d.val = this.data[id][d.key];
@@ -105,3 +100,5 @@ export class AdminUserComponent implements OnInit {
     }
 
 }
+
+

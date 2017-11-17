@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, DataType,searchObj,INPUTTYPE} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, DataType, searchObj, INPUTTYPE} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {_switch} from "rxjs/operator/switch";
@@ -16,12 +16,7 @@ export class AppUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.getAppUserHeader().then(data => {
-      this.headers = data['headers'];
-    });
-    this.http.getAppUserData().then(data => {
-      this.data = data['data'];
-    });
+    this.headers = this.http.getHeader('users');
   }
 
   headers: Array<cell> = [];
@@ -35,9 +30,9 @@ export class AppUserComponent implements OnInit {
   editId: number;
   addEditTitle: string = '添加';
 
-  appUserDel: boolean = this.http.isHavePerm('app-user-del');
-  appUserAdd: boolean = this.http.isHavePerm('app-user-add');
-  appUserEdit: boolean = this.http.isHavePerm('app-user-edit');
+  appUserDel: boolean = true;//this.http.isHavePerm('app-user-del');
+  appUserAdd: boolean = false;//this.http.isHavePerm('app-user-add');
+  appUserEdit: boolean = false;//this.http.isHavePerm('app-user-edit');
   deleteBtn: boolean = this.appUserDel;
   deleteAllBtn: boolean = this.appUserDel;
   addBtn: boolean = this.appUserAdd;
@@ -85,14 +80,13 @@ export class AppUserComponent implements OnInit {
       this.headerAdd = this.headers.map(d => {
         // console.log('______',this.data[id][d.key],d.key);
         // console.log('-------', d.inputType);
-        switch(d.inputType)
-        {
+        switch (d.input_type) {
           case INPUTTYPE.INPUT:
             d.val = this.data[id][d.key];
             break;
           case INPUTTYPE.SELECT:
             let val = this.data[id][d.key];
-            d.val = d.selectVal[val];
+            d.val = d.select_val[val];
             // console.log('----+++++++++---', val, d.selectVal[val]);
             break;
           default:
@@ -128,8 +122,8 @@ export class AppUserComponent implements OnInit {
   submit(submitData: string) {
 
     this.http.postAppUserSubmit(submitData).then(data => {
-        console.log(data, '提交');
-        this.data = data['data'];
+      console.log(data, '提交');
+      this.data = data['data'];
     });
     this.addSubUserView = false;
     this.addView = false;
@@ -138,13 +132,13 @@ export class AppUserComponent implements OnInit {
   }
 
   Search(searchObj: searchObj) {
-      console.log('app-user searchObj:',searchObj);
-      // this.selectValue = searchObj.selectValue;
-      // this.searchValue = searchObj.searchValue;
-      this.http.postAppUserSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
-          console.log('app-user Search result:',data);
-          this.data = data['data'];
-      });
+    console.log('app-user searchObj:', searchObj);
+    // this.selectValue = searchObj.selectValue;
+    // this.searchValue = searchObj.searchValue;
+    this.http.postAppUserSearch(searchObj.selectValue, searchObj.searchValue).then(data => {
+      console.log('app-user Search result:', data);
+      this.data = data['data'];
+    });
   }
 
   details(id: number) {
@@ -189,14 +183,13 @@ export class AppUserComponent implements OnInit {
       this.addEditTitle = '编辑';
       this.editId = id;
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
-        switch(d.inputType)
-        {
+        switch (d.input_type) {
           case INPUTTYPE.INPUT:
             d.val = this.subUserData[id][d.key];
             break;
           case INPUTTYPE.SELECT:
             let val = this.subUserData[id][d.key];
-            d.val = d.selectVal[val];
+            d.val = d.select_val[val];
             break;
           default:
             d.val = this.subUserData[id][d.key];
@@ -230,8 +223,8 @@ export class AppUserComponent implements OnInit {
 
   subUserSubmit(submitData: string) {
     this.http.postAppUserSubSubmit(submitData).then(data => {
-        console.log(data, '提交');
-        this.data = data['data'];
+      console.log(data, '提交');
+      this.data = data['data'];
     });
     this.addView = false;
     this.subUsersView = true;
@@ -247,12 +240,16 @@ export class AppUserComponent implements OnInit {
   }
 
   subUserSearch(searchObj: searchObj) {
-      console.log('app-user-sub searchObj:',searchObj);
-      // this.selectValue = searchObj.selectValue;
-      // this.searchValue = searchObj.searchValue;
-      this.http.postAppUserSubSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
-          console.log('app-user-sub Search result:',data);
-          this.data = data['data'];
-      });
+    console.log('app-user-sub searchObj:', searchObj);
+    // this.selectValue = searchObj.selectValue;
+    // this.searchValue = searchObj.searchValue;
+    this.http.postAppUserSubSearch(searchObj.selectValue, searchObj.searchValue).then(data => {
+      console.log('app-user-sub Search result:', data);
+      this.data = data['data'];
+    });
+  }
+
+  set () {
+
   }
 }

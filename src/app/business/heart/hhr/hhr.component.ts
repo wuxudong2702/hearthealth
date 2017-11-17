@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import {cell, SortDirection, sortObj,DataType,searchObj} from '../../../shared/table/table-list.component';
+import {Component, OnInit} from '@angular/core';
+import {cell, SortDirection, sortObj, DataType, searchObj} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
+
 
 @Component({
   selector: 'app-hhr',
   templateUrl: './hhr.component.html',
   styleUrls: ['./hhr.component.css'],
-  providers:[]
+  providers: []
 })
 export class HhrComponent implements OnInit {
 
-    constructor(private http: ApiService) {}
+  constructor(private http: ApiService) {
+  }
 
     ngOnInit() {
         this.http.getHhrHeader().then(data => {

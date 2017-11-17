@@ -15,12 +15,11 @@ export enum SortDirection {
 }
 
 export enum DataType {
-  ENUM = 0,
+  NONE = 0,
+  ENUM,
   DATATIME,
-  AGE,
   MONEY,
   NAME,
-  NONE,
 }
 
 export enum INPUTTYPE {
@@ -30,11 +29,11 @@ export enum INPUTTYPE {
 }
 
 export enum INFOTYPE {
-    PROTOCOL = 0,
-    GUIDE,
-    STARTPAGE,
-    ABOUTUS,
-    HEALTH
+  PROTOCOL = 0,
+  GUIDE,
+  STARTPAGE,
+  ABOUTUS,
+  HEALTH
 }
 
 export class sortObj {
@@ -47,6 +46,17 @@ export class searchObj {
   searchValue: string;
 }
 
+export class paginationObj {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+  to: number;
+  first_page_url: string;
+  last_page_url: string;
+  next_page_url: string;
+  prev_page_url: string;
+}
 
 export class news {
   newsTitle: string;
@@ -60,32 +70,36 @@ export class pipe {
 }
 
 export class cell {
+
+
   key: string;
   show: boolean;
   name: string;
   index: number;
   order: SortDirection;
-  pipe: pipe;
+  pipe_type: number;
+  pipe_params: any;
+
   val: any;
-  selectVal:Array<any>;
-  validExample: string;
+  select_val: Array<any>;
+  valid_example: string;
   required: boolean;
   pattern: string;
-  inputType: INPUTTYPE;
+  input_type: INPUTTYPE;
+
+
 }
 
 @Pipe({name: 'CPipe'})
 export class CPipePipe implements PipeTransform {
-  transform(originalValue: any, pipe: pipe): any {
-    switch (pipe.type) {
-      case DataType.AGE:
+  transform(originalValue: any, pipe_type: number, pipe_params: any): any {
+    switch (pipe_type) {
+      case DataType.NONE:
         return originalValue;
       case DataType.DATATIME:
-        return (new DatePipe('zh-CN')).transform(originalValue, pipe.params);
+        return (new DatePipe('zh-CN')).transform(originalValue, pipe_params);
       case DataType.ENUM:
-        console.log('----------',pipe,);
-        return pipe.params[originalValue];
-      case DataType.NONE:
+        return pipe_params[originalValue];
       default:
         return originalValue;
     }
@@ -109,7 +123,7 @@ export class TableListComponent implements OnInit {
     this.headers = this.headers.sort((v1, v2) => {
       return v1.index - v2.index;
     });
-    // console.log(this.headers)
+    // this.checkedList=[];
   }
 
   @ViewChild('hp', undefined) hp: HttpPaginationComponent;
@@ -132,13 +146,14 @@ export class TableListComponent implements OnInit {
   @Input() backBtn: boolean;
   @Input() setOperate: boolean;
   @Input() uploadBtn: boolean;
-  // @Input() addCommonBtn: boolean;
 
+  @Input() pagination: paginationObj;
+
+  // @Input() addCommonBtn: boolean;
 
   // @Output() onAddSubmit = new EventEmitter<any>();
   @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
-  @Output() onDelAll = new EventEmitter<any>();
   @Output() onDownload = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
   @Output() onSet = new EventEmitter<any>();
@@ -150,6 +165,7 @@ export class TableListComponent implements OnInit {
   @Output() onUpload = new EventEmitter<any>();
   @Output() onEditZTree = new EventEmitter<any>();
   @Output() onEditH5 = new EventEmitter<any>();
+  @Output() onPaginationChange = new EventEmitter<any>();
 
 
   url: string = '';
@@ -157,25 +173,29 @@ export class TableListComponent implements OnInit {
   selectValue: string = '';
   searchValue: string = '';
   tableAdd: boolean = false;
-  tableEdit:boolean = false;
-  editId:number;
+  tableEdit: boolean = false;
+  editId: number;
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
+  checkedListIds:Array<number>=[];
   // submitData:object;
   delAllChecked() {
     if (!this.isDelAll) {
       this.checkedList = this.data.map(v => true);
+      // this.checkedListIds = this.data.map(v => v.heart_data_id);
     } else {
       this.checkedList = this.data.map(v => false);
+      // this.checkedListIds = [];
     }
   }
 
-  delChecked(index) {
-    this.isDelAll = false;
+  delChecked(i) {
+      this.isDelAll = false;
+      this.checkedList[i]= !this.checkedList[i];
   }
 
-  add(){
+  add() {
     this.onAdd.emit();
   }
 
@@ -183,36 +203,49 @@ export class TableListComponent implements OnInit {
     this.onAdd.emit(id);
   }
 
-  editH5(id:number){
-     console.log('editH5',id);
-     this.onEditH5.emit(id);
+  editH5(id: number) {
+    console.log('editH5', id);
+    this.onEditH5.emit(id);
   }
 
-  editZTree(id:number){
-
-    console.log('editZTree',id);
+  editZTree(id: number) {
     this.onEditZTree.emit(id);
   }
 
-  del(id) {
-    this.onDel.emit(id);
-  }
 
   delAll() {
-    this.onDelAll.emit({
-      checkedList: this.checkedList,
-    });
-  }
-
-  click(id) {
-    this.delAllId.push(id);
+    let checkedListIds='';
+    for(let i=0;i<this.checkedList.length;i++){
+         if(this.checkedList[i]){
+           console.log(this.checkedList,this.data);
+           if(i==this.checkedList.length-1){
+             checkedListIds+=this.data[i]['heart_data_id'];
+           }else{
+             checkedListIds+=this.data[i]['heart_data_id']+',';
+           }
+         }
+         this.checkedList[i]=false;
+    }
+    this.isDelAll = false;
+    this.onDel.emit(checkedListIds);
   }
 
   download() {
-    this.onDownload.emit();
+    let checkedListIds='';
+    for(let i=0;i<this.checkedList.length;i++){
+      if(this.checkedList[i]){
+        console.log(this.checkedList,this.data);
+        if(i==this.checkedList.length-1){
+          checkedListIds+=this.data[i]['heart_data_id'];
+        }else{
+          checkedListIds+=this.data[i]['heart_data_id']+',';
+        }
+      }
+    }
+    this.onDownload.emit(checkedListIds);
   }
 
-  search() {
+  search() {//用户点击查询按钮
     if (!this.selectValue) {
       this.openError('请选择搜索项！');
     } else if (!this.searchValue) {
@@ -230,11 +263,13 @@ export class TableListComponent implements OnInit {
     this.onSet.emit({});
   }
 
-  showModalSetFunc() {//模态框
+  showModalSetFunc() {//设置模态框
     let setConfig = new SetConfig('', this.headers);
     let result = this.modalService.set(setConfig);
     result.then(v => {
-      this.headers = v.configHeaders;
+      console.log(v);
+       this.onSet.emit(v.configHeaders);
+      // this.headers = v.configHeaders;
     }).catch(v => {
     });
   }
@@ -248,11 +283,13 @@ export class TableListComponent implements OnInit {
     })
   }
 
-  showModalDel(i) {
+  showModalDel(i:number) {
     let confirmCfg = new ConfirmConfig('您确认删除吗？！');
     let result = this.modalService.confirm(confirmCfg);
     result.then(v => {
-      this.del(i);
+      let id=''+this.data[i]['heart_data_id'];
+      this.onDel.emit(id);
+      this.checkedList[i]=false;
     }).catch(v => {
     })
   }
@@ -261,16 +298,15 @@ export class TableListComponent implements OnInit {
     this.onDetails.emit(id);
   }
 
-
-
-  chart(id: number) {
-    this.onChart.emit(
-      id
-    );
+  chart(id: number,name:string,sense_time:any) {
+    this.onChart.emit({
+      id:id,
+      name:name,
+      sense_time:sense_time
+    });
   }
 
   sort(i) {
-    // console.log(i);
     this.headers[i].order = this.headers[i].order === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC;
     this.onSort.emit(
       {
@@ -278,15 +314,16 @@ export class TableListComponent implements OnInit {
         id: i,
       }
     );
-    // console.log('table-list sort id',i,this.headers[i].order);
   }
 
   back() {
     this.onBack.emit();
   }
-  upload(){
+
+  upload() {
     this.onUpload.emit();
   }
+
   openError(errorInfo) {
     let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
     this.toastService.toast(toastCfg);
@@ -299,6 +336,10 @@ export class TableListComponent implements OnInit {
 
   onDataChanged($event) {
     console.info($event);
+  }
+
+  paginationChange(parmas) {
+    this.onPaginationChange.emit(parmas);
   }
 
 }

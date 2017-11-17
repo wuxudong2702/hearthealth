@@ -1,7 +1,8 @@
-import { Component, Input, Output, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnChanges, SimpleChanges, EventEmitter,OnInit } from '@angular/core';
 
 import { PaginationType, PaginationOptions } from './pagination-model';
 
+import {paginationObj} from '../table/table-list.component';
 
 
 /**
@@ -11,10 +12,10 @@ import { PaginationType, PaginationOptions } from './pagination-model';
     selector: 'c-pagination',
     templateUrl: './pagination.component.html'
 })
-export class PaginationComponent implements OnChanges {
+export class PaginationComponent implements OnChanges ,OnInit{
 
-    @Input()
-    total: number = 0;
+     @Input()
+     total: number = 0;
 
     @Input()
     pageList: Array<number> = [10, 20, 30, 50, 100, 150, 200];
@@ -22,20 +23,34 @@ export class PaginationComponent implements OnChanges {
     @Input()
     btnCls: string = 'btn-light';
 
-    @Output()
-    onPageChanged = new EventEmitter();
+    @Input() pagination: paginationObj;
+
+
+    @Output() onPageChanged = new EventEmitter();
+    @Output() onPaginationChange = new EventEmitter();
+
+    // @Output() onPrevPage = new EventEmitter();
 
     options: PaginationOptions = {};
+     url:string;
+    pageNum:number;
+
+  ngOnInit(): void {
 
 
+   // // console.log(this.pagination);
+   // console.log(this.pagination.per_page);
+   // console.log(this.pagination.total);
+   //  // this.pageNum=Math.ceil(this.pagination.total/this.pagination.per_page);
+  }
     constructor() { }
 
     /**
     * 改变
-    * @param changes 
+    * @param changes
     */
     ngOnChanges(changes: SimpleChanges) {
-        this.options.total = this.total;
+        this.options.total = this.pagination.total;
         this.options.pageList = this.pageList;
         this.options.pageSize = this.options.pageList[0];
         this.refreshPage();
@@ -78,10 +93,12 @@ export class PaginationComponent implements OnChanges {
      * 上一页
      */
     previousPage() {
-        this.options.pageNumber--;
-        if (this.options.pageNumber <= 0) {
-            this.options.pageNumber = 1
-        }
+         // this.onPrevPage.emit();
+
+        // this.options.pageNumber--;
+        // if (this.options.pageNumber <= 0) {
+        //     this.options.pageNumber = 1
+        // }
     }
 
     /**
@@ -115,24 +132,25 @@ export class PaginationComponent implements OnChanges {
 
     /**
      * 分页改变
-     * @param type 操作类型 
+     * @param type 操作类型
      */
-    pageChanged(type) {
+    pageChanged(type:string) {
         switch (type) {
             case PaginationType.NEXT_PAGE:
-                this.nextPage();
+                this.url=this.pagination.next_page_url;
                 break;
             case PaginationType.LAST_PAGE:
-                this.lastPage();
+              this.url=this.pagination.last_page_url;
                 break;
             case PaginationType.PREVIOUS_PAGE:
-                this.previousPage();
+              this.url=this.pagination.prev_page_url;
                 break;
             case PaginationType.FRIST_PAGE:
-                this.fristPage();
+              this.url=this.pagination.first_page_url;
                 break;
         }
-        this.pageOperation(type);
+        // this.pageOperation(type);
+      this.onPaginationChange.emit({url:this.url,per_page:this.pagination.per_page});
     }
 
     /**

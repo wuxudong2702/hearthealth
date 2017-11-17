@@ -18,31 +18,35 @@ export class DevComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.getDevHeader().then(data => {
 
-      if (data.status == 'ok') {
-        this.headers=data['headers'];
-      } else {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-        this.toastService.toast(toastCfg);
-        // this.router.navigate(['/login']);
-      }
-    }).catch(err => {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      this.toastService.toast(toastCfg);
-    });
-    this.http.getDevData().then(data => {
-      if (data.status == 'ok') {
-        this.data = data['data'];
-      } else {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-        this.toastService.toast(toastCfg);
-        // this.router.navigate(['/login']);
-      }
-    }).catch(err => {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      this.toastService.toast(toastCfg);
-    });
+    this.headers= this.http.getHeader('devs');
+
+
+    // this.http.getDevHeader().then(data => {
+    //
+    //   if (data.status == 'ok') {
+    //     this.headers=data['headers'];
+    //   } else {
+    //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+    //     this.toastService.toast(toastCfg);
+    //     // this.router.navigate(['/login']);
+    //   }
+    // }).catch(err => {
+    //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+    //   this.toastService.toast(toastCfg);
+    // });
+    // this.http.getDevData().then(data => {
+    //   if (data.status == 'ok') {
+    //     this.data = data['data'];
+    //   } else {
+    //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+    //     this.toastService.toast(toastCfg);
+    //     // this.router.navigate(['/login']);
+    //   }
+    // }).catch(err => {
+    //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+    //   this.toastService.toast(toastCfg);
+    // });
   }
 
   headers: Array<cell> = [];
@@ -50,8 +54,8 @@ export class DevComponent implements OnInit {
   data: Array<any> = [];
   addEditTitle: string = '添加';
 
-  devDel: boolean = this.http.isHavePerm('heart-dev-del');
-  devAdd: boolean = this.http.isHavePerm('heart-dev-add');
+  devDel: boolean =  false;//this.http.isHavePerm('heart-dev-del');
+  devAdd: boolean = false;// this.http.isHavePerm('heart-dev-add');
   deleteBtn: boolean = this.devDel;
   deleteAllBtn: boolean = this.devDel;
   addBtn: boolean = this.devAdd;

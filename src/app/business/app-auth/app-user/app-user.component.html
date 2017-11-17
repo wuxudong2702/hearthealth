@@ -32,6 +32,8 @@
 >
 </app-table-add>
 
+
+
 <!--子用戶信息-->
 <c-table-list
   (onSort)="subUsersSort($event)"
@@ -40,6 +42,7 @@
   (onBack)="subUsersback()"
   (onSearch)="subUserSearch($event)"
   (onAdd)="subUsersAdd($event)"
+  (onSet)="set"
 
   [setOperate]="setOperate"
   [headers]="subUserHeaders"

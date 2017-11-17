@@ -29,7 +29,7 @@
         <div class="col-md-12">
           <select class="form-control" [(ngModel)]="selectValue">
             <option value="" style="display:none">请选择</option>
-            <option *ngFor="let header of headers" [hidden] = "!header.show" value = {{header.key}} >{{header.name}}</option>
+            <option *ngFor="let header of headers" [hidden]="!header.show" value={{header.key}}>{{header.name}}</option>
           </select>
         </div>
       </div>
@@ -77,10 +77,10 @@
         </thead>
         <tbody>
         <tr *ngFor="let row of data;let i = index" [class.alert-info]="i%2==0">
-          <td class="text-center" *ngIf="setOperate"><input type="checkbox" (click)="delChecked()"
+          <td class="text-center" *ngIf="setOperate"><input type="checkbox" (click)="delChecked(i)"
                                                             [(ngModel)]="checkedList[i]"/></td>
           <td *ngFor="let header of headers" [hidden]="!header.show" class="text-center">
-            {{row[header.key] | CPipe:header.pipe}}
+            {{row[header.key] | CPipe:header.pipe_type | CPipe: header.pipe_params}}
           </td>
           <td class="text-center" *ngIf="setOperate">
             <button class="btn btn-info btn-sm" *ngIf="detailsBtn" (click)="details(i)"><i
@@ -89,25 +89,34 @@
             <button class="btn btn-success btn-sm" *ngIf="editBtn" (click)="edit(i)"><i class="fa fa-pencil fa-fw"></i>
               编辑
             </button>
-            <button class="btn btn-success btn-sm" *ngIf="editH5Btn" (click)="editH5(i)"><i class="fa fa-pencil fa-fw"></i>
+            <button class="btn btn-success btn-sm" *ngIf="editH5Btn" (click)="editH5(i)"><i
+              class="fa fa-pencil fa-fw"></i>
               编辑
             </button>
-            <button class="btn btn-success btn-sm" *ngIf="editZTreeBtn" (click)="editZTree(i)"><i class="fa fa-pencil fa-fw"></i>
+            <button class="btn btn-success btn-sm" *ngIf="editZTreeBtn" (click)="editZTree(i)"><i
+              class="fa fa-pencil fa-fw"></i>
               编辑
             </button>
             <button class="btn btn-danger btn-sm" *ngIf="deleteBtn" (click)="showModalDel(i)"><i
               class="fa fa-trash-o fa-fw"></i>
               删除
             </button>
-            <button class="btn btn-warning btn-sm" *ngIf="chartBtn" (click)="chart(i)"><i
+            <button class="btn btn-warning btn-sm" *ngIf="chartBtn" (click)="chart(row['heart_data_id'],row['name'],row['sense_time'])"><i
               class="fa fa-area-chart fa-fw"></i> 图表
             </button>
           </td>
         </tr>
         </tbody>
       </table>
-      <c-pagination #hp total="100" (onDataChanged)="onDataChanged($event)" *ngIf="paginationBtn">
-      </c-pagination>
+      <!--<c-pagination #hp-->
+
+                    <!--[pagination]="pagination"-->
+                    <!--[total]="100"-->
+                    <!--(onDataChanged)="onDataChanged($event)"-->
+                    <!--(onPaginationChange)="paginationChange($event)"-->
+                    <!--*ngIf="paginationBtn"-->
+      <!--&gt;-->
+      <!--</c-pagination>-->
     </div>
   </div>
 </div>

@@ -15,12 +15,7 @@ export class LogComponent implements OnInit {
     constructor(private http: ApiService) {}
 
     ngOnInit() {
-        this.http.getLogHeader().then(data => {
-            this.headers = data['headers'];
-        });
-        this.http.getLogData().then(data => {
-            this.data = data['data'];
-        });
+      this.headers= this.http.getHeader('logs');
     }
 
   // setOperate

@@ -198,7 +198,7 @@
   ],
   "heart-data": [
     {
-      "key": "userName",
+      "key": "name",
       "show": true,
       "name": "用户名",
       "index": 4,
@@ -228,7 +228,7 @@
       "input_type": 0
     },
     {
-      "key": "birthDate",
+      "key": "birth",
       "show": true,
       "name": "出生日期",
       "index": 1,
@@ -243,7 +243,7 @@
       "input_type": 2
     },
     {
-      "key": "acquisitionTime",
+      "key": "sense_time",
       "show": true,
       "name": "心跳数据采集时间",
       "index": 3,
@@ -254,11 +254,11 @@
       "select_val": [],
       "valid_example": "",
       "required": true,
-      "pattern": "",
+      "pattern": "yyyy-mm-dd",
       "input_type": 0
     },
     {
-      "key": "heartDataLength",
+      "key": "len",
       "show": true,
       "name": "心跳数据长度",
       "index": 5,
@@ -269,29 +269,30 @@
       "select_val": [],
       "valid_example": " ",
       "required": true,
-      "pattern": "",
+      "pattern": "sS",
       "input_type": 0
     },
+
     {
-      "key": "devNumber",
+      "key":"d_f1",
       "show": true,
-      "name": "采集设备号",
-      "index": 6,
+      "name": "心率",
+      "index": 7,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "123456789",
+      "valid_example": " ",
       "required": true,
-      "pattern": "^[0-9]+$",
+      "pattern": "",
       "input_type": 0
-    },
-    {
-      "table_id": 0,
+    }
+    , {
+      "key":"mobile",
       "show": true,
-      "name": "心率",
-      "index": 7,
+      "name": "手机号码",
+      "index": 0,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -662,6 +663,56 @@
       "required": true,
       "pattern": "^[0-9]+$",
       "input_type": 0
+    }
+  ],
+  "logs": [
+    {
+      "key": "userName",
+      "show": true,
+      "name": "用户名",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+
+    {
+      "id": "9",
+      "key": "operating",
+      "table_id": 0,
+      "show": true,
+      "name": "操作",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "date",
+      "show": true,
+      "name": "时间",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-17",
+      "required": true,
+      "pattern": "yyyy-mm-dd",
+      "input_type": 2
     }
   ]
 }

@@ -15,13 +15,7 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.getNewsHeader().then(data => {
-      this.headers = data['headers'];
-    });
-    this.http.getNewsData().then(data => {
-      this.data = data['data'];
-      console.log('0000', this.data);
-    });
+    this.headers= this.http.getHeader('infos');
   }
 
   headers: Array<cell> = [];
@@ -36,9 +30,9 @@ export class NewsComponent implements OnInit {
   dataEditor: news;
   isSelectShow: boolean = false;
 
-  del: boolean = this.http.isHavePerm('info-del');
-  add: boolean = this.http.isHavePerm('info-add');
-  edit: boolean = this.http.isHavePerm('info-edit');
+  del: boolean =  false;//this.http.isHavePerm('info-del');
+  add: boolean = false;// this.http.isHavePerm('info-add');
+  edit: boolean = false;// this.http.isHavePerm('info-edit');
   deleteBtn: boolean = this.del;
   deleteAllBtn: boolean = this.del;
   addBtn: boolean = this.add;

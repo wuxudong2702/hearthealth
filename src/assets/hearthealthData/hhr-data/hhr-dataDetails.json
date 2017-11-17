@@ -6,7 +6,7 @@
                   {
                     "key": "int nTotalDetBeat",
                     "name": "检测到心跳的总数",
-                    "value": 80
+                    "value": 1000
                   },
                   {
                     "key": "int nNormNum",
@@ -456,7 +456,7 @@
         {
           "key": "int nTotalDetBeat",
           "name": "检测到心跳的总数",
-          "value": 600
+          "value": 666
         },
         {
           "key": "int nNormNum",

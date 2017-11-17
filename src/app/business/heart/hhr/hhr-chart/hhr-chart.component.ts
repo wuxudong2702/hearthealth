@@ -147,11 +147,7 @@ export class HhrChartComponent implements OnInit {
   }
 
   @HostListener('window:resize')
-  onWindowResize(): void {
-
-  }
-
-
+  onWindowResize(): void {}
 
 }
 

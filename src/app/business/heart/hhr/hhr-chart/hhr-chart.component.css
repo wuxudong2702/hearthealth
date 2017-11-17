@@ -1,6 +1,6 @@
 .demo-chart {
     height: 50vh;
-    margin-top:-5%;
+    margin-top:1%;
 }
 
 .dateInput {
@@ -19,7 +19,7 @@
     background-color: #868e96;
 }
 h4 {
-    font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+  font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
 }
 .chartStyle{
    background: white;
@@ -38,4 +38,12 @@ hr {
     color: #20a8d8;
     border: 0;
     border-bottom: 2px solid;
+}
+
+h2{
+  font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+  text-align: left;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  /*margin: 8px 25px;*/
 }

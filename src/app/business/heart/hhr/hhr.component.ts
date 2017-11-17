@@ -51,7 +51,9 @@ export class HhrComponent implements OnInit {
       });
 
   }
-
+  chartBack(){
+    this.showChartView = !this.showChartView;
+  }
     onSort(sort: sortObj) {
         this.http.postHhrSort(sort.id,sort.order).then(data=>{
             console.log(data,'排序');

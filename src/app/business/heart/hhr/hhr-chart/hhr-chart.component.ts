@@ -85,7 +85,7 @@ export class HhrChartComponent implements OnInit {
   }
 
   chartView() {
-    this.onChart.emit(1);
+    this.onChart.emit();
   }
 
   indicator1() {

@@ -213,6 +213,7 @@ export class ApiService {
       });
   }
 
+
   //获取users表头
   getHeader(table: string): any {
     let header: any = this.headers[table];

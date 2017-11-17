@@ -1,7 +1,7 @@
 <div class="chartStyle">
 
   <div>
-    <button class="btn btn-success btn-md back" (click)="chartView()">返回</button>
+    <button class="btn btn-success btn-md back" (click)="chartView($event)">返回</button>
   </div>
   <div class="text-center text-primary">
     <h4>用户：&nbsp;{{userName}}</h4>
@@ -27,7 +27,7 @@
   </div>
   <div class="details-panel" *ngIf="isDetails">
     <hr>
-    <h4 style="text-align: left;margin: 8px 25px">心电数据详情</h4>
+    <h2 >心电数据详情</h2>
     <label class="details" *ngFor="let data of chartDetailsData" title={{data.name}}>{{data.key }}：&nbsp;{{data.value}}</label>
   </div>
 </div>

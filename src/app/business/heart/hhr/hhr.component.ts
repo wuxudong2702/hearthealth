@@ -17,9 +17,7 @@ export class HhrComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.http.getHeader('reports');
-    // this.http.getHhrData().then(data => {
-    //   this.data = data['data'];
-    // });
+
   }
 
   dataChart: Array<any> = [];

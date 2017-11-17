@@ -25,6 +25,7 @@ export class ApiService {
   headerConfig: any;
 
   constructor(private http: Http, private spinService: SpinService, private httpClient: HttpClient, private toastService: ToastService, private sessionStorageService: SessionStorageService) {
+    console.log('api service');
     this.getHeaders();
     let perm = this.sessionStorageService.getObject('perm');
     let headerConfig = this.sessionStorageService.getObject('headerConfig');
@@ -94,6 +95,8 @@ export class ApiService {
         this.sessionStorageService.remove('headerConfig');
         this.sessionStorageService.remove('headers');
         this.sessionStorageService.remove('token');
+        this.sessionStorageService.remove('menu');
+        // conso
         return data;
       })
       .catch(this.handleError);
@@ -189,19 +192,23 @@ export class ApiService {
       });
   }
 
-  getHeaderConfig(): any {
+  getHeaderConfig(): Promise<any> {
     const url: string = '/api/admin/header';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
     })
       .toPromise()
       .then(data => {
-        if (data['status'] == 'ok') {
-          this.headerConfig = data['data'];
-          this.sessionStorageService.setObject('headerConfig', data);
-        } else {
-          console.error('获取表头配置错误', data['message']);
-        }
+        return new Promise((fulfill, reject) => {
+          if (data['status'] == 'ok') {
+            this.headerConfig = data['data'];
+            console.log('getHeaderConfig4',this.headerConfig);
+            this.sessionStorageService.setObject('headerConfig', data);
+            fulfill(true);
+          } else {
+            reject(false);
+          }
+        });
       })
       .catch(err => {
         let msg = this.handleError(err);
@@ -218,7 +225,7 @@ export class ApiService {
       let key: string = v['key'];
       if (config && config[key]) {
         v['index'] = config[key]['index'];
-        v['show'] = config[key]['show'];
+        v['show'] = config[key]['show'] == '1';
       }
       return v;
     });
@@ -234,8 +241,9 @@ export class ApiService {
   // earliest, true, 3;
   // latest, true,4;
   // historicalTests,true,5;'
-  setHeader(table: string, set: string): any {
+  setHeader(table: string, set: string): Promise<any> {
     const url: string = '/api/admin/header/set';
+    console.log(set,'setHeader2');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       table: table,
@@ -245,7 +253,7 @@ export class ApiService {
       .then(data => {
         console.log("apiservicve setHeaders data", data);
         if (data['status'] == 'ok') {
-          this.getHeaders();
+          return this.getHeaderConfig();
         } else {
           console.error('设置表头错误', data['message']);
         }
@@ -254,6 +262,13 @@ export class ApiService {
         let msg = this.handleError(err);
       });
   }
+
+
+
+
+
+
+
 
   reset(oldPassword: string, password: string, certainPassword: string): Promise<any> {
     const url: string = '/api/admin/auth/reset';
@@ -267,7 +282,6 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
-
 
   getEcgdData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null): Promise<any> {
     return this.httpClient.post(url, {

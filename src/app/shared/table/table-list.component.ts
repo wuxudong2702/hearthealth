@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, EventEmitter, Input, Output} from '@angular/core';
+import {Component, OnInit,OnChanges, ViewChild, EventEmitter, Input, Output} from '@angular/core';
 import {AppService} from '../../app.service';
 import {HttpPaginationComponent} from '../../shared/pagination/http-pagination.component';
 import {ModalService} from '../../shared/modal/modal.service';
@@ -116,14 +116,13 @@ export class CPipePipe implements PipeTransform {
   `],
 })
 
-export class TableListComponent implements OnInit {
+export class TableListComponent implements OnInit, OnChanges{
 
-  ngOnInit(): void {
-    // console.log(this.headers,'tablelist');
+  ngOnInit(): void {}
+  ngOnChanges(){
     this.headers = this.headers.sort((v1, v2) => {
       return v1.index - v2.index;
     });
-    // this.checkedList=[];
   }
 
   @ViewChild('hp', undefined) hp: HttpPaginationComponent;
@@ -149,9 +148,6 @@ export class TableListComponent implements OnInit {
 
   @Input() pagination: paginationObj;
 
-  // @Input() addCommonBtn: boolean;
-
-  // @Output() onAddSubmit = new EventEmitter<any>();
   @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
   @Output() onDownload = new EventEmitter<any>();
@@ -183,10 +179,8 @@ export class TableListComponent implements OnInit {
   delAllChecked() {
     if (!this.isDelAll) {
       this.checkedList = this.data.map(v => true);
-      // this.checkedListIds = this.data.map(v => v.heart_data_id);
     } else {
       this.checkedList = this.data.map(v => false);
-      // this.checkedListIds = [];
     }
   }
 
@@ -267,9 +261,11 @@ export class TableListComponent implements OnInit {
     let setConfig = new SetConfig('', this.headers);
     let result = this.modalService.set(setConfig);
     result.then(v => {
-      console.log(v);
-       this.onSet.emit(v.configHeaders);
-      // this.headers = v.configHeaders;
+      let set='';
+      v.configHeaders.forEach((v,index)=>{
+        set+=v.key+','+v.show+','+v.index+';';
+      });
+      this.onSet.emit(set);
     }).catch(v => {
     });
   }

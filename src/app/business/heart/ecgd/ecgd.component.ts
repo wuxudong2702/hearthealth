@@ -163,13 +163,14 @@ export class EcgdComponent implements OnInit {
 
   onSearch(searchObj: searchObj) {
     console.log(searchObj, 'ecgd Search searchObj');
-    this.http.postEcgdSearch(searchObj.selectValue, searchObj.searchValue).then(data => {
+    this.http.getEcgdData('/api/admin/heart/index',  '8',searchObj.selectValue, searchObj.searchValue).then(data => {
       console.log(data, 'ecgd Search result');
       this.data = data['data'];
     });
   }
 
-  onUpload() {
+  onUploadlocal
+  () {
   }
 
   paginationChange(parmas) {
@@ -229,6 +230,13 @@ export class EcgdComponent implements OnInit {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    });
+  }
+
+  set(set:string){
+    this.http.setHeader('heart-data',set).then(v => v).then( w => {
+        this.headers = this.http.getHeader('heart-data');
+        console.log(this.headers,'------0-0-0-');
     });
   }
 }

@@ -15,19 +15,19 @@ export class HhrComponent implements OnInit {
   constructor(private http: ApiService) {
   }
 
-  ngOnInit() {
-    this.headers = this.http.getHeader('reports');
-
-  }
+    ngOnInit() {
+        this.http.getHhrHeader().then(data => {
+            this.headers = data['headers'];
+        });
+        this.http.getHhrData().then(data => {
+            this.data = data['data'];
+        });
+    }
 
   dataChart: Array<any> = [];
   headers: Array<cell> = [];
   data: Array<any> = [];
   dataChart1: Array<any>;
-
-  del: boolean =  false;//this.http.isHavePerm('hhr-del');
-  deleteBtn: boolean = this.del;
-  deleteAllBtn: boolean = this.del;
 
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
@@ -38,49 +38,30 @@ export class HhrComponent implements OnInit {
   setOperate: boolean = true;
 
   showChartView: boolean = false;
-  userName: string = '';
+  userName:string='';
 
   onChart(chartId1: number) {
 
-    this.http.getHhrDataChart().then(data => {
-      console.log(data);
-      this.dataChart = data['dataChart'];
-      this.dataChart1 = this.dataChart[chartId1];
-      this.userName = this.data[chartId1].userName;
-      this.showChartView = !this.showChartView;
-    });
+      this.http.getHhrDataChart().then(data => {
+          console.log('data',data);
+          this.dataChart =data['dataChart'];
+          this.dataChart1 = this.dataChart[0];
+          this.userName = this.data[0].userName;
+          this.showChartView = !this.showChartView;
+      });
 
   }
 
-  onDel(id: number) {
-    this.http.postHhrDel(id).then(data => {
-      console.log(data, '删除');
-      this.data = data['data'];
-    });
-  }
-
-  onDelAll(checkedList: any) {
-    this.http.postHhrDelAll(checkedList).then(data => {
-      console.log(data, '删除全部');
-      this.data = data['data'];
-    });
-  }
-
-  onSort(sort: sortObj) {
-    this.http.postHhrSort(sort.id, sort.order).then(data => {
-      console.log(data, '排序');
-      this.data = data['data'];
-    });
-  }
-
-  onSearch(searchObj: searchObj) {
-    console.log('hhr searchObj:', searchObj);
-    // this.selectValue = searchObj.selectValue;
-    // this.searchValue = searchObj.searchValue;
-    this.http.postHhrSearch(searchObj.selectValue, searchObj.searchValue).then(data => {
-      console.log('hhr Search result:', data);
-      this.data = data['data'];
-    });
-  }
+    onSort(sort: sortObj) {
+        this.http.postHhrSort(sort.id,sort.order).then(data=>{
+            console.log(data,'排序');
+            this.data=data['data'];
+        });
+    }
+    onSearch(searchObj: searchObj) {
+        this.http.postHhrSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
+            this.data = data['data'];
+        });
+    }
 
 }

@@ -1,6 +1,8 @@
-import {Component, OnInit, NgModule, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, NgModule, Input, Output, EventEmitter, HostListener} from '@angular/core';
 import {NgbDatepickerI18n} from '@ng-bootstrap/ng-bootstrap';
 import {DatepickerI18n, DatepickerI18nType} from '../../../../shared/datepickerI18n/datepickerI18n';
+import {ApiService} from '../../../../business-service/api/api.service';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-hhr-chart',
@@ -14,16 +16,21 @@ export class HhrChartComponent implements OnInit {
   @Input() userName: string;
 
   @Output() onChart = new EventEmitter<any>();
+  @Output() onDelDetails = new EventEmitter<any>();
 
   dateList: Array<any>;
   valueList: Array<any>;
   chartOption: object = {};
   userInfo: string;
   dataChart: Array<any>;
-
+  chartDetailsData: Array<any>;
+  isDetails: boolean = false;
+  userSelectName: string;
+  userSelectIndex: number;
+  chartDetailsId: string;
   selectedDateStart;
   selectedDateEnd;
-  constructor() {
+  constructor(private http: ApiService) {
   }
 
   chartToggle(dataChart: Array<any>) {
@@ -33,73 +40,48 @@ export class HhrChartComponent implements OnInit {
     this.valueList = this.dataChart.map(function (item) {
       return item[1];
     });
-    this.chartOption = {
 
-      // Make gradient line here
-      visualMap: [{
-        show: false,
-        type: 'continuous',
-        seriesIndex: 0,
-        min: 0,
-        max: 400
-      }, {
-        show: false,
-        type: 'continuous',
-        seriesIndex: 1,
-        dimension: 0,
-        min: 0,
-        max: this.dateList.length - 1
-      }],
-      title: [{
-        left: 'center',
-        text: ''
-      }],
-      tooltip: {
-        trigger: 'axis'
-      },
-      xAxis: [
-        {
-          data: this.dateList
-        },
-        {
-          //data: this.dateList,
-          gridIndex: 1
-        }
-      ],
-      yAxis: [{
-        splitLine: {show: false}
-      }, {
-        splitLine: {show: false},
-        gridIndex: 1
-      }],
-      grid: [{
-        bottom: '15%'
-      }, {
-        top: '70%'
-      }],
-      series: [
-        {
-          type: 'line',
-          showSymbol: true,
-          data: this.valueList
-        },
-        {
-          type: 'line',
-          showSymbol: false,
-          xAxisIndex: 1,
-          yAxisIndex: 1
-        }
-      ]
-    };
+    this.chartOption = {
+          visualMap: [{
+            show: false,
+            type: 'continuous',
+            seriesIndex: 0,
+            min: 0,
+            max: 400
+          }],
+          title: [{
+            left: 'center',
+            text: ''
+          }],
+          tooltip: {
+            trigger: 'axis'
+          },
+          xAxis: [{
+              data: this.dateList
+          }],
+          yAxis: [{
+            splitLine: {show: false}
+          }],
+          grid: {
+            top: '15%'
+          },
+          series: [{
+              type: 'line',
+              showSymbol: true,
+              data: this.valueList
+          }]
+        };
   }
   datePickerConfig = {
-    locale: 'zh-CN'
+    locale: 'zh-CN',
+    format:"YYYY-MM-DD"
   };
 
   ngOnInit() {
     this.dataChart = this.dataChart1[0];
     this.chartToggle(this.dataChart);
     this.userInfo = this.userName;
+
   }
 
   chartView() {
@@ -130,23 +112,42 @@ export class HhrChartComponent implements OnInit {
     this.chartToggle( this.dataChart);
   }
 
-  single: any[];
-  multi: any[];
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  legendTitle = "图例";
-  showXAxisLabel = true;
-  xAxisLabel = '图家';
-  showYAxisLabel = true;
-  yAxisLabel = '人口';
+  clear(){
+      this.onDelDetails.emit(this.chartDetailsId);
+      console.log(this.chartDetailsId);
+      this.isDetails=false;
+  }
+  chartClick(e){
+      // console.log(e);
+      this.userSelectName = e.name;
+      this.userSelectIndex = e.dataIndex;
+      this.http.getHhrDataDetails().then(data => {
+          this.chartDetailsData = data['data'][this.userSelectIndex][this.userSelectName ];
+          this.chartDetailsId = data['data'][this.userSelectIndex]['id'];
+          this.chartDetailsData.forEach(function (v) {
+              if(v['key']=="int nBpmCode"){
+                switch(v['value']){
+                    case 0 :  v['value']="过慢"; break;
+                    case 1 :  v['value']="正常"; break;
+                    case 2 :  v['value']="过快"; break;
+                    default:  v['value']="";
+                }
+              }
+              if(v['key']=="int nArrhythmiaCode"){
+                switch(v['value']){
+                    case 0 :  v['value']="正常"; break;
+                    case 1 :  v['value']="隐患"; break;
+                    case 2 :  v['value']="高风险"; break;
+                    default:  v['value']="";
+                }
+              }
+          });
+      });
+      this.isDetails=true;
+  }
 
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-
+  @HostListener('window:resize')
+  onWindowResize(): void {}
 
 }
 

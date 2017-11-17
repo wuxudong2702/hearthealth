@@ -31,7 +31,8 @@ export class InputEditComponent implements OnInit {
 
 
   datePickerConfig = {
-    locale: 'zh-CN'
+    locale: 'zh-CN',
+    format:"YYYY-MM-DD"
   };
 
 }

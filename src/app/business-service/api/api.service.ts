@@ -262,12 +262,6 @@ export class ApiService {
   }
 
 
-
-
-
-
-
-
   reset(oldPassword: string, password: string, certainPassword: string): Promise<any> {
     const url: string = '/api/admin/auth/reset';
     return this.httpClient.post(url, {
@@ -281,7 +275,8 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getEcgdData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null): Promise<any> {
+  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null): Promise<any> {
+    console.log(url,count,find_key,find_val,'-=-=-=');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       count: count,

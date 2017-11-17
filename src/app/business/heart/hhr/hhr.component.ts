@@ -1,8 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, DataType, searchObj} from '../../../shared/table/table-list.component';
+import {
+  cell,
+  SortDirection,
+  sortObj,
+  DataType,
+  searchObj,
+  paginationObj
+} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
-
+import {ToastService} from '../../../shared/toast/toast.service';
+import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 
 @Component({
   selector: 'app-hhr',
@@ -12,17 +20,13 @@ import 'rxjs/add/operator/toPromise';
 })
 export class HhrComponent implements OnInit {
 
-  constructor(private http: ApiService) {
+  constructor(private http: ApiService, private toastService: ToastService) {
   }
 
-    ngOnInit() {
-        this.http.getHhrHeader().then(data => {
-            this.headers = data['headers'];
-        });
-        this.http.getHhrData().then(data => {
-            this.data = data['data'];
-        });
-    }
+  ngOnInit() {
+    this.headers = this.http.getHeader('reports');
+    this.getHeartData();
+  }
 
   dataChart: Array<any> = [];
   headers: Array<cell> = [];
@@ -38,32 +42,64 @@ export class HhrComponent implements OnInit {
   setOperate: boolean = true;
 
   showChartView: boolean = false;
-  userName:string='';
+  userName: string = '';
+  pagination: paginationObj = new paginationObj();
 
   onChart(chartId1: number) {
 
-      this.http.getHhrDataChart().then(data => {
-          console.log('data',data);
-          this.dataChart =data['dataChart'];
-          this.dataChart1 = this.dataChart[0];
-          this.userName = this.data[0].userName;
-          this.showChartView = !this.showChartView;
-      });
+    this.http.getHhrDataChart().then(data => {
+      console.log('data', data);
+      this.dataChart = data['dataChart'];
+      this.dataChart1 = this.dataChart[0];
+      this.userName = this.data[0].userName;
+      this.showChartView = !this.showChartView;
+    });
 
   }
-  chartBack(){
-    this.showChartView = !this.showChartView;
+
+  onSort(sort: sortObj) {
+    this.http.postHhrSort(sort.id, sort.order).then(data => {
+      console.log(data, '排序');
+      this.data = data['data'];
+    });
   }
-    onSort(sort: sortObj) {
-        this.http.postHhrSort(sort.id,sort.order).then(data=>{
-            console.log(data,'排序');
-            this.data=data['data'];
-        });
-    }
-    onSearch(searchObj: searchObj) {
-        this.http.postHhrSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
-            this.data = data['data'];
-        });
-    }
+
+  getHeartData(url: string = '/api/admin/report/index', per_page: string = '8', find_key: string = null, find_val: string = null) {
+    this.http.getData(url, per_page, find_key, find_val).then(data => {
+      if (data['status'] == 'ok') {
+        this.data = data['data']['data'];
+        this.pagination.current_page = data['data']['current_page'];
+        this.pagination.last_page = data['data']['last_page'];
+        this.pagination.per_page = data['data']['per_page'];
+        this.pagination.total = data['data']['total'];
+        this.pagination.first_page_url = data['data']['first_page_url'];
+        this.pagination.last_page_url = data['data']['last_page_url'];
+        this.pagination.next_page_url = data['data']['next_page_url'];
+        this.pagination.prev_page_url = data['data']['prev_page_url'];
+        this.pagination.to = data['data']['to'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
+  }
+
+  onSearch(searchObj: searchObj) {
+    this.getHeartData('/api/admin/report/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
+  }
+
+  chartBack() {
+    this.showChartView = !this.showChartView;
+
+  }
+
+  set (set: string) {
+    this.http.setHeader('reports', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('reports');
+    });
+  }
 
 }

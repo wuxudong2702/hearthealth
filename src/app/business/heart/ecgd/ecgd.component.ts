@@ -23,7 +23,6 @@ import {timestamp} from "rxjs/operators";
 export class EcgdComponent implements OnInit {
 
   constructor(private cdr: ChangeDetectorRef, private http: ApiService, private toastService: ToastService) {
-
   }
 
   ngOnInit(): void {
@@ -48,7 +47,7 @@ export class EcgdComponent implements OnInit {
     //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
     //   this.toastService.toast(toastCfg);
     // });
-    this.getData();
+    this.getHeartData();
     this.http.isHavePerm('ecgd-del').then(v => {
       this.deleteBtn = v;
       this.deleteAllBtn = v;
@@ -88,7 +87,6 @@ export class EcgdComponent implements OnInit {
   headers: Array<cell> = [];
   data: Array<any>[];
   result: Array<any> = [];
-  // dataChart: Array<any> = [];
   dataChart1: Array<any> = [];
 
   pagination: paginationObj = new paginationObj();
@@ -107,8 +105,8 @@ export class EcgdComponent implements OnInit {
   showChartView: boolean = false;
   downloadData: Array<any>;
 
-  getData(url: string = '/api/admin/heart/index', per_page: string = '8') {
-    this.http.getEcgdData(url,per_page).then(data => {
+  getHeartData(url: string = '/api/admin/heart/index', per_page: string = '8', find_key: string = null, find_val: string = null) {
+    this.http.getData(url, per_page, find_key, find_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];
@@ -160,21 +158,13 @@ export class EcgdComponent implements OnInit {
     });
   }
 
-
   onSearch(searchObj: searchObj) {
-    console.log(searchObj, 'ecgd Search searchObj');
-    this.http.getEcgdData('/api/admin/heart/index',  '8',searchObj.selectValue, searchObj.searchValue).then(data => {
-      console.log(data, 'ecgd Search result');
-      this.data = data['data'];
-    });
+    this.getHeartData('/api/admin/heart/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
   }
 
-  onUploadlocal
-  () {
-  }
 
   paginationChange(parmas) {
-    this.getData(parmas['url'],parmas['per_page']);
+    this.getHeartData(parmas['url'], parmas['per_page']);
 //     this.http.getEcgdData(parmas['url'],parmas['per_page']).then(data => {
 //       if (data['status'] == 'ok') {
 //   this.data = data['data']['data'];
@@ -201,7 +191,7 @@ export class EcgdComponent implements OnInit {
   onDel(ids: string) {
     this.http.ecgdDelData(ids).then(data => {
       if (data['status'] == 'ok') {
-   this.getData();
+        this.getHeartData();
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -218,7 +208,7 @@ export class EcgdComponent implements OnInit {
     const month: any = ( Dates.getMonth() + 1 ) < 10 ? '0' + ( Dates.getMonth() + 1 ) : ( Dates.getMonth() + 1 );
     const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate();
     return year + '-' + month + '-' + day;
-  };
+  }
 
   download(i: string) {
     let link = document.createElement("a");
@@ -233,10 +223,10 @@ export class EcgdComponent implements OnInit {
     });
   }
 
-  set(set:string){
-    this.http.setHeader('heart-data',set).then(v => v).then( w => {
-        this.headers = this.http.getHeader('heart-data');
-        console.log(this.headers,'------0-0-0-');
+  set (set: string) {
+    this.http.setHeader('heart-data', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('heart-data');
+      console.log(this.headers, '------0-0-0-');
     });
   }
 }

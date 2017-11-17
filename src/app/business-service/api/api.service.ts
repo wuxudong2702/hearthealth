@@ -242,7 +242,7 @@ export class ApiService {
   // historicalTests,true,5;'
   setHeader(table: string, set: string): Promise<any> {
     const url: string = '/api/admin/header/set';
-    console.log(set,'setHeader2');
+    console.log(set, 'setHeader2');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       table: table,
@@ -276,7 +276,7 @@ export class ApiService {
   }
 
   getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null): Promise<any> {
-    console.log(url,count,find_key,find_val,'-=-=-=');
+    console.log(url, count, find_key, find_val, '-=-=-=');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       count: count,
@@ -327,14 +327,14 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
+
   ecgdDownloadData(ids: string) {
     console.log(ids);
     const url: string = '/api/admin/heart/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + ids;
     return this.http.get(url)
-      .map(res => new Blob([res.text()],{ type: 'txt/plain' }))
+      .map(res => new Blob([res.text()], {type: 'txt/plain'}))
       .catch(this.handleError);
   }
-
 
 // admin-role
   getAdminRoleHeader(): Promise<any> {
@@ -886,7 +886,8 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
-    getHhrDataDetails(): Promise<any> {
+
+  getHhrDataDetails(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/hhr-data/hhr-dataDetails.json';
     return this.httpClient.get(url, {})
       .toPromise()

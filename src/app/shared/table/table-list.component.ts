@@ -93,6 +93,7 @@ export class cell {
 @Pipe({name: 'CPipe'})
 export class CPipePipe implements PipeTransform {
   transform(originalValue: any, pipe_type: number, pipe_params: any): any {
+
     switch (pipe_type) {
       case DataType.NONE:
         return originalValue;

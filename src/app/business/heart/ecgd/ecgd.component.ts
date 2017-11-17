@@ -48,6 +48,7 @@ export class EcgdComponent implements OnInit {
     //   this.toastService.toast(toastCfg);
     // });
     this.getHeartData();
+    console.log(this.headers,this.data);
     this.http.isHavePerm('ecgd-del').then(v => {
       this.deleteBtn = v;
       this.deleteAllBtn = v;

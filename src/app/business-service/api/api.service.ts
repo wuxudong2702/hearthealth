@@ -38,7 +38,6 @@ export class ApiService {
     }
   }
 
-
   postLogSort(headersId, order): Promise<any> {
     const url: string = '../../../assets/hearthealthData/log-data/log-data.json';
     return this.httpClient.get(url)
@@ -202,8 +201,7 @@ export class ApiService {
         return new Promise((fulfill, reject) => {
           if (data['status'] == 'ok') {
             this.headerConfig = data['data'];
-            console.log('getHeaderConfig4',this.headerConfig);
-            this.sessionStorageService.setObject('headerConfig', data);
+            this.sessionStorageService.setObject('headerConfig', this.headerConfig);
             fulfill(true);
           } else {
             reject(false);
@@ -251,7 +249,6 @@ export class ApiService {
     })
       .toPromise()
       .then(data => {
-        console.log("apiservicve setHeaders data", data);
         if (data['status'] == 'ok') {
           return this.getHeaderConfig();
         } else {

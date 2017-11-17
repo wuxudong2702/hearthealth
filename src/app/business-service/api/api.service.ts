@@ -879,6 +879,13 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
+    getHhrDataDetails(): Promise<any> {
+    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-dataDetails.json';
+    return this.httpClient.get(url, {})
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
 
   postHhrDel(id): Promise<any> {
     const url: string = '../../../assets/hearthealthData/hhr-data/hhr-data.json';

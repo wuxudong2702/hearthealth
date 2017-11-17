@@ -1,4 +1,4 @@
-import {Component, OnInit, NgModule, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, NgModule, Input, Output, EventEmitter, HostListener} from '@angular/core';
 import {NgbDatepickerI18n} from '@ng-bootstrap/ng-bootstrap';
 import {DatepickerI18n, DatepickerI18nType} from '../../../../shared/datepickerI18n/datepickerI18n';
 import {ApiService} from '../../../../business-service/api/api.service';
@@ -118,31 +118,37 @@ export class HhrChartComponent implements OnInit {
       this.isDetails=false;
   }
   chartClick(e){
-      console.log(e);
+      // console.log(e);
       this.userSelectName = e.name;
       this.userSelectIndex = e.dataIndex;
       this.http.getHhrDataDetails().then(data => {
           this.chartDetailsData = data['data'][this.userSelectIndex][this.userSelectName ];
           this.chartDetailsId = data['data'][this.userSelectIndex]['id'];
-          console.log("chartDetailsData",this.chartDetailsData);
           this.chartDetailsData.forEach(function (v) {
               if(v['key']=="int nBpmCode"){
                 switch(v['value']){
-                    case 0 :  v['value']="过慢";
-                    case 1 :  v['value']="正常";
-                    case 2 :  v['value']="过快";
+                    case 0 :  v['value']="过慢"; break;
+                    case 1 :  v['value']="正常"; break;
+                    case 2 :  v['value']="过快"; break;
+                    default:  v['value']="";
                 }
               }
               if(v['key']=="int nArrhythmiaCode"){
                 switch(v['value']){
-                    case 0 :  v['value']="正常";
-                    case 1 :  v['value']="隐患";
-                    case 2 :  v['value']="高风险";
+                    case 0 :  v['value']="正常"; break;
+                    case 1 :  v['value']="隐患"; break;
+                    case 2 :  v['value']="高风险"; break;
+                    default:  v['value']="";
                 }
               }
           });
       });
       this.isDetails=true;
+  }
+
+  @HostListener('window:resize')
+  onWindowResize(): void {
+
   }
 
 

@@ -15,7 +15,7 @@
 .dateInputStyle {
   margin-left:20px;
 }
-button:focus {
+.Btns:focus {
     background-color: #868e96;
 }
 h4 {

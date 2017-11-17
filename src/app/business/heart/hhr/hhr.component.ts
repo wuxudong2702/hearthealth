@@ -43,10 +43,10 @@ export class HhrComponent implements OnInit {
   onChart(chartId1: number) {
 
       this.http.getHhrDataChart().then(data => {
-          console.log(data);
+          console.log('data',data);
           this.dataChart =data['dataChart'];
-          this.dataChart1 = this.dataChart[chartId1];
-          this.userName = this.data[chartId1].userName;
+          this.dataChart1 = this.dataChart[0];
+          this.userName = this.data[0].userName;
           this.showChartView = !this.showChartView;
       });
 
@@ -59,11 +59,7 @@ export class HhrComponent implements OnInit {
         });
     }
     onSearch(searchObj: searchObj) {
-        console.log('hhr searchObj:',searchObj);
-        // this.selectValue = searchObj.selectValue;
-        // this.searchValue = searchObj.searchValue;
         this.http.postHhrSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
-            console.log('hhr Search result:',data);
             this.data = data['data'];
         });
     }

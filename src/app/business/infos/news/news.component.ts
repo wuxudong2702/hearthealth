@@ -92,10 +92,6 @@ export class NewsComponent implements OnInit {
     this.editor = true;
     this.isSelectShow = true;
   }
-  sort(sort: sortObj) {
-    this.getHeartData('/api/admin/info/index', this.per_page, null, null,sort.key, sort.val);
-  }
-
 
   del(info_id: string) {
     this.http.infoDel(info_id).then(data => {

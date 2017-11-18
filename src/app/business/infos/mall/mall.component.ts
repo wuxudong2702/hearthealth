@@ -154,7 +154,7 @@ export class MallComponent implements OnInit {
     }
 
     onSort(sort: sortObj) {
-        this.http.postMallSort(sort.id,sort.order).then(data=>{
+        this.http.postMallSort(sort.key,sort.val).then(data=>{
             console.log(data,'排序');
             this.data=data['data'];
         });

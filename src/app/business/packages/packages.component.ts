@@ -52,7 +52,7 @@ export class PackagesComponent implements OnInit {
   }
 
   sort(sort: sortObj) {
-      this.http.postPackagesSort(sort.id,sort.order).then(data=>{
+      this.http.postPackagesSort(sort.key,sort.val).then(data=>{
           this.data=data['data'];
       });
   }

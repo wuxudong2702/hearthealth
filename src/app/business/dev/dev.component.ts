@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {cell, SortDirection, sortObj, DataType,searchObj} from '../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, DataType,searchObj,paginationObj} from '../../shared/table/table-list.component';
 import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastConfig, ToastType} from "../../shared/toast/toast-model";
@@ -18,35 +18,14 @@ export class DevComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.headers = this.http.getHeader('devs');
+    this.getHeartData();
 
-    this.headers= this.http.getHeader('devs');
+    this.http.isHavePerm('heart-dev-del').then(v => {
+      this.deleteBtn = v;
+      this.deleteAllBtn = v;
+    });
 
-
-    // this.http.getDevHeader().then(data => {
-    //
-    //   if (data.status == 'ok') {
-    //     this.headers=data['headers'];
-    //   } else {
-    //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-    //     this.toastService.toast(toastCfg);
-    //     // this.router.navigate(['/login']);
-    //   }
-    // }).catch(err => {
-    //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-    //   this.toastService.toast(toastCfg);
-    // });
-    // this.http.getDevData().then(data => {
-    //   if (data.status == 'ok') {
-    //     this.data = data['data'];
-    //   } else {
-    //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-    //     this.toastService.toast(toastCfg);
-    //     // this.router.navigate(['/login']);
-    //   }
-    // }).catch(err => {
-    //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-    //   this.toastService.toast(toastCfg);
-    // });
   }
 
   headers: Array<cell> = [];
@@ -67,30 +46,25 @@ export class DevComponent implements OnInit {
 
   tableView: boolean = true;
   addView: boolean = false;
+  pagination: paginationObj = new paginationObj();
+  per_page:string;
 
   add() {
     this.addView = true;
     this.tableView = false;
   }
 
-  del(id: number) {
-    this.http.postDevDel(id).then(data => {
-      console.log(data, '删除');
-      this.data = data['data'];
-    });
-  }
-
-  delAll(checkedList: any) {
-    this.http.postDevDelAll(checkedList).then(data => {
-      console.log(data, '删除全部');
-      this.data = data['data'];
-    });
-  }
-
-  sort(sort: sortObj) {
-    this.http.postDevSort(sort.id, sort.order).then(data => {
-      console.log(data, '排序');
-      this.data = data['data'];
+  del(dev_id: string) {
+    this.http.unbind(dev_id).then(data => {
+      if (data['status'] == 'ok') {
+        this.getHeartData();
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
   }
 
@@ -107,13 +81,46 @@ export class DevComponent implements OnInit {
     this.tableView = true;
   }
 
-  Search(searchObj: searchObj) {
-      console.log('dev searchObj:',searchObj);
-      // this.selectValue = searchObj.selectValue;
-      // this.searchValue = searchObj.searchValue;
-      this.http.postDevSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
-          console.log('dev Search result:',data);
-          this.data = data['data'];
-      });
+  paginationChange(parmas) {
+    this.getHeartData(parmas['url'], parmas['per_page']);
   }
+
+  set (set: string) {
+    this.http.setHeader('devs', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('devs');
+      console.log(this.headers, '------0-0-0-');
+    });
+  }
+
+  getHeartData(url: string = '/api/admin/dev/index', per_page: string = '8', find_key: string = null, find_val: string = null,sort_key:string=null,sort_val:string=null) {
+    this.http.getData(url, per_page, find_key, find_val,sort_key,sort_val).then(data => {
+      if (data['status'] == 'ok') {
+        this.data = data['data']['data'];
+        this.pagination.current_page = data['data']['current_page'];
+        this.pagination.last_page = data['data']['last_page'];
+        this.pagination.per_page = data['data']['per_page'];
+        this.pagination.total = data['data']['total'];
+        this.pagination.first_page_url = data['data']['first_page_url'];
+        this.pagination.last_page_url = data['data']['last_page_url'];
+        this.pagination.next_page_url = data['data']['next_page_url'];
+        this.pagination.prev_page_url = data['data']['prev_page_url'];
+        this.pagination.to = data['data']['to'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
+  }
+
+  sort(sort: sortObj) {
+    this.getHeartData('/api/admin/dev/index', this.per_page, null, null,sort.key, sort.val);
+  }
+
+  search(searchObj: searchObj) {
+    this.getHeartData('/api/admin/dev/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
+  }
+
 }

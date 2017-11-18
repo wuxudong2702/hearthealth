@@ -274,16 +274,21 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null): Promise<any> {
-    console.log(url, count, find_key, find_val, '-=-=-=');
+  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null,sort_key:string,sort_val:string): Promise<any> {
+    console.log(url, count, find_key, find_val, '');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       count: count,
       find_key: find_key,
       find_val: find_val,
+      sort_key: sort_key,
+      sort_val: sort_val,
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        console.log(data,'getData全局获取data');
+        return data
+      })
       .catch(err => {
         this.handleError(err);
       });
@@ -308,13 +313,6 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  postEcgdSearch(selectValue, searchValue): Promise<any> {
-    const url: string = '../../../assets/ecgd-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
 
   ecgdDelData(ids: string): Promise<any> {
     const url: string = '/api/admin/heart/del';
@@ -326,15 +324,25 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
+
   ecgdDownloadData(ids: string) {
     console.log(ids);
     const url: string = '/api/admin/heart/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + ids;
     return this.http.get(url)
-      .map(res => new Blob([res.text()],{ type: 'txt/plain' }))
+      .map(res => new Blob([res.text()], {type: 'txt/plain'}))
       .catch(this.handleError);
   }
 
-
+  unbind(dev_id:string){
+    const url: string = '/api/admin/dev/unbind';
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      dev_id: dev_id
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
 // admin-role
   getAdminRoleHeader(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-headers.json';
@@ -878,22 +886,22 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-    getHhrDataChart(chartId: number,start_time:any,end_time:any,field:string): Promise<any> {
-        const url: string = '/api/admin/report/series';
-        return this.httpClient.post(url, {
-            token: this.sessionStorageService.get('token'),
-            start_time: start_time,
-            end_time: end_time,
-            field: field,
-            heart_data_id: chartId
-        })
-            .toPromise()
-            .then(data => data)
-            .catch(this.handleError);
-    }
+  getHhrDataChart(chartId: number, start_time: any, end_time: any, field: string): Promise<any> {
+    const url: string = '/api/admin/report/series';
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      start_time: start_time,
+      end_time: end_time,
+      field: field,
+      heart_data_id: chartId
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
 
 
-    getHhrDataDetails(): Promise<any> {
+  getHhrDataDetails(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/hhr-data/hhr-dataDetails.json';
     return this.httpClient.get(url, {})
       .toPromise()

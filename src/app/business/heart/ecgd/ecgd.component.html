@@ -1,10 +1,10 @@
 <c-table-list
   *ngIf="!showChartView"
-  (onChart)="onChart($event)"
-  (onSort)="onSort($event)"
-  (onSearch)="onSearch($event)"
+  (onChart)="chart($event)"
+  (onSort)="sort($event)"
+  (onSearch)="search($event)"
 
-  (onDel)="onDel($event)"
+  (onDel)="del($event)"
   (onDownload)="download($event)"
   (onSet)="set($event)"
 
@@ -16,9 +16,8 @@
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
-  [paginationBtn]="paginationBtn"
   [setOperate]="setOperate"
-
+  [paginationBtn]="paginationBtn"
   [pagination]="pagination"
   (onPaginationChange)="paginationChange($event)"
 

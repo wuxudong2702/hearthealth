@@ -38,7 +38,7 @@ export class AppRoleComponent implements OnInit {
 
 
   sort(sort: sortObj) {
-    this.http.postAppRoleSort(sort.id, sort.order).then(data => {
+    this.http.postAppRoleSort(sort.key,sort.val).then(data => {
       console.log(data, '排序');
       this.data = data['data'];
     });

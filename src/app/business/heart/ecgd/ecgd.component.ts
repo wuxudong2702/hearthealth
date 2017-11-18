@@ -48,7 +48,7 @@ export class EcgdComponent implements OnInit {
     //   this.toastService.toast(toastCfg);
     // });
     this.getHeartData();
-    console.log(this.headers,this.data);
+    console.log(this.headers, this.data);
     this.http.isHavePerm('ecgd-del').then(v => {
       this.deleteBtn = v;
       this.deleteAllBtn = v;
@@ -89,9 +89,8 @@ export class EcgdComponent implements OnInit {
   data: Array<any>[];
   result: Array<any> = [];
   dataChart1: Array<any> = [];
-
   pagination: paginationObj = new paginationObj();
-
+  per_page:string;
   userName: string;
   sense_time: any;
   deleteBtn: boolean = false;
@@ -106,28 +105,6 @@ export class EcgdComponent implements OnInit {
   showChartView: boolean = false;
   downloadData: Array<any>;
 
-  getHeartData(url: string = '/api/admin/heart/index', per_page: string = '8', find_key: string = null, find_val: string = null) {
-    this.http.getData(url, per_page, find_key, find_val).then(data => {
-      if (data['status'] == 'ok') {
-        this.data = data['data']['data'];
-        this.pagination.current_page = data['data']['current_page'];
-        this.pagination.last_page = data['data']['last_page'];
-        this.pagination.per_page = data['data']['per_page'];
-        this.pagination.total = data['data']['total'];
-        this.pagination.first_page_url = data['data']['first_page_url'];
-        this.pagination.last_page_url = data['data']['last_page_url'];
-        this.pagination.next_page_url = data['data']['next_page_url'];
-        this.pagination.prev_page_url = data['data']['prev_page_url'];
-        this.pagination.to = data['data']['to'];
-      } else {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-        this.toastService.toast(toastCfg);
-      }
-    }).catch(err => {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      this.toastService.toast(toastCfg);
-    });
-  }
 
   onChart(params) {
     this.userName = params['name'];
@@ -152,19 +129,52 @@ export class EcgdComponent implements OnInit {
     this.showChartView = !this.showChartView;
   }
 
-  onSort(sort: sortObj) {
-    console.log(sort, '3456789');
-    this.http.postEcgdSort(sort.id, sort.order).then(data => {
-      this.data = data['data'];
+  formatDate(time: any) {
+    const Dates = new Date(time);
+    const year: number = Dates.getFullYear();
+    const month: any = ( Dates.getMonth() + 1 ) < 10 ? '0' + ( Dates.getMonth() + 1 ) : ( Dates.getMonth() + 1 );
+    const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate();
+    return year + '-' + month + '-' + day;
+  }
+
+  download(i: string) {
+    let link = document.createElement("a");
+    this.http.ecgdDownloadData(i).subscribe(data => {
+      // Blob转化为链接
+      link.setAttribute("href", window.URL.createObjectURL(data));
+      link.setAttribute("download", 'heart_data' + this.formatDate(new Date().getTime()) + '.txt');
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     });
   }
 
-  onSearch(searchObj: searchObj) {
+
+
+  sort(sort: sortObj) {
+    this.getHeartData('/api/admin/heart/index', this.per_page, null, null,sort.key, sort.val);
+  }
+
+  del(ids: string) {
+    this.http.ecgdDelData(ids).then(data => {
+      if (data['status'] == 'ok') {
+        this.getHeartData();
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
+  }
+  search(searchObj: searchObj) {
     this.getHeartData('/api/admin/heart/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
   }
 
-
   paginationChange(parmas) {
+    this.per_page=parmas['per_page'];
     this.getHeartData(parmas['url'], parmas['per_page']);
 //     this.http.getEcgdData(parmas['url'],parmas['per_page']).then(data => {
 //       if (data['status'] == 'ok') {
@@ -189,10 +199,27 @@ export class EcgdComponent implements OnInit {
 // });
   }
 
-  onDel(ids: string) {
-    this.http.ecgdDelData(ids).then(data => {
+  set (set: string) {
+    this.http.setHeader('heart-data', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('heart-data');
+      console.log(this.headers, '------0-0-0-');
+    });
+  }
+
+  getHeartData(url: string = '/api/admin/heart/index', per_page: string=this.per_page, find_key: string = null, find_val: string = null,sort_key:string=null,sort_val:string=null) {
+    this.http.getData(url, per_page, find_key, find_val,sort_key,sort_val).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData();
+        this.data = data['data']['data'];
+        this.pagination.current_page = data['data']['current_page'];
+        this.pagination.last_page = data['data']['last_page'];
+        this.pagination.per_page = data['data']['per_page'];
+        this.pagination.total = data['data']['total'];
+        this.pagination.first_page_url = data['data']['first_page_url'];
+        this.pagination.last_page_url = data['data']['last_page_url'];
+        this.pagination.next_page_url = data['data']['next_page_url'];
+        this.pagination.prev_page_url = data['data']['prev_page_url'];
+        this.pagination.to = data['data']['to'];
+        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -203,31 +230,4 @@ export class EcgdComponent implements OnInit {
     });
   }
 
-  formatDate(time: any) {
-    const Dates = new Date(time);
-    const year: number = Dates.getFullYear();
-    const month: any = ( Dates.getMonth() + 1 ) < 10 ? '0' + ( Dates.getMonth() + 1 ) : ( Dates.getMonth() + 1 );
-    const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate();
-    return year + '-' + month + '-' + day;
-  }
-
-  download(i: string) {
-    let link = document.createElement("a");
-    this.http.ecgdDownloadData(i).subscribe(data => {
-      // Blob转化为链接
-      link.setAttribute("href", window.URL.createObjectURL(data));
-      link.setAttribute("download", 'heart_data' + this.formatDate(new Date().getTime()) + '.txt');
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-  }
-
-  set (set: string) {
-    this.http.setHeader('heart-data', set).then(v => v).then(w => {
-      this.headers = this.http.getHeader('heart-data');
-      console.log(this.headers, '------0-0-0-');
-    });
-  }
 }

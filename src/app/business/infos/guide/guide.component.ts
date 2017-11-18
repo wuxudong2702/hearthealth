@@ -110,7 +110,7 @@ export class GuideComponent implements OnInit {
   }
 
   onSort(sort: sortObj) {
-      this.http.postGuideSort(sort.id,sort.order).then(data=>{
+      this.http.postGuideSort(sort.key,sort.val).then(data=>{
           console.log(data,'排序');
           this.data=data['data'];
       });

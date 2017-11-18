@@ -26,17 +26,18 @@ const htmlH: string ="<!DOCTYPE html>\n" +
   "  .article-content p{\n" +
   "    word-wrap: break-word;line-height: 1.2em;margin: 20px 0 0 0;text-indent: 1.8em;\n" +
   "  }\n" +
-  "  .article-content img {max-width: 30%;display: block;margin: 0 auto;border-radius: 4px; float:right;}\n" +
+  "  .article-content img {max-width: 100%;display: block;margin: 0 auto;border-radius: 4px; }\n" +
   "</style>\n" +
-  "<div class=\"article-title\">\n" +
-  "  <h1 class=\"title\">我是预览页面</h1>\n" +
-  "</div>\n" +
+
   "<div class=\"article-content\">";
 
 const htmlL: string = "</div>\n" +
   "\t\n" +
   "</body>\n" +
   "</html>";
+const htmlTitle= "<div class=\"article-title\">\n" +
+  "  <h1 class=\"title\">我是预览页面</h1>\n" +
+  "</div>\n" ;
 
 @Component({
   selector: 'c-editor-h5',
@@ -125,7 +126,7 @@ export class Editorh5Component implements OnInit {
     }
     let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
     doc.open();
-    doc.write(htmlH + this.html5 + htmlL);
+    doc.write(htmlH +htmlTitle+ this.html5 + htmlL);
     doc.close();
   }
 

@@ -1,12 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  cell,
-  SortDirection,
-  sortObj,
-  DataType,
-  searchObj,
-  paginationObj
-} from '../../../shared/table/table-list.component';
+  cell, SortDirection, sortObj, DataType, searchObj, paginationObj} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../shared/toast/toast.service';
@@ -49,28 +43,28 @@ export class HhrComponent implements OnInit {
   chartId: number;
   pagination: paginationObj = new paginationObj();
 
-  onChart(params) {
+  chart(params) {
     // this.http.getHhrDataChart().then(data => {
     //   console.log('data', data);
     //   this.dataChart = data['dataChart'];
     //   this.dataChart1 = this.dataChart[0];
     //   this.userName = this.data[0].userName;
     // });
-      console.log(params,'params');
-      this.userName = params['name'];
-      this.chartId = params['id'];
-      this.showChartView = !this.showChartView;
+    console.log(params, 'params');
+    this.userName = params['name'];
+    this.chartId = params['id'];
+    this.showChartView = !this.showChartView;
   }
 
-  onSort(sort: sortObj) {
-    this.http.postHhrSort(sort.id, sort.order).then(data => {
+  sort(sort: sortObj) {
+    this.http.postHhrSort(sort.key,sort.val).then(data => {
       console.log(data, '排序');
       this.data = data['data'];
     });
   }
 
-  getHeartData(url: string = '/api/admin/report/index', per_page: string = '8', find_key: string = null, find_val: string = null) {
-    this.http.getData(url, per_page, find_key, find_val).then(data => {
+  getHeartData(url: string = '/api/admin/report/index', per_page: string = '8', find_key: string = null, find_val: string = null,sort_key:string=null,sort_val:string=null) {
+    this.http.getData(url, per_page, find_key, find_val,sort_key,sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];
@@ -92,7 +86,7 @@ export class HhrComponent implements OnInit {
     });
   }
 
-  onSearch(searchObj: searchObj) {
+  search(searchObj: searchObj) {
     this.getHeartData('/api/admin/report/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
   }
 
@@ -108,4 +102,7 @@ export class HhrComponent implements OnInit {
     });
   }
 
+  paginationChange(parmas) {
+    this.getHeartData(parmas['url'], parmas['per_page']);
+  }
 }

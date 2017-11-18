@@ -19,7 +19,7 @@ export class TableEditComponent implements OnInit {
   @Input() editId: number;
   @Input() data: Array<any>;
 
-  @Output() onEditCancle = new EventEmitter<any>();
+  @Output() onEditCancel = new EventEmitter<any>();
   @Output() onSubmit = new EventEmitter<any>();
 
   submitData: string;
@@ -42,8 +42,8 @@ export class TableEditComponent implements OnInit {
     this.onSubmit.emit(this.submitData);
   }
 
-  editCancle() {
-    this.onEditCancle.emit();
+  editCancel() {
+    this.onEditCancel.emit();
   }
 
 }

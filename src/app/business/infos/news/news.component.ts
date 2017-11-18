@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, news, DataType, searchObj,INFOTYPE} from '../../../shared/table/table-list.component';
+import {cell, SortDirection, sortObj, news, DataType, searchObj,INFOTYPE,paginationObj} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
+import {ToastService} from '../../../shared/toast/toast.service';
+import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 
 @Component({
   selector: 'app-news',
@@ -11,11 +13,23 @@ import 'rxjs/add/operator/toPromise';
 })
 export class NewsComponent implements OnInit {
 
-  constructor(private http: ApiService) {
+  constructor(private http: ApiService,private  toastService:ToastService) {
   }
 
   ngOnInit() {
     this.headers= this.http.getHeader('infos');
+    this.getHeartData();
+    this.http.isHavePerm('info-del').then(v => {
+      this.deleteBtn = v;
+      this.deleteAllBtn = v;
+    });
+
+    this.http.isHavePerm('info-edit').then(v => {
+      this.editH5Btn = v;
+    });
+    this.http.isHavePerm('info-add').then(v => {
+      this.addBtn = v;
+    });
   }
 
   headers: Array<cell> = [];
@@ -30,21 +44,22 @@ export class NewsComponent implements OnInit {
   dataEditor: news;
   isSelectShow: boolean = false;
 
-  del: boolean =  false;//this.http.isHavePerm('info-del');
-  add: boolean = false;// this.http.isHavePerm('info-add');
-  edit: boolean = false;// this.http.isHavePerm('info-edit');
-  deleteBtn: boolean = this.del;
-  deleteAllBtn: boolean = this.del;
-  addBtn: boolean = this.add;
-  editH5Btn: boolean = this.edit;
+
+
+  deleteBtn: boolean = false;
+  deleteAllBtn: boolean = false;
+  addBtn: boolean = false;
+  editH5Btn: boolean = false;
 
   searchBtn: boolean = true;
   setBtn: boolean = true;
   paginationBtn: boolean = true;
   setOperate: boolean = true;
   editor: boolean = false;
+  pagination: paginationObj = new paginationObj();
+  per_page:string;
 
-  onEditH5(id: number) {
+  editH5(id: number) {
     this.dataEditor = this.data[id];
     this.editor = true;
     this.isSelectShow = false;
@@ -65,34 +80,71 @@ export class NewsComponent implements OnInit {
       this.isSelectShow = false;
   }
 
-  onDel(id: number) {
-    this.http.postNewsDel(id).then(data => {
-      this.data = data['data'];
-    });
-  }
 
-  onDelAll(checkedList: any) {
-    this.http.postNewsDelAll(checkedList).then(data => {
-      this.data = data['data'];
-    });
-  }
 
-  onSort(sort: sortObj) {
-    this.http.postNewsSort(sort.id, sort.order).then(data => {
-      this.data = data['data'];
-    });
-  }
-
-  onAdd() {
+  add() {
     this.editor = true;
     this.isSelectShow = true;
   }
+  sort(sort: sortObj) {
+    this.getHeartData('/api/admin/info/index', this.per_page, null, null,sort.key, sort.val);
+  }
 
-  onSearch(searchObj: searchObj) {
-    console.log('news searchObj:', searchObj);
-    this.http.postNewsSearch(searchObj.selectValue, searchObj.searchValue).then(data => {
-      console.log('news Search result:', data);
-      this.data = data['data'];
+  del(ids: string) {
+    this.http.ecgdDelData(ids).then(data => {
+      if (data['status'] == 'ok') {
+        this.getHeartData();
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
   }
+  search(searchObj: searchObj) {
+    this.getHeartData('/api/admin/info/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
+  }
+
+  paginationChange(parmas) {
+    this.per_page=parmas['per_page'];
+    this.getHeartData(parmas['url'], parmas['per_page']);
+  }
+
+  set (set: string) {
+    this.http.setHeader('infos', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('heart-data');
+    });
+  }
+
+  getHeartData(url: string = '/api/admin/info/index', per_page: string=this.per_page, find_key: string = null, find_val: string = null,sort_key:string=null,sort_val:string=null) {
+    this.http.getData(url, per_page, find_key, find_val,sort_key,sort_val).then(data => {
+      if (data['status'] == 'ok') {
+        this.data = data['data']['data'];
+        this.pagination.current_page = data['data']['current_page'];
+        this.pagination.last_page = data['data']['last_page'];
+        this.pagination.per_page = data['data']['per_page'];
+        this.pagination.total = data['data']['total'];
+        this.pagination.first_page_url = data['data']['first_page_url'];
+        this.pagination.last_page_url = data['data']['last_page_url'];
+        this.pagination.next_page_url = data['data']['next_page_url'];
+        this.pagination.prev_page_url = data['data']['prev_page_url'];
+        this.pagination.to = data['data']['to'];
+        // console.log(this.pagination,'pagination======');
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
+  }
+
+  save(html:string){
+    console.log('===============');
+   this.http.uploadHtml5Page('12','12','12',html);
+  }
+
 }

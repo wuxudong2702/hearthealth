@@ -71,13 +71,13 @@ export class AdminRoleComponent implements OnInit {
      });
   }
   sort(sort: sortObj) {
-     this.http.postAdminRoleSort(sort.id,sort.order).then(data=>{
+     this.http.postAdminRoleSort(sort.key,sort.val).then(data=>{
          console.log(data,'排序');
          this.data=data['data'];
      });
   }
 
-  cancle() {
+  cancel() {
      this.addView = false;
      this.editView=false;
      this.tableView = true;

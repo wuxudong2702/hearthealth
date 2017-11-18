@@ -51,7 +51,7 @@ export class AdminUserComponent implements OnInit {
   }
 
   onSort(sort: sortObj) {
-      this.http.postAdminUserSort(sort.id,sort.order).then(data=>{
+      this.http.postAdminUserSort(sort.key,sort.val).then(data=>{
           this.data=data['data'];
       });
   }
@@ -86,7 +86,7 @@ export class AdminUserComponent implements OnInit {
 
   }
 
-  cancle() {
+  cancel() {
       this.addView = false;
       this.tableView = true;
   }

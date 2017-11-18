@@ -67,7 +67,7 @@ export class AppUserComponent implements OnInit {
   }
 
   sort(sort: sortObj) {
-    this.http.postAppUserSort(sort.id, sort.order).then(data => {
+    this.http.postAppUserSort(sort.key, sort.val).then(data => {
       console.log(data, '排序');
       this.data = data['data'];
     });
@@ -111,7 +111,7 @@ export class AppUserComponent implements OnInit {
 
   }
 
-  cancle() {
+  cancel() {
     this.addView = false;
     this.subUsersView = false;
     this.tableView = true;
@@ -172,7 +172,7 @@ export class AppUserComponent implements OnInit {
   }
 
   subUsersSort(sort: sortObj) {
-    this.http.postAppUserSubSort(sort.id, sort.order).then(data => {
+    this.http.postAppUserSubSort(sort.key,sort.val).then(data => {
       console.log(data, '排序');
       this.subUserData = data['data'];
     });
@@ -232,7 +232,7 @@ export class AppUserComponent implements OnInit {
     this.addSubUserView = false;
   }
 
-  subUsersCancle() {
+  subUsersCancel() {
     this.addView = false;
     this.subUsersView = true;
     this.tableView = false;

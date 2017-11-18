@@ -109,10 +109,40 @@
   ],
   "devs": [
     {
-      "key": "userName",
+      "key": "dev_id",
+      "show": false,
+      "name": "id",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key":"mobile",
+      "show": true,
+      "name": "手机号码",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": " ",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "name",
       "show": true,
       "name": "用户名",
-      "index": 4,
+      "index": 3,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -124,10 +154,40 @@
       "input_type": 0
     },
     {
-      "key": "accountBind",
+      "key": "qq",
+      "show": true,
+      "name": "qq",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "qq",
+      "required": true,
+      "pattern": "[1-9][0-9]{4,14}",
+      "input_type": 0
+    },
+    {
+      "key": "weixin",
+      "show": true,
+      "name": "微信",
+      "index": 5,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "微信",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "user_id",
       "show": true,
       "name": "绑定账户",
-      "index": 3,
+      "index": 6,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -138,32 +198,12 @@
       "pattern": "[0-9]+$",
       "input_type": 0
     },
+
     {
-      "key": "isBinding",
-      "show": true,
-      "name": "是否绑定",
-      "index": "2",
-      "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "0": "是",
-        "1": "否"
-      },
-      "val": "",
-      "select_val": [
-        "是",
-        "否"
-      ],
-      "valid_example": "",
-      "required": true,
-      "pattern": "",
-      "input_type": 1
-    },
-    {
-      "key": "devType",
+      "key": "type",
       "show": true,
       "name": "设备类型",
-      "index": 1,
+      "index": 7,
       "order": 0,
       "pipe_type": 1,
       "pipe_params": {
@@ -179,21 +219,6 @@
       "required": true,
       "pattern": "",
       "input_type": 1
-    },
-    {
-      "key": "devID",
-      "show": true,
-      "name": "设备ID",
-      "index": 6,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "123456789",
-      "required": true,
-      "pattern": "^[0-9]+$",
-      "input_type": 3
     }
   ],
   "heart-data": [
@@ -293,13 +318,13 @@
       "name": "心跳数据长度",
       "index": 4,
       "order": 0,
-      "pipe_type": 2,
+      "pipe_type": 0,
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": " ",
+      "valid_example": "",
       "required": true,
-      "pattern": "sS",
+      "pattern": "",
       "input_type": 0
     },
 
@@ -336,9 +361,9 @@
   ],
   "infos": [
     {
-      "key": "name",
+      "key": "id",
       "show": true,
-      "name": "名称",
+      "name": "id",
       "index": 0,
       "order": 0,
       "pipe_type": 0,
@@ -351,36 +376,24 @@
       "input_type": 0
     },
     {
-      "key": "infoType",
+      "key": "label",
       "show": true,
       "name": "类型",
       "index": "1",
       "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "0": "监控咨询",
-        "1": "用户协议",
-        "2": "指南",
-        "3": "启动页",
-        "4": "关于我们"
-      },
+      "pipe_type": 0,
+      "pipe_params": {},
       "val": "",
-      "select_val": [
-        "监控咨询",
-        "用户协议",
-        "指南",
-        "启动页",
-        "关于我们"
-      ],
+      "select_val": [],
       "valid_example": "武旭东",
       "required": true,
       "pattern": "",
       "input_type": 0
     },
     {
-      "key": "date",
+      "key": "created_at",
       "show": true,
-      "name": "日期",
+      "name": "创建日期",
       "index": 2,
       "order": 0,
       "pipe_type": 2,
@@ -391,6 +404,66 @@
       "required": true,
       "pattern": "",
       "input_type": 2
+    },
+    {
+      "key": "title",
+      "show": true,
+      "name": "题目",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "description",
+      "show": true,
+      "name": "内容",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "updated_at",
+      "show": true,
+      "name": "最近更新日期",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "yyyyMMdd",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-14",
+      "required": true,
+      "pattern": "",
+      "input_type": 2
+    },
+    {
+      "key": "url",
+      "show": true,
+      "name": "地址",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
     }
   ],
   "reports": [

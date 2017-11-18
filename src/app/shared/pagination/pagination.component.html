@@ -10,7 +10,8 @@
 
 		<div class="btn-group pull-left" style="margin-top:5px">
 			<span *ngIf="pagination.total>0"> 每页
-				<select  [ngModel]="pagination.per_page" (ngModelChange)="pageSizeChanged($event);">
+				<select  [(ngModel)]="pagination.per_page" (ngModelChange)="pageChanged($event);">
+             <option value="8" style="display:none">8</option>
 				<option *ngFor="let item of options.pageList" [value]='item'>{{item}}</option>
 				</select> 条数据，
 	            </span>
@@ -20,6 +21,5 @@
 
 			当前第 {{pagination.current_page}} 页, 共 {{pagination.last_page}} 页，共  {{pagination.total}} 条数据
 		</div>
-
 	</div>
 </div>

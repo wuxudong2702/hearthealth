@@ -18,7 +18,7 @@ export class TableAddComponent implements OnInit {
   @Input() addEditTitle:string;
 
 
-  @Output() onAddCancle = new EventEmitter<any>();
+  @Output() onAddCancel = new EventEmitter<any>();
   @Output() onSubmit = new EventEmitter<any>();
 
   submitData: string;
@@ -42,8 +42,8 @@ export class TableAddComponent implements OnInit {
     this.onSubmit.emit(this.submitData);
   }
 
-  addCancle() {
-    this.onAddCancle.emit();
+  addCancel() {
+    this.onAddCancel.emit();
   }
 
 }

@@ -12,13 +12,14 @@
   [addBtn]="addBtn"
 
   (onSort)="sort($event)"
-  (onDel)="del($event)"
-  (onDelAll)="delAll($event)"
+  (onDelAll)="del($event)"
   (onAddSubmit)="submit($event)"
-  (onAdd)="add($event)"
-  (onSearch)="Search($event)"
+   (onDel)="del($event)"
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
 
-
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
 
@@ -28,7 +29,7 @@
   [headers]="headers"
   [addEditTitle]="addEditTitle"
 
-  (onAddCancle)="cancle($event)"
+  (onAddCancel)="cancel($event)"
   (onSubmit)="submit($event)"
 
   *ngIf="addView"

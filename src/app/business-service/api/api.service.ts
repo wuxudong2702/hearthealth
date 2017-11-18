@@ -274,16 +274,21 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null): Promise<any> {
-    console.log(url, count, find_key, find_val, '-=-=-=');
+  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null,sort_key:string=null,sort_val:string=null): Promise<any> {
+    console.log(url, count, find_key, find_val, '');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       count: count,
       find_key: find_key,
       find_val: find_val,
+      sort_key: sort_key,
+      sort_val: sort_val,
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        console.log(data,'getData全局获取data');
+        return data
+      })
       .catch(err => {
         this.handleError(err);
       });
@@ -308,13 +313,6 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  postEcgdSearch(selectValue, searchValue): Promise<any> {
-    const url: string = '../../../assets/ecgd-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
 
   ecgdDelData(ids: string): Promise<any> {
     const url: string = '/api/admin/heart/del';
@@ -334,7 +332,16 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-
+  unbind(dev_id:string){
+    const url: string = '/api/admin/dev/unbind';
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      dev_id: dev_id
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
 // admin-role
   getAdminRoleHeader(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-headers.json';
@@ -351,6 +358,54 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
+
+
+  // uploadHtml5Page(title:string, description:string, label:string, content: string): void {
+  //   const uri:string = "api/admin/info/add";
+  //   let form, inputToken, inputTitle, inputDesc, inputLabel, inputContent;
+  //
+  //   form = document.createElement("form");
+  //
+  //   form.method = "post";
+  //   form.action = uri;
+  //
+  //   inputToken= document.createElement("input");
+  //   inputTitle = document.createElement("input");
+  //   inputDesc = document.createElement("input");
+  //   inputLabel = document.createElement("input");
+  //   inputContent = document.createElement("input");
+  //
+  //   console.log(this.sessionStorageService.get('token'));
+  //
+  //
+  //   inputToken.setAttribute("name", "token");
+  //   inputToken.setAttribute("value", this.sessionStorageService.get('token'));
+  //
+  //   inputTitle.setAttribute("name", "title");
+  //   inputTitle.setAttribute("value", title);
+  //
+  //   inputDesc.setAttribute("name", "description");
+  //   inputDesc.setAttribute("value", description);
+  //
+  //   inputLabel.setAttribute("name", "label");
+  //   inputLabel.setAttribute("value", label);
+  //
+  //
+  //
+  //   inputContent.setAttribute("name", "content");
+  //   inputContent.setAttribute("value", content);
+  //
+  //   form.appendChild(inputToken);
+  //   form.appendChild(inputTitle);
+  //   form.appendChild(inputDesc);
+  //   form.appendChild(inputLabel);
+  //   form.appendChild(inputContent);
+  //
+  //   document.body.appendChild(form);
+  //
+  //   form.submit();
+  // }
+
 
   getZtreeNodes(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-ztreeNodes.json';

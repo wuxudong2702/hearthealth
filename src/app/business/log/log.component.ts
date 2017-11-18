@@ -26,7 +26,7 @@ export class LogComponent implements OnInit {
   setOperate: boolean = false;
 
   onSort(sort: sortObj) {
-      this.http.postLogSort(sort.id,sort.order).then(data=>{
+      this.http.postLogSort(sort.key,sort.val).then(data=>{
           console.log(data,'排序');
           this.data=data['data'];
       });

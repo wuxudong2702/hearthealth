@@ -26,17 +26,18 @@ const htmlH: string ="<!DOCTYPE html>\n" +
   "  .article-content p{\n" +
   "    word-wrap: break-word;line-height: 1.2em;margin: 20px 0 0 0;text-indent: 1.8em;\n" +
   "  }\n" +
-  "  .article-content img {max-width: 30%;display: block;margin: 0 auto;border-radius: 4px; float:right;}\n" +
+  "  .article-content img {max-width: 100%;display: block;margin: 0 auto;border-radius: 4px; }\n" +
   "</style>\n" +
-  "<div class=\"article-title\">\n" +
-  "  <h1 class=\"title\">我是预览页面</h1>\n" +
-  "</div>\n" +
+
   "<div class=\"article-content\">";
 
 const htmlL: string = "</div>\n" +
   "\t\n" +
   "</body>\n" +
   "</html>";
+const htmlTitle= "<div class=\"article-title\">\n" +
+  "  <h1 class=\"title\">我是预览页面</h1>\n" +
+  "</div>\n" ;
 
 @Component({
   selector: 'c-editor-h5',
@@ -51,7 +52,7 @@ const htmlL: string = "</div>\n" +
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
         <div class="col-md-12" >
-          <c-editor [dataEditor]="dataEditor" (onTextChange)="onTextChange($event)" [style]="{'height':'60vh'}"></c-editor>
+          <c-editor [dataEditor]="dataEditor" id="c-editor" (onTextChange)="onTextChange($event)" [style]="{'height':'60vh'}"></c-editor>
           <br/>
         </div>
       </div>
@@ -62,14 +63,12 @@ const htmlL: string = "</div>\n" +
         <button class="" (click)="editBack()">返回</button>
       </div>
     </div>
-    <div style="height: 840px; overflow: auto">
-      <div class="preview-layer" [hidden]="previews" (click)="noPreviews()">
+      <div class="preview-layer" [hidden]="previews" style="height: 840px; overflow: auto"  (click)="noPreviews()">
         <div class="preview-bg"></div>
         <div class="preview-phone prephone"  >
           <iframe #iframe class="iframe1" ></iframe>
         </div>
       </div>
-    </div>
 
 
 
@@ -105,6 +104,9 @@ export class Editorh5Component implements OnInit {
   }
 
   ngOnInit() {
+    $('body').delegate('#c-editor','mousewheel',function(){
+      return false;
+    });
     this.appService.titleEventEmitter.emit("富文本编辑器");
     console.log('富文本编辑框传给编辑的数据',this.dataEditor);
 
@@ -117,6 +119,9 @@ export class Editorh5Component implements OnInit {
     // this.source = html.source;
   }
 
+
+
+
   preview() {
     this.previews = false;
     // this.prePhone=true;
@@ -125,7 +130,7 @@ export class Editorh5Component implements OnInit {
     }
     let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
     doc.open();
-    doc.write(htmlH + this.html5 + htmlL);
+    doc.write(htmlH +htmlTitle+ this.html5 + htmlL);
     doc.close();
   }
 
@@ -148,13 +153,14 @@ export class Editorh5Component implements OnInit {
   }
 
   save(){
-      if (!this.selectValue) {
-          this.openError('请选择类别！');
-      } else {
-          this.onSave.emit({
-              selectValue: this.selectValue,
-          });
-      }
+    this.onSave.emit(htmlH + this.html5 + htmlL);
+      // if (!this.selectValue) {
+      //     this.openError('请选择类别！');
+      // } else {
+      //     this.onSave.emit({
+      //         selectValue: this.selectValue,
+      //     });
+      // }
   }
 
   openError(errorInfo) {

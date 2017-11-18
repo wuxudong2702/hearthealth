@@ -101,7 +101,8 @@
               class="fa fa-trash-o fa-fw"></i>
               删除
             </button>
-            <button class="btn btn-warning btn-sm" *ngIf="chartBtn" (click)="chart(row['heart_data_id'],row['name'],row['sense_time'])"><i
+            <button class="btn btn-warning btn-sm" *ngIf="chartBtn"
+                    (click)="chart(row['heart_data_id'],row['name'],row['sense_time'])"><i
               class="fa fa-area-chart fa-fw"></i> 图表
             </button>
             <button class="btn btn-warning btn-sm" *ngIf="chartBtn2" (click)="chart2(row['id'])"><i
@@ -111,22 +112,22 @@
         </tr>
         </tbody>
       </table>
-      <!--<c-pagination #hp-->
+      <c-pagination #hp
 
-                    <!--[pagination]="pagination"-->
-                    <!--[total]="100"-->
-                    <!--(onDataChanged)="onDataChanged($event)"-->
-                    <!--(onPaginationChange)="paginationChange($event)"-->
-                    <!--*ngIf="paginationBtn"-->
-      <!--&gt;-->
-      <!--</c-pagination>-->
+                    [pagination]="pagination"
+                    [total]="100"
+                    (onDataChanged)="onDataChanged($event)"
+                    (onPaginationChange)="paginationChange($event)"
+                    *ngIf="paginationBtn"
+      >
+      </c-pagination>
     </div>
   </div>
 </div>
 
 
-<!--<app-table-add *ngIf="tableAdd" [headers]="headers" (onCancle)="onCancle($event)" (onSubmit)="onSubmit($event)"  ></app-table-add>-->
-<!--<app-table-edit *ngIf="tableEdit" [headers]="headers" [data]="data" [editId]="editId" (onEditCommonCancle)="onEditCommonCancle($event)" (onSubmit)="onSubmit($event)"  ></app-table-edit>-->
+<!--<app-table-add *ngIf="tableAdd" [headers]="headers" (onCancel)="onCancel($event)" (onSubmit)="onSubmit($event)"  ></app-table-add>-->
+<!--<app-table-edit *ngIf="tableEdit" [headers]="headers" [data]="data" [editId]="editId" (onEditCommonCancel)="onEditCommonCancle($event)" (onSubmit)="onSubmit($event)"  ></app-table-edit>-->
 
 
 

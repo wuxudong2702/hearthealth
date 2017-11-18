@@ -37,8 +37,8 @@ export enum INFOTYPE {
 }
 
 export class sortObj {
-  order: SortDirection;
-  id: string;
+  val: string;
+  key: string;
 }
 
 export class searchObj {
@@ -121,6 +121,7 @@ export class TableListComponent implements OnInit, OnChanges{
 
   ngOnInit(): void {}
   ngOnChanges(){
+    // console.log(this.headers,this.data,'[[[[[[[[');
     this.headers = this.headers.sort((v1, v2) => {
       return v1.index - v2.index;
     });
@@ -214,7 +215,7 @@ export class TableListComponent implements OnInit, OnChanges{
     let checkedListIds='';
     for(let i=0;i<this.checkedList.length;i++){
          if(this.checkedList[i]){
-           console.log(this.checkedList,this.data);
+           // console.log(this.checkedList,this.data);
            if(i==this.checkedList.length-1){
              checkedListIds+=this.data[i]['heart_data_id'];
            }else{
@@ -231,7 +232,6 @@ export class TableListComponent implements OnInit, OnChanges{
     let checkedListIds='';
     for(let i=0;i<this.checkedList.length;i++){
       if(this.checkedList[i]){
-        console.log(this.checkedList,this.data);
         if(i==this.checkedList.length-1){
           checkedListIds+=this.data[i]['heart_data_id'];
         }else{
@@ -245,10 +245,7 @@ export class TableListComponent implements OnInit, OnChanges{
   search() {//用户点击查询按钮
     if (!this.selectValue) {
       this.openError('请选择搜索项！');
-    } else if (!this.searchValue) {
-      this.openError('请输入关键字！');
     } else {
-      console.log('table-list search selectValue searchValue', this.selectValue, this.searchValue);
       this.onSearch.emit({
         selectValue: this.selectValue,
         searchValue: this.searchValue,
@@ -293,6 +290,9 @@ export class TableListComponent implements OnInit, OnChanges{
     let result = this.modalService.confirm(confirmCfg);
     result.then(v => {
       let id=''+this.data[i]['heart_data_id'];
+      if(this.data[i]['heart_data_id']==undefined){
+         id=''+this.data[i]['dev_id'];
+      }
       this.onDel.emit(id);
       this.checkedList[i]=false;
     }).catch(v => {
@@ -314,12 +314,18 @@ export class TableListComponent implements OnInit, OnChanges{
     this.onChart2.emit(id);
   }
 
-  sort(i) {
+  sort(i:string) {
+   let order='';
     this.headers[i].order = this.headers[i].order === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC;
+    if(this.headers[i].order==1){
+      order='asc';
+    }else{
+      order='desc';
+    }
     this.onSort.emit(
       {
-        order: this.headers[i].order,
-        id: i,
+        val: order,
+        key: this.headers[i]['key'],
       }
     );
   }

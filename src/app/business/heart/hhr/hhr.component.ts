@@ -1,12 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  cell,
-  SortDirection,
-  sortObj,
-  DataType,
-  searchObj,
-  paginationObj
-} from '../../../shared/table/table-list.component';
+  cell, SortDirection, sortObj, DataType, searchObj, paginationObj} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../shared/toast/toast.service';
@@ -49,7 +43,16 @@ export class HhrComponent implements OnInit {
   chartId: number;
   pagination: paginationObj = new paginationObj();
 
-  onChart2(id) {
+
+  per_page: string=null;
+  find_key: string=null;
+  find_val: string=null;
+  sort_key: string=null;
+  sort_val: string=null;
+  url: string = '/api/admin/report/index';
+
+
+  chart(id) {
     // this.http.getHhrDataChart().then(data => {
     //   console.log('data', data);
     //   this.dataChart = data['dataChart'];
@@ -62,15 +65,53 @@ export class HhrComponent implements OnInit {
       this.showChartView = !this.showChartView;
   }
 
-  onSort(sort: sortObj) {
-    this.http.postHhrSort(sort.id, sort.order).then(data => {
-      console.log(data, '排序');
-      this.data = data['data'];
+  chartBack() {
+    this.showChartView = !this.showChartView;
+  }
+
+
+  sort(sort: sortObj) {
+    this.sort_key = sort.key;
+    this.sort_val = sort.val;
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+  del(ids: string) {
+    this.http.ecgdDelData(ids).then(data => {
+      if (data['status'] == 'ok') {
+        this.getHeartData();
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
   }
 
-  getHeartData(url: string = '/api/admin/report/index', per_page: string = '8', find_key: string = null, find_val: string = null) {
-    this.http.getData(url, per_page, find_key, find_val).then(data => {
+  search(searchObj: searchObj) {
+    this.find_val = searchObj.searchValue;
+    this.find_key = searchObj.selectValue;
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+  paginationChange(parmas) {
+    this.per_page = parmas['per_page'];
+    if(parmas['url']!=undefined){
+      this.url = parmas['url'];
+    }
+    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+  set (set: string) {
+    this.http.setHeader('reports', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('reports');
+    });
+  }
+
+  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];
@@ -89,22 +130,6 @@ export class HhrComponent implements OnInit {
     }).catch(err => {
       const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
       this.toastService.toast(toastCfg);
-    });
-  }
-
-  onSearch(searchObj: searchObj) {
-    this.getHeartData('/api/admin/report/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
-  }
-
-  chartBack() {
-    this.showChartView = !this.showChartView;
-
-  }
-
-  set (set: string) {
-    console.log(set);
-    this.http.setHeader('reports', set).then(v => v).then(w => {
-      this.headers = this.http.getHeader('reports');
     });
   }
 

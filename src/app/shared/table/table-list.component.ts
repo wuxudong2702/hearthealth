@@ -272,8 +272,10 @@ export class TableListComponent implements OnInit, OnChanges{
   }
 
   showModalDelAll() {
-
-    if(this.checkedList){
+    function isChecked(i) {
+          return i == true;
+    }
+    if(this.checkedList.some(isChecked)){
         let confirmCfg = new ConfirmConfig('您确认删除吗？！');
         let result = this.modalService.confirm(confirmCfg);
         result.then(v => {

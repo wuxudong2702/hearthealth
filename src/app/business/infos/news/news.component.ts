@@ -81,16 +81,19 @@ export class NewsComponent implements OnInit {
       this.isSelectShow = false;
   }
 
-  // onPost(selectValue:any) {
-  //     this.editor = false;
-  //     this.isSelectShow = false;
-  // }
+  onPost(selectValue:any) {
+      this.editor = false;
+      this.isSelectShow = false;
+  }
 
 
 
   add() {
     this.editor = true;
     this.isSelectShow = true;
+  }
+  sort(sort: sortObj) {
+    this.getHeartData('/api/admin/info/index', this.per_page, null, null,sort.key, sort.val);
   }
 
 

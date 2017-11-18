@@ -144,7 +144,7 @@ export class NewsComponent implements OnInit {
 
   save(html:string){
     console.log('===============');
-   this.http.uploadHtml5Page('12','12','12',html);
+   // this.http.uploadHtml5Page('12','12','12',html);
   }
 
 }

@@ -381,22 +381,10 @@
       "name": "类型",
       "index": "1",
       "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "news": "监控咨询",
-        "1": "用户协议",
-        "2": "指南",
-        "3": "启动页",
-        "4": "关于我们"
-      },
+      "pipe_type": 0,
+      "pipe_params": {},
       "val": "",
-      "select_val": [
-        "监控咨询",
-        "用户协议",
-        "指南",
-        "启动页",
-        "关于我们"
-      ],
+      "select_val": [],
       "valid_example": "武旭东",
       "required": true,
       "pattern": "",

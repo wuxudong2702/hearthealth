@@ -274,7 +274,7 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null,sort_key:string,sort_val:string): Promise<any> {
+  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null,sort_key:string=null,sort_val:string=null): Promise<any> {
     console.log(url, count, find_key, find_val, '');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -358,6 +358,54 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
+
+
+  // uploadHtml5Page(title:string, description:string, label:string, content: string): void {
+  //   const uri:string = "api/admin/info/add";
+  //   let form, inputToken, inputTitle, inputDesc, inputLabel, inputContent;
+  //
+  //   form = document.createElement("form");
+  //
+  //   form.method = "post";
+  //   form.action = uri;
+  //
+  //   inputToken= document.createElement("input");
+  //   inputTitle = document.createElement("input");
+  //   inputDesc = document.createElement("input");
+  //   inputLabel = document.createElement("input");
+  //   inputContent = document.createElement("input");
+  //
+  //   console.log(this.sessionStorageService.get('token'));
+  //
+  //
+  //   inputToken.setAttribute("name", "token");
+  //   inputToken.setAttribute("value", this.sessionStorageService.get('token'));
+  //
+  //   inputTitle.setAttribute("name", "title");
+  //   inputTitle.setAttribute("value", title);
+  //
+  //   inputDesc.setAttribute("name", "description");
+  //   inputDesc.setAttribute("value", description);
+  //
+  //   inputLabel.setAttribute("name", "label");
+  //   inputLabel.setAttribute("value", label);
+  //
+  //
+  //
+  //   inputContent.setAttribute("name", "content");
+  //   inputContent.setAttribute("value", content);
+  //
+  //   form.appendChild(inputToken);
+  //   form.appendChild(inputTitle);
+  //   form.appendChild(inputDesc);
+  //   form.appendChild(inputLabel);
+  //   form.appendChild(inputContent);
+  //
+  //   document.body.appendChild(form);
+  //
+  //   form.submit();
+  // }
+
 
   getZtreeNodes(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-ztreeNodes.json';

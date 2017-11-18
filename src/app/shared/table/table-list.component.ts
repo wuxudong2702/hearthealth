@@ -245,8 +245,6 @@ export class TableListComponent implements OnInit, OnChanges{
   search() {//用户点击查询按钮
     if (!this.selectValue) {
       this.openError('请选择搜索项！');
-    } else if (!this.searchValue) {
-      this.openError('请输入关键字！');
     } else {
       this.onSearch.emit({
         selectValue: this.selectValue,

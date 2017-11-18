@@ -52,7 +52,7 @@ const htmlTitle= "<div class=\"article-title\">\n" +
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
         <div class="col-md-12" >
-          <c-editor [dataEditor]="dataEditor" (onTextChange)="onTextChange($event)" [style]="{'height':'60vh'}"></c-editor>
+          <c-editor [dataEditor]="dataEditor" id="c-editor" (onTextChange)="onTextChange($event)" [style]="{'height':'60vh'}"></c-editor>
           <br/>
         </div>
       </div>
@@ -63,14 +63,12 @@ const htmlTitle= "<div class=\"article-title\">\n" +
         <button class="" (click)="editBack()">返回</button>
       </div>
     </div>
-    <div style="height: 840px; overflow: auto">
-      <div class="preview-layer" [hidden]="previews" (click)="noPreviews()">
+      <div class="preview-layer" [hidden]="previews" style="height: 840px; overflow: auto"  (click)="noPreviews()">
         <div class="preview-bg"></div>
         <div class="preview-phone prephone"  >
           <iframe #iframe class="iframe1" ></iframe>
         </div>
       </div>
-    </div>
 
 
 
@@ -106,6 +104,9 @@ export class Editorh5Component implements OnInit {
   }
 
   ngOnInit() {
+    $('body').delegate('#c-editor','mousewheel',function(){
+      return false;
+    });
     this.appService.titleEventEmitter.emit("富文本编辑器");
     console.log('富文本编辑框传给编辑的数据',this.dataEditor);
 
@@ -117,6 +118,9 @@ export class Editorh5Component implements OnInit {
     // this.delta = html.delta;
     // this.source = html.source;
   }
+
+
+
 
   preview() {
     this.previews = false;
@@ -149,13 +153,14 @@ export class Editorh5Component implements OnInit {
   }
 
   save(){
-      if (!this.selectValue) {
-          this.openError('请选择类别！');
-      } else {
-          this.onSave.emit({
-              selectValue: this.selectValue,
-          });
-      }
+    this.onSave.emit(htmlH + this.html5 + htmlL);
+      // if (!this.selectValue) {
+      //     this.openError('请选择类别！');
+      // } else {
+      //     this.onSave.emit({
+      //         selectValue: this.selectValue,
+      //     });
+      // }
   }
 
   openError(errorInfo) {

@@ -74,7 +74,7 @@ export class AppRoleComponent implements OnInit {
 
   }
 
-  cancle() {
+  cancel() {
     this.addView = false;
     this.tableView = true;
   }

@@ -47,7 +47,7 @@ export class EcgdComponent implements OnInit {
     //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
     //   this.toastService.toast(toastCfg);
     // });
-    this.getHeartData();
+    this.getHeartData(this.url);
     console.log(this.headers, this.data);
     this.http.isHavePerm('ecgd-del').then(v => {
       this.deleteBtn = v;
@@ -90,7 +90,6 @@ export class EcgdComponent implements OnInit {
   result: Array<any> = [];
   dataChart1: Array<any> = [];
   pagination: paginationObj = new paginationObj();
-  per_page:string;
   userName: string;
   sense_time: any;
   deleteBtn: boolean = false;
@@ -105,8 +104,14 @@ export class EcgdComponent implements OnInit {
   showChartView: boolean = false;
   downloadData: Array<any>;
 
+  per_page: string=null;
+  find_key: string=null;
+  find_val: string=null;
+  sort_key: string=null;
+  sort_val: string=null;
+  url: string = '/api/admin/heart/index';
 
-  onChart(params) {
+  chart(params) {
     this.userName = params['name'];
     this.sense_time = params['sense_time'];
     this.http.getEcgdDataChart(params['id']).then(data => {
@@ -151,9 +156,10 @@ export class EcgdComponent implements OnInit {
   }
 
 
-
   sort(sort: sortObj) {
-    this.getHeartData('/api/admin/heart/index', this.per_page, null, null,sort.key, sort.val);
+    this.sort_key = sort.key;
+    this.sort_val = sort.val;
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   del(ids: string) {
@@ -169,13 +175,17 @@ export class EcgdComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
+
   search(searchObj: searchObj) {
-    this.getHeartData('/api/admin/heart/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
+    this.find_val = searchObj.searchValue;
+    this.find_key = searchObj.selectValue;
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   paginationChange(parmas) {
-    this.per_page=parmas['per_page'];
-    this.getHeartData(parmas['url'], parmas['per_page']);
+    this.per_page = parmas['per_page'];
+    this.url = parmas['url'];
+    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 //     this.http.getEcgdData(parmas['url'],parmas['per_page']).then(data => {
 //       if (data['status'] == 'ok') {
 //   this.data = data['data']['data'];
@@ -206,8 +216,8 @@ export class EcgdComponent implements OnInit {
     });
   }
 
-  getHeartData(url: string = '/api/admin/heart/index', per_page: string=this.per_page, find_key: string = null, find_val: string = null,sort_key:string=null,sort_val:string=null) {
-    this.http.getData(url, per_page, find_key, find_val,sort_key,sort_val).then(data => {
+  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];

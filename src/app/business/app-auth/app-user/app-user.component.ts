@@ -111,7 +111,7 @@ export class AppUserComponent implements OnInit {
 
   }
 
-  cancle() {
+  cancel() {
     this.addView = false;
     this.subUsersView = false;
     this.tableView = true;
@@ -232,7 +232,7 @@ export class AppUserComponent implements OnInit {
     this.addSubUserView = false;
   }
 
-  subUsersCancle() {
+  subUsersCancel() {
     this.addView = false;
     this.subUsersView = true;
     this.tableView = false;

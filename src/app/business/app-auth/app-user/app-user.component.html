@@ -25,7 +25,7 @@
   [headers]="headerAdd"
   [addEditTitle]="addEditTitle"
 
-  (onAddCancle)="cancle($event)"
+  (onAddCancel)="cancel($event)"
   (onSubmit)="submit($event)"
 
   *ngIf="addView"
@@ -62,7 +62,7 @@
   [headers]="subUsersheaderAdd"
   [addEditTitle]="addEditTitle"
 
-  (onAddCancle)="subUsersCancle($event)"
+  (onAddCancel)="subUserscancel($event)"
   (onSubmit)="subUserSubmit($event)"
 
   *ngIf="addSubUserView"
@@ -92,7 +92,7 @@
 <!--[headers]="headerEdit"-->
 <!--[editId]="editId"-->
 <!--[data]="data"-->
-<!--(onEditCancle)="cancle($event)"-->
+<!--(onEditCancel)="Cancel($event)"-->
 <!--(onSubmit)="Submit($event)"-->
 
 <!--*ngIf="editView"-->

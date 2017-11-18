@@ -77,7 +77,7 @@ export class AdminRoleComponent implements OnInit {
      });
   }
 
-  cancle() {
+  cancel() {
      this.addView = false;
      this.editView=false;
      this.tableView = true;

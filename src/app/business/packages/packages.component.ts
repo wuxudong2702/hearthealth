@@ -88,7 +88,7 @@ export class PackagesComponent implements OnInit {
       this.tableView = false;
   }
 
-  cancle() {
+  cancel() {
       this.addView = false;
       this.tableView = true;
   }

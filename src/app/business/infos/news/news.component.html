@@ -15,16 +15,18 @@
   [searchBtn]="searchBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
-  [paginationBtn]="paginationBtn"
   [setOperate]="setOperate"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
 <c-editor-h5 *ngIf="editor"
              [dataEditor]="dataEditor"
              (onEditBack)="onEditBack($event)"
              (onPost)="onPost($event)"
-             (onSave)="onSave($event)"
              [H5Type]="H5Type"
              [isSelectShow]="isSelectShow"
+             (onSave)="save($event)"
 >
 </c-editor-h5>

@@ -84,7 +84,7 @@
       "val": "",
       "select_val": [],
       "valid_example": "V.1",
-      "required": true,
+      "required": false,
       "pattern": "",
       "input_type": 0
     },
@@ -114,7 +114,7 @@
       "val": "",
       "select_val": [],
       "valid_example": "本次更新了...",
-      "required": true,
+      "required": false,
       "pattern": "",
       "input_type": 0
     },
@@ -676,7 +676,7 @@
   ],
   "users": [
     {
-      "key": "userName",
+      "key": "name",
       "show": true,
       "name": "用户名",
       "index": 4,
@@ -729,7 +729,7 @@
       "input_type": 0
     },
     {
-      "key": "birthDate",
+      "key": "birth",
       "show": true,
       "name": "出生日期",
       "index": 1,
@@ -764,21 +764,7 @@
       "pattern": "",
       "input_type": 1
     },
-    {
-      "key": "address",
-      "show": true,
-      "name": "地区",
-      "index": 3,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": "",
-      "valid_example": "黑龙江哈尔滨南岗区",
-      "required": true,
-      "pattern": "",
-      "input_type": 0
-    },
+
     {
       "key": "height",
       "show": true,
@@ -795,7 +781,7 @@
       "input_type": 0
     },
     {
-      "key": "telephoneNum",
+      "key": "mobile",
       "show": true,
       "name": "手机",
       "index": 4,
@@ -837,6 +823,63 @@
       "valid_example": "15",
       "required": true,
       "pattern": "^[0-9]+$",
+      "input_type": 0
+    },
+    {
+      "key": "email",
+      "show": true,
+      "name": "邮箱",
+      "index": 7,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "15",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    }, {
+      "key": "id",
+      "show": false,
+      "name": "id",
+      "index": 7,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "15",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    }, {
+      "key": "parent_id",
+      "show": false,
+      "name": "parent_id",
+      "index": 7,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "15",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    }, {
+      "key": "zone",
+      "show": false,
+      "name": "地区",
+      "index": 7,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "15",
+      "required": true,
+      "pattern": "",
       "input_type": 0
     }
   ],

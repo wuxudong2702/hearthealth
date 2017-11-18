@@ -120,6 +120,7 @@ export class PackagesComponent implements OnInit {
   }
 
   submit(submitData) {
+    console.log(this.flag,'ppppppppppppppppppppp');
     if(this.flag){
       this.http.upgradeAdd(submitData.ver,submitData.desc,submitData.url).then(data => {
         if (data['status'] == 'ok') {
@@ -153,7 +154,6 @@ export class PackagesComponent implements OnInit {
     }
   }
 
-
   sort(sort: sortObj) {
     this.sort_key = sort.key;
     this.sort_val = sort.val;
@@ -172,29 +172,10 @@ export class PackagesComponent implements OnInit {
   }
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
-    this.url = parmas['url'];
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-//     this.http.getEcgdData(parmas['url'],parmas['per_page']).then(data => {
-//       if (data['status'] == 'ok') {
-//   this.data = data['data']['data'];
-//   this.pagination.current_page=data['data']['current_page'];
-//   this.pagination.last_page=data['data']['last_page'];
-//   this.pagination.per_page=data['data']['per_page'];
-//   this.pagination.total=data['data']['total'];
-//   this.pagination.first_page_url=data['data']['first_page_url'];
-//   this.pagination.last_page_url=data['data']['last_page_url'];
-//   this.pagination.next_page_url=data['data']['next_page_url'];
-//   this.pagination.prev_page_url=data['data']['prev_page_url'];
-//   this.pagination.to=data['data']['to'];
-// } else {
-//   const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-//   this.toastService.toast(toastCfg);
-// }
-// }).catch(err => {
-//   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-//   console.error(err);
-//   this.toastService.toast(toastCfg);
-// });
+    if(parmas['url']!=undefined){
+      this.url = parmas['url'];
+    }
+    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
 

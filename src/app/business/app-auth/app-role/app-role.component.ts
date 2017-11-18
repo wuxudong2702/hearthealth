@@ -110,16 +110,7 @@ export class AppRoleComponent implements OnInit {
         this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
             if (data['status'] == 'ok') {
                 this.data = data['data']['data'];
-                // this.pagination.current_page = data['data']['current_page'];
-                // this.pagination.last_page = data['data']['last_page'];
-                // this.pagination.per_page = data['data']['per_page'];
-                // this.pagination.total = data['data']['total'];
-                // this.pagination.first_page_url = data['data']['first_page_url'];
-                // this.pagination.last_page_url = data['data']['last_page_url'];
-                // this.pagination.next_page_url = data['data']['next_page_url'];
-                // this.pagination.prev_page_url = data['data']['prev_page_url'];
-                // this.pagination.to = data['data']['to'];
-                // console.log(this.pagination,'pagination======');
+
             } else {
                 const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                 this.toastService.toast(toastCfg);

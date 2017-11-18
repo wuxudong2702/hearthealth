@@ -447,7 +447,7 @@ export class ApiService {
       .catch(this.handleError);
   }
   upgradeUpdate(id:string,ver:string=null,desc:string=null,url:string=null){
-    const urls: string = "api/admin/upgrade/add";
+    const urls: string = "api/admin/upgrade/update";
     return this.httpClient.post(urls, {
       token: this.sessionStorageService.get('token'),
       id:id,

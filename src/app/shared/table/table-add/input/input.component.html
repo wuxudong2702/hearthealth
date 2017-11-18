@@ -1,12 +1,12 @@
 <div [formGroup]="form" class="form-inline" >
 
-  <label style="width: 100px" for="name">{{field.name+":"}}</label>
+  <label style="width: 100px" for="name" *ngIf="field.show" >{{field.name+":"}}</label>
   <input
     type="text"
     class="form-control addInputValue"
     id="name"
     name="name"
-    *ngIf="field.input_type == 0"
+    *ngIf="field.input_type == 0&&field.show"
      [(ngModel)]="field.val"
     [formControlName]="field.key"
     placeholder="请输入"

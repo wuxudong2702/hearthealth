@@ -43,16 +43,24 @@ const htmlTitle = "<div class=\"article-title\">\n" +
   selector: 'c-editor-h5',
   styleUrls: ['./editorh5.component.css'],
   template: `
-    <div class="col-md-2 h5Select">
+      <!--<div class="col-md-2 h5Select">-->
       <!--<select class="form-control" [(ngModel)]="selectValue" [hidden]="!isSelectShow">-->
       <!--<option value="" style="display:none">请选择类别</option>-->
       <!--<option *ngFor="let type of H5Type" value={{type.key}}>{{type.value}}</option>-->
       <!--</select>-->
-      <div>
-        <div>标签：<input type="text" [(ngModel)]="label"></div>
-        <div>标题：<input type="text" [(ngModel)]="title"></div>
-        <div>描述：<input type="text" [(ngModel)]="description"></div>
-      </div>
+          <!--<div class="form-group">-->
+              <!--<div>标签：<input class="form-control" type="text" [(ngModel)]="label"></div>-->
+              <!--<div>标题：<input class="form-control" type="text" [(ngModel)]="title"></div>-->
+              <!--<div>描述：<input class="form-control" type="text" [(ngModel)]="description"></div>-->
+          <!--</div>-->
+    <!--</div>-->
+  <div  style="background-color: white">
+    <div class="form-group" style="margin-top: 12px;">
+        <div style="margin-left: 2%;">
+            <label>标签：</label><input style="border: 1px solid #dddddd;width: 33%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="label">
+            <label style="margin-left: 27px;">标题：</label><input style="border: 1px solid #dddddd;width: 33%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="title">
+        </div>
+        <div style="margin-left: 2%;"><label>描述：</label><input style="border: 1px solid #dddddd;width: 75%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="description"></div>
     </div>
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
@@ -74,8 +82,7 @@ const htmlTitle = "<div class=\"article-title\">\n" +
         <iframe #iframe class="iframe1"></iframe>
       </div>
     </div>
-
-
+  </div>
 
   `
 })

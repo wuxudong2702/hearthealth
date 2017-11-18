@@ -13,7 +13,7 @@ import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
   selector: 'app-packages',
   templateUrl: './packages.component.html',
   styleUrls: ['./packages.component.css'],
-  providers: []
+  providers:[]
 })
 export class PackagesComponent implements OnInit {
 
@@ -66,6 +66,19 @@ export class PackagesComponent implements OnInit {
   sort_val: string = null;
   url: string = '/api/admin/upgrade/index';
 
+  del(packages_id:string){
+      this.http.packagesDel(packages_id).then(data => {
+          if (data['status'] == 'ok') {
+              this.getHeartData();
+          } else {
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+              this.toastService.toast(toastCfg);
+          }
+      }).catch(err => {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+          this.toastService.toast(toastCfg);
+      });
+  }
 
   add(id: number) {
     if (id >= 0) {
@@ -145,26 +158,16 @@ export class PackagesComponent implements OnInit {
     this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
-  del(ids: string) {
-    this.http.ecgdDelData(ids).then(data => {
-      if (data['status'] == 'ok') {
-        this.getHeartData();
-      } else {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-      this.toastService.toast(toastCfg);
-    }
-  }).catch(err => {
-  const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-  this.toastService.toast(toastCfg);
-});
-  }
-
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
     this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
-
+  set (set: string) {
+    this.http.setHeader('app-upgrades', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('app-upgrades');
+    });
+  }
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
     this.url = parmas['url'];
@@ -192,11 +195,6 @@ export class PackagesComponent implements OnInit {
 // });
   }
 
-  set (set: string) {
-    this.http.setHeader('app-upgrades', set).then(v => v).then(w => {
-      this.headers = this.http.getHeader('app-upgrades');
-    });
-  }
 
   getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
     this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {

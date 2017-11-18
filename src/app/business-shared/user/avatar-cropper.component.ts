@@ -1,7 +1,9 @@
-import { Component, Input, ViewEncapsulation, ViewChild } from '@angular/core';
+import {Component, Input, ViewEncapsulation, ViewChild, Output,EventEmitter} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
-
+import {ApiService} from '../../business-service/api/api.service';
+import 'rxjs/add/operator/toPromise';
+import {ConfirmConfig} from '../../shared/modal/modal-model';
 import { ToastService } from '../../shared/toast/toast.service';
 import { ToastConfig, ToastType } from '../../shared/toast/toast-model';
 
@@ -16,6 +18,7 @@ import { ToastConfig, ToastType } from '../../shared/toast/toast-model';
 })
 export class AvatarCropperComponent {
 
+
     //用户头像
     userAvatar: string = "./assets/img/user-header.png";
 
@@ -27,7 +30,7 @@ export class AvatarCropperComponent {
     @ViewChild('avatarCropper', undefined)
     avatarCropper: ImageCropperComponent;
 
-    constructor(public activeModal: NgbActiveModal, private toastService: ToastService) {
+    constructor(private http: ApiService,public activeModal: NgbActiveModal, private toastService: ToastService) {
         //头像裁剪配置
         this.avatarSettings = new CropperSettings();
         this.avatarSettings.noFileInput = true;
@@ -50,9 +53,22 @@ export class AvatarCropperComponent {
      */
     upload() {
         console.info(this.avatar.image);
-        this.userAvatar=this.avatar.image;
-        const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '图片上传成功!', 2000);
-        this.toastService.toast(toastCfg);
+        this.http.postAvatar(this.avatar.image).then(data => {
+            if (data['status'] == 'ok') {
+                this.userAvatar=data['data'];
+                const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '图片上传成功!', 2000);
+                this.toastService.toast(toastCfg);
+                this.activeModal.close({ status: 'closed' });
+            } else {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                this.toastService.toast(toastCfg);
+            }
+        }).catch(err => {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+            console.error(err);
+            this.toastService.toast(toastCfg);
+        });
+
     }
 
     /**

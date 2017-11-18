@@ -4,6 +4,7 @@
 
   (onSort)="sort($event)"
   (onDel)="del($event)"
+  (onDelAll)="del($event)"
   (onAdd)="add($event)"
   (onEdit)="add($event)"
 
@@ -21,7 +22,6 @@
 >
 </c-table-list>
 <app-table-add
-
         [headers]="headerAdd"
         [addEditTitle]="addEditTitle"
 

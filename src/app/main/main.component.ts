@@ -35,7 +35,6 @@ export class MainComponent implements OnInit {
 
     defatltImage: string = './assets/img/user-header.png';
 
-
     //用户数据
     mainData: MainData = {
         userData: {
@@ -231,7 +230,20 @@ export class MainComponent implements OnInit {
      */
     avatarReplacement() {
         this.ngbModalService.open(AvatarCropperComponent, {size: 'lg', backdrop: 'static', keyboard: false}).result.then((result) => {
-
+            this.apiService.me().then(data => {
+                if (data.status == 'ok') {
+                    this.mainData.userData = data['data'];
+                    if (data['data']['avator'] == null) {
+                        this.mainData.userData.avator = this.defatltImage;
+                    }
+                } else {
+                    console.error('获取用户信息失败', data.message );
+                    this.router.navigate(['/login']);
+                }
+            }).catch(err => {
+                console.error('获取用户异常', err );
+                this.router.navigate(['/login']);
+            });
         }, (reason) => {
 
         });

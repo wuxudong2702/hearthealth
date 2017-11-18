@@ -755,13 +755,20 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  postAppRoleSubmit(submitData): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-role-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
+  postAppRoleSubmit(id:string,users_count:number){
+        const urls: string = "/api/admin/app/role/update";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            id:id,
+            users_count:users_count
+        })
+            .toPromise()
+            .then(data => {
+                console.log(data,'======');
+                return data;
+            })
+            .catch(this.handleError);
+    }
 
 //packages
 

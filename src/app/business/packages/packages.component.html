@@ -7,6 +7,8 @@
   (onDelAll)="del($event)"
   (onAdd)="add($event)"
   (onEdit)="add($event)"
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
 
   [headers]="headers"
   [data]="data"
@@ -18,6 +20,7 @@
   [paginationBtn]="paginationBtn"
   [pagination]="pagination"
   [searchBtn]="searchBtn"
+  [setBtn]="setBtn"
   (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>

@@ -54,6 +54,7 @@ export class PackagesComponent implements OnInit {
   addBtn: boolean = false;
   editBtn: boolean = false;
   searchBtn: boolean = true;
+  setBtn: boolean = true;
 
   setOperate: boolean = true;
   paginationBtn: boolean = true;
@@ -67,6 +68,7 @@ export class PackagesComponent implements OnInit {
   url: string = '/api/admin/upgrade/index';
 
   del(packages_id:string){
+    console.log(packages_id,'0-0-0-0');
       this.http.packagesDel(packages_id).then(data => {
           if (data['status'] == 'ok') {
               this.getHeartData();

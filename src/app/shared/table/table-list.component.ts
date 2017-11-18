@@ -298,7 +298,6 @@ export class TableListComponent implements OnInit, OnChanges{
         console.log( this.delId,'00000000');
         if(this.data[i]['dev_id']==undefined){
           this.delId=''+this.data[i]['id'];
-          console.log( this.delId,'111111');
         }else{
           this.delId=''+this.data[i]['dev_id'];
         }

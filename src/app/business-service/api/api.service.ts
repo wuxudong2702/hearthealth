@@ -765,11 +765,13 @@ export class ApiService {
 
 //packages
 
-    packagesDel(packages_id:string){
+    packagesDel(packages_id:string=null){
+    console.log(packages_id,'[][][][' +
+      ']');
         const url: string = '/api/admin/upgrade/del';
         return this.httpClient.post(url, {
             token: this.sessionStorageService.get('token'),
-            packages_id: packages_id
+            id: packages_id
         })
             .toPromise()
             .then(data => data)

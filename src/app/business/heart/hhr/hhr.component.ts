@@ -34,7 +34,7 @@ export class HhrComponent implements OnInit {
   detailsBtn: boolean = true;
   // editBtn: boolean = true;
   setBtn: boolean = true;
-  chartBtn: boolean = true;
+  chartBtn2: boolean = true;
   paginationBtn: boolean = true;
   setOperate: boolean = true;
 
@@ -43,17 +43,17 @@ export class HhrComponent implements OnInit {
   chartId: number;
   pagination: paginationObj = new paginationObj();
 
-  chart(params) {
+  onChart2(id) {
     // this.http.getHhrDataChart().then(data => {
     //   console.log('data', data);
     //   this.dataChart = data['dataChart'];
     //   this.dataChart1 = this.dataChart[0];
     //   this.userName = this.data[0].userName;
     // });
-    console.log(params, 'params');
-    this.userName = params['name'];
-    this.chartId = params['id'];
-    this.showChartView = !this.showChartView;
+      console.log(id,'id');
+      // this.userName = params['name'];
+      this.chartId = id;
+      this.showChartView = !this.showChartView;
   }
 
   sort(sort: sortObj) {

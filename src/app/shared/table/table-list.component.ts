@@ -143,6 +143,7 @@ export class TableListComponent implements OnInit, OnChanges{
   @Input() deleteAllBtn: boolean;
   @Input() setBtn: boolean;
   @Input() chartBtn: boolean;
+  @Input() chartBtn2: boolean;
   @Input() paginationBtn: boolean;
   @Input() backBtn: boolean;
   @Input() setOperate: boolean;
@@ -158,6 +159,7 @@ export class TableListComponent implements OnInit, OnChanges{
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDetails = new EventEmitter<any>();
   @Output() onChart = new EventEmitter<any>();
+  @Output() onChart2 = new EventEmitter<any>();
   @Output() onSort = new EventEmitter<any>();
   @Output() onBack = new EventEmitter<any>();
   @Output() onUpload = new EventEmitter<any>();
@@ -303,6 +305,9 @@ export class TableListComponent implements OnInit, OnChanges{
       name:name,
       sense_time:sense_time
     });
+  }
+  chart2(id: number) {
+    this.onChart2.emit(id);
   }
 
   sort(i:string) {

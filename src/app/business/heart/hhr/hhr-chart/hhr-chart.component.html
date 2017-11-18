@@ -19,14 +19,16 @@
     <button class="btn btn-primary btn-md Btns" (click)="indicator5()">指标5
     </button>
     <input [(ngModel)]="selectedDateStart" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
-           class="form-control dateInput dateInputStyle " placeholder="开始时间" (click)="startTime()"/>
+           class="form-control dateInput dateInputStyle " placeholder="开始时间" />
     <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
-           class="form-control dateInput" placeholder="结束时间" (click)="startTime()"/>
+           class="form-control dateInput" placeholder="结束时间" />
+    <button class="btn btn-success btn-md" (click)="show()">显示</button>
     <button class="btn btn-danger btn-md" (click)="clear($event)">清空用户该次数据</button>
   </div>
   <div class="details-panel" *ngIf="isDetails">
     <hr>
     <h2 >心电数据详情</h2>
-    <label class="details" *ngFor="let data of chartDetailsData" title={{data.name}}>{{data.key }}：&nbsp;{{data.value}}</label>
+    <label class="details" *ngFor="let data of chartDetailsData" title={{data}}>{{data[0]}}：&nbsp;{{data[1]}}
+    </label>
   </div>
 </div>

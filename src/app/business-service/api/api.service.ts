@@ -324,12 +324,11 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
-
   ecgdDownloadData(ids: string) {
     console.log(ids);
     const url: string = '/api/admin/heart/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + ids;
     return this.http.get(url)
-      .map(res => new Blob([res.text()], {type: 'txt/plain'}))
+      .map(res => new Blob([res.text()],{ type: 'txt/plain' }))
       .catch(this.handleError);
   }
 
@@ -886,28 +885,41 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getHhrDataChart(chartId: number, start_time: any, end_time: any, field: string): Promise<any> {
-    const url: string = '/api/admin/report/series';
-    return this.httpClient.post(url, {
-      token: this.sessionStorageService.get('token'),
-      start_time: start_time,
-      end_time: end_time,
-      field: field,
-      heart_data_id: chartId
-    })
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-
-  getHhrDataDetails(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-dataDetails.json';
-    return this.httpClient.get(url, {})
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
+    getHhrDataChart(chartId: number,start_time:any,end_time:any,field:string): Promise<any> {
+        const url: string = '/api/admin/report/series';
+        return this.httpClient.post(url, {
+            token: this.sessionStorageService.get('token'),
+            user_id: chartId,
+            start_time: start_time,
+            end_time: end_time,
+            field: field
+        })
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+    getHhrDataDetails(chartId: number,id:number): Promise<any> {
+        const url: string = '/api/admin/report/detail';
+        return this.httpClient.post(url, {
+            token: this.sessionStorageService.get('token'),
+            user_id: chartId,
+            heart_data_id: id
+        })
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+    delHhrDataDetails(id: number,chartId:number): Promise<any> {
+        const url: string = '/api/admin/report/del';
+        return this.httpClient.post(url, {
+            token: this.sessionStorageService.get('token'),
+            user_id: id,
+            heart_data_id: chartId
+        })
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
 
   postHhrDel(id): Promise<any> {
     const url: string = '../../../assets/hearthealthData/hhr-data/hhr-data.json';

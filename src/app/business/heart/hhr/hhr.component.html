@@ -3,17 +3,20 @@
   (onChart)="chart($event)"
   (onSort)="sort($event)"
   (onSearch)="search($event)"
+  (onChart2)="onChart2($event)"
+  (onSort)="onSort($event)"
+  (onSearch)="onSearch($event)"
   (onSet)="set($event)"
   (onPaginationChange)="paginationChange($event)"
 
   [pagination]="pagination"
   [headers]="headers"
   [data]="data"
-  [chartBtn]="chartBtn"
+  [chartBtn2]="chartBtn2"
   [searchBtn]="searchBtn"
   [setBtn]="setBtn"
   [paginationBtn]="paginationBtn"
   [setOperate]="setOperate"
 >
 </c-table-list>
-<app-hhr-chart *ngIf="showChartView" [dataChart1]="dataChart1" [userName]="userName" (onChart)="chartBack($event)" ></app-hhr-chart>
+<app-hhr-chart *ngIf="showChartView" [dataChart1]="dataChart1" [userName]="userName" [chartId]="chartId" (onChart)="chartBack($event)" ></app-hhr-chart>

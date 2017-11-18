@@ -274,12 +274,18 @@ export class TableListComponent implements OnInit, OnChanges{
   }
 
   showModalDelAll() {
-    let confirmCfg = new ConfirmConfig('您确认删除吗？！');
-    let result = this.modalService.confirm(confirmCfg);
-    result.then(v => {
-      this.delAll();
-    }).catch(v => {
-    })
+
+    if(this.checkedList){
+        let confirmCfg = new ConfirmConfig('您确认删除吗？！');
+        let result = this.modalService.confirm(confirmCfg);
+        result.then(v => {
+            this.delAll();
+        }).catch(v => {
+        })
+    }else{
+        const toastCfg = new ToastConfig(ToastType.ERROR, '','请选择删除的数据！', 3000);
+        this.toastService.toast(toastCfg);
+    }
   }
 
   showModalDel(i:number) {

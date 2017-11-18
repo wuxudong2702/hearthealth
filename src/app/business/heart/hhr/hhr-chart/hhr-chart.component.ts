@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../../../shared/toast/toast-model';
 import {ModalService} from '../../../../shared/modal/modal.service';
-import {ConfirmConfig, SetConfig} from '../../../../shared/modal/modal-model';
+import {ConfirmConfig} from '../../../../shared/modal/modal-model';
 
 @Component({
   selector: 'app-hhr-chart',
@@ -33,10 +33,7 @@ export class HhrChartComponent implements OnInit {
   field: string='n_total_detbeat';
   dataChart: Array<any>;
   chartDetailsData: Array<any>;
-  chartDetailsValue: Array<any>;
   isDetails: boolean = false;
-  userSelectName: string;
-  userSelectIndex: number;
   chartDetailsId: number = 1;
   selectedDateStart;
   selectedDateEnd;
@@ -44,12 +41,6 @@ export class HhrChartComponent implements OnInit {
   }
 
   chartToggle(dataList: Array<any>,valueList: Array<any>) {
-    // this.dateList = this.dataChart.map(function (item) {
-    //       return item[0];
-    //   });
-    // this.valueList = this.dataChart.map(function (item) {
-    //   return item[1];
-    // });
     this.chartOption = {
           visualMap: [{
             show: false,
@@ -81,6 +72,7 @@ export class HhrChartComponent implements OnInit {
           }]
         };
   }
+
   datePickerConfig = {
     locale: 'zh-CN',
     format:"YYYY-MM-DD"
@@ -105,39 +97,18 @@ export class HhrChartComponent implements OnInit {
   indicator3() {
       this.field='indicator3';
       this.chartToggle(this.dataList,this.valueList);
-
   }
 
   indicator4() {
       this.field='indicator4';
       this.chartToggle(this.dataList,this.valueList);
-
   }
 
   indicator5() {
       this.field='indicator5';
       this.chartToggle(this.dataList,this.valueList);
-
   }
 
-  clear(){
-
-          let confirmCfg = new ConfirmConfig('您确认清空吗？！');
-          let result = this.modalService.confirm(confirmCfg);
-          result.then(v => {
-              this.http.delHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
-                  if (data['status'] == 'ok') {
-                      this. show();
-                      this.isDetails = false;
-                  }
-              }).catch(err => {
-                  // const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-                  // this.toastService.toast(toastCfg);
-              });
-          }).catch(v => {
-          })
-
-  }
   show(){
       if(this.selectedDateStart && this.selectedDateEnd){
           this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
@@ -170,6 +141,7 @@ export class HhrChartComponent implements OnInit {
           this.toastService.toast(toastCfg);
       }
   }
+
   chartClick(e){
       // console.log(e);
       this.dataIndex = e.dataIndex;
@@ -203,6 +175,28 @@ export class HhrChartComponent implements OnInit {
           this.toastService.toast(toastCfg);
       });
       this.isDetails=true;
+  }
+
+  clear(){
+      if(this.dataIndex >= 0){
+          let confirmCfg = new ConfirmConfig('您确认清空该次数据吗？');
+          let result = this.modalService.confirm(confirmCfg);
+          result.then(v => {
+              this.http.delHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
+                  if (data['status'] == 'ok') {
+                      this. show();
+                      this.isDetails = false;
+                  }
+              }).catch(err => {
+                  // const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                  // this.toastService.toast(toastCfg);
+              });
+          }).catch(v => {
+          })
+      }else{
+          const toastCfg = new ToastConfig(ToastType.ERROR, '','请选择清空的数据！', 3000);
+          this.toastService.toast(toastCfg);
+      }
   }
 
   @HostListener('window:resize')

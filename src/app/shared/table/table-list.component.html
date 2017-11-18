@@ -104,6 +104,9 @@
             <button class="btn btn-warning btn-sm" *ngIf="chartBtn" (click)="chart(row['heart_data_id'],row['name'],row['sense_time'])"><i
               class="fa fa-area-chart fa-fw"></i> 图表
             </button>
+            <button class="btn btn-warning btn-sm" *ngIf="chartBtn2" (click)="chart2(row['id'])"><i
+                    class="fa fa-area-chart fa-fw"></i> 图表
+            </button>
           </td>
         </tr>
         </tbody>

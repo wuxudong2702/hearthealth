@@ -24,9 +24,9 @@
 </c-table-list>
 <c-editor-h5 *ngIf="editor"
              [dataEditor]="dataEditor"
-             (onEditBack)="onEditBack($event)"
-
              [H5Type]="H5Type"
+             [HTML5Content]="HTML5Content"
+             (onEditBack)="onEditBack($event)"
              [isSelectShow]="isSelectShow"
              (onSave)="save($event)"
 >

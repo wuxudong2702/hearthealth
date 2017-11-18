@@ -203,7 +203,8 @@ export class TableListComponent implements OnInit, OnChanges{
   }
 
   editH5(id: number) {
-    console.log('editH5', id);
+    // console.log('editH5', id);
+
     this.onEditH5.emit(id);
   }
 

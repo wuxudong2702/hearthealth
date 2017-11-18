@@ -41,6 +41,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
   @Input() dataEditor: news;
 
   @Input() styleClass: string;
+  @Input() HTML5Content: string;
 
   @Input() placeholder: string;
 
@@ -61,6 +62,9 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
   quill: any;
 
   constructor(public el: ElementRef) {
+
+
+
   }
 
   ngOnInit() {
@@ -82,6 +86,13 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
       theme: 'snow',
       formats: this.formats
     });
+
+
+    if (this.HTML5Content) {
+         console.log(this.HTML5Content,'999');
+           this.quill.pasteHTML(this.HTML5Content);
+      // this.onTextChange.emit(this.Html);
+    }
 
     if (this.Html) {
       this.quill.pasteHTML(this.Html);

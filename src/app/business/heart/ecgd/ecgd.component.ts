@@ -89,7 +89,6 @@ export class EcgdComponent implements OnInit {
   data: Array<any>[];
   result: Array<any> = [];
   dataChart1: Array<any> = [];
-  pagination: paginationObj = new paginationObj();
   userName: string;
   sense_time: any;
   deleteBtn: boolean = false;
@@ -104,6 +103,7 @@ export class EcgdComponent implements OnInit {
   showChartView: boolean = false;
   downloadData: Array<any>;
 
+  pagination: paginationObj = new paginationObj();
   per_page: string=null;
   find_key: string=null;
   find_val: string=null;

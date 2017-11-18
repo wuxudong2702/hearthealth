@@ -4,8 +4,8 @@
 
   (onSort)="sort($event)"
   (onDel)="del($event)"
-  (onDelAll)="delAll($event)"
   (onAdd)="add($event)"
+  (onEdit)="add($event)"
 
   [headers]="headers"
   [data]="data"
@@ -15,9 +15,13 @@
   [deleteAllBtn]="deleteAllBtn"
   [setOperate]="setOperate"
   [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  [searchBtn]="searchBtn"
+  (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
 <app-table-add
+
         [headers]="headerAdd"
         [addEditTitle]="addEditTitle"
 

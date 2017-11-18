@@ -38,7 +38,7 @@ export class TableAddComponent implements OnInit {
   };
 
   submit() {
-    this.submitData=JSON.stringify(this.form.value);
+    this.submitData=this.form.value;
     this.onSubmit.emit(this.submitData);
   }
 

@@ -77,7 +77,22 @@
   ],
   "app-upgrades": [
     {
-      "key": "version",
+      "key": "id",
+      "show": false,
+      "name": "信息id号",
+      "index": 0,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "V.1",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "ver",
       "show": true,
       "name": "版本名称",
       "index": 0,
@@ -92,9 +107,9 @@
       "input_type": 0
     },
     {
-      "key": "updateInfo",
+      "key": "desc",
       "show": true,
-      "name": "更新说明",
+      "name": "描述",
       "index": 1,
       "order": 0,
       "pipe_type": 0,
@@ -102,6 +117,21 @@
       "val": "",
       "select_val": [],
       "valid_example": "本次更新了...",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "url",
+      "show": true,
+      "name": "地址",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "http://ewwrtyewq...",
       "required": true,
       "pattern": "",
       "input_type": 0
@@ -452,7 +482,7 @@
     },
     {
       "key": "url",
-      "show": true,
+      "show": false,
       "name": "地址",
       "index": 2,
       "order": 0,

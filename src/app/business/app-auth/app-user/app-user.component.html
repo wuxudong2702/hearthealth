@@ -43,7 +43,6 @@
   (onSearch)="subUserSearch($event)"
   (onAdd)="subUsersAdd($event)"
 
-  [setOperate]="setOperate"
   [headers]="subUserHeaders"
   [data]="subUserData"
   [deleteBtn]="deleteBtn"
@@ -53,6 +52,10 @@
   [deleteAllBtn]="deleteAllBtn"
   [setBtn]="setBtn"
   [addBtn]="addBtn"
+  [setOperate]="setOperate"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
 
   *ngIf="subUsersView"
 >
@@ -62,7 +65,7 @@
   [headers]="subUsersheaderAdd"
   [addEditTitle]="addEditTitle"
 
-  (onAddCancel)="subUserscancel($event)"
+  (onAddCancel)="subUsersCancel($event)"
   (onSubmit)="subUserSubmit($event)"
 
   *ngIf="addSubUserView"

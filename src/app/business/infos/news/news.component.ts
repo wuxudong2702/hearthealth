@@ -41,7 +41,7 @@ export class NewsComponent implements OnInit {
      {key:INFOTYPE.PROTOCOL,value:"用户注册协议"},
      {key:INFOTYPE.HEALTH,value:"健康资讯"}
   ];
-  dataEditor: news;
+  dataEditor: Array<any> = [];
   isSelectShow: boolean = false;
 
 
@@ -57,23 +57,43 @@ export class NewsComponent implements OnInit {
   setOperate: boolean = true;
   editor: boolean = false;
   pagination: paginationObj = new paginationObj();
-
+  HTML5Content:string;
   per_page: string=null;
   find_key: string=null;
   find_val: string=null;
   sort_key: string=null;
   sort_val: string=null;
   url: string = '/api/admin/info/index';
+  flag:boolean=true;
+  id:string;
 
-  editH5(id: number) {
-    this.dataEditor = this.data[id];
-    this.editor = true;
-    this.isSelectShow = false;
+  editH5(i: number) {
+    this.dataEditor = this.data[i];
+   this.flag=false;
+    this.id=this.data[i]['id'];
+   console.log(this.id,'00000000000');
+    this.http.infoContent(this.id).then(data => {
+      if (data['status'] == 'ok') {
+        // this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+        this.HTML5Content=data['data'];
+        // console.log(this.HTML5Content,' vcccccccccccccccccccc');
+        this.editor = true;
+        this.isSelectShow = false;
+
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
   }
 
   onEditBack(id: number) {
     this.editor = false;
     this.isSelectShow = false;
+    this.HTML5Content='';
   }
 
   onSave(selectValue:any) {
@@ -89,8 +109,10 @@ export class NewsComponent implements OnInit {
 
 
   add() {
+    this.flag=true;
     this.editor = true;
     this.isSelectShow = true;
+    this.dataEditor=[];
   }
 
   del(info_id: string) {
@@ -108,31 +130,44 @@ export class NewsComponent implements OnInit {
   }
 
 
-
-
   set (set: string) {
     this.http.setHeader('infos', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('infos');
     });
   }
 
-
   save(html){
-    // console.log('===============',html);
-   this.http.uploadHtml5Page(html.title,html.description,html.label,html.html).then(data => {
-     if (data['status'] == 'ok') {
-       this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-       this.editor=false;
-     } else {
-       const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-       this.toastService.toast(toastCfg);
-     }
-   }).catch(err => {
-     const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-     this.toastService.toast(toastCfg);
-   });
-  }
+    console.log('===============',html);
+    if(this.flag){
+      this.http.uploadHtml5Page(html.title,html.description,html.label,html.header,html.content,html.footer).then(data => {
+        if (data['status'] == 'ok') {
+          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.editor=false;
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }else{
+      console.log(html,']]]]]]]]]]]]]]]]]');
+      this.http.upDataHtml5Page(this.id,html.title,html.description,html.label,html.header,html.content,html.footer).then(data => {
+        if (data['status'] == 'ok') {
+          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.editor=false;
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
 
+  }
 
 
 

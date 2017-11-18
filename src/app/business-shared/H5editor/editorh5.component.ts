@@ -48,7 +48,7 @@ const htmlTitle = "<div class=\"article-title\">\n" +
       <!--<option value="" style="display:none">请选择类别</option>-->
       <!--<option *ngFor="let type of H5Type" value={{type.key}}>{{type.value}}</option>-->
       <!--</select>-->
-      <div>
+      <div style="display:flex;flex-direction:row;" >
         <div>标签：<input type="text" [(ngModel)]="label"></div>
         <div>标题：<input type="text" [(ngModel)]="title"></div>
         <div>描述：<input type="text" [(ngModel)]="description"></div>
@@ -58,6 +58,7 @@ const htmlTitle = "<div class=\"article-title\">\n" +
       <div class="row editorDocument">
         <div class="col-md-12">
           <c-editor [dataEditor]="dataEditor" id="c-editor" (onTextChange)="onTextChange($event)"
+                    [HTML5Content]="HTML5Content"
                     [style]="{'height':'60vh'}"></c-editor>
           <br/>
         </div>
@@ -74,18 +75,18 @@ const htmlTitle = "<div class=\"article-title\">\n" +
         <iframe #iframe class="iframe1"></iframe>
       </div>
     </div>
-
-
-
+    
   `
 })
 
 export class Editorh5Component implements OnInit {
 
   @ViewChild('iframe') iframe: ElementRef;
-  @Input() dataEditor: news;
+  @Input() dataEditor: Array<any>;
   @Input() H5Type: Array<any>;
   @Input() isSelectShow: boolean;
+  @Input() infoData: Array<any>;
+  @Input() HTML5Content: string;
 
   @Output() onEditBack = new EventEmitter<any>();
   @Output() onPost = new EventEmitter<any>();
@@ -112,9 +113,15 @@ export class Editorh5Component implements OnInit {
   }
 
   ngOnInit() {
-    $('body').delegate('#c-editor', 'mousewheel', function () {
-      return false;
-    });
+    // $('body').delegate('#c-editor', 'mousewheel', function () {
+    //   return false;
+    // });
+    // if(this.dataEditor.length!=1){
+      console.log('00000',this.dataEditor);
+      this.title=this.dataEditor['title'];
+       this.description=this.dataEditor['description'];
+       this.label=this.dataEditor['label'];
+    // }
     this.appService.titleEventEmitter.emit("富文本编辑器");
     console.log('富文本编辑框传给编辑的数据', this.dataEditor);
 
@@ -122,6 +129,9 @@ export class Editorh5Component implements OnInit {
 
   onTextChange(html: UEditorHtml) {
     this.htmlValue = html.htmlValue;
+    if(html.htmlValue){
+      this.html5=html.htmlValue;
+    }
     // this.textValue = html.textValue;
     // this.delta = html.delta;
     // this.source = html.source;
@@ -160,7 +170,9 @@ export class Editorh5Component implements OnInit {
 
   save() {
     this.onSave.emit({
-      html: htmlH + this.html5 + htmlL,
+      header: htmlH,
+      content: this.html5,
+      footer: htmlL,
       title: this.title,
       label: this.label,
       description:this.description

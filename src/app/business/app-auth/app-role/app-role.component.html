@@ -3,12 +3,17 @@
 
   (onSort)="sort($event)"
   (onAdd)="add($event)"
-
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
   [headers]="headers"
   [data]="data"
   [editBtn]="editBtn"
+  [setBtn]="setBtn"
   [setOperate]="setOperate"
-
+  [searchBtn]="searchBtn"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
 <app-table-add

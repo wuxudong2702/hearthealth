@@ -120,7 +120,6 @@ export class PackagesComponent implements OnInit {
   }
 
   submit(submitData) {
-    console.log(this.flag,'ppppppppppppppppppppp');
     if(this.flag){
       this.http.upgradeAdd(submitData.ver,submitData.desc,submitData.url).then(data => {
         if (data['status'] == 'ok') {
@@ -153,6 +152,7 @@ export class PackagesComponent implements OnInit {
       });
     }
   }
+
 
   sort(sort: sortObj) {
     this.sort_key = sort.key;

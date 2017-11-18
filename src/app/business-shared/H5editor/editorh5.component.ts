@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild, ElementRef,Input,Output,EventEmitter} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {AppService} from '../../app.service';
 import {DOCUMENT} from '@angular/common';
@@ -13,7 +13,7 @@ export class UEditorHtml {
   source: string;
 }
 
-const htmlH: string ="<!DOCTYPE html>\n" +
+const htmlH: string = "<!DOCTYPE html>\n" +
   "<html>\n" +
   "<head>\n" +
   "  <meta charset=\"UTF-8\">\n" +
@@ -35,40 +35,45 @@ const htmlL: string = "</div>\n" +
   "\t\n" +
   "</body>\n" +
   "</html>";
-const htmlTitle= "<div class=\"article-title\">\n" +
+const htmlTitle = "<div class=\"article-title\">\n" +
   "  <h1 class=\"title\">我是预览页面</h1>\n" +
-  "</div>\n" ;
+  "</div>\n";
 
 @Component({
   selector: 'c-editor-h5',
   styleUrls: ['./editorh5.component.css'],
-  template: `      
+  template: `
     <div class="col-md-2 h5Select">
-        <select class="form-control" [(ngModel)]="selectValue" [hidden]="!isSelectShow">
-            <option value="" style="display:none">请选择类别</option>
-            <option *ngFor="let type of H5Type" value={{type.key}}>{{type.value}}</option>
-        </select>
+      <!--<select class="form-control" [(ngModel)]="selectValue" [hidden]="!isSelectShow">-->
+      <!--<option value="" style="display:none">请选择类别</option>-->
+      <!--<option *ngFor="let type of H5Type" value={{type.key}}>{{type.value}}</option>-->
+      <!--</select>-->
+      <div>
+        <div>标签：<input type="text" [(ngModel)]="label"></div>
+        <div>标题：<input type="text" [(ngModel)]="title"></div>
+        <div>描述：<input type="text" [(ngModel)]="description"></div>
+      </div>
     </div>
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
-        <div class="col-md-12" >
-          <c-editor [dataEditor]="dataEditor" id="c-editor" (onTextChange)="onTextChange($event)" [style]="{'height':'60vh'}"></c-editor>
+        <div class="col-md-12">
+          <c-editor [dataEditor]="dataEditor" id="c-editor" (onTextChange)="onTextChange($event)"
+                    [style]="{'height':'60vh'}"></c-editor>
           <br/>
         </div>
       </div>
       <div class="buttons">
-        <button class="" (click)="post()">发表</button>
         <button class="" (click)="save()">保存</button>
         <button class="" (click)="preview()">预览</button>
         <button class="" (click)="editBack()">返回</button>
       </div>
     </div>
-      <div class="preview-layer" [hidden]="previews" style="height: 840px; overflow: auto"  (click)="noPreviews()">
-        <div class="preview-bg"></div>
-        <div class="preview-phone prephone"  >
-          <iframe #iframe class="iframe1" ></iframe>
-        </div>
+    <div class="preview-layer" [hidden]="previews" style="height: 840px; overflow: auto" (click)="noPreviews()">
+      <div class="preview-bg"></div>
+      <div class="preview-phone prephone">
+        <iframe #iframe class="iframe1"></iframe>
       </div>
+    </div>
 
 
 
@@ -78,9 +83,9 @@ const htmlTitle= "<div class=\"article-title\">\n" +
 export class Editorh5Component implements OnInit {
 
   @ViewChild('iframe') iframe: ElementRef;
-  @Input() dataEditor:news;
-  @Input() H5Type:Array<any>;
-  @Input() isSelectShow:boolean;
+  @Input() dataEditor: news;
+  @Input() H5Type: Array<any>;
+  @Input() isSelectShow: boolean;
 
   @Output() onEditBack = new EventEmitter<any>();
   @Output() onPost = new EventEmitter<any>();
@@ -97,18 +102,21 @@ export class Editorh5Component implements OnInit {
   secHtml5;
   ifr_document: any;
   htmlElement: HTMLElement;
-  prePhone:boolean=false;
+  prePhone: boolean = false;
+  label: string;
+  title: string;
+  description: string;
 
-  constructor(private appService: AppService, private toastService: ToastService , private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
+  constructor(private appService: AppService, private toastService: ToastService, private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
 
   }
 
   ngOnInit() {
-    $('body').delegate('#c-editor','mousewheel',function(){
+    $('body').delegate('#c-editor', 'mousewheel', function () {
       return false;
     });
     this.appService.titleEventEmitter.emit("富文本编辑器");
-    console.log('富文本编辑框传给编辑的数据',this.dataEditor);
+    console.log('富文本编辑框传给编辑的数据', this.dataEditor);
 
   }
 
@@ -120,8 +128,6 @@ export class Editorh5Component implements OnInit {
   }
 
 
-
-
   preview() {
     this.previews = false;
     // this.prePhone=true;
@@ -130,41 +136,39 @@ export class Editorh5Component implements OnInit {
     }
     let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
     doc.open();
-    doc.write(htmlH +htmlTitle+ this.html5 + htmlL);
+    doc.write(htmlH + htmlTitle + this.html5 + htmlL);
     doc.close();
   }
 
-  noPreviews(){
+  noPreviews() {
     this.previews = true;
   }
 
-  editBack(){
+  editBack() {
     this.onEditBack.emit(1);
   }
 
-  post(){
-      if (!this.selectValue) {
-          this.openError('请选择类别！');
-      } else {
-          this.onPost.emit({
-              selectValue: this.selectValue,
-          });
-      }
+  post() {
+    if (!this.selectValue) {
+      this.openError('请选择类别！');
+    } else {
+      this.onPost.emit({
+        selectValue: this.selectValue,
+      });
+    }
   }
 
-  save(){
-    this.onSave.emit(htmlH + this.html5 + htmlL);
-      // if (!this.selectValue) {
-      //     this.openError('请选择类别！');
-      // } else {
-      //     this.onSave.emit({
-      //         selectValue: this.selectValue,
-      //     });
-      // }
+  save() {
+    this.onSave.emit({
+      html: htmlH + this.html5 + htmlL,
+      title: this.title,
+      label: this.label,
+      description:this.description
+    });
   }
 
   openError(errorInfo) {
-      let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
-      this.toastService.toast(toastCfg);
+    let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
+    this.toastService.toast(toastCfg);
   }
 }

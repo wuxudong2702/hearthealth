@@ -57,7 +57,13 @@ export class NewsComponent implements OnInit {
   setOperate: boolean = true;
   editor: boolean = false;
   pagination: paginationObj = new paginationObj();
-  per_page:string;
+
+  per_page: string=null;
+  find_key: string=null;
+  find_val: string=null;
+  sort_key: string=null;
+  sort_val: string=null;
+  url: string = '/api/admin/info/index';
 
   editH5(id: number) {
     this.dataEditor = this.data[id];
@@ -75,10 +81,10 @@ export class NewsComponent implements OnInit {
       this.isSelectShow = false;
   }
 
-  onPost(selectValue:any) {
-      this.editor = false;
-      this.isSelectShow = false;
-  }
+  // onPost(selectValue:any) {
+  //     this.editor = false;
+  //     this.isSelectShow = false;
+  // }
 
 
 
@@ -86,14 +92,12 @@ export class NewsComponent implements OnInit {
     this.editor = true;
     this.isSelectShow = true;
   }
-  sort(sort: sortObj) {
-    this.getHeartData('/api/admin/info/index', this.per_page, null, null,sort.key, sort.val);
-  }
 
-  del(ids: string) {
-    this.http.ecgdDelData(ids).then(data => {
+
+  del(info_id: string) {
+    this.http.infoDel(info_id).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData();
+        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -103,23 +107,61 @@ export class NewsComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
-  search(searchObj: searchObj) {
-    this.getHeartData('/api/admin/info/index', '' + this.pagination.per_page, searchObj.selectValue, searchObj.searchValue);
-  }
 
-  paginationChange(parmas) {
-    this.per_page=parmas['per_page'];
-    this.getHeartData(parmas['url'], parmas['per_page']);
-  }
+
+
 
   set (set: string) {
     this.http.setHeader('infos', set).then(v => v).then(w => {
-      this.headers = this.http.getHeader('heart-data');
+      this.headers = this.http.getHeader('infos');
     });
   }
 
-  getHeartData(url: string = '/api/admin/info/index', per_page: string=this.per_page, find_key: string = null, find_val: string = null,sort_key:string=null,sort_val:string=null) {
-    this.http.getData(url, per_page, find_key, find_val,sort_key,sort_val).then(data => {
+
+  save(html){
+    // console.log('===============',html);
+   this.http.uploadHtml5Page(html.title,html.description,html.label,html.html).then(data => {
+     if (data['status'] == 'ok') {
+       this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+       this.editor=false;
+     } else {
+       const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+       this.toastService.toast(toastCfg);
+     }
+   }).catch(err => {
+     const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+     this.toastService.toast(toastCfg);
+   });
+  }
+
+
+
+
+  sort(sort: sortObj) {
+    this.sort_key = sort.key;
+    this.sort_val = sort.val;
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+
+
+  search(searchObj: searchObj) {
+    this.find_val = searchObj.searchValue;
+    this.find_key = searchObj.selectValue;
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+  paginationChange(parmas) {
+    this.per_page = parmas['per_page'];
+    if(parmas['url']!=undefined){
+      this.url = parmas['url'];
+    }
+    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+
+  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];
@@ -131,7 +173,6 @@ export class NewsComponent implements OnInit {
         this.pagination.next_page_url = data['data']['next_page_url'];
         this.pagination.prev_page_url = data['data']['prev_page_url'];
         this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -142,9 +183,5 @@ export class NewsComponent implements OnInit {
     });
   }
 
-  save(html:string){
-    console.log('===============');
-   this.http.uploadHtml5Page('12','12','12',html);
-  }
 
 }

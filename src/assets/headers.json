@@ -378,7 +378,7 @@
     {
       "key": "label",
       "show": true,
-      "name": "类型",
+      "name": "标签",
       "index": "1",
       "order": 0,
       "pipe_type": 0,
@@ -408,7 +408,7 @@
     {
       "key": "title",
       "show": true,
-      "name": "题目",
+      "name": "标题",
       "index": 2,
       "order": 0,
       "pipe_type": 0,
@@ -423,7 +423,7 @@
     {
       "key": "description",
       "show": true,
-      "name": "内容",
+      "name": "描述",
       "index": 2,
       "order": 0,
       "pipe_type": 0,

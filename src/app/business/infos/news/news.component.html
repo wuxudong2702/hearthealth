@@ -6,6 +6,7 @@
   (onEditH5)="editH5($event)"
   (onAdd)="add($event)"
   (onSearch)="search($event)"
+  (onSet)="set($event)"
 
   [headers]="headers"
   [data]="data"
@@ -24,7 +25,7 @@
 <c-editor-h5 *ngIf="editor"
              [dataEditor]="dataEditor"
              (onEditBack)="onEditBack($event)"
-             (onPost)="onPost($event)"
+
              [H5Type]="H5Type"
              [isSelectShow]="isSelectShow"
              (onSave)="save($event)"

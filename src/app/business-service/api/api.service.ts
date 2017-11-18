@@ -359,6 +359,31 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+  uploadHtml5Page(title:string, description:string, label:string, content: string):  Promise<any> {
+    const url: string = "api/admin/info/add";
+    return this.httpClient.post(url,{
+       token:this.sessionStorageService.get('token'),
+      title:title,
+      description:description,
+      label:label,
+      content:content
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
+
+  infoDel(info_id:string=null){
+    const url: string = "api/admin/info/del";
+    return this.httpClient.post(url,{
+      token:this.sessionStorageService.get('token'),
+      info_id:info_id
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
+
 
   // uploadHtml5Page(title:string, description:string, label:string, content: string): void {
   //   const uri:string = "api/admin/info/add";

@@ -175,6 +175,7 @@ export class TableListComponent implements OnInit, OnChanges{
   tableAdd: boolean = false;
   tableEdit: boolean = false;
   editId: number;
+  delId:string;
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
@@ -289,11 +290,20 @@ export class TableListComponent implements OnInit, OnChanges{
     let confirmCfg = new ConfirmConfig('您确认删除吗？！');
     let result = this.modalService.confirm(confirmCfg);
     result.then(v => {
-      let id=''+this.data[i]['heart_data_id'];
+
       if(this.data[i]['heart_data_id']==undefined){
-         id=''+this.data[i]['dev_id'];
+        console.log( this.delId,'00000000');
+        if(this.data[i]['dev_id']==undefined){
+          this.delId=''+this.data[i]['id'];
+          console.log( this.delId,'111111');
+        }else{
+          this.delId=''+this.data[i]['dev_id'];
+        }
+      }else{
+        this.delId=''+this.data[i]['heart_data_id'];
       }
-      this.onDel.emit(id);
+      console.log( this.delId,'111111');
+      this.onDel.emit(this.delId);
       this.checkedList[i]=false;
     }).catch(v => {
     })
@@ -342,6 +352,7 @@ export class TableListComponent implements OnInit, OnChanges{
     let toastCfg = new ToastConfig(ToastType.ERROR, '', errorInfo, 3000);
     this.toastService.toast(toastCfg);
   }
+
 
   constructor(private modalService: ModalService, private appService: AppService, private toastService: ToastService) {
     this.appService.titleEventEmitter.emit('');

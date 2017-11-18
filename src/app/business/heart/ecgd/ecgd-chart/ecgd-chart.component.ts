@@ -147,9 +147,9 @@ export class EcgdChartComponent implements OnInit {
                   splitNumber: 20,
                   axisLabel: {
                       formatter: function (value, index) {
+
                           var date = new Date(parseInt(value));
                           var texts = [date.getMinutes(),date.getSeconds(),date.getMilliseconds()];
-
                           return texts.join(':');
                       }
                   }

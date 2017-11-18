@@ -5,6 +5,8 @@ import {ApiService} from '../../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../../../shared/toast/toast-model';
+import {ModalService} from '../../../../shared/modal/modal.service';
+import {ConfirmConfig} from '../../../../shared/modal/modal-model';
 
 @Component({
   selector: 'app-hhr-chart',
@@ -31,23 +33,14 @@ export class HhrChartComponent implements OnInit {
   field: string='n_total_detbeat';
   dataChart: Array<any>;
   chartDetailsData: Array<any>;
-  chartDetailsValue: Array<any>;
   isDetails: boolean = false;
-  userSelectName: string;
-  userSelectIndex: number;
   chartDetailsId: number = 1;
   selectedDateStart;
   selectedDateEnd;
-  constructor(private http: ApiService, private toastService: ToastService) {
+  constructor(private http: ApiService, private toastService: ToastService,private modalService: ModalService) {
   }
 
   chartToggle(dataList: Array<any>,valueList: Array<any>) {
-    // this.dateList = this.dataChart.map(function (item) {
-    //       return item[0];
-    //   });
-    // this.valueList = this.dataChart.map(function (item) {
-    //   return item[1];
-    // });
     this.chartOption = {
           visualMap: [{
             show: false,
@@ -79,6 +72,7 @@ export class HhrChartComponent implements OnInit {
           }]
         };
   }
+
   datePickerConfig = {
     locale: 'zh-CN',
     format:"YYYY-MM-DD"
@@ -103,64 +97,21 @@ export class HhrChartComponent implements OnInit {
   indicator3() {
       this.field='indicator3';
       this.chartToggle(this.dataList,this.valueList);
-
   }
 
   indicator4() {
       this.field='indicator4';
       this.chartToggle(this.dataList,this.valueList);
-
   }
 
   indicator5() {
       this.field='indicator5';
       this.chartToggle(this.dataList,this.valueList);
-
   }
 
-  clear(){
-      console.log(this.chartDetailsId);
-      this.http.delHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
-          if (data['status'] == 'ok') {
-              // this.http.getHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
-              //     if (data['status'] == 'ok') {
-              //         this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
-              //         this.chartDetailsData=Object.entries(data['data']);
-              //         this.chartDetailsData.forEach(function (v) {
-              //             if(v[0]=="int nBpmCode"){
-              //                 switch(v[1]){
-              //                     case 0 :  v[1]="过慢"; break;
-              //                     case 1 :  v[1]="正常"; break;
-              //                     case 2 :  v[1]="过快"; break;
-              //                     default:  v[1]="";
-              //                 }
-              //             }
-              //             if(v[0]=="int nArrhythmiaCode"){
-              //                 switch(v[1]){
-              //                     case 0 :  v[1]="正常"; break;
-              //                     case 1 :  v[1]="隐患"; break;
-              //                     case 2 :  v[1]="高风险"; break;
-              //                     default:  v[1]="";
-              //                 }
-              //             }
-              //         });
-              //     }
-              // }).catch(err => {
-              //     const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-              //     console.error(err);
-              //     this.toastService.toast(toastCfg);
-              // });
-              console.log();
-          }
-      }).catch(err => {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-          this.toastService.toast(toastCfg);
-      });
-  }
   show(){
       if(this.selectedDateStart && this.selectedDateEnd){
           this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
-              console.log(data,'data');
               if (data['status'] == 'ok') {
                   this.dataChart1 = data['data'];
                   this.valueList = this.dataChart1.map(function (item) {
@@ -190,16 +141,14 @@ export class HhrChartComponent implements OnInit {
           this.toastService.toast(toastCfg);
       }
   }
+
   chartClick(e){
-      console.log(e);
+      // console.log(e);
       this.dataIndex = e.dataIndex;
+      this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
       this.http.getHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
-          console.log(data,'档案');
           if (data['status'] == 'ok') {
-              // console.log(this.dataChart1,'dataChart1');
-              // console.log(this.dataChart1[e.dataIndex],'this.dataChart1[e.dataIndex]');
               this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
-              // console.log(this.chartDetailsId,'chartDetailsId');
               this.chartDetailsData=Object.entries(data['data']);
               this.chartDetailsData.forEach(function (v) {
                   if(v[0]=="int nBpmCode"){
@@ -226,6 +175,28 @@ export class HhrChartComponent implements OnInit {
           this.toastService.toast(toastCfg);
       });
       this.isDetails=true;
+  }
+
+  clear(){
+      if(this.dataIndex >= 0){
+          let confirmCfg = new ConfirmConfig('您确认清空该次数据吗？');
+          let result = this.modalService.confirm(confirmCfg);
+          result.then(v => {
+              this.http.delHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
+                  if (data['status'] == 'ok') {
+                      this. show();
+                      this.isDetails = false;
+                  }
+              }).catch(err => {
+                  // const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                  // this.toastService.toast(toastCfg);
+              });
+          }).catch(v => {
+          })
+      }else{
+          const toastCfg = new ToastConfig(ToastType.ERROR, '','请选择清空的数据！', 3000);
+          this.toastService.toast(toastCfg);
+      }
   }
 
   @HostListener('window:resize')

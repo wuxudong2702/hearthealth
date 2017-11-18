@@ -294,6 +294,20 @@ export class ApiService {
       });
   }
 
+    /*
+     设置个人信息
+    */
+    postAvatar(avator:string): Promise<any> {
+        const url: string = '/api/admin/auth/update';
+        return this.httpClient.post(url, {
+            token: this.sessionStorageService.get('token'),
+            avator: avator
+        })
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
   getEcgdDataChart(chartId: number): Promise<any> {
     const url: string = ' /api/admin/heart/data';
     return this.httpClient.post(url, {
@@ -687,6 +701,18 @@ export class ApiService {
   }
 
 //packages
+
+    packagesDel(packages_id:string){
+        const url: string = '/api/admin/upgrade/del';
+        return this.httpClient.post(url, {
+            token: this.sessionStorageService.get('token'),
+            packages_id: packages_id
+        })
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
+
   getPackagesHeader(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/packages-data/packages-headers.json';
     return this.httpClient.get(url)

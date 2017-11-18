@@ -39,16 +39,13 @@
   ],
   "app-roles": [
     {
-      "key": "appRole",
+      "key": "name",
       "show": true,
       "name": "账户角色",
       "index": 0,
       "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "0": "子账户",
-        "1": "主账户"
-      },
+      "pipe_type": 0,
+      "pipe_params": "",
       "val": "",
       "select_val": [
         "子账户",
@@ -60,7 +57,7 @@
       "input_type": 1
     },
     {
-      "key": "subUsersMaxNum",
+      "key": "users_count",
       "show": true,
       "name": "最大子用户个数",
       "index": 1,
@@ -102,6 +99,21 @@
       "val": "",
       "select_val": [],
       "valid_example": "本次更新了...",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "updateUrl",
+      "show": true,
+      "name": "升级地址",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "http://localhost:4200",
       "required": true,
       "pattern": "",
       "input_type": 0

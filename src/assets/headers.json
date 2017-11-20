@@ -638,6 +638,21 @@
   ],
   "roles": [
     {
+      "key": "id",
+      "show": false,
+      "name": "id号",
+      "index": 0,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
       "key": "administratorPermissions",
       "show": true,
       "name": "管理员角色",

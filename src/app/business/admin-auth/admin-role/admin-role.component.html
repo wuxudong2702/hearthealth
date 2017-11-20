@@ -1,10 +1,15 @@
 <c-table-list
   *ngIf="tableView"
-  (onSort)="sort($event)"
+
   (onDel)="del($event)"
   (onDelAll)="delAll($event)"
   (onEditZTree)="editZTree($event)"
   (onAdd)="add($event)"
+
+  (onSort)="sort($event)"
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
+
   [headers]="headers"
   [data]="data"
   [addBtn]="addBtn"
@@ -12,6 +17,11 @@
   [deleteAllBtn]="deleteAllBtn"
   [editZTreeBtn]="editZTreeBtn"
   [setOperate]="setOperate"
+  [searchBtn]="searchBtn"
+  [setBtn]="setBtn"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
 <app-admin-ztree

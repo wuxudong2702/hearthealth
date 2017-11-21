@@ -22,54 +22,54 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.http.getHomeDataChart().then(data => {
-            this.dataChart = data['dataChart'];
-            this.dateList = this.dataChart.map(function (item) {
-                return item[0];
-            });
-            this.valueList = this.dataChart.map(function (item) {
-                return item[1];
-            });
-            this.chartOption = {
-                color: ['#3aafdb'],
-                tooltip : {
-                    trigger: 'axis',
-                    axisPointer : {
-                        type : 'shadow',
-                        shadowStyle:{
-                            color:'rgba(224,224,224,0.3)'
-                        }
-                    }
-                },
-                grid: {
-                    left: '8%',
-                    right: '10%',
-                    top: '30%',
-                    containLabel: true,
-                },
-                xAxis : [
-                    {
-                        type : 'category',
-                        data : this.dateList,
-                        axisTick: {
-                            alignWithLabel: true
-                        }
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'value',
-                        // splitLine:{show: false}
-                    }
-                ],
-                series : [
-                    {
-                        type:'bar',
-                        barWidth: '50%',
-                        data:this.valueList
-                    }
-                ]
-            };
-        });
+        // this.http.getHomeDataChart().then(data => {
+        //     this.dataChart = data['dataChart'];
+        //     this.dateList = this.dataChart.map(function (item) {
+        //         return item[0];
+        //     });
+        //     this.valueList = this.dataChart.map(function (item) {
+        //         return item[1];
+        //     });
+        //     this.chartOption = {
+        //         color: ['#3aafdb'],
+        //         tooltip : {
+        //             trigger: 'axis',
+        //             axisPointer : {
+        //                 type : 'shadow',
+        //                 shadowStyle:{
+        //                     color:'rgba(224,224,224,0.3)'
+        //                 }
+        //             }
+        //         },
+        //         grid: {
+        //             left: '8%',
+        //             right: '10%',
+        //             top: '30%',
+        //             containLabel: true,
+        //         },
+        //         xAxis : [
+        //             {
+        //                 type : 'category',
+        //                 data : this.dateList,
+        //                 axisTick: {
+        //                     alignWithLabel: true
+        //                 }
+        //             }
+        //         ],
+        //         yAxis : [
+        //             {
+        //                 type : 'value',
+        //                 // splitLine:{show: false}
+        //             }
+        //         ],
+        //         series : [
+        //             {
+        //                 type:'bar',
+        //                 barWidth: '50%',
+        //                 data:this.valueList
+        //             }
+        //         ]
+        //     };
+        // });
     }
 }

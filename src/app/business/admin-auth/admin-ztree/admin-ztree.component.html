@@ -1,5 +1,5 @@
 <div class="tableAdd">
-  <p class="tittle">请选择权限</p>
+  <p class="tittle" *ngIf="isShow">请选择权限</p>
   <div class="content">
     <div class="ztree-align ">
       <c-ztree  #ztreeInstance [setting]="setting" [zNodes]="nodes"></c-ztree>

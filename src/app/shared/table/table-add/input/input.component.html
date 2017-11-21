@@ -12,7 +12,16 @@
     placeholder="请输入"
     onfocus="this.placeholder=''"
     onblur="this.placeholder='请输入'"
+    (keyup)="change()"
+    (click)="change()"
   >
+  <select class="form-control addInputValue"
+          *ngIf="isRemind" name={{field.key}}
+          [formControlName]="field.key"
+          [(ngModel)]="field.val"
+  >
+    <option *ngFor="let val of remind;" (click)="selected()" value={{val}}>{{val}}</option>
+  </select>
 
 
   <select class="form-control addInputValue"

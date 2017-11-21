@@ -14,21 +14,28 @@ import {FormControlService} from "./form-controll.service"
 export class TableAddComponent implements OnInit {
 
   @Input() tableAdd: boolean;
+  @Input() isShow: boolean =true;
   @Input() headers: Array<cell>;
   @Input() addEditTitle:string;
+  @Input() isRemind:boolean;
+  @Input() remind:Array<any>;
 
 
   @Output() onAddCancel = new EventEmitter<any>();
   @Output() onSubmit = new EventEmitter<any>();
+  @Output() onSend = new EventEmitter<any>();
+  @Output() onSendFormValue = new EventEmitter<any>();
 
   submitData: string;
+  addFormValue: string;
   checkValue: boolean = false;
   form: FormGroup;
-  date:any;
+
   constructor(private fcs:FormControlService) {
   }
 
   ngOnInit() {
+
     this.form=this.fcs.toFormGroup(this.headers);
 }
 
@@ -36,9 +43,6 @@ export class TableAddComponent implements OnInit {
     locale: 'zh-CN'
   };
 
-  onDate(date){
-    this.date=date;
-  }
   submit() {
     // this.form.value.birth=this.date;
     console.log(this.form.value,'this.form.value');
@@ -49,7 +53,12 @@ export class TableAddComponent implements OnInit {
     }
     this.onSubmit.emit(this.form.value);
   }
-
+  sendId(role_id) {
+    this.onSend.emit(role_id);
+  }
+  SendFormValue(formValue) {
+    this.onSendFormValue.emit(formValue);
+  }
   addCancel() {
     this.onAddCancel.emit();
   }

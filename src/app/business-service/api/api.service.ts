@@ -525,119 +525,119 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  adminsAdd(role_id:string,user_name:string,name:string,password:string){
-    const urls: string = "/api/admin/admins/add";
-    return this.httpClient.post(urls, {
-      token: this.sessionStorageService.get('token'),
-      role_id: role_id,
-      user_name:user_name,
-      name:name,
-      password:password
-    })
-      .toPromise()
-      .then(data => {
-        return data;
-      })
-      .catch(this.handleError);
-  }
+    adminsAdd(role_id:string,user_name:string,name:string,password:string){
+        const urls: string = "/api/admin/admins/add";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            role_id: role_id,
+            user_name:user_name,
+            name:name,
+            password:password
+        })
+            .toPromise()
+            .then(data => {
+                return data;
+            })
+            .catch(this.handleError);
+    }
 
-  adminsUpdate(id:string,role_id:string,user_name:string,name:string,password:string){
-    const urls: string = "/api/admin/admins/update";
-    return this.httpClient.post(urls, {
-      token: this.sessionStorageService.get('token'),
-      id:id,
-      role_id: role_id,
-      user_name:user_name,
-      name:name,
-      password:password
-    })
-      .toPromise()
-      .then(data => {
-        return data;
-      })
-      .catch(this.handleError);
-  }
-  rolesUpdate(id:string,description:string, name:string, perms:string){
-    const urls: string = "/api/admin/admins/role/update";
-    return this.httpClient.post(urls, {
-      token: this.sessionStorageService.get('token'),
-      id:id,
-      description:description,
-      name:name,
-      perms:perms
-    })
-      .toPromise()
-      .then(data => {
-        return data;
-      })
-      .catch(this.handleError);
-  }
-  rolesPerms(id:string){
-    const urls: string = "/api/admin/admins/role/perms";
-    return this.httpClient.post(urls, {
-      token: this.sessionStorageService.get('token'),
-      id:id,
-    })
-      .toPromise()
-      .then(data => {
-        return data;
-      })
-      .catch(this.handleError);
-  }
+    adminsUpdate(id:string,role_id:string,user_name:string,name:string,password:string){
+        const urls: string = "/api/admin/admins/update";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            id:id,
+            role_id: role_id,
+            user_name:user_name,
+            name:name,
+            password:password
+        })
+            .toPromise()
+            .then(data => {
+                return data;
+            })
+            .catch(this.handleError);
+    }
+    rolesUpdate(id:string,description:string, name:string, perms:string){
+        const urls: string = "/api/admin/admins/role/update";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            id:id,
+            description:description,
+            name:name,
+            perms:perms
+        })
+            .toPromise()
+            .then(data => {
+                return data;
+            })
+            .catch(this.handleError);
+    }
+    rolesPerms(id:string){
+        const urls: string = "/api/admin/admins/role/perms";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            id:id,
+        })
+            .toPromise()
+            .then(data => {
+                return data;
+            })
+            .catch(this.handleError);
+    }
 
-  adminsDel(id:string){
-    const urls: string = "/api/admin/admins/del";
-    return this.httpClient.post(urls, {
-      token: this.sessionStorageService.get('token'),
-      id:id
-    })
-      .toPromise()
-      .then(data => {
-        return data;
-      })
-      .catch(this.handleError);
-  }
+    adminsDel(id:string){
+        const urls: string = "/api/admin/admins/del";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            id:id
+        })
+            .toPromise()
+            .then(data => {
+                return data;
+            })
+            .catch(this.handleError);
+    }
 
-  adminsRemind(key:string){
-    const urls: string = "/api/admin/admins/role/remind";
-    return this.httpClient.post(urls, {
-      token: this.sessionStorageService.get('token'),
-      key:key
-    })
-      .toPromise()
-      .then(data => {
-        return data;
-      })
-      .catch(this.handleError);
-  }
+    adminsRemind(key:string){
+        const urls: string = "/api/admin/admins/role/remind";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            key:key
+        })
+            .toPromise()
+            .then(data => {
+                return data;
+            })
+            .catch(this.handleError);
+    }
 
 //admin-user
-  rolesAdd(name:string,description:string,perms:string){
-    const urls: string = "/api/admin/admins/role/add";
-    return this.httpClient.post(urls, {
-      token: this.sessionStorageService.get('token'),
-      name:name,
-      description:description,
-      perms:perms
-    })
-      .toPromise()
-      .then(data => {
-        return data;
-      })
-      .catch(this.handleError);
-  }
-  rolesDel(id:string){
-    const urls: string = "/api/admin/admins/role/del";
-    return this.httpClient.post(urls, {
-      token: this.sessionStorageService.get('token'),
-      id:id
-    })
-      .toPromise()
-      .then(data => {
-        return data;
-      })
-      .catch(this.handleError);
-  }
+    rolesAdd(name:string,description:string,perms:string){
+        const urls: string = "/api/admin/admins/role/add";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            name:name,
+            description:description,
+            perms:perms
+        })
+            .toPromise()
+            .then(data => {
+                return data;
+            })
+            .catch(this.handleError);
+    }
+    rolesDel(id:string){
+        const urls: string = "/api/admin/admins/role/del";
+        return this.httpClient.post(urls, {
+            token: this.sessionStorageService.get('token'),
+            id:id
+        })
+            .toPromise()
+            .then(data => {
+                return data;
+            })
+            .catch(this.handleError);
+    }
 
 //app-user
 
@@ -1288,14 +1288,14 @@ export class ApiService {
 
   //home
 
-  homeData(): Promise<any> {
-    const url: string = '/api/admin/statistics/data';
-    return this.httpClient.post(url, {
-      token: this.sessionStorageService.get('token'),
-    })
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
+    homeData(): Promise<any> {
+        const url: string = '/api/admin/statistics/data';
+        return this.httpClient.post(url, {
+            token: this.sessionStorageService.get('token'),
+        })
+            .toPromise()
+            .then(data => data)
+            .catch(this.handleError);
+    }
 
 }

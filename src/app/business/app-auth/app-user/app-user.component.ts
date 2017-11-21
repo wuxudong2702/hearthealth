@@ -80,6 +80,7 @@ export class AppUserComponent implements OnInit {
   sort_val: string = null;
   url: string = '/api/admin/app/user/index';
 
+
   sub_pagination: paginationObj = new paginationObj();
   sub_per_page: string = null;
   sub_find_key: string = null;

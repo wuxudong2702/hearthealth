@@ -1,37 +1,106 @@
 {
   "admins": [
     {
-      "key": "administratorPermissions",
+      "key": "role_name",
       "show": true,
       "name": "管理员角色",
       "index": 1,
       "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "0": "管理员",
-        "1": "普通用户"
-      },
+      "pipe_type": 0,
+      "pipe_params": "",
       "val": "",
-      "select_val": [
-        "管理员",
-        "普通用户"
-      ],
+      "select_val": "",
       "valid_example": "",
       "required": true,
       "pattern": "",
-      "input_type": 1
+      "input_type": 0
     },
     {
-      "key": "administrator",
+      "key": "user_name",
       "show": true,
       "name": "管理员姓名",
-      "index": 4,
+      "index": 0,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "武旭东",
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "id",
+      "show": false,
+      "name": "用户id",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": false,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "role_id",
+      "show": false,
+      "name": "角色id",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": false,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "name",
+      "show": false,
+      "name": "账号",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "password",
+      "show": false,
+      "name": "密码",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
+      "key": "password_confirmation",
+      "show": false,
+      "name": "确认密码",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
       "required": true,
       "pattern": "",
       "input_type": 0
@@ -653,28 +722,22 @@
   ],
   "roles": [
     {
-      "key": "administratorPermissions",
+      "key": "name",
       "show": true,
       "name": "管理员角色",
       "index": 1,
       "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "0": "管理员",
-        "1": "普通用户"
-      },
+      "pipe_type": 0,
+      "pipe_params": "",
       "val": "",
-      "select_val": [
-        "管理员",
-        "普通用户"
-      ],
+      "select_val": "",
       "valid_example": "",
       "required": false,
       "pattern": "",
-      "input_type": 1
+      "input_type": 0
     },
     {
-      "key": "devID",
+      "key": "description",
       "show": "true",
       "name": "备注",
       "index": 6,
@@ -981,7 +1044,7 @@
       "key": "name",
       "show": true,
       "name": "用户名",
-      "index": 4,
+      "index": 0,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -996,7 +1059,7 @@
       "key": "accountType",
       "show": true,
       "name": "账户类型",
-      "index": 0,
+      "index": 1,
       "order": 0,
       "pipe_type": 1,
       "pipe_params": {
@@ -1173,10 +1236,10 @@
   ],
   "logs": [
     {
-      "key": "userName",
+      "key": "log_name",
       "show": true,
       "name": "用户名",
-      "index": 4,
+      "index": 0,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -1190,8 +1253,8 @@
 
     {
       "id": "9",
-      "key": "operating",
-      "table_id": 0,
+      "key": "description",
+      "table_id": 1,
       "show": true,
       "name": "操作",
       "index": 1,
@@ -1206,10 +1269,10 @@
       "input_type": 0
     },
     {
-      "key": "date",
+      "key": "created_at",
       "show": true,
       "name": "时间",
-      "index": 1,
+      "index": 2,
       "order": 0,
       "pipe_type": 2,
       "pipe_params": "yyyy-mm-dd",

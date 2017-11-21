@@ -1,8 +1,11 @@
 <c-table-list
   *ngIf="tableView"
-  (onSort)="onSort($event)"
-  (onDel)="onDel($event)"
-  (onDelAll)="onDelAll($event)"
+  (onSort)="sort($event)"
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
+
+  (onDel)="del($event)"
+  (onDelAll)="del($event)"
   (onAdd)="add($event)"
   [headers]="headers"
   [data]="data"
@@ -11,6 +14,11 @@
   [editBtn]="editBtn"
   [deleteAllBtn]="deleteAllBtn"
   [setOperate]="setOperate"
+  [searchBtn]="searchBtn"
+  [setBtn]="setBtn"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
 <app-table-add
@@ -18,6 +26,7 @@
         [addEditTitle]="addEditTitle"
         (onAddCancel)="cancel($event)"
         (onSubmit)="submit($event)"
+        (onSend)="getRoleId($event)"
         *ngIf="addView"
 >
 </app-table-add>

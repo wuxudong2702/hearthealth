@@ -24,12 +24,11 @@ export class TableAddComponent implements OnInit {
   submitData: string;
   checkValue: boolean = false;
   form: FormGroup;
-
+  date:any;
   constructor(private fcs:FormControlService) {
   }
 
   ngOnInit() {
-
     this.form=this.fcs.toFormGroup(this.headers);
 }
 
@@ -37,9 +36,18 @@ export class TableAddComponent implements OnInit {
     locale: 'zh-CN'
   };
 
+  onDate(date){
+    this.date=date;
+  }
   submit() {
-    this.submitData=this.form.value;
-    this.onSubmit.emit(this.submitData);
+    // this.form.value.birth=this.date;
+    console.log(this.form.value,'this.form.value');
+    if( this.form.value.sex='男'){
+      this.form.value.sex='1';
+    }else{
+      this.form.value.sex='0'
+    }
+    this.onSubmit.emit(this.form.value);
   }
 
   addCancel() {

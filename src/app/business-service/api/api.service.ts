@@ -218,8 +218,9 @@ export class ApiService {
   getHeader(table: string): any {
     let header: any = this.headers[table];
     let config: any = this.headerConfig[table];
-    let _header: Array<any> = [];
+    console.log(config,'1111111111111');
 
+    let _header: Array<any> = [];
     _header = header.map(v => {
       let key: string = v['key'];
       if (config && config[key]) {
@@ -228,6 +229,7 @@ export class ApiService {
       }
       return v;
     });
+    console.log(_header,'2222222');
     return _header;
   }
 
@@ -241,6 +243,7 @@ export class ApiService {
   // latest, true,4;
   // historicalTests,true,5;'
   setHeader(table: string, set: string): Promise<any> {
+    console.log(table,set,'table,set');
     const url: string = '/api/admin/header/set';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -274,10 +277,11 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
+  getSUbUserData(url: string = '/api/admin/app/user/index', parent_id:string=null,count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
     console.log(url, count, find_key, find_val, '');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
+      parent_id:parent_id,
       count: count,
       find_key: find_key,
       find_val: find_val,
@@ -294,19 +298,19 @@ export class ApiService {
       });
   }
 
-    /*
-     设置个人信息
-    */
-    postAvatar(avator:string): Promise<any> {
-        const url: string = '/api/admin/auth/update';
-        return this.httpClient.post(url, {
-            token: this.sessionStorageService.get('token'),
-            avator: avator
-        })
-            .toPromise()
-            .then(data => data)
-            .catch(this.handleError);
-    }
+  /*
+   设置个人信息
+  */
+  postAvatar(avator: string): Promise<any> {
+    const url: string = '/api/admin/auth/update';
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      avator: avator
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
 
   getEcgdDataChart(chartId: number): Promise<any> {
     const url: string = ' /api/admin/heart/data';
@@ -390,7 +394,8 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
-  upDataHtml5Page(info_id:string,title:string,description:string,label:string,header:string,content:string,footer:string){
+
+  upDataHtml5Page(info_id: string, title: string, description: string, label: string, header: string, content: string, footer: string) {
     const url: string = "api/admin/info/update";
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -400,7 +405,7 @@ export class ApiService {
       content: content,
       footer: footer,
       description: description,
-      info_id:info_id
+      info_id: info_id
     })
       .toPromise()
       .then(data => data)
@@ -416,11 +421,12 @@ export class ApiService {
       .toPromise()
       .then(data => {
 
-        console.log(info_id,data,'6567890-9876567890-=');
+        console.log(info_id, data, '6567890-9876567890-=');
         return data
       })
       .catch(this.handleError);
   }
+
   infoDel(info_id: string = null) {
     const url: string = "api/admin/info/del";
     return this.httpClient.post(url, {
@@ -432,13 +438,13 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  upgradeAdd(ver:string=null,desc:string=null,url:string=null){
+  upgradeAdd(ver: string = null, desc: string = null, url: string = null) {
     const urls: string = "api/admin/upgrade/add";
     return this.httpClient.post(urls, {
       token: this.sessionStorageService.get('token'),
-      ver:ver,
-      desc:desc,
-      url:url
+      ver: ver,
+      desc: desc,
+      url: url
     })
       .toPromise()
       .then(data => {
@@ -446,22 +452,24 @@ export class ApiService {
       })
       .catch(this.handleError);
   }
-  upgradeUpdate(id:string,ver:string=null,desc:string=null,url:string=null){
-    const urls: string = "api/admin/upgrade/update";
+
+  upgradeUpdate(id: string, ver: string = null, desc: string = null, url: string = null) {
+    const urls: string = "/api/admin/upgrade/update";
     return this.httpClient.post(urls, {
       token: this.sessionStorageService.get('token'),
-      id:id,
-      ver:ver,
-      desc:desc,
-      url:url
+      id: id,
+      ver: ver,
+      desc: desc,
+      url: url
     })
       .toPromise()
       .then(data => {
-        console.log(data,'======');
+        console.log(data, '======');
         return data;
       })
       .catch(this.handleError);
   }
+
   // uploadHtml5Page(title:string, description:string, label:string, content: string): void {
   //   const uri:string = "api/admin/info/add";
   //   let form, inputToken, inputTitle, inputDesc, inputLabel, inputContent;
@@ -599,6 +607,103 @@ export class ApiService {
   }
 
 //app-user
+
+  userAdd(parent_id :string=null,mobile: string = null, qq: string = null, weixin: string = null, password: string = null,password_confirmation:string=null,
+          name: string = null, email: string = null, birth: string = null, sex: string = null,
+          height: string = null, weight: string = null, zone: string = null, role: string = null, relationship: string = null) {
+    console.log(role);
+    const url: string = '/api/admin/app/user/add';
+    return this.httpClient.post(url,{
+      token:this.sessionStorageService.get('token'),
+      mobile :mobile,
+      qq :qq,
+      weixin :weixin,
+      password :password,
+      password_confirmation:password_confirmation,
+      name :name,
+      email :email,
+      birth :birth,
+      sex:sex,
+      height:height ,
+      weight:weight,
+      zone:zone,
+      role:role,
+      relationship :relationship,
+      parent_id:parent_id
+    })
+      .toPromise()
+      .then(data => {
+        console.log(data,'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq ');
+        return data
+      })
+      .catch(this.handleError);
+  }
+
+  userUpdate(edit_id :string=null,parent_id:string=null,mobile: string = null, qq: string = null, weixin: string = null, password: string = null,password_confirmation:string=null,
+                    name: string = null, email: string = null, birth: string = null, sex: string = null,
+                    height: string = null, weight: string = null, zone: string = null, role: string = null, relationship: string = null) {
+    console.log(password,password_confirmation,role,'password_confirmed');
+    const url: string = '/api/admin/app/user/update';
+    return this.httpClient.post(url,{
+      token:this.sessionStorageService.get('token'),
+      id:edit_id,
+      mobile :mobile,
+      qq :qq,
+      weixin :weixin,
+      password :password,
+      password_confirmation:password_confirmation,
+      name :name,
+      email :email,
+      birth :birth,
+      sex:sex,
+      height:height ,
+      weight:weight,
+      zone:zone,
+      role:role,
+      relationship :relationship,
+      parent_id:parent_id,
+    })
+      .toPromise()
+      .then(data => {
+        console.log(data,'ppppppooooo');
+        return data
+      })
+      .catch(this.handleError);
+  }
+
+
+
+  userDelData(id: string = null) {
+    const url: string = " /api/admin/app/user/del";
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      id: id
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
+
+  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
+    console.log(url, count, find_key, find_val, '');
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      count: count,
+      find_key: find_key,
+      find_val: find_val,
+      sort_key: sort_key,
+      sort_val: sort_val,
+    })
+      .toPromise()
+      .then(data => {
+        console.log(data, 'getData全局获取data');
+        return data
+      })
+      .catch(err => {
+        this.handleError(err);
+      });
+  }
+
   getAppUserHeader(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-headers.json';
     return this.httpClient.get(url)
@@ -755,35 +860,35 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  postAppRoleSubmit(id:string,users_count:number){
-        const urls: string = "/api/admin/app/role/update";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            id:id,
-            users_count:users_count
-        })
-            .toPromise()
-            .then(data => {
-                console.log(data,'======');
-                return data;
-            })
-            .catch(this.handleError);
-    }
+  appRoleSubmit(id: string, users_count: number) {
+    console.log(id, users_count, '89000000000000');
+    const url: string = "/api/admin/app/role/update";
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      id: id,
+      users_count: users_count
+    })
+      .toPromise()
+      .then(data => {
+        console.log(data, '======');
+        return data;
+      })
+      .catch(this.handleError);
+  }
 
 //packages
-
-    packagesDel(packages_id:string=null){
-    console.log(packages_id,'[][][][' +
+  packagesDel(packages_id: string = null) {
+    console.log(packages_id, '[][][][' +
       ']');
-        const url: string = '/api/admin/upgrade/del';
-        return this.httpClient.post(url, {
-            token: this.sessionStorageService.get('token'),
-            id: packages_id
-        })
-            .toPromise()
-            .then(data => data)
-            .catch(this.handleError);
-    }
+    const url: string = '/api/admin/upgrade/del';
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      id: packages_id
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
+  }
 
   getPackagesHeader(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/packages-data/packages-headers.json';

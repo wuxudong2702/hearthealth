@@ -85,10 +85,9 @@ export class AppRoleComponent implements OnInit {
   }
 
   submit(submitData) {
-
-      this.http.postAppRoleSubmit(submitData.id,submitData.users_count).then(data => {
-        console.log(submitData['id'],'喵');
-        console.log(submitData,'汪');
+    console.log(submitData['id'],'喵');
+    console.log(submitData,'汪');
+      this.http.appRoleSubmit(submitData.id,submitData.users_count).then(data => {
         if (data['status'] == 'ok') {
               this.data = data['data'];
               this.getHeartData();

@@ -6,7 +6,8 @@ import {
   DataType,
   searchObj,
   INPUTTYPE,
-  paginationObj
+  paginationObj,
+  indexParams
 } from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
@@ -27,6 +28,7 @@ export class AppUserComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.http.getHeader('users');
+
     this.getHeartData(this.url);
     this.http.isHavePerm('app-user-del').then(v => {
       this.deleteBtn = v;
@@ -44,23 +46,17 @@ export class AppUserComponent implements OnInit {
 
   headers: Array<cell> = [];
   data: Array<any> = [];
-
   headerAdd: Array<cell> = [];
   subUsersheaderAdd: Array<cell> = [];
 
   subUserHeaders: Array<any> = [];
   subUserData: Array<any> = [];
-  editId: number;
   addEditTitle: string = '添加';
 
-  // appUserDel: boolean = true;//this.http.isHavePerm('app-user-del');
-  // appUserAdd: boolean = false;//this.http.isHavePerm('app-user-add');
-  // appUserEdit: boolean = false;//this.http.isHavePerm('app-user-edit');
   deleteBtn: boolean = false;
   deleteAllBtn: boolean = false;
   addBtn: boolean = false;
   editBtn: boolean = false;
-
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
   setBtn: boolean = true;
@@ -76,21 +72,46 @@ export class AppUserComponent implements OnInit {
   subUsersView: boolean = false;
 
   pagination: paginationObj = new paginationObj();
-  per_page: string=null;
-  find_key: string=null;
-  find_val: string=null;
-  sort_key: string=null;
-  sort_val: string=null;
+  indexParams: indexParams = new indexParams();
+  per_page: string = null;
+  find_key: string = null;
+  find_val: string = null;
+  sort_key: string = null;
+  sort_val: string = null;
   url: string = '/api/admin/app/user/index';
 
+  sub_pagination: paginationObj = new paginationObj();
+  sub_per_page: string = null;
+  sub_find_key: string = null;
+  sub_find_val: string = null;
+  sub_sort_key: string = null;
+  sub_sort_val: string = null;
+  sub_url: string = '/api/admin/app/user/index';
+
+  id: number = 0;
+  addEditFlag: boolean = true;
+  parentSubFlag: boolean = true;
+  parent_id: string = '';
+  editId: string;
+  subEditId: string;
 
   add(id: number) {
+    for (let i = 0; i < this.headers.length; i++) {
+      if (this.headers[i].key == 'accountType') {
+        this.headers[i].show = false;
+      } else if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+        this.headers[i].required = true;
+        this.headers[i].show = true;
+      } else {
+
+      }
+    }
     if (id >= 0) {
+      this.addEditFlag = false;
       this.addEditTitle = '编辑';
-      this.editId = id;
+      this.editId = '' + this.data[id].id;
+      console.log(this.editId, 'thislkjdsfgsldkfjg');
       this.headerAdd = this.headers.map(d => {
-        // console.log('______',this.data[id][d.key],d.key);
-        // console.log('-------', d.inputType);
         switch (d.input_type) {
           case INPUTTYPE.INPUT:
             d.val = this.data[id][d.key];
@@ -98,101 +119,239 @@ export class AppUserComponent implements OnInit {
           case INPUTTYPE.SELECT:
             let val = this.data[id][d.key];
             d.val = d.select_val[val];
-            // console.log('----+++++++++---', val, d.selectVal[val]);
             break;
           default:
             d.val = this.data[id][d.key];
         }
-
         return d;
       });
     }
     else {
+      this.addEditFlag = true;
       this.addEditTitle = '添加';
       this.headerAdd = this.headers.map(d => {
         d.val = '';
         return d;
       });
-
     }
+
     this.addView = true;
     this.subUsersView = false;
     this.tableView = false;
     this.addSubUserView = false;
-
   }
 
   cancel() {
+    for (let i = 0; i < this.headers.length; i++) {
+      if (this.headers[i].key == 'accountType') {
+        this.headers[i].show = true;
+      } else if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+        this.headers[i].required = false;
+        this.headers[i].show = false;
+      } else {
+      }
+    }
     this.addView = false;
     this.subUsersView = false;
     this.tableView = true;
     this.addSubUserView = false;
-
+    this.addEditFlag = true;
+    this.parentSubFlag = true;
   }
 
-  submit(submitData: string) {
+  submit(submitData) {
+    if (this.addEditFlag) {//addEditFlag=true的时候是添加
+      // let role = this.parentSubFlag ? '0' : '1';
+      this.http.userAdd(this.parent_id, submitData.mobile, submitData.qq, submitData.weixin, submitData.password, submitData.password_confirmation,
+        submitData.name, submitData.email, submitData.birth, submitData.sex, submitData.height, submitData.weight, submitData.zone, '0', submitData.relationship).then(data => {
+        if (data['status'] == 'ok') {
+          this.data = data['data'];
+          this.getHeartData();
+          this.tableView = true;
+          this.addSubUserView = false;
+          this.addView = false;
+          this.subUsersView = false;
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    } else {//编辑提交
+      let role = this.parentSubFlag ? '0' : '1';
+      this.http.userUpdate(this.editId, this.parent_id, submitData.mobile, submitData.qq, submitData.weixin, submitData.password, submitData.password_confirmation,
+        submitData.name, submitData.email, submitData.birth, submitData.sex, submitData.height, submitData.weight, submitData.zone, role, submitData.relationship).then(data => {
+        if (data['status'] == 'ok') {
+          this.data = data['data'];
+          this.getHeartData();
+          this.tableView = true;
+          this.addSubUserView = false;
+          this.addView = false;
+          this.subUsersView = false;
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
+  }
 
-    this.http.postAppUserSubmit(submitData).then(data => {
-      console.log(data, '提交');
-      this.data = data['data'];
+  sort(sort: sortObj) {
+    this.sort_key = sort.key;
+    this.sort_val = sort.val;
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+  del(ids: string) {
+    console.log(ids, 'ids');
+    this.http.userDelData(ids).then(data => {
+      if (data['status'] == 'ok') {
+        this.getHeartData();
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
-    this.addSubUserView = false;
-    this.addView = false;
-    this.subUsersView = false;
-    this.tableView = true;
   }
 
-  Search(searchObj: searchObj) {
-    console.log('app-user searchObj:', searchObj);
-    // this.selectValue = searchObj.selectValue;
-    // this.searchValue = searchObj.searchValue;
-    this.http.postAppUserSearch(searchObj.selectValue, searchObj.searchValue).then(data => {
-      console.log('app-user Search result:', data);
-      this.data = data['data'];
+  delAll(arr: Array<any>) {
+    if (arr.length) {
+       console.log(arr);
+      this.http.userDelData('' + arr[0]).then(data => {
+        if (data['status'] == 'ok') {
+          arr.splice(0,1);
+          if(arr.length){
+            this.delAll(arr);
+          }else{
+            if(this.parentSubFlag){
+              this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            }else{
+              this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+            }
+            return;
+          }
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+          return;
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
+  }
+
+  search(searchObj: searchObj) {
+    this.find_val = searchObj.searchValue;
+    this.find_key = searchObj.selectValue;
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+  paginationChange(parmas) {
+    this.per_page = parmas['per_page'];
+    if (parmas['url'] != undefined) {
+      this.url = parmas['url'];
+    }
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+  }
+
+  set (set: string) {
+    // console.log(set,'app user set');
+    this.http.setHeader('users', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('users');
     });
   }
+
+  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
+      if (data['status'] == 'ok') {
+        this.data = data['data']['data'];
+        this.pagination.current_page = data['data']['current_page'];
+        this.pagination.last_page = data['data']['last_page'];
+        this.pagination.per_page = data['data']['per_page'];
+        this.pagination.total = data['data']['total'];
+        this.pagination.first_page_url = data['data']['first_page_url'];
+        this.pagination.last_page_url = data['data']['last_page_url'];
+        this.pagination.next_page_url = data['data']['next_page_url'];
+        this.pagination.prev_page_url = data['data']['prev_page_url'];
+        this.pagination.to = data['data']['to'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
+  }
+
+
+
+
+
+
+
 
   details(id: number) {
+    this.parentSubFlag = false;
+    this.parent_id = '' + this.data[id].id;
     this.addView = false;
     this.subUsersView = true;
     this.tableView = false;
     this.addSubUserView = false;
-    // this.headerAdd=this.headers;
-    this.http.getAppUserSubHeader().then(data => {
-      console.log('appuser getAppUserSubHeaders header', data);
-      this.subUserHeaders = data['headers'];
-    });
-    this.http.getAppUserSubData().then(data => {
-      this.subUserData = data['data'];
-
-    });
+    for (let i = 0; i < this.headers.length; i++) {
+      if (this.headers[i].key == 'accountType' || this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'weixin' || this.headers[i].key == 'qq' || this.headers[i].key == 'mobile' || this.headers[i].key == 'name' || this.headers[i].key == 'email' || this.headers[i].key == 'zone') {
+        this.headers[i].required = false;
+        this.headers[i].show = false;
+      } else {
+      }
+    }
+    this.getSubHeartData(this.sub_url, this.parent_id, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.subUserHeaders = this.headers;
   }
 
-  subUsersDel(id: number) {
-    this.http.postAppUserSubDel(id).then(data => {
-      console.log(data, '删除');
-      this.subUserData = data['data'];
-    });
-  }
 
-  subUsersDelAll(checkedList: any) {
-    this.http.postAppUserSubDelAll(checkedList).then(data => {
-      console.log(data, '删除全部');
-      this.subUserData = data['data'];
+
+
+
+
+  subUsersDel(ids: string) {
+    console.log(ids, 'ids');
+    // let id= ''+this.subUserData[ids].id;
+    this.http.userDelData(ids).then(data => {
+      if (data['status'] == 'ok') {
+        this.getSubHeartData(this.sub_url, this.parent_id);
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
     });
   }
 
   subUsersSort(sort: sortObj) {
-    this.http.postAppUserSubSort(sort.key, sort.val).then(data => {
-      console.log(data, '排序');
-      this.subUserData = data['data'];
-    });
+    this.sub_sort_key = sort.key;
+    this.sub_sort_val = sort.val;
+    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
   }
 
   subUsersAdd(id: number) {
     if (id >= 0) {
+      console.log(this.addEditFlag, '子用户addtitleflag编辑');
+      this.addEditFlag = false;
       this.addEditTitle = '编辑';
-      this.editId = id;
+      this.subEditId = '' + this.subUserData[id].id;
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
         switch (d.input_type) {
           case INPUTTYPE.INPUT:
@@ -210,12 +369,13 @@ export class AppUserComponent implements OnInit {
       });
     }
     else {
+      console.log(this.addEditFlag, '子用户addtitleflag添加');
+      this.addEditFlag = true;
       this.addEditTitle = '添加';
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
         d.val = '';
         return d;
       });
-
     }
     this.addView = false;
     this.subUsersView = false;
@@ -224,26 +384,68 @@ export class AppUserComponent implements OnInit {
   }
 
   subUsersback() {
+    for (let i = 0; i < this.headers.length; i++) {
+      if (this.headers[i].key == 'accountType' || this.headers[i].key == 'weixin' || this.headers[i].key == 'qq' || this.headers[i].key == 'mobile' || this.headers[i].key == 'name' || this.headers[i].key == 'email' || this.headers[i].key == 'zone') {
+        this.headers[i].show = true;
+      }
+    }
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
     this.addView = false;
     this.subUsersView = false;
     this.tableView = true;
     this.addSubUserView = false;
     this.addEditTitle = '添加';
+    this.addEditFlag = true;
+    this.parentSubFlag = true;
+    this.parent_id = '';
 
   }
 
-  subUserSubmit(submitData: string) {
-    this.http.postAppUserSubSubmit(submitData).then(data => {
-      console.log(data, '提交');
-      this.data = data['data'];
-    });
-    this.addView = false;
-    this.subUsersView = true;
-    this.tableView = false;
-    this.addSubUserView = false;
+  subUserSubmit(submitData) {
+    if (this.addEditFlag) {//addEditFlag=true的时候是添加
+      console.log(this.addEditFlag, 'addtitleflag子用户添加tiji提交');
+      this.http.userAdd(this.parent_id, submitData.mobile, submitData.qq, submitData.weixin, submitData.password, submitData.password_confirmation,
+        submitData.name, submitData.email, submitData.birth, submitData.sex, submitData.height, submitData.weight, submitData.zone, '1', submitData.relationship).then(data => {
+        if (data['status'] == 'ok') {
+          this.data = data['data'];
+          this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+          this.tableView = false;
+          this.addSubUserView = false;
+          this.addView = false;
+          this.subUsersView = true;
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    } else {//编辑提交
+      console.log(this.addEditFlag, 'addtitleflag子用户编辑提交');
+      let role = this.parentSubFlag ? '0' : '1';
+      this.http.userUpdate(this.subEditId, this.parent_id, submitData.mobile, submitData.qq, submitData.weixin, submitData.password, submitData.password_confirmation,
+        submitData.name, submitData.email, submitData.birth, submitData.sex, submitData.height, submitData.weight, submitData.zone, role, submitData.relationship).then(data => {
+        if (data['status'] == 'ok') {
+          this.data = data['data'];
+          this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+          this.tableView = false;
+          this.addSubUserView = false;
+          this.addView = false;
+          this.subUsersView = true;
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
   }
 
   subUsersCancel() {
+
     this.addView = false;
     this.subUsersView = true;
     this.tableView = false;
@@ -251,25 +453,39 @@ export class AppUserComponent implements OnInit {
   }
 
   subUserSearch(searchObj: searchObj) {
-    console.log('app-user-sub searchObj:', searchObj);
-    // this.selectValue = searchObj.selectValue;
-    // this.searchValue = searchObj.searchValue;
-    this.http.postAppUserSubSearch(searchObj.selectValue, searchObj.searchValue).then(data => {
-      console.log('app-user-sub Search result:', data);
-      this.data = data['data'];
-    });
+    console.log(this.parent_id, 'parent_id');
+    this.sub_find_val = searchObj.searchValue;
+    this.sub_find_key = searchObj.selectValue;
+    this.getSubHeartData(
+      this.sub_url,
+      this.parent_id,
+      this.sub_per_page,
+      this.sub_find_key,
+      this.sub_find_val,
+      this.sub_sort_key,
+      this.sub_sort_val);
   }
 
-  sort(sort: sortObj) {
-    this.sort_key = sort.key;
-    this.sort_val = sort.val;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-  }
-
-  del(ids: string) {
-    this.http.ecgdDelData(ids).then(data => {
+  getSubHeartData(sub_url: string = this.sub_url,
+                  parent_id: string = this.parent_id,
+                  sub_per_page: string = this.sub_per_page,
+                  sub_find_key: string = this.sub_find_key,
+                  sub_find_val: string = this.sub_find_val,
+                  sub_sort_key: string = this.sub_sort_key,
+                  sub_sort_val: string = this.sub_sort_val) {
+    this.http.getSUbUserData(sub_url, parent_id, sub_per_page, sub_find_key, sub_find_val, sub_sort_key, sub_sort_val).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData();
+        console.log(data, 'dada');
+        this.subUserData = data['data']['data'];
+        this.sub_pagination.current_page = data['data']['current_page'];
+        this.sub_pagination.last_page = data['data']['last_page'];
+        this.sub_pagination.per_page = data['data']['per_page'];
+        this.sub_pagination.total = data['data']['total'];
+        this.sub_pagination.first_page_url = data['data']['first_page_url'];
+        this.sub_pagination.last_page_url = data['data']['last_page_url'];
+        this.sub_pagination.next_page_url = data['data']['next_page_url'];
+        this.sub_pagination.prev_page_url = data['data']['prev_page_url'];
+        this.sub_pagination.to = data['data']['to'];
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -280,50 +496,18 @@ export class AppUserComponent implements OnInit {
     });
   }
 
-  search(searchObj: searchObj) {
-    this.find_val = searchObj.searchValue;
-    this.find_key = searchObj.selectValue;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-  }
 
-  paginationChange(parmas) {
-    this.per_page = parmas['per_page'];
-    if(parmas['url']!=undefined){
-      this.url = parmas['url'];
+  sub_paginationChange(parmas) {
+    this.sub_per_page = parmas['per_page'];
+    if (parmas['url'] != undefined) {
+      this.sub_url = parmas['url'];
     }
-    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-  }
-  set (set: string) {
-    this.http.setHeader('heart-data', set).then(v => v).then(w => {
-      this.headers = this.http.getHeader('heart-data');
-      console.log(this.headers, '------0-0-0-');
-    });
+    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
   }
 
-  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
-    console.log('dada');
-
-    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
-      if (data['status'] == 'ok') {
-        console.log(data,'dada');
-        this.data = data['data']['data'];
-        this.pagination.current_page = data['data']['current_page'];
-        this.pagination.last_page = data['data']['last_page'];
-        this.pagination.per_page = data['data']['per_page'];
-        this.pagination.total = data['data']['total'];
-        this.pagination.first_page_url = data['data']['first_page_url'];
-        this.pagination.last_page_url = data['data']['last_page_url'];
-        this.pagination.next_page_url = data['data']['next_page_url'];
-        this.pagination.prev_page_url = data['data']['prev_page_url'];
-        this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
-      } else {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-        this.toastService.toast(toastCfg);
-      }
-    }).catch(err => {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      this.toastService.toast(toastCfg);
+  sub_set(set: string) {
+    this.http.setHeader('users', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('users');
     });
   }
 

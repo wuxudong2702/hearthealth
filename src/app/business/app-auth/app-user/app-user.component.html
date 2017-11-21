@@ -9,13 +9,17 @@
   [editBtn]="editBtn"
   [detailsBtn]="detailsBtn"
   [setOperate]="setOperate"
-  [paginationBtn]="paginationBtn"
-  (onDetails)="details()"
+
+  (onDetails)="details($event)"
   (onSort)="sort($event)"
   (onDel)="del($event)"
-  (onAdd)="add($event)"
   (onDelAll)="delAll($event)"
-  (onSearch)="Search($event)"
+  (onAdd)="add($event)"
+  (onSet)="set($event)"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
+  (onSearch)="search($event)"
 
   *ngIf="tableView"
 >
@@ -34,11 +38,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <!--子用戶信息-->
 <c-table-list
   (onSort)="subUsersSort($event)"
   (onDel)="subUsersDel($event)"
-  (onDelAll)="subUsersDelAll($event)"
+  (onDelAll)="delAll($event)"
   (onBack)="subUsersback()"
   (onSearch)="subUserSearch($event)"
   (onAdd)="subUsersAdd($event)"
@@ -54,10 +68,9 @@
   [addBtn]="addBtn"
   [setOperate]="setOperate"
   [paginationBtn]="paginationBtn"
-  [pagination]="pagination"
-  (onPaginationChange)="paginationChange($event)"
-
-
+  [pagination]="sub_pagination"
+  (onPaginationChange)="sub_paginationChange($event)"_p
+  (onSet)="sub_set($event)"
 
   *ngIf="subUsersView"
 >

@@ -1,4 +1,4 @@
-import {Component, OnInit,OnChanges, ViewChild, EventEmitter, Input, Output} from '@angular/core';
+import {Component, OnInit, OnChanges, ViewChild, EventEmitter, Input, Output} from '@angular/core';
 import {AppService} from '../../app.service';
 import {HttpPaginationComponent} from '../../shared/pagination/http-pagination.component';
 import {ModalService} from '../../shared/modal/modal.service';
@@ -56,6 +56,16 @@ export class paginationObj {
   last_page_url: string;
   next_page_url: string;
   prev_page_url: string;
+}
+
+export class indexParams {
+  url:string;
+  parent_id:string;
+  per_page:string;
+  find_key:string;
+  find_val:string;
+  sort_key:string;
+  sort_val:string;
 }
 
 export class news {
@@ -117,10 +127,12 @@ export class CPipePipe implements PipeTransform {
   `],
 })
 
-export class TableListComponent implements OnInit, OnChanges{
+export class TableListComponent implements OnInit, OnChanges {
 
-  ngOnInit(): void {}
-  ngOnChanges(){
+  ngOnInit(): void {
+  }
+
+  ngOnChanges() {
     // console.log(this.headers,this.data,'[[[[[[[[');
     this.headers = this.headers.sort((v1, v2) => {
       return v1.index - v2.index;
@@ -148,11 +160,13 @@ export class TableListComponent implements OnInit, OnChanges{
   @Input() backBtn: boolean;
   @Input() setOperate: boolean;
   @Input() uploadBtn: boolean;
+  // @Input() flag: boolean;
 
   @Input() pagination: paginationObj;
 
   @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
+  @Output() onDelAll = new EventEmitter<any>();
   @Output() onDownload = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
   @Output() onSet = new EventEmitter<any>();
@@ -175,11 +189,14 @@ export class TableListComponent implements OnInit, OnChanges{
   tableAdd: boolean = false;
   tableEdit: boolean = false;
   editId: number;
-  delId:string;
+  delId: string;
   pageList: Array<number> = [19, 25, 35];
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
-  checkedListIds:Array<number>=[];
+  checkedListIds: Array<number> = [];
+  // ids:string=''
+// CLIDS:string='';
+
   // submitData:object;
   delAllChecked() {
     if (!this.isDelAll) {
@@ -190,8 +207,8 @@ export class TableListComponent implements OnInit, OnChanges{
   }
 
   delChecked(i) {
-      this.isDelAll = false;
-      this.checkedList[i]= !this.checkedList[i];
+    this.isDelAll = false;
+    this.checkedList[i] = !this.checkedList[i];
   }
 
   add() {
@@ -199,6 +216,7 @@ export class TableListComponent implements OnInit, OnChanges{
   }
 
   edit(id: number) {
+    console.log(id, 'table edit id');
     this.onAdd.emit(id);
   }
 
@@ -214,30 +232,41 @@ export class TableListComponent implements OnInit, OnChanges{
 
 
   delAll() {
-    let checkedListIds='';
-    for(let i=0;i<this.checkedList.length;i++){
-         if(this.checkedList[i]){
-           // console.log(this.checkedList,this.data);
-           if(i==this.checkedList.length-1){
-             checkedListIds+=this.data[i]['heart_data_id'];
-           }else{
-             checkedListIds+=this.data[i]['heart_data_id']+',';
-           }
-         }
-         this.checkedList[i]=false;
+    let checkedListIds = [];
+    for (let i = 0; i < this.checkedList.length; i++) {
+      if (this.checkedList[i]) {
+        let idName = '';
+        if (this.data[i]['heart_data_id']) {
+          idName = 'heart_data_id';
+        } else if (this.data[i]['id']) {
+          idName = 'id'
+        } else if (this.data[i]['dev_id']) {
+          idName = 'dev_id';
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', '出现id号错误！', 3000);
+          this.toastService.toast(toastCfg);
+          break;
+        }
+        // if(this.flag){
+        //   this.onDel.emit(''+this.data[i][idName]);
+        // }else break;
+        checkedListIds.push(this.data[i][idName]);
+      }
+      this.checkedList[i] = false;
     }
     this.isDelAll = false;
-    this.onDel.emit(checkedListIds);
+    console.log(checkedListIds, 'qaqaqaqa');
+    this.onDelAll.emit(checkedListIds);
   }
 
   download() {
-    let checkedListIds='';
-    for(let i=0;i<this.checkedList.length;i++){
-      if(this.checkedList[i]){
-        if(i==this.checkedList.length-1){
-          checkedListIds+=this.data[i]['heart_data_id'];
-        }else{
-          checkedListIds+=this.data[i]['heart_data_id']+',';
+    let checkedListIds = '';
+    for (let i = 0; i < this.checkedList.length; i++) {
+      if (this.checkedList[i]) {
+        if (i == this.checkedList.length - 1) {
+          checkedListIds += this.data[i]['heart_data_id'];
+        } else {
+          checkedListIds += this.data[i]['heart_data_id'] + ',';
         }
       }
     }
@@ -245,6 +274,7 @@ export class TableListComponent implements OnInit, OnChanges{
   }
 
   search() {//用户点击查询按钮
+    console.log(this.headers, 'table list');
     if (!this.selectValue) {
       this.openError('请选择搜索项！');
     } else {
@@ -253,6 +283,7 @@ export class TableListComponent implements OnInit, OnChanges{
         searchValue: this.searchValue,
       });
     }
+    console.log(this.headers, 'table list 22');
   }
 
   set () {
@@ -262,11 +293,13 @@ export class TableListComponent implements OnInit, OnChanges{
   showModalSetFunc() {//设置模态框
     let setConfig = new SetConfig('', this.headers);
     let result = this.modalService.set(setConfig);
+    // console.log(result,'table list set');
     result.then(v => {
-      let set='';
-      v.configHeaders.forEach((v,index)=>{
-        set+=v.key+','+v.show+','+v.index+';';
+      let set = '';
+      v.configHeaders.forEach((v, index) => {
+        set += v.key + ',' + v.show + ',' + v.index + ';';
       });
+      // console.log(set,'table list set');
       this.onSet.emit(set);
     }).catch(v => {
     });
@@ -274,39 +307,40 @@ export class TableListComponent implements OnInit, OnChanges{
 
   showModalDelAll() {
     function isChecked(i) {
-          return i == true;
+      return i == true;
     }
-    if(this.checkedList.some(isChecked)){
-        let confirmCfg = new ConfirmConfig('您确认删除吗？！');
-        let result = this.modalService.confirm(confirmCfg);
-        result.then(v => {
-            this.delAll();
-        }).catch(v => {
-        })
-    }else{
-        const toastCfg = new ToastConfig(ToastType.ERROR, '','请选择删除的数据！', 3000);
-        this.toastService.toast(toastCfg);
+
+    if (this.checkedList.some(isChecked)) {
+      let confirmCfg = new ConfirmConfig('您确认删除吗？！');
+      let result = this.modalService.confirm(confirmCfg);
+      result.then(v => {
+        this.delAll();
+      }).catch(v => {
+      })
+    } else {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择删除的数据！', 3000);
+      this.toastService.toast(toastCfg);
     }
   }
 
-  showModalDel(i:number) {
+  showModalDel(i: number) {
     let confirmCfg = new ConfirmConfig('您确认删除吗？！');
     let result = this.modalService.confirm(confirmCfg);
     result.then(v => {
 
-      if(this.data[i]['heart_data_id']==undefined){
-        console.log( this.delId,'00000000');
-        if(this.data[i]['dev_id']==undefined){
-          this.delId=''+this.data[i]['id'];
-        }else{
-          this.delId=''+this.data[i]['dev_id'];
+      if (this.data[i]['heart_data_id'] == undefined) {
+        console.log(this.delId, '00000000');
+        if (this.data[i]['dev_id'] == undefined) {
+          this.delId = '' + this.data[i]['id'];
+        } else {
+          this.delId = '' + this.data[i]['dev_id'];
         }
-      }else{
-        this.delId=''+this.data[i]['heart_data_id'];
+      } else {
+        this.delId = '' + this.data[i]['heart_data_id'];
       }
-      console.log( this.delId,'111111');
+      console.log(this.delId, '111111');
       this.onDel.emit(this.delId);
-      this.checkedList[i]=false;
+      this.checkedList[i] = false;
     }).catch(v => {
     })
   }
@@ -315,24 +349,25 @@ export class TableListComponent implements OnInit, OnChanges{
     this.onDetails.emit(id);
   }
 
-  chart(id: number,name:string,sense_time:any) {
+  chart(id: number, name: string, sense_time: any) {
     this.onChart.emit({
-      id:id,
-      name:name,
-      sense_time:sense_time
+      id: id,
+      name: name,
+      sense_time: sense_time
     });
   }
+
   chart2(id: number) {
     this.onChart2.emit(id);
   }
 
-  sort(i:string) {
-   let order='';
+  sort(i: string) {
+    let order = '';
     this.headers[i].order = this.headers[i].order === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC;
-    if(this.headers[i].order==1){
-      order='asc';
-    }else{
-      order='desc';
+    if (this.headers[i].order == 1) {
+      order = 'asc';
+    } else {
+      order = 'desc';
     }
     this.onSort.emit(
       {

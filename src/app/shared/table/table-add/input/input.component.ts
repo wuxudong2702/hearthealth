@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import {cell} from "../../table-list.component";
 import {FormGroup} from '@angular/forms';
 
@@ -12,11 +12,15 @@ export class InputComponent implements OnInit {
   @Input() field: cell;
   @Input() form: FormGroup;
 
+  @Output() onDate = new EventEmitter<any>();
+
+  date = '';
+
   get isValid() {
     return this.form.controls[this.field.key].valid;
   }
 
-  get isDirty(){
+  get isDirty() {
     return this.form.controls[this.field.key].dirty;
   }
 
@@ -27,10 +31,14 @@ export class InputComponent implements OnInit {
     // console.log('add and edit field ',this.field)
   }
 
+  dateSelected(date){
+    console.log(date, '21212121');
+    this.onDate.emit(this.date);
+  }
 
   datePickerConfig = {
     locale: 'zh-CN',
-    format:"YYYY-MM-DD"
+    format: "YYYY-MM-DD"
   };
 
 }

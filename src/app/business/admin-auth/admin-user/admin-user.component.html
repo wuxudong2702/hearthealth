@@ -4,8 +4,8 @@
   (onSearch)="search($event)"
   (onSet)="set($event)"
 
-  (onDel)="onDel($event)"
-  (onDelAll)="onDelAll($event)"
+  (onDel)="del($event)"
+  (onDelAll)="del($event)"
   (onAdd)="add($event)"
   [headers]="headers"
   [data]="data"
@@ -26,6 +26,7 @@
         [addEditTitle]="addEditTitle"
         (onAddCancel)="cancel($event)"
         (onSubmit)="submit($event)"
+        (onSend)="getRoleId($event)"
         *ngIf="addView"
 >
 </app-table-add>

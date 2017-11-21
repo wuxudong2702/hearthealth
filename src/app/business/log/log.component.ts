@@ -35,24 +35,9 @@ export class LogComponent implements OnInit {
   find_val: string=null;
   sort_key: string=null;
   sort_val: string=null;
-  url: string = '';
+  url: string = '/api/admin/log/index';
 
-  onSort(sort: sortObj) {
-      this.http.postLogSort(sort.key,sort.val).then(data=>{
-          console.log(data,'排序');
-          this.data=data['data'];
-      });
-  }
 
-  onSearch(searchObj: searchObj) {
-      console.log('log searchObj:',searchObj);
-        // this.selectValue = searchObj.selectValue;
-        // this.searchValue = searchObj.searchValue;
-      this.http.postLogSearch(searchObj.selectValue,searchObj.searchValue).then(data => {
-          console.log('log Search result:',data);
-          this.data = data['data'];
-      });
-  }
 
     getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
         this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {

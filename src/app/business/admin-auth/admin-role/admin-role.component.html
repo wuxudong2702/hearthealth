@@ -2,7 +2,7 @@
   *ngIf="tableView"
 
   (onDel)="del($event)"
-  (onDelAll)="delAll($event)"
+  (onDelAll)="del($event)"
   (onEditZTree)="editZTree($event)"
   (onAdd)="add($event)"
 
@@ -24,18 +24,32 @@
   (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
-<app-admin-ztree
-        *ngIf="editView"
-        (onZTreeSubmit)="zTreeSubmit($event)"
-        (onBack)="back($event)"
-        [nodes]="nodes"
->
-</app-admin-ztree>
-<app-table-add
-        [headers]="headerAdd"
-        [addEditTitle]="addEditTitle"
-        (onAddCancel)="cancel($event)"
-        (onSubmit)="submit($event)"
-        *ngIf="addView"
->
-</app-table-add>
+
+<div style="background-color: white">
+    <app-table-add
+            [headers]="headerAdd"
+            [addEditTitle]="addEditTitle"
+            (onAddCancel)="cancel($event)"
+            (onSubmit)="submit($event)"
+            [isShow]="isShow"
+            (onSendFormValue)="sendFormValue($event)"
+            *ngIf="addView"
+    >
+    </app-table-add>
+    <app-admin-ztree
+            *ngIf="editView"
+            [isShow]="isShow"
+            (onZTreeSubmit)="zTreeSubmit($event)"
+            (onBack)="back($event)"
+            [nodes]="nodes"
+    >
+    </app-admin-ztree>
+    <app-admin-ztree
+            *ngIf="updateView"
+            [isShow]="isShow"
+            (onZTreeSubmit)="zTreeUpdate($event)"
+            (onBack)="back($event)"
+            [nodes]="nodesUpdate"
+    >
+    </app-admin-ztree>
+</div>

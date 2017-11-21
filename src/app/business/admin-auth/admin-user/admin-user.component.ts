@@ -37,10 +37,13 @@ export class AdminUserComponent implements OnInit {
   headers: Array<cell> = [];
   headerAdd: Array<any> = [];
   data: Array<any> = [];
+  remind: Array<any> = [];
   addEditTitle: string = '添加';
+  role_id: string;
   editId: number;
+  flag:boolean=true;
 
-  // adminUserDel: boolean =false;// this.http.isHavePerm('admin-user-del');
+    // adminUserDel: boolean =false;// this.http.isHavePerm('admin-user-del');
   // adminUserAdd: boolean = false;//this.http.isHavePerm('admin-user-add');
   // adminUserEdit: boolean = false;//this.http.isHavePerm('admin-user-edit');
   // deleteBtn: boolean = this.adminUserDel;
@@ -58,6 +61,7 @@ export class AdminUserComponent implements OnInit {
 
   tableView: boolean = true;
   addView: boolean = false;
+  isRemind: boolean = false;
 
   pagination: paginationObj = new paginationObj();
   per_page: string=null;
@@ -65,28 +69,26 @@ export class AdminUserComponent implements OnInit {
   find_val: string=null;
   sort_key: string=null;
   sort_val: string=null;
-  url: string = '';
+  url: string = '/api/admin/admins/index';
 
-  onDel(id:number){
-      this.http.postAdminUserDel(id).then(data=>{
-          this.data=data['data'];
-      });
-  }
-
-  onDelAll(checkedList:any){
-      this.http.postAdminUserDelAll(checkedList).then(data=>{
-          this.data=data['data'];
-      });
-  }
-
-  onSort(sort: sortObj) {
-      this.http.postAdminUserSort(sort.key,sort.val).then(data=>{
-          this.data=data['data'];
+  del(id:string){
+      console.log(id,'---------------------------');
+      this.http.adminsDel(id).then(data => {
+          if (data['status'] == 'ok') {
+              this.getHeartData();
+          } else {
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+              this.toastService.toast(toastCfg);
+          }
+      }).catch(err => {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+          this.toastService.toast(toastCfg);
       });
   }
 
   add(id: number) {
       if (id >= 0) {
+          this.flag=false;
           this.addEditTitle = '编辑';
           this.editId = id;
           this.headerAdd = this.headers.map(d => {
@@ -101,14 +103,22 @@ export class AdminUserComponent implements OnInit {
                   default:
                       d.val = this.data[id][d.key];
               }
+              if(d.key=='name' || d.key=='password'|| d.key=='password_confirmation'){
+                  d.show=true;
+              }
               return d;
           });
       } else {
+          this.flag=true;
           this.addEditTitle = '添加';
           this.headerAdd = this.headers.map(d => {
+              if(d.key=='name' || d.key=='password'|| d.key=='password_confirmation'){
+                  d.show=true;
+              }
               d.val = '';
               return d;
           });
+          console.log(this.headerAdd,'headerAdd----');
       }
       this.addView = true;
       this.tableView = false;
@@ -120,12 +130,41 @@ export class AdminUserComponent implements OnInit {
       this.tableView = true;
   }
 
-  submit(submitData: string) {
-      this.http.postAdminUserSubmit(submitData).then(data => {
-          this.data = data['data'];
-      });
-      this.addView = false;
-      this.tableView = true;
+  submit(submitData) {
+      console.log(submitData,'submitData');
+      if(this.flag){
+          console.log('添加==========');
+          this.http.adminsAdd(this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
+              if (data['status'] == 'ok') {
+                  this.data = data['data'];
+                  this.getHeartData();
+                  this.addView = false;
+                  this.tableView = true;
+              } else {
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                  this.toastService.toast(toastCfg);
+              }
+          }).catch(err => {
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+              this.toastService.toast(toastCfg);
+          });
+      }else{
+          this.http.adminsUpdate(submitData.id,this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
+              console.log(data);
+              if (data['status'] == 'ok') {
+                  this.data = data['data'];
+                  this.getHeartData();
+                  this.addView = false;
+                  this.tableView = true;
+              } else {
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                  this.toastService.toast(toastCfg);
+              }
+          }).catch(err => {
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+              this.toastService.toast(toastCfg);
+          });
+      }
   }
 
     getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
@@ -167,8 +206,8 @@ export class AdminUserComponent implements OnInit {
     }
 
     set (set: string) {
-        this.http.setHeader('users', set).then(v => v).then(w => {
-            this.headers = this.http.getHeader('users');
+        this.http.setHeader('admins', set).then(v => v).then(w => {
+            this.headers = this.http.getHeader('admins');
         });
     }
 
@@ -177,7 +216,10 @@ export class AdminUserComponent implements OnInit {
         this.find_key = searchObj.selectValue;
         this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
     }
-
+    getRoleId(role_id){
+        this.role_id = role_id;
+        console.log(this.role_id ,'this.role_id ');
+    };
 }
 
 

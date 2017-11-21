@@ -13,6 +13,7 @@ import 'rxjs/add/operator/toPromise';
 export class AdminZtreeComponent implements OnInit {
 
   @Input() nodes :any ;
+  @Input() isShow :boolean = true ;
   @Output() onZTreeSubmit = new EventEmitter<any>();
   @Output() onBack = new EventEmitter<any>();
 

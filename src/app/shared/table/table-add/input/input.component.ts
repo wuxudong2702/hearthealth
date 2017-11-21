@@ -52,9 +52,7 @@ export class InputComponent implements OnInit {
           });
       }
   }
-    selected(){
-        this.isRemind = false;
-    }
+
   @Output() onDate = new EventEmitter<any>();
 
   date = '';

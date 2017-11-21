@@ -26,6 +26,7 @@ export enum INPUTTYPE {
   INPUT = 0,
   SELECT,
   DATETIME,
+  REMINDINPUT
 }
 
 export enum INFOTYPE {

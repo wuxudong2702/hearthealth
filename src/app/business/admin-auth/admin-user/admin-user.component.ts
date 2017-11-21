@@ -61,7 +61,6 @@ export class AdminUserComponent implements OnInit {
 
   tableView: boolean = true;
   addView: boolean = false;
-  isRemind: boolean = false;
 
   pagination: paginationObj = new paginationObj();
   per_page: string=null;
@@ -94,6 +93,9 @@ export class AdminUserComponent implements OnInit {
           this.headerAdd = this.headers.map(d => {
               switch (d.input_type) {
                   case INPUTTYPE.INPUT:
+                      d.val = this.data[id][d.key];
+                      break;
+                  case INPUTTYPE.REMINDINPUT:
                       d.val = this.data[id][d.key];
                       break;
                   case INPUTTYPE.SELECT:

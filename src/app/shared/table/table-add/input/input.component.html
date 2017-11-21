@@ -15,13 +15,24 @@
     (keyup)="change()"
     (click)="change()"
   >
-  <select class="form-control addInputValue"
-          *ngIf="isRemind" name={{field.key}}
-          [formControlName]="field.key"
+  <input
+          type="text"
+          class="form-control addInputValue"
+          id="remindList"
+          name="remindList"
+          *ngIf="field.input_type == 3"
           [(ngModel)]="field.val"
+          [formControlName]="field.key"
+          placeholder="请输入"
+          onfocus="this.placeholder=''"
+          onblur="this.placeholder='请输入'"
+          (keyup)="change()"
+          (click)="change()"
+          list="list"
   >
-    <option *ngFor="let val of remind;" (click)="selected()" value={{val}}>{{val}}</option>
-  </select>
+    <datalist id="list" *ngIf="isRemind">
+      <option *ngFor="let val of remind;"  value={{val}}>{{val}}</option>
+    </datalist>
 
 
   <select class="form-control addInputValue"

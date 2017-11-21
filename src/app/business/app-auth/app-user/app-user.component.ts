@@ -6,14 +6,15 @@ import {
   DataType,
   searchObj,
   INPUTTYPE,
-  paginationObj,
-  indexParams
+  paginationObj
+
 } from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {_switch} from "rxjs/operator/switch";
 import {ToastService} from '../../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
+
 
 @Component({
   selector: 'app-app-user',
@@ -48,7 +49,21 @@ export class AppUserComponent implements OnInit {
   data: Array<any> = [];
   headerAdd: Array<cell> = [];
   subUsersheaderAdd: Array<cell> = [];
-
+  // password :Array<cell>= [{
+  //   "key": "password",
+  //   "show": false,
+  //   "name": "密码",
+  //   "index": 17,
+  //   "order": 0,
+  //   "pipe_type": 0,
+  //   "pipe_params": "",
+  //   "val": "",
+  //   "select_val": "",
+  //   "valid_example": "15",
+  //   "required": false,
+  //   "pattern": "",
+  //   "input_type": 0
+  // }];
   subUserHeaders: Array<any> = [];
   subUserData: Array<any> = [];
   addEditTitle: string = '添加';
@@ -72,7 +87,10 @@ export class AppUserComponent implements OnInit {
   subUsersView: boolean = false;
 
   pagination: paginationObj = new paginationObj();
-  indexParams: indexParams = new indexParams();
+  // indexParams: indexParams = new indexParams();
+  // subIndexParams: indexParams = new indexParams();
+
+
   per_page: string = null;
   find_key: string = null;
   find_val: string = null;
@@ -107,11 +125,30 @@ export class AppUserComponent implements OnInit {
 
       }
     }
+    // this.headers
+
+
+    // this.headers.push(password)
+//    {
+//      "key": "password_confirmation",
+//      "show": false,
+//      "name": "确认密码",
+//      "index": 3,
+//      "order": 0,
+//      "pipe_type": 0,
+//      "pipe_params": "",
+//      "val": "",
+//      "select_val": "",
+//      "valid_example": "15",
+//      "required": false,
+//      "pattern": "",
+//      "input_type": 0
+//    },
+
     if (id >= 0) {
       this.addEditFlag = false;
       this.addEditTitle = '编辑';
       this.editId = '' + this.data[id].id;
-      console.log(this.editId, 'thislkjdsfgsldkfjg');
       this.headerAdd = this.headers.map(d => {
         switch (d.input_type) {
           case INPUTTYPE.INPUT:
@@ -135,7 +172,6 @@ export class AppUserComponent implements OnInit {
         return d;
       });
     }
-
     this.addView = true;
     this.subUsersView = false;
     this.tableView = false;
@@ -162,9 +198,8 @@ export class AppUserComponent implements OnInit {
 
   submit(submitData) {
     if (this.addEditFlag) {//addEditFlag=true的时候是添加
-      // let role = this.parentSubFlag ? '0' : '1';
-      this.http.userAdd(this.parent_id, submitData.mobile, submitData.qq, submitData.weixin, submitData.password, submitData.password_confirmation,
-        submitData.name, submitData.email, submitData.birth, submitData.sex, submitData.height, submitData.weight, submitData.zone, '0', submitData.relationship).then(data => {
+      let role = this.parentSubFlag ? '0' : '1';
+      this.http.userAdd(this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
           this.getHeartData();
@@ -182,8 +217,7 @@ export class AppUserComponent implements OnInit {
       });
     } else {//编辑提交
       let role = this.parentSubFlag ? '0' : '1';
-      this.http.userUpdate(this.editId, this.parent_id, submitData.mobile, submitData.qq, submitData.weixin, submitData.password, submitData.password_confirmation,
-        submitData.name, submitData.email, submitData.birth, submitData.sex, submitData.height, submitData.weight, submitData.zone, role, submitData.relationship).then(data => {
+      this.http.userUpdate(this.editId, this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
           this.getHeartData();
@@ -209,7 +243,6 @@ export class AppUserComponent implements OnInit {
   }
 
   del(ids: string) {
-    console.log(ids, 'ids');
     this.http.userDelData(ids).then(data => {
       if (data['status'] == 'ok') {
         this.getHeartData();
@@ -225,16 +258,15 @@ export class AppUserComponent implements OnInit {
 
   delAll(arr: Array<any>) {
     if (arr.length) {
-       console.log(arr);
       this.http.userDelData('' + arr[0]).then(data => {
         if (data['status'] == 'ok') {
-          arr.splice(0,1);
-          if(arr.length){
+          arr.splice(0, 1);
+          if (arr.length) {
             this.delAll(arr);
-          }else{
-            if(this.parentSubFlag){
+          } else {
+            if (this.parentSubFlag) {
               this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-            }else{
+            } else {
               this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
             }
             return;
@@ -266,7 +298,6 @@ export class AppUserComponent implements OnInit {
   }
 
   set (set: string) {
-    // console.log(set,'app user set');
     this.http.setHeader('users', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('users');
     });
@@ -296,12 +327,6 @@ export class AppUserComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
   details(id: number) {
     this.parentSubFlag = false;
     this.parent_id = '' + this.data[id].id;
@@ -310,24 +335,15 @@ export class AppUserComponent implements OnInit {
     this.tableView = false;
     this.addSubUserView = false;
     for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'accountType' || this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'weixin' || this.headers[i].key == 'qq' || this.headers[i].key == 'mobile' || this.headers[i].key == 'name' || this.headers[i].key == 'email' || this.headers[i].key == 'zone') {
-        this.headers[i].required = false;
-        this.headers[i].show = false;
-      } else {
+      if (this.headers[i].key == 'birth' || this.headers[i].key == 'sex' || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
+        this.subUserHeaders.push(this.headers[i]);
       }
     }
     this.getSubHeartData(this.sub_url, this.parent_id, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-    this.subUserHeaders = this.headers;
   }
 
 
-
-
-
-
   subUsersDel(ids: string) {
-    console.log(ids, 'ids');
-    // let id= ''+this.subUserData[ids].id;
     this.http.userDelData(ids).then(data => {
       if (data['status'] == 'ok') {
         this.getSubHeartData(this.sub_url, this.parent_id);
@@ -349,7 +365,6 @@ export class AppUserComponent implements OnInit {
 
   subUsersAdd(id: number) {
     if (id >= 0) {
-      console.log(this.addEditFlag, '子用户addtitleflag编辑');
       this.addEditFlag = false;
       this.addEditTitle = '编辑';
       this.subEditId = '' + this.subUserData[id].id;
@@ -370,7 +385,6 @@ export class AppUserComponent implements OnInit {
       });
     }
     else {
-      console.log(this.addEditFlag, '子用户addtitleflag添加');
       this.addEditFlag = true;
       this.addEditTitle = '添加';
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
@@ -404,9 +418,7 @@ export class AppUserComponent implements OnInit {
 
   subUserSubmit(submitData) {
     if (this.addEditFlag) {//addEditFlag=true的时候是添加
-      console.log(this.addEditFlag, 'addtitleflag子用户添加tiji提交');
-      this.http.userAdd(this.parent_id, submitData.mobile, submitData.qq, submitData.weixin, submitData.password, submitData.password_confirmation,
-        submitData.name, submitData.email, submitData.birth, submitData.sex, submitData.height, submitData.weight, submitData.zone, '1', submitData.relationship).then(data => {
+      this.http.userAdd(this.parent_id, submitData, '1').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
           this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
@@ -423,10 +435,8 @@ export class AppUserComponent implements OnInit {
         this.toastService.toast(toastCfg);
       });
     } else {//编辑提交
-      console.log(this.addEditFlag, 'addtitleflag子用户编辑提交');
       let role = this.parentSubFlag ? '0' : '1';
-      this.http.userUpdate(this.subEditId, this.parent_id, submitData.mobile, submitData.qq, submitData.weixin, submitData.password, submitData.password_confirmation,
-        submitData.name, submitData.email, submitData.birth, submitData.sex, submitData.height, submitData.weight, submitData.zone, role, submitData.relationship).then(data => {
+      this.http.userUpdate(this.subEditId, this.parent_id, submitData, '1').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
           this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
@@ -454,7 +464,6 @@ export class AppUserComponent implements OnInit {
   }
 
   subUserSearch(searchObj: searchObj) {
-    console.log(this.parent_id, 'parent_id');
     this.sub_find_val = searchObj.searchValue;
     this.sub_find_key = searchObj.selectValue;
     this.getSubHeartData(
@@ -476,7 +485,6 @@ export class AppUserComponent implements OnInit {
                   sub_sort_val: string = this.sub_sort_val) {
     this.http.getSUbUserData(sub_url, parent_id, sub_per_page, sub_find_key, sub_find_val, sub_sort_key, sub_sort_val).then(data => {
       if (data['status'] == 'ok') {
-        console.log(data, 'dada');
         this.subUserData = data['data']['data'];
         this.sub_pagination.current_page = data['data']['current_page'];
         this.sub_pagination.last_page = data['data']['last_page'];
@@ -496,6 +504,7 @@ export class AppUserComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
+
 
 
   sub_paginationChange(parmas) {

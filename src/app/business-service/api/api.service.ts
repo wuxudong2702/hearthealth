@@ -641,66 +641,55 @@ export class ApiService {
 
 //app-user
 
-  userAdd(parent_id :string=null,mobile: string = null, qq: string = null, weixin: string = null, password: string = null,password_confirmation:string=null,
-          name: string = null, email: string = null, birth: string = null, sex: string = null,
-          height: string = null, weight: string = null, zone: string = null, role: string = null, relationship: string = null) {
-    console.log(role);
+  userAdd(parent_id :string=null,submitData,role) {
     const url: string = '/api/admin/app/user/add';
     return this.httpClient.post(url,{
       token:this.sessionStorageService.get('token'),
-      mobile :mobile,
-      qq :qq,
-      weixin :weixin,
-      password :password,
-      password_confirmation:password_confirmation,
-      name :name,
-      email :email,
-      birth :birth,
-      sex:sex,
-      height:height ,
-      weight:weight,
-      zone:zone,
+      mobile :submitData.mobile,
+      qq :submitData.qq,
+      weixin :submitData.weixin,
+      password :submitData.password,
+      password_confirmation:submitData.password_confirmation,
+      name :submitData.name,
+      email :submitData.email,
+      birth :submitData.birth,
+      sex:submitData.sex,
+      height:submitData.height ,
+      weight:submitData.weight,
+      zone:submitData.zone,
       role:role,
-      relationship :relationship,
+      relationship :submitData.relationship,
       parent_id:parent_id
     })
       .toPromise()
-      .then(data => {
-        console.log(data,'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq ');
-        return data
-      })
+      .then(data => data)
       .catch(this.handleError);
   }
 
-  userUpdate(edit_id :string=null,parent_id:string=null,mobile: string = null, qq: string = null, weixin: string = null, password: string = null,password_confirmation:string=null,
-                    name: string = null, email: string = null, birth: string = null, sex: string = null,
-                    height: string = null, weight: string = null, zone: string = null, role: string = null, relationship: string = null) {
-    console.log(password,password_confirmation,role,'password_confirmed');
+  userUpdate(edit_id :string=null,parent_id:string=null,submitData,role) {
+    // console.log(password,password_confirmation,role,'password_confirmed');
     const url: string = '/api/admin/app/user/update';
     return this.httpClient.post(url,{
       token:this.sessionStorageService.get('token'),
       id:edit_id,
-      mobile :mobile,
-      qq :qq,
-      weixin :weixin,
-      password :password,
-      password_confirmation:password_confirmation,
+      mobile :submitData.mobile,
+      qq :submitData.qq,
+      weixin :submitData.weixin,
+      password :submitData.password,
+      password_confirmation:submitData.password_confirmation,
       name :name,
-      email :email,
-      birth :birth,
-      sex:sex,
-      height:height ,
-      weight:weight,
-      zone:zone,
+      email :submitData.email,
+      birth :submitData.birth,
+      sex:submitData.sex,
+      height:submitData.height ,
+      weight:submitData.weight,
+      zone:submitData.zone,
       role:role,
-      relationship :relationship,
+      relationship :submitData.relationship,
       parent_id:parent_id,
     })
       .toPromise()
-      .then(data => {
-        console.log(data,'ppppppooooo');
-        return data
-      })
+      .then(data => data)
       .catch(this.handleError);
   }
 

@@ -235,7 +235,7 @@
       "input_type": 0
     },
     {
-      "key":"mobile",
+      "key": "mobile",
       "show": true,
       "name": "手机号码",
       "index": 2,
@@ -309,7 +309,6 @@
       "pattern": "[0-9]+$",
       "input_type": 0
     },
-
     {
       "key": "type",
       "show": true,
@@ -438,9 +437,8 @@
       "pattern": "",
       "input_type": 0
     },
-
     {
-      "key":"d_f1",
+      "key": "d_f1",
       "show": true,
       "name": "心率",
       "index": 5,
@@ -453,9 +451,9 @@
       "required": true,
       "pattern": "",
       "input_type": 0
-    }
-  , {
-      "key":"mobile",
+    },
+    {
+      "key": "mobile",
       "show": true,
       "name": "手机号码",
       "index": 6,
@@ -592,7 +590,8 @@
       "required": false,
       "pattern": "",
       "input_type": 0
-    }, {
+    },
+    {
       "key": "name",
       "show": true,
       "name": "用户名",
@@ -606,8 +605,9 @@
       "required": false,
       "pattern": "",
       "input_type": 0
-    }, {
-      "key":"mobile",
+    },
+    {
+      "key": "mobile",
       "show": true,
       "name": "手机号码",
       "index": 8,
@@ -651,28 +651,9 @@
       "pattern": "",
       "input_type": 0
     },
+
     {
-      "key": "accountType",
-      "show": true,
-      "name": "账户类型",
-      "index": 2,
-      "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "0": "子账户",
-        "1": "主账户"
-      },
-      "val": "",
-      "select_val": [
-        "子账户",
-        "主账户"
-      ],
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
-      "input_type": "1"
-    },
-    { "key": "historicalTests",
+      "key": "historicalTests",
       "show": true,
       "name": "历史检测次数",
       "index": 5,
@@ -686,7 +667,6 @@
       "pattern": "^[0-9]+$",
       "input_type": 0
     },
-
     {
       "key": "earliest",
       "show": true,
@@ -717,8 +697,6 @@
       "pattern": "",
       "input_type": 2
     }
-
-
   ],
   "roles": [
     {
@@ -783,21 +761,21 @@
       "pattern": "",
       "input_type": 0
     },
-{
-  "key": "password",
-  "show": false,
-  "name": "密码",
-  "index": 2,
-  "order": 0,
-  "pipe_type": 0,
-  "pipe_params": "",
-  "val": "",
-  "select_val": "",
-  "valid_example": "15",
-  "required": false,
-  "pattern": "",
-  "input_type": 0
-},
+    {
+      "key": "password",
+      "show": false,
+      "name": "密码",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "15",
+      "required": false,
+      "pattern": "",
+      "input_type": 0
+    },
     {
       "key": "password_confirmation",
       "show": false,
@@ -813,7 +791,6 @@
       "pattern": "",
       "input_type": 0
     },
-
     {
       "key": "mobile",
       "show": true,
@@ -901,7 +878,6 @@
       "pattern": "",
       "input_type": 1
     },
-
     {
       "key": "height",
       "show": true,
@@ -921,7 +897,7 @@
       "key": "weight",
       "show": true,
       "name": "体重",
-      "index":11,
+      "index": 11,
       "order": false,
       "pipe_type": 0,
       "pipe_params": "",
@@ -963,7 +939,7 @@
       "input_type": 0
     }
   ],
-  "subUsers":[
+  "subUsers": [
     {
       "key": "weixin",
       "show": true,
@@ -1024,7 +1000,6 @@
       "pattern": "",
       "input_type": 0
     },
-
     {
       "key": "mobile",
       "show": true,
@@ -1127,7 +1102,6 @@
       "pattern": "",
       "input_type": 1
     },
-
     {
       "key": "height",
       "show": true,
@@ -1250,7 +1224,6 @@
       "pattern": "",
       "input_type": 0
     },
-
     {
       "id": "9",
       "key": "description",

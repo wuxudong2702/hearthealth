@@ -9,13 +9,14 @@
     <div class="set-modal-headers text-center">列顺序</div>
   </div>
 
-  <div *ngFor="let header of headersTemp;let i=index;   " class="set-modal-header" >
-    <div class="set-modal-headers text-center">{{header.name}}</div>
-    <input class="set-modal-headers text-center" type="checkbox" [checked]="header.show"
+  <div *ngFor="let header of headersTemp;let i=index;   "  [hidden]="header.key=='password'||header.key=='password_confirmation'" class="set-modal-header" >
+    <div class="set-modal-headers text-center"  >{{header.name}}</div>
+    <input class="set-modal-headers text-center"  type="checkbox" [checked]="header.show"
            (click)="customSetColumn(i,header.show)"/>
-    <div class="fa set-modal-headers text-center set-modal-arrow " [class.fa-arrow-up]="i!=0"  [class.fa-arrow-down]="i==0"
+    <div class="fa set-modal-headers text-center set-modal-arrow "  [class.fa-arrow-up]="i!=0"  [class.fa-arrow-down]="i==0"
           (click)="customSetOrder(i,header.index)"></div>
   </div>
+
 
   <div class="text-center c-mb20 c-mt10 set-modal-footer">
     <button type="button" class="btn set-modal-btn" [ngClass]="config.approveBtnCls" (click)="approve()">

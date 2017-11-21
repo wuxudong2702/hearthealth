@@ -59,15 +59,6 @@ export class paginationObj {
   prev_page_url: string;
 }
 
-export class indexParams {
-  url:string;
-  parent_id:string;
-  per_page:string;
-  find_key:string;
-  find_val:string;
-  sort_key:string;
-  sort_val:string;
-}
 
 export class news {
   newsTitle: string;

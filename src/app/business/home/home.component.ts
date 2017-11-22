@@ -25,51 +25,51 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.chartOption = {
-                color: ['#3aafdb'],
-                tooltip : {
-                    trigger: 'axis',
-                    axisPointer : {
-                        type : 'shadow',
-                        shadowStyle:{
-                            color:'rgba(224,224,224,0.3)'
-                        }
-                    }
-                },
-                grid: {
-                    left: '8%',
-                    right: '10%',
-                    top: '30%',
-                    containLabel: true,
-                },
-                xAxis : [
-                    {
-                        type : 'category',
-                        data : this.dataList,
-                        axisTick: {
-                            alignWithLabel: true
-                        }
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'value',
-                        // splitLine:{show: false}
-                    }
-                ],
-                series : [
-                    {
-                        type:'bar',
-                        barWidth: '50%',
-                        data:this.valueList
-                    }
-                ]
-            };
+
         this.http.homeData().then(data => {
             if (data['status'] == 'ok') {
                 this.valueList = Object.keys(data['data']);
                 this.dataList = Object.values(data['data']);
-
+                this.chartOption = {
+                    color: ['#3aafdb'],
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {
+                            type : 'shadow',
+                            shadowStyle:{
+                                color:'rgba(224,224,224,0.3)'
+                            }
+                        }
+                    },
+                    grid: {
+                        left: '8%',
+                        right: '10%',
+                        top: '30%',
+                        containLabel: true,
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : this.valueList,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            // splitLine:{show: false}
+                        }
+                    ],
+                    series : [
+                        {
+                            type:'bar',
+                            barWidth: '50%',
+                            data:this.dataList
+                        }
+                    ]
+                };
             } else {
                 const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                 this.toastService.toast(toastCfg);
@@ -79,5 +79,9 @@ export class HomeComponent implements OnInit {
             console.error(err);
             this.toastService.toast(toastCfg);
         });
+
+
     }
+
+
 }

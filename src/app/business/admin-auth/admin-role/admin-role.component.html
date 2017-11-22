@@ -44,12 +44,4 @@
             [nodes]="nodes"
     >
     </app-admin-ztree>
-    <app-admin-ztree
-            *ngIf="updateView"
-            [isShow]="isShow"
-            (onZTreeSubmit)="zTreeUpdate($event)"
-            (onBack)="back($event)"
-            [nodes]="nodesUpdate"
-    >
-    </app-admin-ztree>
 </div>

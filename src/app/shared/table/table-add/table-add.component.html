@@ -5,7 +5,7 @@
 
     <form class="addForm " [formGroup]="form" >
       <div class=" form-inline formCenter " *ngFor="let header of headers">
-      <app-input [field]="header" [form]="form" (onSendFormValue)="SendFormValue($event)" (onSendId)="sendId($event)"  *ngIf="header.show"></app-input>
+      <app-input [field]="header" [form]="form" (onSendFormValue)="SendFormValue($event)" (onSendId)="sendId($event)" *ngIf="header.show"></app-input>
 
       </div>
       <div class="form-button " *ngIf="isShow">

@@ -35,9 +35,9 @@ const htmlL: string = "</div>\n" +
   "\t\n" +
   "</body>\n" +
   "</html>";
-const htmlTitle = "<div class=\"article-title\">\n" +
-  "  <h1 class=\"title\">我是预览页面</h1>\n" +
-  "</div>\n";
+// const htmlTitle = "<div class=\"article-title\">\n" +
+//   "  <h1 class=\"title\">我是预览页面</h1>\n" +
+//   "</div>\n";
 
 @Component({
   selector: 'c-editor-h5',
@@ -57,10 +57,10 @@ const htmlTitle = "<div class=\"article-title\">\n" +
   <div  style="background-color: white">
     <div class="form-group" style="margin-top: 12px;">
         <div style="margin-left: 2%;">
-            <label>标签：</label><input style="border: 1px solid #dddddd;width: 33%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="label">
-            <label style="margin-left: 27px;">标题：</label><input style="border: 1px solid #dddddd;width: 33%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="title">
+            <label>标签：</label><input style="border: 1px solid #dddddd;width: 35%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="label">
+            <label style="margin-left: 27px;">标题：</label><input style="border: 1px solid #dddddd;width: 35%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="title">
         </div>
-        <div style="margin-left: 2%;"><label>描述：</label><input style="border: 1px solid #dddddd;width: 75%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="description"></div>
+        <div style="margin-left: 2%;"><label>描述：</label><input style="border: 1px solid #dddddd;width: 74%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="description"></div>
     </div>
     <div class="c-content-inner " [hidden]="!previews">
       <div class="row editorDocument">
@@ -84,7 +84,7 @@ const htmlTitle = "<div class=\"article-title\">\n" +
       </div>
     </div>
 
-
+  </div>
 
   `
 })
@@ -127,7 +127,7 @@ export class Editorh5Component implements OnInit {
     //   return false;
     // });
     // if(this.dataEditor.length!=1){
-      console.log('00000',this.dataEditor);
+      console.log('00000',this.dataEditor,this.HTML5Content);
       this.title=this.dataEditor['title'];
        this.description=this.dataEditor['description'];
        this.label=this.dataEditor['label'];
@@ -156,7 +156,7 @@ export class Editorh5Component implements OnInit {
     }
     let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
     doc.open();
-    doc.write(htmlH + htmlTitle + this.html5 + htmlL);
+    doc.write(htmlH + `<h5>`+this.title+`</h5>` +this.HTML5Content+ this.html5 + htmlL);
     doc.close();
   }
 

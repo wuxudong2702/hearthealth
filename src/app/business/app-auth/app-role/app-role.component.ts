@@ -32,6 +32,7 @@ export class AppRoleComponent implements OnInit {
   data: Array<any> = [];
   editId: number;
   addEditTitle: string = '添加';
+  id: string = '';
 
   editBtn: boolean = false;
   setOperate: boolean = true;
@@ -50,6 +51,13 @@ export class AppRoleComponent implements OnInit {
   url: string = '/api/admin/app/role/index';
 
   add(id: number) {
+
+    console.log(id,'00000');
+    this.id=this.data[id]['id']; // for (let i = 0; i < this.headers.length; i++) {
+    //   if (this.headers[i].key == 'accountType') {
+    //     this.headers[i].show = false;
+    //   }
+    // }
     if (id >= 0) {
       this.addEditTitle = '编辑';
       this.editId = id;
@@ -82,17 +90,27 @@ export class AppRoleComponent implements OnInit {
   cancel() {
     this.addView = false;
     this.tableView = true;
+    for (let i = 0; i < this.headers.length; i++) {
+      if (this.headers[i].key == 'accountType') {
+        this.headers[i].show = true;
+      }
+    }
   }
 
   submit(submitData) {
-    console.log(submitData['id'],'喵');
-    console.log(submitData,'汪');
-      this.http.appRoleSubmit(submitData.id,submitData.users_count).then(data => {
+    // console.log(submitData['id'],'喵');
+    // console.log(submitData,'汪');
+      this.http.appRoleSubmit(this.id,submitData.users_count).then(data => {
         if (data['status'] == 'ok') {
               this.data = data['data'];
-              this.getHeartData();
+              this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
               this.addView = false;
               this.tableView = true;
+          for (let i = 0; i < this.headers.length; i++) {
+            if (this.headers[i].key == 'accountType') {
+              this.headers[i].show = true;
+            }
+          }
           } else {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
               this.toastService.toast(toastCfg);

@@ -73,7 +73,7 @@ export class AdminUserComponent implements OnInit {
   del(id:string){
       this.http.adminsDel(id).then(data => {
           if (data['status'] == 'ok') {
-              this.getHeartData();
+            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
           } else {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
               this.toastService.toast(toastCfg);
@@ -138,7 +138,7 @@ export class AdminUserComponent implements OnInit {
           this.http.adminsAdd(this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
               if (data['status'] == 'ok') {
                   this.data = data['data'];
-                  this.getHeartData();
+                  this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
                   this.addView = false;
                   this.tableView = true;
               } else {
@@ -154,7 +154,7 @@ export class AdminUserComponent implements OnInit {
               console.log(data);
               if (data['status'] == 'ok') {
                   this.data = data['data'];
-                  this.getHeartData();
+                  this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
                   this.addView = false;
                   this.tableView = true;
               } else {

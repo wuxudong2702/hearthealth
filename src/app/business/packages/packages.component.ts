@@ -22,7 +22,8 @@ export class PackagesComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.http.getHeader('app-upgrades');
-    this.getHeartData(this.url);
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+
 
     this.http.isHavePerm('app-upgrade-del').then(v => {
       this.deleteBtn = v;
@@ -71,7 +72,8 @@ export class PackagesComponent implements OnInit {
     console.log(packages_id,'0-0-0-0');
       this.http.packagesDel(packages_id).then(data => {
           if (data['status'] == 'ok') {
-              this.getHeartData();
+            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+
           } else {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
               this.toastService.toast(toastCfg);
@@ -81,7 +83,29 @@ export class PackagesComponent implements OnInit {
           this.toastService.toast(toastCfg);
       });
   }
+  delAll(arr: Array<any>) {
+    if (arr.length) {
+      this.http.packagesDel('' + arr[0]).then(data => {
+        if (data['status'] == 'ok') {
+          arr.splice(0, 1);
+          if (arr.length) {
+            this.delAll(arr);
+          } else {
+            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
+            return;
+          }
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+          return;
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
+  }
   add(id: number) {
     if (id >= 0) {
       this.flag=false;
@@ -124,7 +148,8 @@ export class PackagesComponent implements OnInit {
       this.http.upgradeAdd(submitData.ver,submitData.desc,submitData.url).then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getHeartData();
+          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+
           this.addView = false;
           this.tableView = true;
         } else {
@@ -139,7 +164,8 @@ export class PackagesComponent implements OnInit {
       this.http.upgradeUpdate(submitData.id,submitData.ver,submitData.desc,submitData.url).then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getHeartData();
+          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+
           this.addView = false;
           this.tableView = true;
         } else {

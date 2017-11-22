@@ -19,7 +19,8 @@ export class HhrComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.http.getHeader('reports');
-    this.getHeartData();
+    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+
   }
 
   dataChart: Array<any> = [];
@@ -76,19 +77,6 @@ export class HhrComponent implements OnInit {
     this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
-  del(ids: string) {
-    this.http.ecgdDelData(ids).then(data => {
-      if (data['status'] == 'ok') {
-        this.getHeartData();
-      } else {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-        this.toastService.toast(toastCfg);
-      }
-    }).catch(err => {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      this.toastService.toast(toastCfg);
-    });
-  }
 
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;

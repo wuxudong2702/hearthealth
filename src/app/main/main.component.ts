@@ -14,6 +14,7 @@ import {AppService} from '../app.service';
 import {ApiService} from '../business-service/api/api.service';
 import {ToastService} from '../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../shared/toast/toast-model';
+import {SessionStorageService} from '../shared/storage/session-storage.service';
 
 
 /**
@@ -155,8 +156,11 @@ export class MainComponent implements OnInit {
 
     title: string = '首页';
 
-    constructor(private router: Router, private modalService: ModalService, private ngbModalService: NgbModal, private apiService: ApiService, private toastService: ToastService) {
-        // this.appService.titleEventEmitter.subscribe((value: string) => {
+    constructor(private router: Router,private sessionStorageService:SessionStorageService,private modalService: ModalService, private ngbModalService: NgbModal, private apiService: ApiService, private toastService: ToastService) {
+        if(this.sessionStorageService.get('token')=='undefined'){
+          this.router.navigate(['/login']);
+        }
+         // this.appService.titleEventEmitter.subscribe((value: string) => {
         //     if (value) {
         //         this.title = value;
         //     }

@@ -31,21 +31,6 @@
       "input_type": 0
     },
     {
-      "key": "id",
-      "show": false,
-      "name": "用户id",
-      "index": 2,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
-    {
       "key": "role_id",
       "show": false,
       "name": "角色id",
@@ -139,39 +124,11 @@
       "required": true,
       "pattern": "[0-9]+$",
       "input_type": 0
-    },
-    {
-      "key": "id",
-      "show": false,
-      "name": "id",
-      "index": 1,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": 12,
-      "required": true,
-      "pattern": "",
-      "input_type": 0
     }
+
   ],
   "app-upgrades": [
-    {
-      "key": "id",
-      "show": false,
-      "name": "信息id号",
-      "index": 0,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "V.1",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
+
     {
       "key": "ver",
       "show": true,
@@ -219,21 +176,6 @@
     }
   ],
   "devs": [
-    {
-      "key": "dev_id",
-      "show": false,
-      "name": "id",
-      "index": 1,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": true,
-      "pattern": "",
-      "input_type": 0
-    },
     {
       "key": "mobile",
       "show": true,
@@ -292,21 +234,6 @@
       "valid_example": "微信",
       "required": true,
       "pattern": "",
-      "input_type": 0
-    },
-    {
-      "key": "user_id",
-      "show": true,
-      "name": "绑定账户",
-      "index": 6,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "12344567890",
-      "required": true,
-      "pattern": "[0-9]+$",
       "input_type": 0
     },
     {
@@ -469,21 +396,7 @@
     }
   ],
   "infos": [
-    {
-      "key": "id",
-      "show": true,
-      "name": "id",
-      "index": 0,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": true,
-      "pattern": "",
-      "input_type": 0
-    },
+
     {
       "key": "label",
       "show": true,
@@ -576,21 +489,6 @@
     }
   ],
   "reports": [
-    {
-      "key": "id",
-      "show": false,
-      "name": "id",
-      "index": 1,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
     {
       "key": "name",
       "show": true,
@@ -821,27 +719,7 @@
       "pattern": "",
       "input_type": 0
     },
-    {
-      "key": "accountType",
-      "show": true,
-      "name": "账户类型",
-      "index": 6,
-      "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "0": "子账户",
-        "1": "主账户"
-      },
-      "val": "",
-      "select_val": [
-        "子账户",
-        "主账户"
-      ],
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
-      "input_type": 1
-    },
+
     {
       "key": "birth",
       "show": true,
@@ -865,7 +743,7 @@
       "order": 0,
       "pipe_type": 1,
       "pipe_params": {
-        "0": "女",
+        "2": "女",
         "1": "男"
       },
       "val": "",
@@ -1089,7 +967,7 @@
       "order": 0,
       "pipe_type": 1,
       "pipe_params": {
-        "0": "女",
+        "2": "女",
         "1": "男"
       },
       "val": "",
@@ -1162,36 +1040,8 @@
       "pattern": "",
       "input_type": 0
     },
-    {
-      "key": "id",
-      "show": false,
-      "name": "id",
-      "index": 7,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": "",
-      "valid_example": "15",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
-    {
-      "key": "parent_id",
-      "show": false,
-      "name": "parent_id",
-      "index": 7,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": "",
-      "valid_example": "15",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
+
+
     {
       "key": "zone",
       "show": true,
@@ -1225,9 +1075,7 @@
       "input_type": 0
     },
     {
-      "id": "9",
       "key": "description",
-      "table_id": 1,
       "show": true,
       "name": "操作",
       "index": 1,

@@ -1,5 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {cell, SortDirection, sortObj, news, DataType, searchObj,INFOTYPE,paginationObj} from '../../../shared/table/table-list.component';
+import {
+  cell,
+  SortDirection,
+  sortObj,
+  news,
+  DataType,
+  searchObj,
+  INFOTYPE,
+  paginationObj
+} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../shared/toast/toast.service';
@@ -13,12 +22,12 @@ import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 })
 export class NewsComponent implements OnInit {
 
-  constructor(private http: ApiService,private  toastService:ToastService) {
+  constructor(private http: ApiService, private  toastService: ToastService) {
   }
 
   ngOnInit() {
-    this.headers= this.http.getHeader('infos');
-    this.getHeartData();
+    this.headers = this.http.getHeader('infos');
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
     this.http.isHavePerm('info-del').then(v => {
       this.deleteBtn = v;
       this.deleteAllBtn = v;
@@ -35,15 +44,14 @@ export class NewsComponent implements OnInit {
   headers: Array<cell> = [];
   data: Array<any> = [];
   H5Type: Array<any> = [
-     {key:INFOTYPE.GUIDE,value:"新手指南"},
-     {key:INFOTYPE.STARTPAGE,value:"启动页"},
-     {key:INFOTYPE.ABOUTUS,value:"关于我们"},
-     {key:INFOTYPE.PROTOCOL,value:"用户注册协议"},
-     {key:INFOTYPE.HEALTH,value:"健康资讯"}
+    {key: INFOTYPE.GUIDE, value: "新手指南"},
+    {key: INFOTYPE.STARTPAGE, value: "启动页"},
+    {key: INFOTYPE.ABOUTUS, value: "关于我们"},
+    {key: INFOTYPE.PROTOCOL, value: "用户注册协议"},
+    {key: INFOTYPE.HEALTH, value: "健康资讯"}
   ];
   dataEditor: Array<any> = [];
   isSelectShow: boolean = false;
-
 
 
   deleteBtn: boolean = false;
@@ -57,25 +65,25 @@ export class NewsComponent implements OnInit {
   setOperate: boolean = true;
   editor: boolean = false;
   pagination: paginationObj = new paginationObj();
-  HTML5Content:string;
-  per_page: string=null;
-  find_key: string=null;
-  find_val: string=null;
-  sort_key: string=null;
-  sort_val: string=null;
+  HTML5Content: string;
+  per_page: string = null;
+  find_key: string = null;
+  find_val: string = null;
+  sort_key: string = null;
+  sort_val: string = null;
   url: string = '/api/admin/info/index';
-  flag:boolean=true;
-  id:string;
+  flag: boolean = true;
+  id: string;
 
   editH5(i: number) {
     this.dataEditor = this.data[i];
-   this.flag=false;
-    this.id=this.data[i]['id'];
-   console.log(this.id,'00000000000');
+    this.flag = false;
+    this.id = this.data[i]['id'];
+    console.log(this.id, '00000000000');
     this.http.infoContent(this.id).then(data => {
       if (data['status'] == 'ok') {
         // this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-        this.HTML5Content=data['data'];
+        this.HTML5Content = data['data'];
         // console.log(this.HTML5Content,' vcccccccccccccccccccc');
         this.editor = true;
         this.isSelectShow = false;
@@ -93,26 +101,25 @@ export class NewsComponent implements OnInit {
   onEditBack(id: number) {
     this.editor = false;
     this.isSelectShow = false;
-    this.HTML5Content='';
+    this.HTML5Content = '';
   }
 
-  onSave(selectValue:any) {
-      this.editor = false;
-      this.isSelectShow = false;
+  onSave(selectValue: any) {
+    this.editor = false;
+    this.isSelectShow = false;
   }
 
-  onPost(selectValue:any) {
-      this.editor = false;
-      this.isSelectShow = false;
+  onPost(selectValue: any) {
+    this.editor = false;
+    this.isSelectShow = false;
   }
-
 
 
   add() {
-    this.flag=true;
+    this.flag = true;
     this.editor = true;
     this.isSelectShow = true;
-    this.dataEditor=[];
+    this.dataEditor = [];
   }
 
   del(info_id: string) {
@@ -129,6 +136,28 @@ export class NewsComponent implements OnInit {
     });
   }
 
+  delAll(arr: Array<any>) {
+    if (arr.length) {
+      this.http.infoDel('' + arr[0]).then(data => {
+        if (data['status'] == 'ok') {
+          arr.splice(0, 1);
+          if (arr.length) {
+            this.delAll(arr);
+          } else {
+            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            return;
+          }
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+          return;
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
+  }
 
   set (set: string) {
     this.http.setHeader('infos', set).then(v => v).then(w => {
@@ -136,13 +165,13 @@ export class NewsComponent implements OnInit {
     });
   }
 
-  save(html){
-    console.log('===============',html);
-    if(this.flag){
-      this.http.uploadHtml5Page(html.title,html.description,html.label,html.header,html.content,html.footer).then(data => {
+  save(html) {
+    console.log('===============', html);
+    if (this.flag) {
+      this.http.uploadHtml5Page(html.title, html.description, html.label, html.header, html.content, html.footer).then(data => {
         if (data['status'] == 'ok') {
           this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-          this.editor=false;
+          this.editor = false;
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
           this.toastService.toast(toastCfg);
@@ -151,12 +180,12 @@ export class NewsComponent implements OnInit {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
         this.toastService.toast(toastCfg);
       });
-    }else{
-      console.log(html,']]]]]]]]]]]]]]]]]');
-      this.http.upDataHtml5Page(this.id,html.title,html.description,html.label,html.header,html.content,html.footer).then(data => {
+    } else {
+      console.log(html, ']]]]]]]]]]]]]]]]]');
+      this.http.upDataHtml5Page(this.id, html.title, html.description, html.label, html.header, html.content, html.footer).then(data => {
         if (data['status'] == 'ok') {
           this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-          this.editor=false;
+          this.editor = false;
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
           this.toastService.toast(toastCfg);
@@ -170,13 +199,11 @@ export class NewsComponent implements OnInit {
   }
 
 
-
   sort(sort: sortObj) {
     this.sort_key = sort.key;
     this.sort_val = sort.val;
     this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
-
 
 
   search(searchObj: searchObj) {
@@ -187,10 +214,10 @@ export class NewsComponent implements OnInit {
 
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
-    if(parmas['url']!=undefined){
+    if (parmas['url'] != undefined) {
       this.url = parmas['url'];
     }
-    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
 

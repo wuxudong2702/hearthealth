@@ -145,7 +145,7 @@ export class AdminRoleComponent implements OnInit {
   del(id){
       this.http.rolesDel(id).then(data => {
           if (data['status'] == 'ok') {
-              this.getHeartData();
+              this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
           } else {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
               this.toastService.toast(toastCfg);
@@ -184,7 +184,7 @@ export class AdminRoleComponent implements OnInit {
           this.http.rolesAdd(this.name,this.description,this.permsAdd).then(data => {
                 if (data['status'] == 'ok') {
                     this.data = data['data'];
-                    this.getHeartData();
+                    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
                     this.tableView = true;
                     this.addView=false;
@@ -204,7 +204,7 @@ export class AdminRoleComponent implements OnInit {
           this.http.rolesUpdate(this.id,this.description,this.name,this.permsUpdate).then(data => {
               if (data['status'] == 'ok') {
                   this.data = data['data'];
-                  this.getHeartData();
+                  this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
                   this.addView = false;
                   this.editView=false;
                   this.tableView = true;

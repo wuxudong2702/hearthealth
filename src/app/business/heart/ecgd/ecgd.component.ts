@@ -47,7 +47,8 @@ export class EcgdComponent implements OnInit {
     //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
     //   this.toastService.toast(toastCfg);
     // });
-    this.getHeartData(this.url);
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+
     console.log(this.headers, this.data);
     this.http.isHavePerm('ecgd-del').then(v => {
       this.deleteBtn = v;
@@ -165,7 +166,8 @@ export class EcgdComponent implements OnInit {
   del(ids: string) {
     this.http.ecgdDelData(ids).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData();
+        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -189,7 +191,28 @@ export class EcgdComponent implements OnInit {
     }
     this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
-
+  delAll(arr: Array<any>) {
+    if (arr.length) {
+      this.http.ecgdDelData('' + arr[0]).then(data => {
+        if (data['status'] == 'ok') {
+          arr.splice(0, 1);
+          if (arr.length) {
+            this.delAll(arr);
+          } else {
+            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            return;
+          }
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+          return;
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
+  }
   set (set: string) {
     this.http.setHeader('heart-data', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('heart-data');

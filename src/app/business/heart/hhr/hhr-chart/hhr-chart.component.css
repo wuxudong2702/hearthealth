@@ -6,13 +6,18 @@
 .dateInput {
   width:130px;
   display:inline;
+    vertical-align: middle;
+}
+.chartFileBtns{
 
 }
 .Btns{
     margin:6px 3px;
+    vertical-align: middle;
 }
 .clearBtn {
-    margin:6px 13px;
+    margin:6px 25px;
+    vertical-align: middle;
 }
 
 .dateInputStyle {

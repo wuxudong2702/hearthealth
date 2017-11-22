@@ -34,73 +34,6 @@ export class EcgdChartComponent implements OnInit {
         return index+1;
       });
 
-    // this.chartOption = {
-    //
-    //   // Make gradient line here
-    //   visualMap: [{
-    //     show: false,
-    //     type: 'continuous',
-    //     seriesIndex: 0,
-    //     min: 0,
-    //     max: 400
-    //   }, {
-    //     show: false,
-    //     type: 'continuous',
-    //     seriesIndex: 1,
-    //     dimension: 0,
-    //     min: 0,
-    //     max: this.dateList.length - 1
-    //   }],
-    //
-    //
-    //   title: [{
-    //     left: 'center',
-    //     text: '心电数据波形'
-    //   },
-    //   //   {
-    //   //   top: '55%',
-    //   //   left: 'center',
-    //   //   text: '心电数据波形'
-    //   // }
-    //   ],
-    //   tooltip: {
-    //     trigger: 'axis'
-    //   },
-    //   xAxis: [
-    //     {
-    //     data: this.dateList
-    //   },
-    //     {
-    //     // data: this.dateList,
-    //     gridIndex: 1
-    //   }
-    //   ],
-    //   yAxis: [{
-    //     splitLine: {show: false}
-    //   }, {
-    //     splitLine: {show: false},
-    //     gridIndex: 1
-    //   }],
-    //   grid: [{
-    //     bottom: '15%'
-    //   }, {
-    //     top: '70%'
-    //   }],
-    //   series: [
-    //     {
-    //     type: 'line',
-    //     showSymbol: true,
-    //     data: this.valueList
-    //   },
-    //     {
-    //     type: 'line',
-    //     showSymbol: false,
-    //     // data: this.valueList,
-    //     xAxisIndex: 1,
-    //     yAxisIndex: 1
-    //   }
-    //   ]
-    // };
       this.chartOption = {
 
           animation: false,
@@ -126,7 +59,7 @@ export class EcgdChartComponent implements OnInit {
           axisPointer: {
               link: {xAxisIndex: 'all'},
               label: {
-                  backgroundColor: '#777'
+                  backgroundColor: '#ccc'
               }
           },
           grid: [
@@ -144,6 +77,12 @@ export class EcgdChartComponent implements OnInit {
                   boundaryGap : false,
                   axisLine: {onZero: false},
                   splitLine: {show: false},
+                  splitArea : {
+                      show : true,
+                      areaStyle:{
+                         color:'#fff'
+                      }
+                  },
                   splitNumber: 20,
                   axisLabel: {
                       formatter: function (value, index) {
@@ -158,15 +97,19 @@ export class EcgdChartComponent implements OnInit {
           yAxis: [
               {
                   scale: true,
+                  splitLine: {show: false},
                   splitArea: {
-                      show: true
+                      show: true,
+                      areaStyle:{
+                          color:'#fff'
+                      }
                   }
               }
           ],
           dataZoom: [
               {
                   type: 'inside',
-                  start: 98,
+                  start: 0,
                   end: 100,
                   minValueSpan: 10
               },
@@ -174,7 +117,7 @@ export class EcgdChartComponent implements OnInit {
                   show: true,
                   type: 'slider',
                   bottom: 60,
-                  start: 98,
+                  start: 0,
                   end: 100,
                   minValueSpan: 10
               }

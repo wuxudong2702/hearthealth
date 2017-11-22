@@ -28,8 +28,11 @@ export class HomeComponent implements OnInit {
 
         this.http.homeData().then(data => {
             if (data['status'] == 'ok') {
-                this.valueList = Object.keys(data['data']);
+                // this.valueList = Object.keys(data['data']);
+                this.valueList = ["用户人数","账户个数","管理员人数","心电个数","档案个数"];
                 this.dataList = Object.values(data['data']);
+                console.log(this.dataList);
+
                 this.chartOption = {
                     color: ['#3aafdb'],
                     tooltip : {
@@ -76,7 +79,6 @@ export class HomeComponent implements OnInit {
             }
         }).catch(err => {
             const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-            console.error(err);
             this.toastService.toast(toastCfg);
         });
 

@@ -22,7 +22,7 @@
            class="form-control dateInput dateInputStyle " placeholder="开始时间" />
     <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
            class="form-control dateInput" placeholder="结束时间" />
-    <button class="btn btn-success btn-md" (click)="show()">显示</button>
+    <button class="btn btn-success btn-md Btns" (click)="show()">显示</button>
     <button class="btn btn-danger btn-md clearBtn" (click)="clear($event)">清空用户该次数据</button>
   </div>
   <div class="details-panel" *ngIf="isDetails">

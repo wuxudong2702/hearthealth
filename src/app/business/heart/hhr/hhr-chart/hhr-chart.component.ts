@@ -112,15 +112,21 @@ export class HhrChartComponent implements OnInit {
   show(){
       if(this.selectedDateStart && this.selectedDateEnd){
           this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
+              console.log(data,'-------');
               if (data['status'] == 'ok') {
-                  this.dataChart1 = data['data'];
-                  this.valueList = this.dataChart1.map(function (item) {
-                      return item['sense_time'];
-                  });
-                  this.dataList = this.dataChart1.map(function (item) {
-                      return item['data'];
-                  });
-                  this.chartToggle(this.dataList,this.valueList);
+                  if(data['data']){
+                      this.dataChart1 = data['data'];
+                      this.valueList = this.dataChart1.map(function (item) {
+                          return item['sense_time'];
+                      });
+                      this.dataList = this.dataChart1.map(function (item) {
+                          return item['data'];
+                      });
+                      this.chartToggle(this.dataList,this.valueList);
+                  }else{
+                      const toastCfg = new ToastConfig(ToastType.ERROR, '','暂无数据', 3000);
+                      this.toastService.toast(toastCfg);
+                  }
               } else {
                   const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                   this.toastService.toast(toastCfg);

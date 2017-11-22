@@ -49,21 +49,6 @@ export class AppUserComponent implements OnInit {
   data: Array<any> = [];
   headerAdd: Array<cell> = [];
   subUsersheaderAdd: Array<cell> = [];
-  // password :Array<cell>= [{
-  //   "key": "password",
-  //   "show": false,
-  //   "name": "密码",
-  //   "index": 17,
-  //   "order": 0,
-  //   "pipe_type": 0,
-  //   "pipe_params": "",
-  //   "val": "",
-  //   "select_val": "",
-  //   "valid_example": "15",
-  //   "required": false,
-  //   "pattern": "",
-  //   "input_type": 0
-  // }];
   subUserHeaders: Array<any> = [];
   subUserData: Array<any> = [];
   addEditTitle: string = '添加';
@@ -87,9 +72,6 @@ export class AppUserComponent implements OnInit {
   subUsersView: boolean = false;
 
   pagination: paginationObj = new paginationObj();
-  // indexParams: indexParams = new indexParams();
-  // subIndexParams: indexParams = new indexParams();
-
 
   per_page: string = null;
   find_key: string = null;
@@ -119,32 +101,12 @@ export class AppUserComponent implements OnInit {
       if (this.headers[i].key == 'accountType') {
         this.headers[i].show = false;
       } else if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
-        this.headers[i].required = true;
         this.headers[i].show = true;
-      } else {
-
+        if(id==undefined){
+          this.headers[i].required = true;
+        }
       }
     }
-    // this.headers
-
-
-    // this.headers.push(password)
-//    {
-//      "key": "password_confirmation",
-//      "show": false,
-//      "name": "确认密码",
-//      "index": 3,
-//      "order": 0,
-//      "pipe_type": 0,
-//      "pipe_params": "",
-//      "val": "",
-//      "select_val": "",
-//      "valid_example": "15",
-//      "required": false,
-//      "pattern": "",
-//      "input_type": 0
-//    },
-
     if (id >= 0) {
       this.addEditFlag = false;
       this.addEditTitle = '编辑';
@@ -415,6 +377,7 @@ export class AppUserComponent implements OnInit {
     this.parent_id = '';
 
   }
+
 
   subUserSubmit(submitData) {
     if (this.addEditFlag) {//addEditFlag=true的时候是添加

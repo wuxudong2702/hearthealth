@@ -323,14 +323,6 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  postEcgdSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/ecgd-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
 
   ecgdDelData(ids: string): Promise<any> {
     const url: string = '/api/admin/heart/del';
@@ -642,6 +634,7 @@ export class ApiService {
 //app-user
 
   userAdd(parent_id :string=null,submitData,role) {
+      console.log(submitData,'0000000000000000000000');
     const url: string = '/api/admin/app/user/add';
     return this.httpClient.post(url,{
       token:this.sessionStorageService.get('token'),

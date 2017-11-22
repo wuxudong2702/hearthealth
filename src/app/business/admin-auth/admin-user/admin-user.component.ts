@@ -72,7 +72,6 @@ export class AdminUserComponent implements OnInit {
   url: string = '/api/admin/admins/index';
 
   del(id:string){
-      console.log(id,'---------------------------');
       this.http.adminsDel(id).then(data => {
           if (data['status'] == 'ok') {
               this.getHeartData();

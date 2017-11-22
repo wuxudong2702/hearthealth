@@ -14,11 +14,11 @@ import {FormControlService} from "./form-controll.service"
 export class TableAddComponent implements OnInit {
 
   @Input() tableAdd: boolean;
-  @Input() isShow: boolean =true;
+  @Input() isShow: boolean = true;
   @Input() headers: Array<cell>;
-  @Input() addEditTitle:string;
-  @Input() isRemind:boolean;
-  @Input() remind:Array<any>;
+  @Input() addEditTitle: string;
+  @Input() isRemind: boolean;
+  @Input() remind: Array<any>;
 
 
   @Output() onAddCancel = new EventEmitter<any>();
@@ -31,34 +31,41 @@ export class TableAddComponent implements OnInit {
   checkValue: boolean = false;
   form: FormGroup;
 
-  constructor(private fcs:FormControlService) {
+  constructor(private fcs: FormControlService) {
   }
 
   ngOnInit() {
 
-    this.form=this.fcs.toFormGroup(this.headers);
-}
+    this.form = this.fcs.toFormGroup(this.headers);
+  }
 
   datePickerConfig = {
     locale: 'zh-CN'
   };
 
   submit() {
-    // this.form.value.birth=this.date;
-    console.log(this.form.value,'this.form.value');
-    if( this.form.value.sex='男'){
-      this.form.value.sex='1';
-    }else{
-      this.form.value.sex='0'
+    console.log(this.form.value, 'this.form.value');
+    if (this.form.value.sex = '男') {
+      this.form.value.sex = '1';
+    } else {
+      this.form.value.sex = '0'
+    }
+    for (let i in this.form.value) {
+      if (!this.form.value[i]) {
+        this.form.value[i] = undefined;
+      }
     }
     this.onSubmit.emit(this.form.value);
   }
+
   sendId(role_id) {
     this.onSend.emit(role_id);
   }
+
   SendFormValue(formValue) {
     this.onSendFormValue.emit(formValue);
   }
+
   addCancel() {
     this.onAddCancel.emit();
   }

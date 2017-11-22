@@ -15,10 +15,12 @@ export class TableAddComponent implements OnInit {
 
   @Input() tableAdd: boolean;
   @Input() isShow: boolean = true;
+  @Input() isShowTittle: boolean = true;
   @Input() headers: Array<cell>;
   @Input() addEditTitle: string;
   @Input() isRemind: boolean;
   @Input() remind: Array<any>;
+
 
 
   @Output() onAddCancel = new EventEmitter<any>();

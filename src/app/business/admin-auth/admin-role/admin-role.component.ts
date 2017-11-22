@@ -33,12 +33,7 @@ export class AdminRoleComponent implements OnInit {
           this.addBtn = v;
       });
       this.getNodes();
-     //  this.http.getAdminRoleHeader().then(data => {
-     //      this.headers = data['headers'];
-     //  });
-     //  this.http.getAdminRoleData().then(data => {
-     //      this.data = data['data'];
-     //  });
+
   }
 
   nodes:any;
@@ -57,6 +52,7 @@ export class AdminRoleComponent implements OnInit {
   searchBtn: boolean = true;
   setBtn: boolean = true;
   isShow: boolean = true;
+  isShowTittle: boolean = true;
 
   setOperate: boolean = true;
   editId: string;
@@ -92,6 +88,7 @@ export class AdminRoleComponent implements OnInit {
       this.id = this.data[id]['id'];
       console.log(this.id,'编辑的id');
       this.isShow = false;
+      this.isShowTittle = true;
       this.flag=false;
       this.addEditTitle = '编辑';
       this.headerAdd = this.headers.map(d => {
@@ -140,6 +137,7 @@ export class AdminRoleComponent implements OnInit {
       });
       console.log(this.nodes,'-------默认全选');
       this.isShow = false;
+      this.isShowTittle = false;
       this.addView = true;
       this.addTreeView=true;
       this.editTreeView=false;

@@ -70,21 +70,15 @@ export class AdminUserComponent implements OnInit {
   sort_val: string=null;
   url: string = '/api/admin/admins/index';
 
-  del(id:string){
-      this.http.adminsDel(id).then(data => {
-          if (data['status'] == 'ok') {
-            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-          } else {
-              const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-              this.toastService.toast(toastCfg);
-          }
-      }).catch(err => {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-          this.toastService.toast(toastCfg);
-      });
-  }
-
   add(id: number) {
+      for (let i = 0; i < this.headers.length; i++) {
+          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+              this.headers[i].show = true;
+              if(id==undefined){
+                  this.headers[i].required = true;
+              }
+          }
+      }
       if (id >= 0) {
           this.flag=false;
           this.addEditTitle = '编辑';
@@ -125,12 +119,6 @@ export class AdminUserComponent implements OnInit {
       this.tableView = false;
 
   }
-
-  cancel() {
-      this.addView = false;
-      this.tableView = true;
-  }
-
   submit(submitData) {
       console.log(submitData,'submitData');
       if(this.flag){
@@ -138,6 +126,13 @@ export class AdminUserComponent implements OnInit {
           this.http.adminsAdd(this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
               if (data['status'] == 'ok') {
                   this.data = data['data'];
+                  this.getHeartData();
+                  for (let i = 0; i < this.headers.length; i++) {
+                      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+                          this.headers[i].show = false;
+                          this.headers[i].required = false;
+                      }
+                  }
                   this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
                   this.addView = false;
                   this.tableView = true;
@@ -154,6 +149,13 @@ export class AdminUserComponent implements OnInit {
               console.log(data);
               if (data['status'] == 'ok') {
                   this.data = data['data'];
+                  this.getHeartData();
+                  for (let i = 0; i < this.headers.length; i++) {
+                      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+                          this.headers[i].show = false;
+                          this.headers[i].required = false;
+                      }
+                  }
                   this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
                   this.addView = false;
                   this.tableView = true;
@@ -191,7 +193,6 @@ export class AdminUserComponent implements OnInit {
             this.toastService.toast(toastCfg);
         });
     }
-
     paginationChange(parmas) {
         this.per_page = parmas['per_page'];
         if(parmas['url']!=undefined){
@@ -199,23 +200,64 @@ export class AdminUserComponent implements OnInit {
         }
         this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
     }
-
     sort(sort: sortObj) {
         this.sort_key = sort.key;
         this.sort_val = sort.val;
         this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
     }
-
     set (set: string) {
         this.http.setHeader('admins', set).then(v => v).then(w => {
             this.headers = this.http.getHeader('admins');
         });
     }
-
     search(searchObj: searchObj) {
         this.find_val = searchObj.searchValue;
         this.find_key = searchObj.selectValue;
         this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    }
+    del(id:string){
+        this.http.adminsDel(id).then(data => {
+            if (data['status'] == 'ok') {
+                this.getHeartData();
+            } else {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                this.toastService.toast(toastCfg);
+            }
+        }).catch(err => {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+            this.toastService.toast(toastCfg);
+        });
+    }
+    delAll(arr: Array<any>) {
+        if (arr.length) {
+            this.http.adminsDel('' + arr[0]).then(data => {
+                if (data['status'] == 'ok') {
+                    arr.splice(0, 1);
+                    if (arr.length) {
+                        this.delAll(arr);
+                    } else {
+                        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                    }
+                } else {
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                    this.toastService.toast(toastCfg);
+                    return;
+                }
+            }).catch(err => {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                this.toastService.toast(toastCfg);
+            });
+        }
+    }
+    cancel() {
+        for (let i = 0; i < this.headers.length; i++) {
+            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+                this.headers[i].show = false;
+                this.headers[i].required = false;
+            }
+        }
+        this.addView = false;
+        this.tableView = true;
     }
     getRoleId(role_id){
         this.role_id = role_id;

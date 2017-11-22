@@ -53,15 +53,9 @@ export class HhrComponent implements OnInit {
   url: string = '/api/admin/report/index';
 
 
-  chart(id) {
-    // this.http.getHhrDataChart().then(data => {
-    //   console.log('data', data);
-    //   this.dataChart = data['dataChart'];
-    //   this.dataChart1 = this.dataChart[0];
-    //   this.userName = this.data[0].userName;
-    // });
+  chart(id,name) {
       console.log(id,'id');
-      // this.userName = params['name'];
+      this.userName = name;
       this.chartId = id;
       this.showChartView = !this.showChartView;
   }

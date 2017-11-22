@@ -349,8 +349,11 @@ export class TableListComponent implements OnInit, OnChanges {
     });
   }
 
-  chart2(id: number) {
-    this.onChart2.emit(id);
+  chart2(id: number, name: string) {
+    this.onChart2.emit({
+        id: id,
+        name: name
+    });
   }
 
   sort(i: string) {

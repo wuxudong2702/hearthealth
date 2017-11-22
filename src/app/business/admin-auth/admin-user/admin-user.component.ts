@@ -121,51 +121,57 @@ export class AdminUserComponent implements OnInit {
   }
   submit(submitData) {
       console.log(submitData,'submitData');
-      if(this.flag){
-          console.log('添加==========');
-          this.http.adminsAdd(this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
-              if (data['status'] == 'ok') {
-                  this.data = data['data'];
-                  this.getHeartData();
-                  for (let i = 0; i < this.headers.length; i++) {
-                      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
-                          this.headers[i].show = false;
-                          this.headers[i].required = false;
+      if(submitData.password_confirmation == submitData.password){
+          if(this.flag){
+              console.log('添加==========');
+              this.http.adminsAdd(this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
+                  if (data['status'] == 'ok') {
+                      this.data = data['data'];
+                      this.getHeartData();
+                      for (let i = 0; i < this.headers.length; i++) {
+                          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+                              this.headers[i].show = false;
+                              this.headers[i].required = false;
+                          }
                       }
+                      this.addView = false;
+                      this.tableView = true;
+                  } else {
+                      const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                      this.toastService.toast(toastCfg);
                   }
-                  this.addView = false;
-                  this.tableView = true;
-              } else {
-                  const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+              }).catch(err => {
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
                   this.toastService.toast(toastCfg);
-              }
-          }).catch(err => {
-              const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-              this.toastService.toast(toastCfg);
-          });
+              });
+          }else{
+              this.http.adminsUpdate(submitData.id,this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
+                  console.log(data);
+                  if (data['status'] == 'ok') {
+                      this.data = data['data'];
+                      this.getHeartData();
+                      for (let i = 0; i < this.headers.length; i++) {
+                          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+                              this.headers[i].show = false;
+                              this.headers[i].required = false;
+                          }
+                      }
+                      this.addView = false;
+                      this.tableView = true;
+                  } else {
+                      const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                      this.toastService.toast(toastCfg);
+                  }
+              }).catch(err => {
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                  this.toastService.toast(toastCfg);
+              });
+          }
       }else{
-          this.http.adminsUpdate(submitData.id,this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
-              console.log(data);
-              if (data['status'] == 'ok') {
-                  this.data = data['data'];
-                  this.getHeartData();
-                  for (let i = 0; i < this.headers.length; i++) {
-                      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
-                          this.headers[i].show = false;
-                          this.headers[i].required = false;
-                      }
-                  }
-                  this.addView = false;
-                  this.tableView = true;
-              } else {
-                  const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-                  this.toastService.toast(toastCfg);
-              }
-          }).catch(err => {
-              const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-              this.toastService.toast(toastCfg);
-          });
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', '密码不一致', 3000);
+          this.toastService.toast(toastCfg);
       }
+
   }
 
     getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {

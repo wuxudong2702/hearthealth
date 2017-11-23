@@ -66,7 +66,10 @@ export class EcgdChartComponent implements OnInit {
               {
                   left: '10%',
                   right: '8%',
-                  bottom: 150
+                  top:'8%',
+                  // bottom: 150,
+                  height:'50%',
+                  borderColor:'#FF6347'
               }
           ],
           xAxis: [
@@ -76,14 +79,23 @@ export class EcgdChartComponent implements OnInit {
                   scale: true,
                   boundaryGap : false,
                   axisLine: {onZero: false},
-                  splitLine: {show: true},
+                  splitLine: {
+                      show: true,
+                      lineStyle:{
+                          color: '#FF6347',//网格线颜色
+                          width: 1,//网格线宽度
+                          type: 'solid'//网格线样式
+
+                      },
+                      interval:40
+                  },
+                  // splitNumber: 1,
                   // splitArea : {
                   //     show : true,
                   //     areaStyle:{
                   //        color:'#ccc'
                   //     }
                   // },
-                  splitNumber: 20,
                   axisLabel: {
                       formatter: function (value, index) {
 
@@ -97,7 +109,15 @@ export class EcgdChartComponent implements OnInit {
           yAxis: [
               {
                   scale: true,
-                  // splitLine: {show: false},
+                  // splitNumber: 500,
+                  splitLine: {
+                      show:true,
+                      lineStyle:{
+                      color: '#FF6347',//网格线颜色
+                      width: 1,//网格线宽度
+                      type: 'solid',//网格线样式
+                      interval:0
+                  }},
                   splitArea: {
                       show: false,
                       // areaStyle:{
@@ -116,7 +136,8 @@ export class EcgdChartComponent implements OnInit {
               {
                   show: true,
                   type: 'slider',
-                  bottom: 60,
+                  // bottom: 60,
+                  top:'70%',
                   start: 0,
                   end: 100,
                   minValueSpan: 10
@@ -128,7 +149,12 @@ export class EcgdChartComponent implements OnInit {
                   hoverAnimation: false,
                   symbol:'none',
                   smooth:false,
-                  data: this.valueList
+                  data: this.valueList,
+                  lineStyle : {
+                      normal : {
+                              color:'#000000'
+                      }
+                  },
               }
           ]
     }

@@ -114,7 +114,7 @@ export class HhrChartComponent implements OnInit {
           this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
               console.log(data,'-------');
               if (data['status'] == 'ok') {
-                  if(data['data']){
+                  if(data['data'].length){
                       this.dataChart1 = data['data'];
                       this.valueList = this.dataChart1.map(function (item) {
                           return item['sense_time'];

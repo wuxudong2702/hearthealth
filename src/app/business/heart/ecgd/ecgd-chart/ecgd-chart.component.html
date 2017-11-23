@@ -1,7 +1,5 @@
 <div class="chartStyle" >
   <button class="btn btn-success btn-sm" (click)="chartView()">返回</button>
-
-
-  <div echarts [options]="chartOption" class="demo-chart"></div>
   <h4 class="text-center text-primary" >用户：&nbsp;{{userName}} &nbsp;&nbsp;&nbsp; 测量时间：&nbsp;{{ sense_time }}</h4>
+  <div echarts [options]="chartOption" class="demo-chart"></div>
 </div>

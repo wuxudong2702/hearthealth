@@ -99,10 +99,12 @@ export class AppUserComponent implements OnInit {
 
   add(id: number) {
     for (let i = 0; i < this.headers.length; i++) {
-        if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'mobile') {
         this.headers[i].show = true;
-        if(id==undefined){
+        if (id == undefined) {
           this.headers[i].required = true;
+        } else {
+          this.headers[i].required = false;
         }
       }
     }
@@ -141,8 +143,7 @@ export class AppUserComponent implements OnInit {
 
   cancel() {
     for (let i = 0; i < this.headers.length; i++) {
-       if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
-        this.headers[i].required = false;
+      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
         this.headers[i].show = false;
       }
     }
@@ -160,14 +161,13 @@ export class AppUserComponent implements OnInit {
       this.http.userAdd(this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-         this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
           this.tableView = true;
           this.addSubUserView = false;
           this.addView = false;
           this.subUsersView = false;
           for (let i = 0; i < this.headers.length; i++) {
             if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
-              this.headers[i].required = false;
               this.headers[i].show = false;
             }
           }
@@ -305,8 +305,8 @@ export class AppUserComponent implements OnInit {
     this.tableView = false;
     this.addSubUserView = false;
 
-    if(this.flag){
-      this.flag=false;
+    if (this.flag) {
+      this.flag = false;
       for (let i = 0; i < this.headers.length; i++) {
         if (this.headers[i].key == 'birth' || this.headers[i].key == 'sex' || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
           this.subUserHeaders.push(this.headers[i]);
@@ -475,8 +475,6 @@ export class AppUserComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
-
-
 
 
   sub_paginationChange(parmas) {

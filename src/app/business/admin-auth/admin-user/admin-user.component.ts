@@ -82,14 +82,13 @@ export class AdminUserComponent implements OnInit {
 
   add(id: number) {
     for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
         this.headers[i].show = true;
-        if (id == undefined) {
-          this.headers[i].required = true;
-        }
-      }
+        this.headers[i].required = true;
     }
     if (id >= 0) {
+      for (let i = 0; i < this.headers.length; i++) {
+          this.headers[i].required = false;
+      }
       this.flag = false;
       this.addEditTitle = '编辑';
       this.editId = id;
@@ -115,7 +114,6 @@ export class AdminUserComponent implements OnInit {
       this.flag = true;
       this.addEditTitle = '添加';
       this.headerAdd = this.headers.map(d => {
-
         d.val = '';
         return d;
       });
@@ -130,13 +128,12 @@ export class AdminUserComponent implements OnInit {
     console.log(submitData, 'submitData');
     if (submitData.password_confirmation == submitData.password) {
       if (this.flag) {
-        console.log('添加==========');
         this.http.adminsAdd(this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
           if (data['status'] == 'ok') {
             this.data = data['data'];
             this.getHeartData();
             for (let i = 0; i < this.headers.length; i++) {
-              if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+              if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
                 this.headers[i].show = false;
                 this.headers[i].required = false;
               }
@@ -158,7 +155,7 @@ export class AdminUserComponent implements OnInit {
             this.data = data['data'];
             this.getHeartData();
             for (let i = 0; i < this.headers.length; i++) {
-              if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+              if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
                 this.headers[i].show = false;
                 this.headers[i].required = false;
               }
@@ -268,9 +265,8 @@ export class AdminUserComponent implements OnInit {
 
   cancel() {
     for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
+      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name'|| this.headers[i].key == 'role_id') {
         this.headers[i].show = false;
-        this.headers[i].required = false;
       }
     }
     this.addView = false;
@@ -279,7 +275,6 @@ export class AdminUserComponent implements OnInit {
 
   getRoleId(role_id) {
     this.role_id = role_id;
-    console.log(this.role_id, 'this.role_id ');
   };
 }
 

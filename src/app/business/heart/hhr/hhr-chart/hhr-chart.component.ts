@@ -114,7 +114,7 @@ export class HhrChartComponent implements OnInit {
           this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
               console.log(data,'-------');
               if (data['status'] == 'ok') {
-                  if(data['data']){
+                  if(data['data'].length){
                       this.dataChart1 = data['data'];
                       this.valueList = this.dataChart1.map(function (item) {
                           return item['sense_time'];
@@ -154,26 +154,32 @@ export class HhrChartComponent implements OnInit {
       this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
       this.http.getHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
           if (data['status'] == 'ok') {
-              this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
-              this.chartDetailsData=Object.entries(data['data']);
-              this.chartDetailsData.forEach(function (v) {
-                  if(v[0]=="int nBpmCode"){
-                      switch(v[1]){
-                          case 0 :  v[1]="过慢"; break;
-                          case 1 :  v[1]="正常"; break;
-                          case 2 :  v[1]="过快"; break;
-                          default:  v[1]="";
+            console.log(data,'data6789');
+              if(data['data'].length>=0){
+                  this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
+                  this.chartDetailsData=Object.entries(data['data']);
+                  this.chartDetailsData.forEach(function (v) {
+                      if(v[0]=="int nBpmCode"){
+                          switch(v[1]){
+                              case 0 :  v[1]="过慢"; break;
+                              case 1 :  v[1]="正常"; break;
+                              case 2 :  v[1]="过快"; break;
+                              default:  v[1]="";
+                          }
                       }
-                  }
-                  if(v[0]=="int nArrhythmiaCode"){
-                      switch(v[1]){
-                          case 0 :  v[1]="正常"; break;
-                          case 1 :  v[1]="隐患"; break;
-                          case 2 :  v[1]="高风险"; break;
-                          default:  v[1]="";
+                      if(v[0]=="int nArrhythmiaCode"){
+                          switch(v[1]){
+                              case 0 :  v[1]="正常"; break;
+                              case 1 :  v[1]="隐患"; break;
+                              case 2 :  v[1]="高风险"; break;
+                              default:  v[1]="";
+                          }
                       }
-                  }
-              });
+                  });
+              }else{
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '','暂无数据', 3000);
+                  this.toastService.toast(toastCfg);
+              }
           }
       }).catch(err => {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);

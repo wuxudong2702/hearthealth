@@ -30,21 +30,7 @@
       "pattern": "",
       "input_type": 0
     },
-    {
-      "key": "role_id",
-      "show": false,
-      "name": "角色id",
-      "index": 2,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
+
     {
       "key": "name",
       "show": false,
@@ -71,7 +57,7 @@
       "val": "",
       "select_val": [],
       "valid_example": "",
-      "required": false,
+      "required": true,
       "pattern": "",
       "input_type": 0
     },
@@ -86,7 +72,7 @@
       "val": "",
       "select_val": [],
       "valid_example": "",
-      "required": false,
+      "required": true,
       "pattern": "",
       "input_type": 0
     }
@@ -694,7 +680,7 @@
       "val": "",
       "select_val": "",
       "valid_example": "18045142702",
-      "required": false,
+      "required": true,
       "pattern": "",
       "input_type": 0
     },

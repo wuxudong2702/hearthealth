@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  cell, SortDirection, sortObj, DataType, searchObj, paginationObj
-} from '../../../shared/table/table-list.component';
+  cell, SortDirection, sortObj, DataType, searchObj, paginationObj} from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../shared/toast/toast.service';
@@ -20,7 +19,7 @@ export class HhrComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.http.getHeader('reports');
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
   }
 
@@ -46,25 +45,20 @@ export class HhrComponent implements OnInit {
   pagination: paginationObj = new paginationObj();
 
 
-  per_page: string = null;
-  find_key: string = null;
-  find_val: string = null;
-  sort_key: string = null;
-  sort_val: string = null;
+  per_page: string=null;
+  find_key: string=null;
+  find_val: string=null;
+  sort_key: string=null;
+  sort_val: string=null;
   url: string = '/api/admin/report/index';
 
 
-  chart(data) {
-    console.log(data, '-----');
-    this.userName = data.name
-
-    ;
-    this.chartId = data.id
-
-    ;
-    this.showChartView = !this.showChartView;
+  chart(id,name) {
+      console.log(id,'id');
+      this.userName = name;
+      this.chartId = id;
+      this.showChartView = !this.showChartView;
   }
-
 
   chartBack() {
     this.showChartView = !this.showChartView;
@@ -86,10 +80,10 @@ export class HhrComponent implements OnInit {
 
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
-    if (parmas['url'] != undefined) {
+    if(parmas['url']!=undefined){
       this.url = parmas['url'];
     }
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   set (set: string) {

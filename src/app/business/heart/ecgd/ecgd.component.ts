@@ -27,26 +27,7 @@ export class EcgdComponent implements OnInit {
 
   ngOnInit(): void {
     this.headers = this.http.getHeader('heart-data');
-    // this.http.getEcgdData().then(data => {
-    //   if (data['status'] == 'ok') {
-    //     this.data = data['data']['data'];
-    //     this.pagination.current_page=data['data']['current_page'];
-    //     this.pagination.last_page=data['data']['last_page'];
-    //     this.pagination.per_page=data['data']['per_page'];
-    //     this.pagination.total=data['data']['total'];
-    //     this.pagination.first_page_url=data['data']['first_page_url'];
-    //     this.pagination.last_page_url=data['data']['last_page_url'];
-    //     this.pagination.next_page_url=data['data']['next_page_url'];
-    //     this.pagination.prev_page_url=data['data']['prev_page_url'];
-    //     this.pagination.to=data['data']['to'];
-    //   } else {
-    //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-    //     this.toastService.toast(toastCfg);
-    //   }
-    // }).catch(err => {
-    //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-    //   this.toastService.toast(toastCfg);
-    // });
+
     this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
     console.log(this.headers, this.data);
@@ -113,6 +94,7 @@ export class EcgdComponent implements OnInit {
   url: string = '/api/admin/heart/index';
 
   chart(params) {
+    console.log(params,'-=-=-=-=');
     this.userName = params['name'];
     this.sense_time = params['sense_time'];
     this.http.getEcgdDataChart(params['id']).then(data => {

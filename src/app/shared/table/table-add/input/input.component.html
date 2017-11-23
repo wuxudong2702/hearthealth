@@ -1,13 +1,27 @@
 <div [formGroup]="form" class="form-inline" >
 
-  <label style="width: 120px" for="name" >{{field.name+":"}}</label>
+  <label style="width: 120px" for="name" > <span *ngIf="field.required" style="color:red;" >* &nbsp;&nbsp;&nbsp; </span>  {{field.name+":"}}</label>
   <input
-    type="field.key==password ? password:text"
+    type="text"
     class="form-control addInputValue"
     id="name"
     name="name"
-    *ngIf="field.input_type == 0"
+    *ngIf="field.input_type == 0&&field.key!='password'&&field.key!='password_confirmation'"
      [(ngModel)]="field.val"
+    [formControlName]="field.key"
+    placeholder="请输入"
+    onfocus="this.placeholder=''"
+    onblur="this.placeholder='请输入'"
+    (keyup)="change()"
+    (click)="change()"
+  >
+  <input
+    type="password"
+    class="form-control addInputValue"
+
+    name="name"
+    *ngIf="field.key=='password'||field.key=='password_confirmation'"
+    [(ngModel)]="field.val"
     [formControlName]="field.key"
     placeholder="请输入"
     onfocus="this.placeholder=''"

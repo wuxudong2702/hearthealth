@@ -83,11 +83,11 @@ export class EcgdChartComponent implements OnInit {
                       show: true,
                       lineStyle:{
                           color: '#FF6347',//网格线颜色
-                          width: 1,//网格线宽度
+                          width: 0.4,//网格线宽度
                           type: 'solid'//网格线样式
 
                       },
-                      interval:40
+                      interval:4
                   },
                   // splitNumber: 1,
                   // splitArea : {
@@ -108,18 +108,20 @@ export class EcgdChartComponent implements OnInit {
           ],
           yAxis: [
               {
+                  // type: 'category',
                   scale: true,
-                  // splitNumber: 500,
+                  interval:500,
                   splitLine: {
                       show:true,
                       lineStyle:{
                       color: '#FF6347',//网格线颜色
-                      width: 1,//网格线宽度
+                      width: 0.4,//网格线宽度
                       type: 'solid',//网格线样式
-                      interval:100
+                      // interval:1000
                   }},
-                  splitArea: {
-                      show: false,
+                  axisLabel: {
+                      show: true,
+                      interval:200
                       // areaStyle:{
                       //     color:'#ccc'
                       // }
@@ -130,7 +132,7 @@ export class EcgdChartComponent implements OnInit {
               {
                   type: 'inside',
                   start: 0,
-                  end: 4,
+                  end: 3,
                   minValueSpan: 10
               },
               {
@@ -139,7 +141,7 @@ export class EcgdChartComponent implements OnInit {
                   // bottom: 60,
                   top:'70%',
                   start: 0,
-                  end: 4,
+                  end: 3,
                   minValueSpan: 10
               }
           ],

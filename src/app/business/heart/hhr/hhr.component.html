@@ -17,4 +17,4 @@
   [setOperate]="setOperate"
 >
 </c-table-list>
-<app-hhr-chart *ngIf="showChartView" [dataChart1]="dataChart1" [userName]="userName" [chartId]="chartId" (onChart)="chartBack($event)" ></app-hhr-chart>
+<app-hhr-chart *ngIf="showChartView" [dataChart1]="dataChart1" [userName]="userName" [chartId]="chartId" [startValue]="startValue" [endValue]="endValue" (onChart)="chartBack($event)" ></app-hhr-chart>

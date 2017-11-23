@@ -157,9 +157,11 @@ export class MainComponent implements OnInit {
     title: string = '首页';
 
     constructor(private router: Router,private sessionStorageService:SessionStorageService,private modalService: ModalService, private ngbModalService: NgbModal, private apiService: ApiService, private toastService: ToastService) {
-        if(this.sessionStorageService.get('token')=='undefined'){
+        if(this.sessionStorageService.get('token')=='undefined'||!!this.sessionStorageService.get('token')==false){
           this.router.navigate(['/login']);
+          console.log(this.sessionStorageService.get('token'),'___________________');
         }
+        // console.log(this.sessionStorageService.get('token'),'___________________');
          // this.appService.titleEventEmitter.subscribe((value: string) => {
         //     if (value) {
         //         this.title = value;

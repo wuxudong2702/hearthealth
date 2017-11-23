@@ -7,7 +7,7 @@ declare var $: any;
     selector: 'c-ztree',
     template: `
        <div [hidden]="searchMsgHidden" class="c-ztree-search-box">搜索的数据不存在...</div>
-       <div #ztree [hidden]="!searchMsgHidden"  ></div>
+       <div #ztree id= "ztreee" [hidden]="!searchMsgHidden"  ></div>
   `,
   styleUrls:['./ztree.component.scss']
 })

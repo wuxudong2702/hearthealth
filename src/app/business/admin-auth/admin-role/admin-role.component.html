@@ -31,15 +31,16 @@
                 [headers]="headerAdd"
                 [addEditTitle]="addEditTitle"
                 (onAddCancel)="cancel($event)"
-                (onSubmit)="submit($event)"
+
                 [isShow]="isShow"
                 [isShowTittle]="true"
                 (onSendFormValue)="sendFormValue($event)"
                 *ngIf="addView"
         >
         </app-table-add>
+      <!--(onSubmit)="submit($event)"-->
     </div>
-    <div class="adminZtree">
+    <div class="adminZtree" >
         <app-admin-ztree
                 *ngIf="addTreeView"
                 [isShow]="isShow"

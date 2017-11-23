@@ -1,6 +1,10 @@
 @import '../../../assets/scss/base/app-base.scss';
+
 .c-ztree-search-box {
-    padding: 10px;
-    color: $c-color-black-secondary;
-  }
-  
+  padding: 10px;
+  color: $c-color-black-secondary;
+  //font-size: 18px;
+}
+#ztreee{
+  line-height: 30px;
+}

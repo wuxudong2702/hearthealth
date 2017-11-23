@@ -53,7 +53,7 @@ export class HhrComponent implements OnInit {
   url: string = '/api/admin/report/index';
 
 
-  chart(data,name) {
+  chart(data) {
       console.log(data,'-----');
       this.userName = data.name;
       this.chartId = data.id;

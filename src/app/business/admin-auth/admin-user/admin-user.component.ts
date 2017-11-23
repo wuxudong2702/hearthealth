@@ -141,7 +141,7 @@ export class AdminUserComponent implements OnInit {
                   this.toastService.toast(toastCfg);
               });
           }else{
-              this.http.adminsUpdate(submitData.id,this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
+              this.http.adminsUpdate(''+this.data[this.editId]['id'],this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
                   console.log(data);
                   if (data['status'] == 'ok') {
                       this.data = data['data'];

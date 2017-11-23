@@ -154,7 +154,7 @@ export class HhrChartComponent implements OnInit {
       this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
       this.http.getHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
           if (data['status'] == 'ok') {
-              if(data['data'].length){
+              if(data['data']){
                   this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
                   this.chartDetailsData=Object.entries(data['data']);
                   this.chartDetailsData.forEach(function (v) {
@@ -175,6 +175,7 @@ export class HhrChartComponent implements OnInit {
                           }
                       }
                   });
+                  this.isDetails=true;
               }else{
                   const toastCfg = new ToastConfig(ToastType.ERROR, '','暂无数据', 3000);
                   this.toastService.toast(toastCfg);
@@ -185,7 +186,7 @@ export class HhrChartComponent implements OnInit {
           console.error(err);
           this.toastService.toast(toastCfg);
       });
-      this.isDetails=true;
+
   }
 
   clear(){

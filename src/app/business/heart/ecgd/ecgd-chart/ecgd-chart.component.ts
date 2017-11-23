@@ -116,7 +116,7 @@ export class EcgdChartComponent implements OnInit {
                       color: '#FF6347',//网格线颜色
                       width: 1,//网格线宽度
                       type: 'solid',//网格线样式
-                      interval:0
+                      interval:100
                   }},
                   splitArea: {
                       show: false,
@@ -130,7 +130,7 @@ export class EcgdChartComponent implements OnInit {
               {
                   type: 'inside',
                   start: 0,
-                  end: 100,
+                  end: 4,
                   minValueSpan: 10
               },
               {
@@ -139,7 +139,7 @@ export class EcgdChartComponent implements OnInit {
                   // bottom: 60,
                   top:'70%',
                   start: 0,
-                  end: 100,
+                  end: 4,
                   minValueSpan: 10
               }
           ],

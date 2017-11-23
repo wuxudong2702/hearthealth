@@ -33,11 +33,16 @@ export class AdminRoleComponent implements OnInit {
           this.addBtn = v;
       });
       this.getNodes();
-
+     //  this.http.getAdminRoleHeader().then(data => {
+     //      this.headers = data['headers'];
+     //  });
+     //  this.http.getAdminRoleData().then(data => {
+     //      this.data = data['data'];
+     //  });
   }
 
-  nodes:any;
-  updateNodes:any;
+  nodes: any;
+  updateNodes: any;
   headers: Array<cell> = [];
   data: Array<any> =[];
   permsArrayUpdate: Array<any> =[];
@@ -143,6 +148,20 @@ export class AdminRoleComponent implements OnInit {
       this.editTreeView=false;
       this.tableView = false;
   }
+  del(id){
+      this.http.rolesDel(id).then(data => {
+          if (data['status'] == 'ok') {
+              this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          } else {
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+              this.toastService.toast(toastCfg);
+          }
+      }).catch(err => {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+          this.toastService.toast(toastCfg);
+      });
+  }
+
 
   addSubmit(CheckedNodes:any){
       console.log('CheckedNodes',CheckedNodes);
@@ -163,9 +182,9 @@ export class AdminRoleComponent implements OnInit {
           this.toastService.toast(toastCfg);
       }else {
           this.http.rolesAdd(this.name,this.description,this.permsAdd).then(data => {
-              if (data['status'] == 'ok') {
-                  this.data = data['data'];
-                  this.getHeartData();
+                if (data['status'] == 'ok') {
+                    this.data = data['data'];
+                    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
                   this.tableView = true;
                   this.addView=false;
@@ -203,7 +222,7 @@ export class AdminRoleComponent implements OnInit {
           this.http.rolesUpdate(this.id, this.description, this.name, this.permsUpdate).then(data => {
               if (data['status'] == 'ok') {
                   this.data = data['data'];
-                  this.getHeartData();
+                  this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
                   this.addView = false;
                   this.addTreeView = false;
                   this.editTreeView = false;
@@ -214,10 +233,15 @@ export class AdminRoleComponent implements OnInit {
               }
           }).catch(err => {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+              console.log('--------err---------',err);
               this.toastService.toast(toastCfg);
           });
       }
   }
+
+
+
+
 
   getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
         this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
@@ -265,19 +289,7 @@ export class AdminRoleComponent implements OnInit {
       this.find_key = searchObj.selectValue;
       this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
-  del(id){
-        this.http.rolesDel(id).then(data => {
-            if (data['status'] == 'ok') {
-                this.getHeartData();
-            } else {
-                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-                this.toastService.toast(toastCfg);
-            }
-        }).catch(err => {
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-            this.toastService.toast(toastCfg);
-        });
-    }
+
   delAll(arr: Array<any>) {
         if (arr.length) {
             this.http.rolesDel('' + arr[0]).then(data => {

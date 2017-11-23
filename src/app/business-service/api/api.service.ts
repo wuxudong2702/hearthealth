@@ -670,7 +670,7 @@ export class ApiService {
       weixin :submitData.weixin,
       password :submitData.password,
       password_confirmation:submitData.password_confirmation,
-      name :name,
+      name :submitData.name,
       email :submitData.email,
       birth :submitData.birth,
       sex:submitData.sex,
@@ -1149,6 +1149,9 @@ export class ApiService {
       .then(data => data)
       .catch(this.handleError);
   }
+
+
+
 
   //hhr
   postDevSearch(selectValue, searchValue): Promise<any> {

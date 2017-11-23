@@ -72,7 +72,7 @@ export class AdminUserComponent implements OnInit {
 
   add(id: number) {
       for (let i = 0; i < this.headers.length; i++) {
-          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password'|| this.headers[i].key == 'name') {
               this.headers[i].show = true;
               if(id==undefined){
                   this.headers[i].required = true;
@@ -98,18 +98,14 @@ export class AdminUserComponent implements OnInit {
                   default:
                       d.val = this.data[id][d.key];
               }
-              if(d.key=='name' || d.key=='password'|| d.key=='password_confirmation'){
-                  d.show=true;
-              }
+
               return d;
           });
       } else {
           this.flag=true;
           this.addEditTitle = '添加';
           this.headerAdd = this.headers.map(d => {
-              if(d.key=='name' || d.key=='password'|| d.key=='password_confirmation'){
-                  d.show=true;
-              }
+
               d.val = '';
               return d;
           });
@@ -145,7 +141,7 @@ export class AdminUserComponent implements OnInit {
                   this.toastService.toast(toastCfg);
               });
           }else{
-              this.http.adminsUpdate(submitData.id,this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
+              this.http.adminsUpdate(''+this.data[this.editId]['id'],this.role_id,submitData.user_name,submitData.name,submitData.password).then(data => {
                   console.log(data);
                   if (data['status'] == 'ok') {
                       this.data = data['data'];
@@ -171,7 +167,6 @@ export class AdminUserComponent implements OnInit {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', '密码不一致', 3000);
           this.toastService.toast(toastCfg);
       }
-
   }
 
     getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
@@ -255,7 +250,7 @@ export class AdminUserComponent implements OnInit {
     }
     cancel() {
         for (let i = 0; i < this.headers.length; i++) {
-            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password'|| this.headers[i].key == 'name') {
                 this.headers[i].show = false;
                 this.headers[i].required = false;
             }

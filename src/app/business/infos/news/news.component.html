@@ -2,7 +2,7 @@
   *ngIf="!editor"
   (onSort)="sort($event)"
   (onDel)="del($event)"
-  (onDelAll)="del($event)"
+  (onDelAll)="delAll($event)"
   (onEditH5)="editH5($event)"
   (onAdd)="add($event)"
   (onSearch)="search($event)"
@@ -31,3 +31,6 @@
              (onSave)="save($event)"
 >
 </c-editor-h5>
+
+
+

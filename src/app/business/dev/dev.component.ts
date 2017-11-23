@@ -26,7 +26,7 @@ export class DevComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.http.getHeader('devs');
-    this.getHeartData();
+    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
     this.http.isHavePerm('heart-dev-del').then(v => {
       this.deleteBtn = v;
@@ -71,7 +71,7 @@ export class DevComponent implements OnInit {
   del(dev_id: string) {
     this.http.unbind(dev_id).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData();
+        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -81,7 +81,28 @@ export class DevComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
-
+  delAll(arr: Array<any>) {
+    if (arr.length) {
+      this.http.unbind('' + arr[0]).then(data => {
+        if (data['status'] == 'ok') {
+          arr.splice(0, 1);
+          if (arr.length) {
+            this.delAll(arr);
+          } else {
+            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            return;
+          }
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+          return;
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
+  }
   submit(AddData: string) {
     this.http.postDevSubmit(AddData).then(data => {
       this.data = data['data'];

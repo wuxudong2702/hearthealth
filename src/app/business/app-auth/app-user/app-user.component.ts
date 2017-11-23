@@ -92,15 +92,14 @@ export class AppUserComponent implements OnInit {
   id: number = 0;
   addEditFlag: boolean = true;
   parentSubFlag: boolean = true;
+  flag: boolean = true;
   parent_id: string = '';
   editId: string;
   subEditId: string;
 
   add(id: number) {
     for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'accountType') {
-        this.headers[i].show = false;
-      } else if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+        if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
         this.headers[i].show = true;
         if(id==undefined){
           this.headers[i].required = true;
@@ -142,12 +141,9 @@ export class AppUserComponent implements OnInit {
 
   cancel() {
     for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'accountType') {
-        this.headers[i].show = true;
-      } else if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+       if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
         this.headers[i].required = false;
         this.headers[i].show = false;
-      } else {
       }
     }
     this.addView = false;
@@ -164,11 +160,17 @@ export class AppUserComponent implements OnInit {
       this.http.userAdd(this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getHeartData();
+         this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
           this.tableView = true;
           this.addSubUserView = false;
           this.addView = false;
           this.subUsersView = false;
+          for (let i = 0; i < this.headers.length; i++) {
+            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+              this.headers[i].required = false;
+              this.headers[i].show = false;
+            }
+          }
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
           this.toastService.toast(toastCfg);
@@ -182,11 +184,17 @@ export class AppUserComponent implements OnInit {
       this.http.userUpdate(this.editId, this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getHeartData();
+          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
           this.tableView = true;
           this.addSubUserView = false;
           this.addView = false;
           this.subUsersView = false;
+          for (let i = 0; i < this.headers.length; i++) {
+            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+              this.headers[i].required = false;
+              this.headers[i].show = false;
+            }
+          }
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
           this.toastService.toast(toastCfg);
@@ -207,7 +215,7 @@ export class AppUserComponent implements OnInit {
   del(ids: string) {
     this.http.userDelData(ids).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData();
+        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -296,12 +304,16 @@ export class AppUserComponent implements OnInit {
     this.subUsersView = true;
     this.tableView = false;
     this.addSubUserView = false;
-    for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'birth' || this.headers[i].key == 'sex' || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
-        this.subUserHeaders.push(this.headers[i]);
+
+    if(this.flag){
+      this.flag=false;
+      for (let i = 0; i < this.headers.length; i++) {
+        if (this.headers[i].key == 'birth' || this.headers[i].key == 'sex' || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
+          this.subUserHeaders.push(this.headers[i]);
+        }
       }
     }
-    this.getSubHeartData(this.sub_url, this.parent_id, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
   }
 
 
@@ -361,11 +373,7 @@ export class AppUserComponent implements OnInit {
   }
 
   subUsersback() {
-    for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'accountType' || this.headers[i].key == 'weixin' || this.headers[i].key == 'qq' || this.headers[i].key == 'mobile' || this.headers[i].key == 'name' || this.headers[i].key == 'email' || this.headers[i].key == 'zone') {
-        this.headers[i].show = true;
-      }
-    }
+
     this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
     this.addView = false;
     this.subUsersView = false;
@@ -467,6 +475,7 @@ export class AppUserComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
+
 
 
 

@@ -2,9 +2,11 @@
   *ngIf="tableView"
 
   (onSort)="sort($event)"
-  (onAdd)="add($event)"
+
   (onSearch)="search($event)"
   (onSet)="set($event)"
+  (onAdd)="add($event)"
+
   [headers]="headers"
   [data]="data"
   [editBtn]="editBtn"

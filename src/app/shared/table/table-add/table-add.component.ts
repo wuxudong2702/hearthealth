@@ -37,7 +37,7 @@ export class TableAddComponent implements OnInit {
   }
 
   ngOnInit() {
-
+        console.log(this.headers,'=================');
     this.form = this.fcs.toFormGroup(this.headers);
   }
 
@@ -47,10 +47,10 @@ export class TableAddComponent implements OnInit {
 
   submit() {
     console.log(this.form.value, 'this.form.value');
-    if (this.form.value.sex = '男') {
+    if (this.form.value.sex =='男') {
       this.form.value.sex = '1';
     } else {
-      this.form.value.sex = '0'
+      this.form.value.sex = '2'
     }
     for (let i in this.form.value) {
       if (!this.form.value[i]) {

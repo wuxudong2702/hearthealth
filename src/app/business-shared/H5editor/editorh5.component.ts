@@ -35,56 +35,62 @@ const htmlL: string = "</div>\n" +
   "\t\n" +
   "</body>\n" +
   "</html>";
-const htmlTitle = "<div class=\"article-title\">\n" +
-  "  <h1 class=\"title\">我是预览页面</h1>\n" +
-  "</div>\n";
+// const htmlTitle = "<div class=\"article-title\">\n" +
+//   "  <h1 class=\"title\">我是预览页面</h1>\n" +
+//   "</div>\n";
 
 @Component({
   selector: 'c-editor-h5',
   styleUrls: ['./editorh5.component.css'],
   template: `
-      <!--<div class="col-md-2 h5Select">-->
-      <!--<select class="form-control" [(ngModel)]="selectValue" [hidden]="!isSelectShow">-->
-      <!--<option value="" style="display:none">请选择类别</option>-->
-      <!--<option *ngFor="let type of H5Type" value={{type.key}}>{{type.value}}</option>-->
-      <!--</select>-->
-          <!--<div class="form-group">-->
-              <!--<div>标签：<input class="form-control" type="text" [(ngModel)]="label"></div>-->
-              <!--<div>标题：<input class="form-control" type="text" [(ngModel)]="title"></div>-->
-              <!--<div>描述：<input class="form-control" type="text" [(ngModel)]="description"></div>-->
-          <!--</div>-->
+    <!--<div class="col-md-2 h5Select">-->
+    <!--<select class="form-control" [(ngModel)]="selectValue" [hidden]="!isSelectShow">-->
+    <!--<option value="" style="display:none">请选择类别</option>-->
+    <!--<option *ngFor="let type of H5Type" value={{type.key}}>{{type.value}}</option>-->
+    <!--</select>-->
+    <!--<div class="form-group">-->
+    <!--<div>标签：<input class="form-control" type="text" [(ngModel)]="label"></div>-->
+    <!--<div>标题：<input class="form-control" type="text" [(ngModel)]="title"></div>-->
+    <!--<div>描述：<input class="form-control" type="text" [(ngModel)]="description"></div>-->
     <!--</div>-->
-  <div  style="background-color: white">
-    <div class="form-group" style="margin-top: 12px;">
+    <!--</div>-->
+    <div style="background-color: white">
+      <div class="form-group" [hidden]="!previews" style="">
         <div style="margin-left: 2%;">
-            <label>标签：</label><input style="border: 1px solid #dddddd;width: 33%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="label">
-            <label style="margin-left: 27px;">标题：</label><input style="border: 1px solid #dddddd;width: 33%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="title">
+          <label>标签：</label><input
+          style="border: 1px solid #dddddd;width: 35%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text"
+          [(ngModel)]="label">
+          <label style="margin-left: 27px;">标题：</label><input
+          style="border: 1px solid #dddddd;width: 35%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text"
+          [(ngModel)]="title">
         </div>
-        <div style="margin-left: 2%;"><label>描述：</label><input style="border: 1px solid #dddddd;width: 75%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text" [(ngModel)]="description"></div>
-    </div>
-    <div class="c-content-inner " [hidden]="!previews">
-      <div class="row editorDocument">
-        <div class="col-md-12">
-          <c-editor [dataEditor]="dataEditor" id="c-editor" (onTextChange)="onTextChange($event)"
-                    [HTML5Content]="HTML5Content"
-                    [style]="{'height':'60vh'}"></c-editor>
-          <br/>
+        <div style="margin-left: 2%;"><label>描述：</label><input
+          style="border: 1px solid #dddddd;width: 74%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text"
+          [(ngModel)]="description"></div>
+      </div>
+      <div class="c-content-inner " [hidden]="!previews">
+        <div class="row editorDocument">
+          <div class="col-md-12">
+            <c-editor [dataEditor]="dataEditor" id="c-editor" (onTextChange)="onTextChange($event)"
+                      [HTML5Content]="HTML5Content"
+                      [style]="{'height':'60vh'}"></c-editor>
+            <br/>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="" (click)="save()">保存</button>
+          <button class="" (click)="preview()">预览</button>
+          <button class="" (click)="editBack()">返回</button>
         </div>
       </div>
-      <div class="buttons">
-        <button class="" (click)="save()">保存</button>
-        <button class="" (click)="preview()">预览</button>
-        <button class="" (click)="editBack()">返回</button>
+      <div class="preview-layer" [hidden]="previews" style="height: 840px; overflow: auto" (click)="noPreviews()">
+        <div class="preview-bg"></div>
+        <div class="preview-phone prephone">
+          <iframe #iframe class="iframe1"></iframe>
+        </div>
       </div>
-    </div>
-    <div class="preview-layer" [hidden]="previews" style="height: 840px; overflow: auto" (click)="noPreviews()">
-      <div class="preview-bg"></div>
-      <div class="preview-phone prephone">
-        <iframe #iframe class="iframe1"></iframe>
-      </div>
-    </div>
 
-
+    </div>
 
   `
 })
@@ -115,7 +121,7 @@ export class Editorh5Component implements OnInit {
   htmlElement: HTMLElement;
   prePhone: boolean = false;
   label: string;
-  title: string;
+  title: string = '';
   description: string;
 
   constructor(private appService: AppService, private toastService: ToastService, private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
@@ -127,20 +133,19 @@ export class Editorh5Component implements OnInit {
     //   return false;
     // });
     // if(this.dataEditor.length!=1){
-      console.log('00000',this.dataEditor);
-      this.title=this.dataEditor['title'];
-       this.description=this.dataEditor['description'];
-       this.label=this.dataEditor['label'];
-    // }
+
+    console.log('1001', this.dataEditor, this.HTML5Content);
+    this.title = this.dataEditor['title'];
+    this.description = this.dataEditor['description'];
+    this.label = this.dataEditor['label'];
     this.appService.titleEventEmitter.emit("富文本编辑器");
-    console.log('富文本编辑框传给编辑的数据', this.dataEditor);
 
   }
 
   onTextChange(html: UEditorHtml) {
     this.htmlValue = html.htmlValue;
-    if(html.htmlValue){
-      this.html5=html.htmlValue;
+    if (html.htmlValue) {
+      this.html5 = html.htmlValue;
     }
     // this.textValue = html.textValue;
     // this.delta = html.delta;
@@ -153,10 +158,12 @@ export class Editorh5Component implements OnInit {
     // this.prePhone=true;
     if (this.htmlValue) {
       this.html5 = this.htmlValue;
+    }else{
+      this.html5=this.HTML5Content;
     }
     let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
     doc.open();
-    doc.write(htmlH + htmlTitle + this.html5 + htmlL);
+    doc.write(htmlH + `<h3>` + this.title + `</h3>`  + this.html5 + htmlL);
     doc.close();
   }
 
@@ -185,7 +192,7 @@ export class Editorh5Component implements OnInit {
       footer: htmlL,
       title: this.title,
       label: this.label,
-      description:this.description
+      description: this.description
     });
   }
 

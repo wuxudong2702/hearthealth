@@ -161,7 +161,8 @@ export class PackagesComponent implements OnInit {
         this.toastService.toast(toastCfg);
       });
     }else{
-      this.http.upgradeUpdate(submitData.id,submitData.ver,submitData.desc,submitData.url).then(data => {
+      console.log(submitData,'pppppp');
+      this.http.upgradeUpdate( ''+this.data[this.editId]['id'],submitData.ver,submitData.desc,submitData.url).then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
           this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);

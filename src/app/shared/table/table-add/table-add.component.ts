@@ -37,7 +37,7 @@ export class TableAddComponent implements OnInit {
   }
 
   ngOnInit() {
-
+        console.log(this.headers,'=================');
     this.form = this.fcs.toFormGroup(this.headers);
   }
 

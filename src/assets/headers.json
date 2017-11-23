@@ -98,7 +98,7 @@
       "name": "账户角色",
       "index": 0,
       "order": 0,
-      "pipe_type": 1,
+      "pipe_type": 0,
       "pipe_params": "",
       "val": "",
       "select_val": [
@@ -108,7 +108,7 @@
       "valid_example": "",
       "required": true,
       "pattern": "",
-      "input_type": 1
+      "input_type": 0
     },
     {
       "key": "users_count",
@@ -242,20 +242,14 @@
       "name": "设备类型",
       "index": 7,
       "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {
-        "0": "卡片式",
-        "1": "佩戴市"
-      },
+      "pipe_type": 0,
+      "pipe_params": "",
       "val": "",
-      "select_val": [
-        "卡片式",
-        "佩带式"
-      ],
+      "select_val": "",
       "valid_example": "",
       "required": true,
       "pattern": "",
-      "input_type": 1
+      "input_type": 0
     }
   ],
   "heart-data": [
@@ -326,12 +320,12 @@
       "index": 2,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "",
+      "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
       "valid_example": "2018-11-17",
       "required": true,
-      "pattern": "yyyy-mm-dd",
+      "pattern": "",
       "input_type": 2
     },
     {
@@ -341,12 +335,12 @@
       "index": 3,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyy-mm-dd",
+      "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
       "valid_example": "",
       "required": true,
-      "pattern": "yyyy-mm-dd",
+      "pattern": "",
       "input_type": 0
     },
     {
@@ -419,7 +413,7 @@
       "index": 2,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyyMMdd",
+      "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
       "valid_example": "2018-11-14",
@@ -572,7 +566,7 @@
       "index": 3,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyy-mm-dd",
+      "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
       "valid_example": "2018-11-14",
@@ -587,7 +581,7 @@
       "index": 4,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyy-mm-dd",
+      "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
       "valid_example": "2018-11-14",
@@ -727,7 +721,7 @@
       "index": 8,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyy-mm-dd",
+      "pipe_params": "yyyy-MM-dd",
       "val": "2018-11-17",
       "select_val": [],
       "valid_example": "2018-11-17",
@@ -951,7 +945,7 @@
       "index": 1,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyy-mm-dd",
+      "pipe_params": "yyyy-MM-dd",
       "val": "2018-11-17",
       "select_val": [],
       "valid_example": "2018-11-17",
@@ -1096,12 +1090,12 @@
       "index": 2,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyy-mm-dd",
+      "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
       "valid_example": "2018-11-17",
       "required": true,
-      "pattern": "yyyy-mm-dd",
+      "pattern": "yyyy-MM-dd",
       "input_type": 2
     }
   ]

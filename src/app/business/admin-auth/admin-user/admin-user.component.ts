@@ -72,7 +72,7 @@ export class AdminUserComponent implements OnInit {
 
   add(id: number) {
       for (let i = 0; i < this.headers.length; i++) {
-          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password'|| this.headers[i].key == 'name') {
               this.headers[i].show = true;
               if(id==undefined){
                   this.headers[i].required = true;
@@ -98,18 +98,14 @@ export class AdminUserComponent implements OnInit {
                   default:
                       d.val = this.data[id][d.key];
               }
-              if(d.key=='name' || d.key=='password'|| d.key=='password_confirmation'){
-                  d.show=true;
-              }
+
               return d;
           });
       } else {
           this.flag=true;
           this.addEditTitle = '添加';
           this.headerAdd = this.headers.map(d => {
-              if(d.key=='name' || d.key=='password'|| d.key=='password_confirmation'){
-                  d.show=true;
-              }
+
               d.val = '';
               return d;
           });
@@ -254,7 +250,7 @@ export class AdminUserComponent implements OnInit {
     }
     cancel() {
         for (let i = 0; i < this.headers.length; i++) {
-            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password'|| this.headers[i].key == 'name') {
                 this.headers[i].show = false;
                 this.headers[i].required = false;
             }

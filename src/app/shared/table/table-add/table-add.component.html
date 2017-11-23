@@ -4,7 +4,7 @@
   <div class="">
 
     <form class="addForm " [formGroup]="form" >
-      <div class=" form-inline formCenter " *ngFor="let header of headers" [hidden]="header.key=='role_id'||header.key=='id'" >
+      <div class=" form-inline formCenter " *ngFor="let header of headers" [hidden]="header.key=='role_id'||header.key=='id'||header.name=='账户角色'" >
       <app-input [field]="header" [form]="form" (onSendFormValue)="SendFormValue($event)"  (onSendId)="sendId($event)" ></app-input>
 
       </div>

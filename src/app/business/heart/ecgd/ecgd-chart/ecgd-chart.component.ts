@@ -1,4 +1,4 @@
-import {Component, OnInit, NgModule, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, NgModule, Input, Output, EventEmitter,HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-ecgd-chart',
@@ -76,13 +76,13 @@ export class EcgdChartComponent implements OnInit {
                   scale: true,
                   boundaryGap : false,
                   axisLine: {onZero: false},
-                  splitLine: {show: false},
-                  splitArea : {
-                      show : true,
-                      areaStyle:{
-                         color:'#fff'
-                      }
-                  },
+                  splitLine: {show: true},
+                  // splitArea : {
+                  //     show : true,
+                  //     areaStyle:{
+                  //        color:'#ccc'
+                  //     }
+                  // },
                   splitNumber: 20,
                   axisLabel: {
                       formatter: function (value, index) {
@@ -97,12 +97,12 @@ export class EcgdChartComponent implements OnInit {
           yAxis: [
               {
                   scale: true,
-                  splitLine: {show: false},
+                  // splitLine: {show: false},
                   splitArea: {
-                      show: true,
-                      areaStyle:{
-                          color:'#fff'
-                      }
+                      show: false,
+                      // areaStyle:{
+                      //     color:'#ccc'
+                      // }
                   }
               }
           ],
@@ -138,5 +138,7 @@ export class EcgdChartComponent implements OnInit {
      this.back.emit(1);
    }
 
+    @HostListener('window:resize')
+    onWindowResize(): void {}
 }
 

@@ -14,6 +14,7 @@ import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 import {ConfirmConfig} from '../../../shared/modal/modal-model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-user',
@@ -24,7 +25,8 @@ import {ConfirmConfig} from '../../../shared/modal/modal-model';
 
 export class AdminUserComponent implements OnInit {
 
-  constructor(private http: ApiService, private toastService: ToastService) {
+  constructor(private router: Router, private http: ApiService, private toastService: ToastService) {
+
   }
 
   ngOnInit() {

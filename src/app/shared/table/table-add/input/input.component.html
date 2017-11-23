@@ -72,7 +72,6 @@
   <div class=" " *ngIf="!isValid  && isDirty ">
      <div *ngIf="field.required==true&&field.val==''" class="alert-danger validExample ">{{field.name+'是必填项！'}}</div>
     <div *ngIf="field.val!=''" class="alert-danger validExample " >请输入正确的格式，例如： {{field.valid_example}}</div>
-
   </div>
 </div>
 

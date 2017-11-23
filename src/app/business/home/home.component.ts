@@ -8,6 +8,7 @@ import  { PasswordEditComponent} from '../../business-shared/user/password-edit.
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'c-home',
@@ -21,11 +22,13 @@ export class HomeComponent implements OnInit {
     dataList: Array<any> = [];
     valueList: Array<any> = [];
     chartOption: object = {};
-    constructor(private http: ApiService,private toastService: ToastService){
+    constructor(private router: Router, private http: ApiService,private toastService: ToastService){
+
+
     }
 
-    ngOnInit() {
 
+    ngOnInit() {
         this.http.homeData().then(data => {
             if (data['status'] == 'ok') {
                 // this.valueList = Object.keys(data['data']);

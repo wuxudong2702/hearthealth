@@ -99,7 +99,16 @@ export class AdminRoleComponent implements OnInit {
   }
 
   edit(id) {
-
+    // for (let i = 0; i < this.headers.length; i++) {
+    //   if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'mobile') {
+    //     this.headers[i].show = true;
+    //     if (id == undefined) {
+    //       this.headers[i].required = true;
+    //     } else {
+    //       this.headers[i].required = false;
+    //     }
+    //   }
+    // }
     this.id = this.data[id]['id'];
     console.log(this.id, '编辑的id');
     this.isShow = false;
@@ -148,6 +157,7 @@ export class AdminRoleComponent implements OnInit {
       d.val = '';
       return d;
     });
+
     this.http.getZtreeNodes().then(data => {
       this.nodes = data['nodes'];
     });

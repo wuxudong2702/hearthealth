@@ -14,7 +14,8 @@ import {AppService} from '../app.service';
 import {ApiService} from '../business-service/api/api.service';
 import {ToastService} from '../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../shared/toast/toast-model';
-import {SessionStorageService} from '../shared/storage/session-storage.service';
+
+import {isNullOrUndefined} from "util";
 
 
 /**
@@ -156,43 +157,8 @@ export class MainComponent implements OnInit {
 
     title: string = '首页';
 
-    constructor(private router: Router,private sessionStorageService:SessionStorageService,private modalService: ModalService, private ngbModalService: NgbModal, private apiService: ApiService, private toastService: ToastService) {
-        if(this.sessionStorageService.get('token')=='undefined'||!!this.sessionStorageService.get('token')==false){
-          this.router.navigate(['/login']);
-          console.log(this.sessionStorageService.get('token'),'___________________');
-        }
-        // console.log(this.sessionStorageService.get('token'),'___________________');
-         // this.appService.titleEventEmitter.subscribe((value: string) => {
-        //     if (value) {
-        //         this.title = value;
-        //     }
-        // });
-        this.apiService.getMenu().then(data => {
-            if (data['status'] == 'ok') {
-                this.mainData.menuData = data['data'];
-            } else {
-                console.error('获取用户菜单失败', data.message )
-                this.router.navigate(['/login']);
-            }
-        }).catch(err => {
-            console.error('获取用户菜单异常', err)
-            this.router.navigate(['/login']);
-        });
+    constructor(private router: Router,private modalService: ModalService, private ngbModalService: NgbModal, private apiService: ApiService, private toastService: ToastService) {
 
-        this.apiService.me().then(data => {
-            if (data.status == 'ok') {
-                this.mainData.userData = data['data'];
-                if (data['data']['avator'] == null) {
-                    this.mainData.userData.avator = this.defatltImage;
-                }
-            } else {
-                console.error('获取用户信息失败', data.message );
-                this.router.navigate(['/login']);
-            }
-        }).catch(err => {
-            console.error('获取用户异常', err );
-            this.router.navigate(['/login']);
-        });
 
     }
 
@@ -201,7 +167,37 @@ export class MainComponent implements OnInit {
      * 初始化
      */
     ngOnInit() {
+      if(this.apiService.hasToken()){
+        this.router.navigate(['/login']);
+        return;
+      }
 
+      this.apiService.getMenu().then(data => {
+        if (data['status'] == 'ok') {
+          this.mainData.menuData = data['data'];
+        } else {
+          console.error('获取用户菜单失败', data.message )
+          this.router.navigate(['/login']);
+        }
+      }).catch(err => {
+        console.error('获取用户菜单异常', err)
+        this.router.navigate(['/login']);
+      });
+
+      this.apiService.me().then(data => {
+        if (data.status == 'ok') {
+          this.mainData.userData = data['data'];
+          if (data['data']['avator'] == null) {
+            this.mainData.userData.avator = this.defatltImage;
+          }
+        } else {
+          console.error('获取用户信息失败', data.message );
+          this.router.navigate(['/login']);
+        }
+      }).catch(err => {
+        console.error('获取用户异常', err );
+        this.router.navigate(['/login']);
+      });
     }
 
     /**

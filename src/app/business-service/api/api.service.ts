@@ -8,6 +8,7 @@ import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
 import {ToastService} from '../../shared/toast/toast.service';
 import {SessionStorageService} from '../../shared/storage/session-storage.service';
 import {promise} from "selenium-webdriver";
+import {isNullOrUndefined} from "util";
 
 
 /**
@@ -218,7 +219,7 @@ export class ApiService {
   getHeader(table: string): any {
     let header: any = this.headers[table];
     let config: any = this.headerConfig[table];
-    console.log(config,'1111111111111');
+    console.log(config, '1111111111111');
 
     let _header: Array<any> = [];
     _header = header.map(v => {
@@ -229,7 +230,7 @@ export class ApiService {
       }
       return v;
     });
-    console.log(_header,'2222222');
+    console.log(_header, '2222222');
     return _header;
   }
 
@@ -243,7 +244,7 @@ export class ApiService {
   // latest, true,4;
   // historicalTests,true,5;'
   setHeader(table: string, set: string): Promise<any> {
-    console.log(table,set,'table,set');
+    console.log(table, set, 'table,set');
     const url: string = '/api/admin/header/set';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -277,25 +278,25 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getSUbUserData(url: string = '/api/admin/app/user/index', parent_id:string=null,count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
+  getSUbUserData(url: string = '/api/admin/app/user/index', parent_id: string = null, count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
     console.log(url, count, find_key, find_val, '');
-    return this.httpClient.post(url, {
-      token: this.sessionStorageService.get('token'),
-      parent_id:parent_id,
-      count: count,
-      find_key: find_key,
-      find_val: find_val,
-      sort_key: sort_key,
-      sort_val: sort_val,
-    })
-      .toPromise()
-      .then(data => {
-        console.log(data, 'getData全局获取data');
-        return data
+      return this.httpClient.post(url, {
+        token: this.sessionStorageService.get('token'),
+        parent_id: parent_id,
+        count: count,
+        find_key: find_key,
+        find_val: find_val,
+        sort_key: sort_key,
+        sort_val: sort_val,
       })
-      .catch(err => {
-        this.handleError(err);
-      });
+        .toPromise()
+        .then(data => {
+          console.log(data, 'getData全局获取data');
+          return data
+        })
+        .catch(err => {
+          this.handleError(err);
+        });
   }
 
   /*
@@ -355,22 +356,6 @@ export class ApiService {
   }
 
 // admin-role
-  getAdminRoleHeader(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-headers.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  getAdminRoleData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
   uploadHtml5Page(title: string, description: string, label: string, header: string, content: string, footer: string): Promise<any> {
     const url: string = "api/admin/info/add";
     return this.httpClient.post(url, {
@@ -517,175 +502,177 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-    adminsAdd(role_id:string,user_name:string,name:string,password:string){
-        const urls: string = "/api/admin/admins/add";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            role_id: role_id,
-            user_name:user_name,
-            name:name,
-            password:password
-        })
-            .toPromise()
-            .then(data => {
-                return data;
-            })
-            .catch(this.handleError);
-    }
+  adminsAdd(role_id: string, user_name: string, name: string, password: string) {
+    const urls: string = "/api/admin/admins/add";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      role_id: role_id,
+      user_name: user_name,
+      name: name,
+      password: password
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
 
-    adminsUpdate(id:string,role_id:string,user_name:string,name:string,password:string){
-        const urls: string = "/api/admin/admins/update";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            id:id,
-            role_id: role_id,
-            user_name:user_name,
-            name:name,
-            password:password
-        })
-            .toPromise()
-            .then(data => {
-                return data;
-            })
-            .catch(this.handleError);
-    }
-    rolesUpdate(id:string,description:string, name:string, perms:string){
-        const urls: string = "/api/admin/admins/role/update";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            id:id,
-            description:description,
-            name:name,
-            perms:perms
-        })
-            .toPromise()
-            .then(data => {
-                return data;
-            })
-            .catch(this.handleError);
-    }
-    rolesPerms(id:string){
-        const urls: string = "/api/admin/admins/role/perms";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            id:id,
-        })
-            .toPromise()
-            .then(data => {
-                return data;
-            })
-            .catch(this.handleError);
-    }
+  adminsUpdate(id: string, role_id: string, user_name: string, name: string, password: string) {
+    const urls: string = "/api/admin/admins/update";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      id: id,
+      role_id: role_id,
+      user_name: user_name,
+      name: name,
+      password: password
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
 
-    adminsDel(id:string){
-        const urls: string = "/api/admin/admins/del";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            id:id
-        })
-            .toPromise()
-            .then(data => {
-                return data;
-            })
-            .catch(this.handleError);
-    }
+  rolesUpdate(id: string, description: string, name: string, perms: string) {
+    const urls: string = "/api/admin/admins/role/update";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      id: id,
+      description: description,
+      name: name,
+      perms: perms
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
 
-    adminsRemind(key:string){
-        const urls: string = "/api/admin/admins/role/remind";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            key:key
-        })
-            .toPromise()
-            .then(data => {
-                return data;
-            })
-            .catch(this.handleError);
-    }
+  rolesPerms(id: string) {
+    const urls: string = "/api/admin/admins/role/perms";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      id: id,
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
+
+  adminsDel(id: string) {
+    const urls: string = "/api/admin/admins/del";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      id: id
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
+
+  adminsRemind(key: string) {
+    const urls: string = "/api/admin/admins/role/remind";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      key: key
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
 
 //admin-user
-    rolesAdd(name:string,description:string,perms:string){
-        const urls: string = "/api/admin/admins/role/add";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            name:name,
-            description:description,
-            perms:perms
-        })
-            .toPromise()
-            .then(data => {
-                return data;
-            })
-            .catch(this.handleError);
-    }
-    rolesDel(id:string){
-        const urls: string = "/api/admin/admins/role/del";
-        return this.httpClient.post(urls, {
-            token: this.sessionStorageService.get('token'),
-            id:id
-        })
-            .toPromise()
-            .then(data => {
-                return data;
-            })
-            .catch(this.handleError);
-    }
+  rolesAdd(name: string, description: string, perms: string) {
+    const urls: string = "/api/admin/admins/role/add";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      name: name,
+      description: description,
+      perms: perms
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
+
+  rolesDel(id: string) {
+    const urls: string = "/api/admin/admins/role/del";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      id: id
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
 
 //app-user
 
-  userAdd(parent_id :string=null,submitData,role) {
-      console.log(submitData,'0000000000000000000000');
+  userAdd(parent_id: string = null, submitData, role) {
+    console.log(submitData, '0000000000000000000000');
     const url: string = '/api/admin/app/user/add';
-    return this.httpClient.post(url,{
-      token:this.sessionStorageService.get('token'),
-      mobile :submitData.mobile,
-      qq :submitData.qq,
-      weixin :submitData.weixin,
-      password :submitData.password,
-      password_confirmation:submitData.password_confirmation,
-      name :submitData.name,
-      email :submitData.email,
-      birth :submitData.birth,
-      sex:submitData.sex,
-      height:submitData.height ,
-      weight:submitData.weight,
-      zone:submitData.zone,
-      role:role,
-      relationship :submitData.relationship,
-      parent_id:parent_id
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      mobile: submitData.mobile,
+      qq: submitData.qq,
+      weixin: submitData.weixin,
+      password: submitData.password,
+      password_confirmation: submitData.password_confirmation,
+      name: submitData.name,
+      email: submitData.email,
+      birth: submitData.birth,
+      sex: submitData.sex,
+      height: submitData.height,
+      weight: submitData.weight,
+      zone: submitData.zone,
+      role: role,
+      relationship: submitData.relationship,
+      parent_id: parent_id
     })
       .toPromise()
       .then(data => data)
       .catch(this.handleError);
   }
 
-  userUpdate(edit_id :string=null,parent_id:string=null,submitData,role) {
+  userUpdate(edit_id: string = null, parent_id: string = null, submitData, role) {
     // console.log(password,password_confirmation,role,'password_confirmed');
     const url: string = '/api/admin/app/user/update';
-    return this.httpClient.post(url,{
-      token:this.sessionStorageService.get('token'),
-      id:edit_id,
-      mobile :submitData.mobile,
-      qq :submitData.qq,
-      weixin :submitData.weixin,
-      password :submitData.password,
-      password_confirmation:submitData.password_confirmation,
-      name :submitData.name,
-      email :submitData.email,
-      birth :submitData.birth,
-      sex:submitData.sex,
-      height:submitData.height ,
-      weight:submitData.weight,
-      zone:submitData.zone,
-      role:role,
-      relationship :submitData.relationship,
-      parent_id:parent_id,
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      id: edit_id,
+      mobile: submitData.mobile,
+      qq: submitData.qq,
+      weixin: submitData.weixin,
+      password: submitData.password,
+      password_confirmation: submitData.password_confirmation,
+      name: submitData.name,
+      email: submitData.email,
+      birth: submitData.birth,
+      sex: submitData.sex,
+      height: submitData.height,
+      weight: submitData.weight,
+      zone: submitData.zone,
+      role: role,
+      relationship: submitData.relationship,
+      parent_id: parent_id,
     })
       .toPromise()
       .then(data => data)
       .catch(this.handleError);
   }
-
 
 
   userDelData(id: string = null) {
@@ -719,162 +706,6 @@ export class ApiService {
       });
   }
 
-  getAppUserHeader(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-headers.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  getAppUserData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  getAppUserSubHeader(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-headers.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => {
-        console.log(data, '21233243443');
-        return data;
-      })
-      .catch(this.handleError);
-  }
-
-  getAppUserSubData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserDel(id): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserDelAll(checkedList): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserSubmit(submitData): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserSearch(selectValue, searchValue): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserSubDel(id): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserSubDelAll(checkedList): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserSubSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserSubSubmit(submitData): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppUserSubSearch(selectValue, searchValue): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-user-sub-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-//app-role
-  getAppRoleHeader(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-role-headers.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  getAppRoleData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-role-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppRoleDel(id): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-role-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppRoleDelAll(checkedList): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-role-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postAppRoleSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/app-auth-data/app-role-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
   appRoleSubmit(id: string, users_count: number) {
     console.log(id, users_count, '89000000000000');
     const url: string = "/api/admin/app/role/update";
@@ -893,8 +724,6 @@ export class ApiService {
 
 //packages
   packagesDel(packages_id: string = null) {
-    console.log(packages_id, '[][][][' +
-      ']');
     const url: string = '/api/admin/upgrade/del';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -903,55 +732,11 @@ export class ApiService {
       .toPromise()
       .then(data => data)
       .catch(this.handleError);
+
   }
 
-  getPackagesHeader(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/packages-data/packages-headers.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
 
-  getPackagesData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/packages-data/packages-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
 
-  postPackagesDel(id): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/packages-data/packages-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postPackagesDelAll(checkedList): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/packages-data/packages-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postPackagesSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/packages-data/packages-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postPackagesSubmit(checkedList): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/packages-data/packages-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
 
 //infos-guide
   getGuideHeader(): Promise<any> {
@@ -1051,95 +836,18 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-//infos-news
-  getNewsHeader(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/infos-data/infos-news-headers.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
 
   getNewsData(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => {
-        console.log('getNewsData', data);
-        return data;
-      })
-      .catch(this.handleError);
-  }
 
-  postNewsDel(id): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postNewsDelAll(checkedList): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postNewsSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  //dev
-  getDevHeader(): Promise<any> {
-    const url: string = '/api/dev/index';
-    console.log('get dev header token', this.token);
-    return this.httpClient.post(url, {
-      token: this.token
-    })
-      .toPromise()
-      .then(data => {
+      return this.httpClient.get(url)
+        .toPromise()
+        .then(data => {
+          console.log('getNewsData', data);
           return data;
-        }
-      )
-      .catch(this.handleError);
-  }
+        })
+        .catch(this.handleError);
 
-  getDevData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postDevDel(id): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postDevDelAll(checkedList): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postDevSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
   }
 
   postDevSubmit(addData): Promise<any> {
@@ -1150,37 +858,9 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-
-
-
-  //hhr
-  postDevSearch(selectValue, searchValue): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  //hhr
-  getHhrHeader(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-headers.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  getHhrData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-data.json';
-    return this.httpClient.get(url, {})
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
   getHhrDataChart(chartId: number, start_time: any, end_time: any, field: string): Promise<any> {
     const url: string = '/api/admin/report/series';
+    console.log('=======================');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       user_id: chartId,
@@ -1195,103 +875,44 @@ export class ApiService {
 
   getHhrDataDetails(chartId: number, id: number): Promise<any> {
     const url: string = '/api/admin/report/detail';
-    return this.httpClient.post(url, {
-      token: this.sessionStorageService.get('token'),
-      user_id: chartId,
-      heart_data_id: id
-    })
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
+
+      return this.httpClient.post(url, {
+        token: this.sessionStorageService.get('token'),
+        user_id: chartId,
+        heart_data_id: id
+      })
+        .toPromise()
+        .then(data => data)
+        .catch(this.handleError);
+
   }
 
   delHhrDataDetails(id: number, chartId: number): Promise<any> {
     const url: string = '/api/admin/report/del';
-    return this.httpClient.post(url, {
-      token: this.sessionStorageService.get('token'),
-      user_id: id,
-      heart_data_id: chartId
-    })
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
 
-  postHhrDel(id): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
+      return this.httpClient.post(url, {
+        token: this.sessionStorageService.get('token'),
+        user_id: id,
+        heart_data_id: chartId
+      })
+        .toPromise()
+        .then(data => data)
+        .catch(this.handleError);
 
-  postHhrDelAll(checkedList): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
   }
-
-  postHhrSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postHhrSearch(selectValue, searchValue): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/hhr-data/hhr-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-//log
-  getLogHeader(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/log-data/log-headers.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  getLogData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/log-data/log-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postNewsSearch(selectValue, searchValue): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/log-data/log-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
-  postLogSearch(selectValue, searchValue): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/log-data/log-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
   //home
 
-    homeData(): Promise<any> {
-        const url: string = '/api/admin/statistics/data';
-        return this.httpClient.post(url, {
-            token: this.sessionStorageService.get('token'),
-        })
-            .toPromise()
-            .then(data => data)
-            .catch(this.handleError);
-    }
+  homeData(): Promise<any> {
+    const url: string = '/api/admin/statistics/data';
+      return this.httpClient.post(url, {
+        token: this.sessionStorageService.get('token'),
+      })
+        .toPromise()
+        .then(data => data)
+        .catch(this.handleError);
+  }
 
+  hasToken() {
+    return isNullOrUndefined(this.sessionStorageService.get('token'));
+  }
 }

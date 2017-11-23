@@ -14,14 +14,17 @@
 .Btns{
     margin:6px 3px;
     vertical-align: middle;
+    width:80px;
+    height:32px;
 }
 .clearBtn {
     margin:6px 25px;
     vertical-align: middle;
+    width:100px;
 }
 
 .dateInputStyle {
-  margin-left:20px;
+  margin-left:100px;
 }
 .Btns:focus {
     background-color: #868e96;
@@ -54,4 +57,7 @@ h2{
   margin-left: 20px;
   margin-bottom: 20px;
   /*margin: 8px 25px;*/
+}
+.text {
+    margin-top:20px;
 }

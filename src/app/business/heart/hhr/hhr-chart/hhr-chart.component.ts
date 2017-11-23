@@ -19,14 +19,16 @@ export class HhrChartComponent implements OnInit {
   @Input() dataChart1: Array<any>;
   @Input() userName: string;
   @Input() chartId: number;
+  @Input() startValue: any;
+  @Input() endValue: any;
 
   @Output() onChart = new EventEmitter<any>();
   @Output() onTime = new EventEmitter<any>();
   @Output() onIndicators = new EventEmitter<any>();
   @Output() onDelDetails = new EventEmitter<any>();
 
-  dataList: Array<any>;
-  valueList: Array<any>;
+  dataList: Array<any> = [];
+  valueList: Array<any> = [];
   chartOption: object = {};
   userInfo: string;
   dataIndex: number;
@@ -78,7 +80,40 @@ export class HhrChartComponent implements OnInit {
     format:"YYYY-MM-DD"
   };
 
-  ngOnInit() {}
+  ngOnInit() {
+      this.selectedDateStart = this.startValue.slice(0,10);
+      this.selectedDateEnd = this.endValue.slice(0,10);
+      this.chartOption = {
+          visualMap: [{
+              show: false,
+              type: 'continuous',
+              seriesIndex: 0,
+              min: 0,
+              max: 400
+          }],
+          title: [{
+              left: 'center',
+              text: ''
+          }],
+          tooltip: {
+              trigger: 'axis'
+          },
+          xAxis: [{
+              data: this.valueList
+          }],
+          yAxis: [{
+              splitLine: {show: false}
+          }],
+          grid: {
+              top: '15%'
+          },
+          series: [{
+              type: 'line',
+              showSymbol: true,
+              data: this.dataList
+          }]
+      };
+  }
 
   chartView() {
     this.onChart.emit();
@@ -106,6 +141,10 @@ export class HhrChartComponent implements OnInit {
 
   indicator5() {
       this.field='indicator5';
+      this.chartToggle(this.dataList,this.valueList);
+  }
+  indicator6() {
+      this.field='indicator6';
       this.chartToggle(this.dataList,this.valueList);
   }
 
@@ -149,12 +188,19 @@ export class HhrChartComponent implements OnInit {
   }
 
   chartClick(e){
-      // console.log(e);
+       console.log(e,'e');
+       console.log(e.dataIndex,'e.dataIndex');
+
       this.dataIndex = e.dataIndex;
       this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
+      console.log(this.dataChart1,'this.dataChart1');
+      console.log(this.dataChart1[this.dataIndex],'this.dataChart1[this.dataIndex]');
+      console.log(this.chartDetailsId,'this.chartDetailsId');
+
       this.http.getHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
+          console.log(data,'data');
           if (data['status'] == 'ok') {
-              if(data['data']){
+               if(data['data'].length){
                   this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
                   this.chartDetailsData=Object.entries(data['data']);
                   this.chartDetailsData.forEach(function (v) {

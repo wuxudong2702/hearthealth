@@ -1,5 +1,5 @@
 .demo-chart {
-    height: 50vh;
+    height: 45vh;
     margin-top:1%;
 }
 
@@ -12,13 +12,13 @@
 
 }
 .Btns{
-    margin:6px 3px;
+    margin:6px 5px;
     vertical-align: middle;
     width:80px;
     height:32px;
 }
 .clearBtn {
-    margin:6px 25px;
+    margin:6px 5px;
     vertical-align: middle;
     width:100px;
 }

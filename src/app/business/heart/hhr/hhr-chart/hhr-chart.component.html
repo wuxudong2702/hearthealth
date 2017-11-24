@@ -1,7 +1,7 @@
 <div class="chartStyle">
 
   <div>
-    <button class="btn btn-success btn-md back" (click)="chartView($event)">返回</button>
+    <button class="btn btn-success btn-md Btns" (click)="chartView()">返回</button>
       <input [(ngModel)]="selectedDateStart" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
              class="form-control dateInput dateInputStyle " placeholder="开始时间" />
       <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
@@ -11,7 +11,9 @@
   <div class="text-center text-primary text">
     <h4>用户：&nbsp;{{userName}}</h4>
   </div>
-  <div echarts [options]="chartOption"  (chartClick) ="chartClick($event)" class="demo-chart" id="myChart"></div>
+  <div *ngIf="!chartInit" echarts [options]="chartOption"  (chartClick) ="chartClick($event)" class="demo-chart" id="myChart"></div>
+  <div *ngIf="chartInit" echarts [options]="optionInit" class="demo-chart"></div>
+
   <div class="text-center chartFileBtns">
     <button class="btn btn-primary Btns" (click)="indicator1()">指标1
     </button>
@@ -25,12 +27,15 @@
     </button>
     <button class="btn btn-primary Btns" (click)="indicator6()">指标6
     </button>
-    <button class="btn btn-danger btn-md clearBtn" (click)="clear($event)">清空本次数据</button>
+    <button class="btn btn-danger btn-md clearBtn" (click)="clear()">清空本次数据</button>
   </div>
   <div class="details-panel" *ngIf="isDetails">
     <hr>
     <h2 >心电数据详情</h2>
+    <h2 *ngIf="details_none" class="text-center">暂无数据</h2>
+    <div *ngIf="!details_none">
     <label class="details" *ngFor="let data of chartDetailsData" title={{data}}>{{data[0]}}：&nbsp;{{data[1]}}
     </label>
+    </div>
   </div>
 </div>

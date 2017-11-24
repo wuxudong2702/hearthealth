@@ -30,12 +30,15 @@ export class HhrChartComponent implements OnInit {
   dataList: Array<any> = [];
   valueList: Array<any> = [];
   chartOption: object = {};
+  optionInit: object = {};
   userInfo: string;
   dataIndex: number;
-  field: string='n_total_detbeat';
+  field: string='';
   dataChart: Array<any>;
   chartDetailsData: Array<any>;
   isDetails: boolean = false;
+  chartInit: boolean = true;
+  details_none: boolean = false;
   chartDetailsId: number = 1;
   selectedDateStart;
   selectedDateEnd;
@@ -83,7 +86,7 @@ export class HhrChartComponent implements OnInit {
   ngOnInit() {
       this.selectedDateStart = this.startValue.slice(0,10);
       this.selectedDateEnd = this.endValue.slice(0,10);
-      this.chartOption = {
+      this.optionInit = {
           visualMap: [{
               show: false,
               type: 'continuous',
@@ -96,21 +99,25 @@ export class HhrChartComponent implements OnInit {
               text: ''
           }],
           tooltip: {
+              show:false,
               trigger: 'axis'
           },
           xAxis: [{
-              data: this.valueList
+              axisLabel: {show: false},
+              data: [0]
           }],
           yAxis: [{
-              splitLine: {show: false}
+              axisLabel: {show: false},
+              splitLine: {show: false},
+              axisTick: {show: false}
           }],
           grid: {
               top: '15%'
           },
           series: [{
               type: 'line',
-              showSymbol: true,
-              data: this.dataList
+              showSymbol: false,
+              data: [0]
           }]
       };
   }
@@ -150,31 +157,36 @@ export class HhrChartComponent implements OnInit {
 
   show(){
       if(this.selectedDateStart && this.selectedDateEnd){
-          this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
-              console.log(data,'-------');
-              if (data['status'] == 'ok') {
-                  if(data['data'].length){
-                      this.dataChart1 = data['data'];
-                      this.valueList = this.dataChart1.map(function (item) {
-                          return item['sense_time'];
-                      });
-                      this.dataList = this.dataChart1.map(function (item) {
-                          return item['data'];
-                      });
-                      this.chartToggle(this.dataList,this.valueList);
-                  }else{
-                      const toastCfg = new ToastConfig(ToastType.ERROR, '','暂无数据', 3000);
+          if(this.field){
+              this.chartInit = false;
+              this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
+                  console.log(data,'-------');
+                  if (data['status'] == 'ok') {
+                      if(data['data'].length){
+                          this.dataChart1 = data['data'];
+                          this.valueList = this.dataChart1.map(function (item) {
+                              return item['sense_time'];
+                          });
+                          this.dataList = this.dataChart1.map(function (item) {
+                              return item['data'];
+                          });
+                          this.chartToggle(this.dataList,this.valueList);
+                      }else{
+                          this.details_none = true;
+                      }
+                  } else {
+                      const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                       this.toastService.toast(toastCfg);
                   }
-              } else {
-                  const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+              }).catch(err => {
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                  console.error(err);
                   this.toastService.toast(toastCfg);
-              }
-          }).catch(err => {
-              const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-              console.error(err);
+              });
+          }else{
+              const toastCfg = new ToastConfig(ToastType.ERROR, '','请选择指标', 3000);
               this.toastService.toast(toastCfg);
-          });
+          }
       }else if(!this.selectedDateStart){
           const toastCfg = new ToastConfig(ToastType.ERROR, '','请选择开始时间', 3000);
           this.toastService.toast(toastCfg);
@@ -188,43 +200,40 @@ export class HhrChartComponent implements OnInit {
   }
 
   chartClick(e){
-       console.log(e,'e');
-       console.log(e.dataIndex,'e.dataIndex');
-
+      console.log(e.dataIndex,'e.dataIndex');
       this.dataIndex = e.dataIndex;
       this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
-      console.log(this.dataChart1,'this.dataChart1');
-      console.log(this.dataChart1[this.dataIndex],'this.dataChart1[this.dataIndex]');
-      console.log(this.chartDetailsId,'this.chartDetailsId');
 
       this.http.getHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
           console.log(data,'data');
           if (data['status'] == 'ok') {
-               if(data['data'].length){
+               if(data['data']){
                   this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
                   this.chartDetailsData=Object.entries(data['data']);
                   this.chartDetailsData.forEach(function (v) {
-                      if(v[0]=="int nBpmCode"){
+                      if(v[0]=="bpm_code"){
                           switch(v[1]){
-                              case 0 :  v[1]="过慢"; break;
-                              case 1 :  v[1]="正常"; break;
-                              case 2 :  v[1]="过快"; break;
+                              case '0' :  v[1]="过慢"; break;
+                              case '1' :  v[1]="正常"; break;
+                              case '2' :  v[1]="过快"; break;
                               default:  v[1]="";
                           }
                       }
-                      if(v[0]=="int nArrhythmiaCode"){
+                      if(v[0]=="n_arrhythmia_code"){
                           switch(v[1]){
-                              case 0 :  v[1]="正常"; break;
-                              case 1 :  v[1]="隐患"; break;
-                              case 2 :  v[1]="高风险"; break;
+                              case '0' :  v[1]="正常"; break;
+                              case '1' :  v[1]="隐患"; break;
+                              case '2' :  v[1]="高风险"; break;
                               default:  v[1]="";
                           }
                       }
                   });
                   this.isDetails=true;
-              }else{
-                  const toastCfg = new ToastConfig(ToastType.ERROR, '','暂无数据', 3000);
-                  this.toastService.toast(toastCfg);
+                   this.details_none=false;
+
+               }else{
+                  this.isDetails=true;
+                  this.details_none=true;
               }
           }
       }).catch(err => {

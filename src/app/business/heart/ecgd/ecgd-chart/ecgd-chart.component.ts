@@ -33,9 +33,6 @@ export class EcgdChartComponent implements OnInit {
     this.dateList=this.dataChart1.map(function (item,index) {
         return index+1;
       });
-      console.log(this.dataChart1,'this.dataChart1');
-      console.log(this.valueList,'this.valueList');
-      console.log(this.dateList,'this.dateList');
       this.chartOption = {
 
           animation: false,

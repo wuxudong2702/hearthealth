@@ -14,6 +14,7 @@ import {ToastService} from '../../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 import {ModalService} from '../../../shared/modal/modal.service';
 import {ConfirmConfig} from '../../../shared/modal/modal-model';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-admin-role',
@@ -156,11 +157,10 @@ export class AdminRoleComponent implements OnInit {
     this.tableView=false;
     this.addEditTitle = '添加';
     this.flag = true;
-    this.headerAdd = this.headers.map(d => {
-      d.val = '';
-      return d;
-    });
-
+    // this.headerAdd = this.headers.map(d => {
+    //   d.val = '';
+    //   return d;
+    // });
     this.http.getZtreeNodes().then(data => {
       this.nodes = data['nodes'];
     });
@@ -200,8 +200,6 @@ export class AdminRoleComponent implements OnInit {
     this.permsAdd = this.permsArrayAdd.join(',');
 
     console.log('--------添加----------', this.permsAdd);
-    console.log(this.name, this.description);
-
     if (this.name == '' || this.description == '') {
       const toastCfg = new ToastConfig(ToastType.ERROR, '', '有未填项！', 3000);
       this.toastService.toast(toastCfg);

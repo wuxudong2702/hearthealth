@@ -58,20 +58,21 @@
       <input
         type="text"
         class="form-control addInputValue"
-
         id="name"
-
+        name="name"
+        [(ngModel)]="name"
         placeholder="请输入"
         onfocus="this.placeholder=''"
         onblur="this.placeholder='请输入'"
       >
     </div>
     <div class="treeAddInput" >
-      <label style="width: 120px" for="name1">&nbsp;&nbsp;备注 </label>
+      <label style="width: 120px" for="description">&nbsp;&nbsp;备注 </label>
       <input
         type="text"
         class="form-control addInputValue"
-        id="name1"
+        id="description"
+        [(ngModel)]="description"
         placeholder="请输入"
         onfocus="this.placeholder=''"
         onblur="this.placeholder='请输入'"

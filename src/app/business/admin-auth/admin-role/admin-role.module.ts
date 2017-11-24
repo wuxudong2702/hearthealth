@@ -5,7 +5,7 @@ import {AdminRoleRoutingModule} from './admin-role-routing.module';
 import {TableModule} from '../../../shared/table/table.module';
 // import { AdminZtreeComponent } from '../admin-ztree/admin-ztree.component';
 import {AdminZtreeModule} from '../admin-ztree/admin-ztree.module';//ztree
-
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import  { ZtreeModule}            from '../../../shared/ztree/ztree.module';//ztree
 import {HttpClientModule} from '@angular/common/http';
 
@@ -16,7 +16,8 @@ import {HttpClientModule} from '@angular/common/http';
         ZtreeModule,
         TableModule,
         HttpClientModule,
-      AdminZtreeModule
+        AdminZtreeModule,
+        FormsModule
     ],
     declarations: [AdminRoleComponent, ],
   exports:[]

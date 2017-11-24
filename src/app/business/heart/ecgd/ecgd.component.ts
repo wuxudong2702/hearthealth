@@ -102,7 +102,6 @@ export class EcgdComponent implements OnInit {
         this.dataChart1 = data['data'].map( v=>{
             return v*0.002;
         });
-        console.log(this.dataChart1,'map2333=====');
         this.showChartView = !this.showChartView;
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);

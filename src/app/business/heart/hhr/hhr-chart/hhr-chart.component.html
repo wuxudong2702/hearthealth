@@ -1,7 +1,7 @@
 <div class="chartStyle">
 
   <div>
-    <button class="btn btn-success btn-md back" (click)="chartView($event)">返回</button>
+    <button class="btn btn-success btn-md Btns" (click)="chartView()">返回</button>
       <input [(ngModel)]="selectedDateStart" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
              class="form-control dateInput dateInputStyle " placeholder="开始时间" />
       <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
@@ -13,24 +13,28 @@
   </div>
   <div echarts [options]="chartOption"  (chartClick) ="chartClick($event)" class="demo-chart" id="myChart"></div>
   <div class="text-center chartFileBtns">
-    <button class="btn btn-primary Btns" (click)="indicator1()">指标1
+    <button class=" Btns" [class.selected]="this.flag==1" (click)="indicator1()">指标1
     </button>
-    <button class="btn btn-primary Btns" (click)="indicator2()">指标2
+    <button class=" Btns" [class.selected]="this.flag==2" (click)="indicator2()">指标2
     </button>
-    <button class="btn btn-primary Btns" (click)="indicator3()">指标3
+    <button class=" Btns" [class.selected]="this.flag==3" (click)="indicator3()">指标3
     </button>
-    <button class="btn btn-primary Btns" (click)="indicator4()">指标4
+    <button class=" Btns" [class.selected]="this.flag==4" (click)="indicator4()">指标4
     </button>
-    <button class="btn btn-primary Btns" (click)="indicator5()">指标5
+    <button class=" Btns" [class.selected]="this.flag==5" (click)="indicator5()">指标5
     </button>
-    <button class="btn btn-primary Btns" (click)="indicator6()">指标6
+    <button class=" Btns" [class.selected]="this.flag==6" (click)="indicator6()">指标6
     </button>
-    <button class="btn btn-danger btn-md clearBtn" (click)="clear($event)">清空本次数据</button>
+    <button class="btn btn-danger btn-md clearBtn" (click)="clear()">清空本次数据</button>
   </div>
   <div class="details-panel" *ngIf="isDetails">
     <hr>
-    <h2 >心电数据详情</h2>
+    <h3 >心电数据详情</h3>
+    <label class="details_time">检测时间：{{this.clickTime}}</label>
+    <h2 *ngIf="details_none" class="text-center">暂无数据</h2>
+    <div *ngIf="!details_none">
     <label class="details" *ngFor="let data of chartDetailsData" title={{data}}>{{data[0]}}：&nbsp;{{data[1]}}
     </label>
+    </div>
   </div>
 </div>

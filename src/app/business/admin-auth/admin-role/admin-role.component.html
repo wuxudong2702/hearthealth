@@ -25,37 +25,74 @@
 >
 </c-table-list>
 
-<div style="background-color: white;display: flex;flex-direction: row">
-    <div class="tableAdd">
-        <app-table-add
-                [headers]="headerAdd"
-                [addEditTitle]="addEditTitle"
-                (onAddCancel)="cancel($event)"
 
-                [isShow]="isShow"
-                [isShowTittle]="true"
-                (onSendFormValue)="sendFormValue($event)"
-                *ngIf="addView"
-        >
-        </app-table-add>
-      <!--(onSubmit)="submit($event)"-->
+
+
+
+<div *ngIf="!tableView"  class="Ztree">
+
+  <div class="adminZtree">
+    <h2 class="tittle ">{{addEditTitle}}</h2>
+    <app-admin-ztree
+      class="tree"
+      *ngIf="addTreeView"
+      [isShow]="isShow"
+      (onZTreeSubmit)="addSubmit($event)"
+      (onBack)="back($event)"
+      [nodes]="nodes"
+    >
+    </app-admin-ztree>
+    <app-admin-ztree
+      *ngIf="editTreeView"
+      [isShow]="isShow"
+      (onZTreeSubmit)="editSubmit($event)"
+      (onBack)="back($event)"
+      [nodes]="updateNodes"
+    >
+    </app-admin-ztree>
+  </div>
+
+  <div class="treeAdd">
+    <div class="treeAddInput" >
+      <label style="width: 120px" for="name"> <span *ngIf="addTreeView" style="color:red;">*&nbsp; </span> 管理员角色 </label>
+      <input
+        type="text"
+        class="form-control addInputValue"
+
+        id="name"
+
+        placeholder="请输入"
+        onfocus="this.placeholder=''"
+        onblur="this.placeholder='请输入'"
+      >
     </div>
-    <div class="adminZtree" >
-        <app-admin-ztree
-                *ngIf="addTreeView"
-                [isShow]="isShow"
-                (onZTreeSubmit)="addSubmit($event)"
-                (onBack)="back($event)"
-                [nodes]="nodes"
-        >
-        </app-admin-ztree>
-        <app-admin-ztree
-                *ngIf="editTreeView"
-                [isShow]="isShow"
-                (onZTreeSubmit)="editSubmit($event)"
-                (onBack)="back($event)"
-                [nodes]="updateNodes"
-        >
-        </app-admin-ztree>
+    <div class="treeAddInput" >
+      <label style="width: 120px" for="name1">&nbsp;&nbsp;备注 </label>
+      <input
+        type="text"
+        class="form-control addInputValue"
+        id="name1"
+        placeholder="请输入"
+        onfocus="this.placeholder=''"
+        onblur="this.placeholder='请输入'"
+      >
     </div>
+  </div>
+
+
+  <!--<div class="tableAdd">-->
+  <!--<app-table-add-->
+
+  <!--[headers]="headerAdd"-->
+  <!--[addEditTitle]="addEditTitle"-->
+  <!--(onAddCancel)="cancel($event)"-->
+
+  <!--[isShow]="isShow"-->
+  <!--[isShowTittle]="true"-->
+  <!--(onSendFormValue)="sendFormValue($event)"-->
+  <!--*ngIf="addView"-->
+  <!--&gt;-->
+  <!--</app-table-add>-->
+  <!--&lt;!&ndash;(onSubmit)="submit($event)"&ndash;&gt;-->
+  <!--</div>-->
 </div>

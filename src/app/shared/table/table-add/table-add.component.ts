@@ -14,6 +14,7 @@ import {FormControlService} from "./form-controll.service"
 export class TableAddComponent implements OnInit {
 
   @Input() tableAdd: boolean;
+
   @Input() isShow: boolean = true;
   @Input() isShowTittle: boolean = true;
   @Input() headers: Array<cell>;

@@ -16,6 +16,7 @@ export class InputComponent implements OnInit {
 
   @Input() field: cell;
   @Input() form: FormGroup;
+  @Input() AddInput: boolean;
   @Output() onSendId = new EventEmitter<any>();
   @Output() onSendFormValue = new EventEmitter<any>();
 

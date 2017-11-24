@@ -131,13 +131,11 @@ export class EcgdComponent implements OnInit {
   }
 
   download(arr: Array<any>) {
-    console.log(arr,'iiiiiiiiiiiii');
     let link = document.createElement("a");
     if(arr.length){
       this.http.ecgdDownloadData(arr[0]).subscribe(data => {
         // Blob转化为链接
         link.setAttribute("href", window.URL.createObjectURL(data));
-
          let downloadData;
         this.data.forEach(v=>{
            if(v['heart_data_id']==arr[0]){

@@ -72,6 +72,7 @@ export class AdminRoleComponent implements OnInit {
   editId: string;
   addEditTitle: string = '';
   tableView: boolean = true;
+
   addView: boolean = false;
   addTreeView: boolean = false;
   editTreeView: boolean = false;
@@ -109,6 +110,7 @@ export class AdminRoleComponent implements OnInit {
     //     }
     //   }
     // }
+    this.tableView=false;
     this.id = this.data[id]['id'];
     console.log(this.id, '编辑的id');
     this.isShow = false;
@@ -151,6 +153,7 @@ export class AdminRoleComponent implements OnInit {
   }
 
   add() {
+    this.tableView=false;
     this.addEditTitle = '添加';
     this.flag = true;
     this.headerAdd = this.headers.map(d => {

@@ -4,6 +4,7 @@
   <input
     type="text"
     class="form-control addInputValue"
+    [class.AddInputTree]="!AddInput"
     id="name"
     name="name"
     *ngIf="field.input_type == 0&&field.key!='password'&&field.key!='password_confirmation'"

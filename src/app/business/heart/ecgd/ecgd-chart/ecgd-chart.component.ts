@@ -33,7 +33,9 @@ export class EcgdChartComponent implements OnInit {
     this.dateList=this.dataChart1.map(function (item,index) {
         return index+1;
       });
-
+      console.log(this.dataChart1,'this.dataChart1');
+      console.log(this.valueList,'this.valueList');
+      console.log(this.dateList,'this.dateList');
       this.chartOption = {
 
           animation: false,
@@ -50,7 +52,7 @@ export class EcgdChartComponent implements OnInit {
                   color: '#000'
               },
               position: function (pos, params, el, elRect, size) {
-                  var obj = {top: 10};
+                  let obj = {top: 10};
                   obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
                   return obj;
               },
@@ -82,10 +84,9 @@ export class EcgdChartComponent implements OnInit {
                   splitLine: {
                       show: true,
                       lineStyle:{
-                          color: '#FF6347',//网格线颜色
-                          width: 0.4,//网格线宽度
-                          type: 'solid'//网格线样式
-
+                          color: '#FF6347',
+                          width: 0.4,
+                          type: 'solid'
                       },
                       interval:4
                   },
@@ -109,8 +110,9 @@ export class EcgdChartComponent implements OnInit {
           yAxis: [
               {
                   // type: 'category',
+                  name : '单位：mv',
                   scale: true,
-                  interval:500,
+                  interval:1,
                   splitLine: {
                       show:true,
                       lineStyle:{
@@ -118,14 +120,17 @@ export class EcgdChartComponent implements OnInit {
                       width: 0.4,//网格线宽度
                       type: 'solid',//网格线样式
                       // interval:1000
-                  }},
-                  axisLabel: {
-                      show: true,
-                      interval:200
-                      // areaStyle:{
-                      //     color:'#ccc'
-                      // }
-                  }
+                  }}
+                  // axisLabel: {
+                  //     show: false,
+                  //     // interval:200
+                  //     // areaStyle:{
+                  //     //     color:'#ccc'
+                  //     // }
+                  // },
+                  // axisTick: {
+                  //     show: false,
+                  // }
               }
           ],
           dataZoom: [

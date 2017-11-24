@@ -140,7 +140,7 @@ export class MallComponent implements OnInit {
   }
 
     onDel(id:number){
-        this.http.postMallDel(id).then(data=>{
+        this.http.postMallDel().then(data=>{
             console.log(data,'删除');
             this.data=data['data'];
         });

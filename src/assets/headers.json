@@ -640,6 +640,21 @@
       "input_type": 0
     },
     {
+      "key": "relationship",
+      "show": false,
+      "name": "与主账户关系",
+      "index": 18,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "15",
+      "required": false,
+      "pattern": "",
+      "input_type": 0
+    },
+    {
       "key": "password",
       "show": false,
       "name": "密码",

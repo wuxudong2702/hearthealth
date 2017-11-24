@@ -117,6 +117,8 @@ export class EcgdComponent implements OnInit {
     this.showChartView = !this.showChartView;
   }
 
+
+  //用户下载的时间转换函数，现在不需要了
   formatDate(time: any) {
     const Dates = new Date(time);
     const year: number = Dates.getFullYear();
@@ -125,17 +127,31 @@ export class EcgdComponent implements OnInit {
     return year + '-' + month + '-' + day;
   }
 
-  download(i: string) {
+  download(arr: Array<any>) {
+    console.log(arr,'iiiiiiiiiiiii');
     let link = document.createElement("a");
-    this.http.ecgdDownloadData(i).subscribe(data => {
-      // Blob转化为链接
-      link.setAttribute("href", window.URL.createObjectURL(data));
-      link.setAttribute("download", 'heart_data' + this.formatDate(new Date().getTime()) + '.txt');
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+    if(arr.length){
+      this.http.ecgdDownloadData(arr[0]).subscribe(data => {
+        // Blob转化为链接
+        link.setAttribute("href", window.URL.createObjectURL(data));
+
+         let downloadData;
+        this.data.forEach(v=>{
+           if(v['heart_data_id']==arr[0]){
+             downloadData=v;
+             return ;
+           }
+         });
+         console.log(this.data,downloadData,'downdata');
+        link.setAttribute("download", downloadData['name']+'_' +downloadData['mobile']+'_'+ this.formatDate(new Date().getTime()) + '.txt');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        arr.splice(0,1);
+        this.download(arr);
+      });
+    }
   }
 
 

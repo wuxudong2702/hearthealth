@@ -100,7 +100,7 @@ export class CPipePipe implements PipeTransform {
       case DataType.NONE:
         return originalValue;
       case DataType.DATATIME:
-        console.log(originalValue,(new DatePipe('zh-CN')).transform(originalValue, pipe_params));
+        console.log(originalValue, (new DatePipe('zh-CN')).transform(originalValue, pipe_params));
         return (new DatePipe('zh-CN')).transform(originalValue, pipe_params);
       case DataType.ENUM:
         return pipe_params[originalValue];
@@ -253,17 +253,19 @@ export class TableListComponent implements OnInit, OnChanges {
   }
 
   download() {
-    let checkedListIds = '';
+    let downListIds = [];
     for (let i = 0; i < this.checkedList.length; i++) {
       if (this.checkedList[i]) {
-        if (i == this.checkedList.length - 1) {
-          checkedListIds += this.data[i]['heart_data_id'];
-        } else {
-          checkedListIds += this.data[i]['heart_data_id'] + ',';
-        }
+        downListIds.push(this.data[i]['heart_data_id']);
       }
     }
-    this.onDownload.emit(checkedListIds);
+    if(downListIds.length){
+      this.onDownload.emit(downListIds);
+    }else{
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择下载的数据！', 3000);
+      this.toastService.toast(toastCfg);
+    }
+
   }
 
   search() {//用户点击查询按钮
@@ -350,11 +352,11 @@ export class TableListComponent implements OnInit, OnChanges {
     });
   }
 
-  chart2(id: number, name: string,i:number) {
+  chart2(id: number, name: string, i: number) {
     this.onChart2.emit({
-        id: id,
-        name: name,
-        i:i
+      id: id,
+      name: name,
+      i: i
     });
   }
 

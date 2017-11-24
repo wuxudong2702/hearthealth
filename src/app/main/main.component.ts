@@ -167,11 +167,9 @@ export class MainComponent implements OnInit {
      * 初始化
      */
     ngOnInit() {
-      console.log(this.apiService.hasToken(),'hastoken');
-      if(!this.apiService.hasToken()){
-        console.log(this.apiService.hasToken(),'hastoken');
-
-
+      // console.log(this.apiService.hasToken(),'hastoken');
+      if(this.apiService.hasToken()){
+        // console.log(this.apiService.hasToken(),'hastoken');
         this.router.navigate(['/login']);
         return;
       }

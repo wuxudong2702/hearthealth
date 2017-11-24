@@ -100,8 +100,8 @@ export class EcgdChartComponent implements OnInit {
                   axisLabel: {
                       formatter: function (value, index) {
 
-                          var date = new Date(parseInt(value));
-                          var texts = [date.getMinutes(),date.getSeconds(),date.getMilliseconds()];
+                          let date = new Date(parseInt(value));
+                          let texts = [date.getMinutes(),date.getSeconds(),date.getMilliseconds()];
                           return texts.join(':');
                       }
                   }

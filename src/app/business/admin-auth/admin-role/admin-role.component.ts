@@ -14,6 +14,7 @@ import {ToastService} from '../../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 import {ModalService} from '../../../shared/modal/modal.service';
 import {ConfirmConfig} from '../../../shared/modal/modal-model';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-admin-role',
@@ -91,6 +92,7 @@ export class AdminRoleComponent implements OnInit {
   description: string;
   id: string;
   submitData: string;
+  form: FormGroup
 
   getNodes() {
     this.http.getZtreeNodes().then(data => {
@@ -100,37 +102,19 @@ export class AdminRoleComponent implements OnInit {
   }
 
   edit(id) {
-    // for (let i = 0; i < this.headers.length; i++) {
-    //   if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'mobile') {
-    //     this.headers[i].show = true;
-    //     if (id == undefined) {
-    //       this.headers[i].required = true;
-    //     } else {
-    //       this.headers[i].required = false;
-    //     }
-    //   }
-    // }
     this.tableView=false;
     this.id = this.data[id]['id'];
     console.log(this.id, '编辑的id');
+    this.data.map(v=>{
+        if(v.id == this.id){
+            this.name = v.name;
+            this.description = v.description;
+        }
+    });
     this.isShow = false;
     this.isShowTittle = true;
     this.flag = false;
     this.addEditTitle = '编辑';
-    this.headerAdd = this.headers.map(d => {
-      switch (d.input_type) {
-        case INPUTTYPE.INPUT:
-          d.val = this.data[id][d.key];
-          break;
-        case INPUTTYPE.SELECT:
-          let val = this.data[id][d.key];
-          d.val = d.select_val[val];
-          break;
-        default:
-          d.val = this.data[id][d.key];
-      }
-      return d;
-    });
     this.http.rolesPerms(this.data[id]['id']).then(data => {
       if (data['status'] == 'ok') {
         console.log(data, '获取编辑树');
@@ -148,23 +132,17 @@ export class AdminRoleComponent implements OnInit {
       const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
       this.toastService.toast(toastCfg);
     });
-
-
   }
 
   add() {
     this.tableView=false;
     this.addEditTitle = '添加';
     this.flag = true;
-    this.headerAdd = this.headers.map(d => {
-      d.val = '';
-      return d;
-    });
-
+    this.name='';
+    this.description='';
     this.http.getZtreeNodes().then(data => {
       this.nodes = data['nodes'];
     });
-    console.log(this.nodes, '-------默认全选');
     this.isShow = false;
     this.isShowTittle = false;
     this.addView = true;
@@ -199,37 +177,31 @@ export class AdminRoleComponent implements OnInit {
     this.permsUpdate = this.permsArrayUpdate.join(',');
     this.permsAdd = this.permsArrayAdd.join(',');
 
-    console.log('--------添加----------', this.permsAdd);
-    console.log(this.name, this.description);
+    if (this.name) {
+        this.http.rolesAdd(this.name, this.description, this.permsAdd).then(data => {
+            if (data['status'] == 'ok') {
+                this.data = data['data'];
+                this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
-    if (this.name == '' || this.description == '') {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', '有未填项！', 3000);
-      this.toastService.toast(toastCfg);
+                this.tableView = true;
+                this.addView = false;
+                this.addTreeView = false;
+                this.editTreeView = false;
+            } else {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                this.toastService.toast(toastCfg);
+            }
+        }).catch(err => {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+            this.toastService.toast(toastCfg);
+        });
     } else {
-      this.http.rolesAdd(this.name, this.description, this.permsAdd).then(data => {
-        if (data['status'] == 'ok') {
-          this.data = data['data'];
-          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-
-          this.tableView = true;
-          this.addView = false;
-          this.addTreeView = false;
-          this.editTreeView = false;
-        } else {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-          this.toastService.toast(toastCfg);
-        }
-      }).catch(err => {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色必须填写！', 3000);
         this.toastService.toast(toastCfg);
-      });
-
     }
   }
 
   editSubmit(CheckedNodes: any) {
-    console.log('--------编辑----------', this.permsUpdate);
-    console.log('CheckedNodes', CheckedNodes);
     this.permsArrayUpdate = CheckedNodes['CheckedNodes'].map(v => {
       return v.id;
     });
@@ -240,27 +212,27 @@ export class AdminRoleComponent implements OnInit {
     this.permsAdd = this.permsArrayAdd.join(',');
     console.log(this.name, this.description);
 
-    if (this.name == '' || this.description == '') {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', '有未填项！', 3000);
-      this.toastService.toast(toastCfg);
+    if (this.name) {
+        this.http.rolesUpdate(this.id, this.description, this.name, this.permsUpdate).then(data => {
+            if (data['status'] == 'ok') {
+                this.data = data['data'];
+                this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                this.addView = false;
+                this.addTreeView = false;
+                this.editTreeView = false;
+                this.tableView = true;
+            } else {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                this.toastService.toast(toastCfg);
+            }
+        }).catch(err => {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+            console.log('--------err---------', err);
+            this.toastService.toast(toastCfg);
+        });
     } else {
-      this.http.rolesUpdate(this.id, this.description, this.name, this.permsUpdate).then(data => {
-        if (data['status'] == 'ok') {
-          this.data = data['data'];
-          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-          this.addView = false;
-          this.addTreeView = false;
-          this.editTreeView = false;
-          this.tableView = true;
-        } else {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-          this.toastService.toast(toastCfg);
-        }
-      }).catch(err => {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-        console.log('--------err---------', err);
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色必须填写！', 3000);
         this.toastService.toast(toastCfg);
-      });
     }
   }
 
@@ -268,7 +240,6 @@ export class AdminRoleComponent implements OnInit {
   getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
     this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
-        console.log(data['data']['data'], '111111');
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];
         this.pagination.last_page = data['data']['last_page'];
@@ -279,7 +250,6 @@ export class AdminRoleComponent implements OnInit {
         this.pagination.next_page_url = data['data']['next_page_url'];
         this.pagination.prev_page_url = data['data']['prev_page_url'];
         this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -357,4 +327,12 @@ export class AdminRoleComponent implements OnInit {
     this.name = formValue.name;
     this.description = formValue.description;
   }
+
+    // get isValid() {
+    //     return this.form.controls['name'].valid;
+    // }
+    //
+    // get isDirty(){
+    //     return this.form.controls['name'].dirty;
+    // }
 }

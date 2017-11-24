@@ -24,13 +24,7 @@
   (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
-
-
-
-
-
 <div *ngIf="!tableView"  class="Ztree">
-
   <div class="adminZtree">
     <h2 class="tittle ">{{addEditTitle}}</h2>
     <app-admin-ztree
@@ -54,24 +48,30 @@
 
   <div class="treeAdd">
     <div class="treeAddInput" >
-      <label style="width: 120px" for="name"> <span *ngIf="addTreeView" style="color:red;">*&nbsp; </span> 管理员角色 </label>
+      <label style="width: 120px" for="name">
+          <span *ngIf="addTreeView" style="color:red;">*&nbsp; </span> 管理员角色
+      </label>
       <input
         type="text"
         class="form-control addInputValue"
-
         id="name"
-
+        name="name"
+        [(ngModel)]="name"
         placeholder="请输入"
         onfocus="this.placeholder=''"
         onblur="this.placeholder='请输入'"
       >
     </div>
+      <!--<div class=" " *ngIf="!isValid  && isDirty ">-->
+          <!--<div *ngIf="this.name" class="alert-danger validExample ">{{'是必填项！'}}</div>-->
+      <!--</div>-->
     <div class="treeAddInput" >
-      <label style="width: 120px" for="name1">&nbsp;&nbsp;备注 </label>
+      <label style="width: 120px" for="description">&nbsp;&nbsp;备注 </label>
       <input
         type="text"
         class="form-control addInputValue"
-        id="name1"
+        id="description"
+        [(ngModel)]="description"
         placeholder="请输入"
         onfocus="this.placeholder=''"
         onblur="this.placeholder='请输入'"

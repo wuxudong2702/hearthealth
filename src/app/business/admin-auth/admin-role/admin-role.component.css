@@ -6,6 +6,18 @@
   flex-direction: row;
   height:88vh;
 }
+
+.treeAdd {
+  /*float:right;*/
+  /*margin-right:100px;*/
+  /*margin: 20px 20px;*/
+  margin-left:100px;
+  border: 1px solid lightgray;
+  width: 50%;
+  margin-top:70px;
+  height:48%;
+
+}
 .adminZtree {
   width: 45%;
   /*max-height: 300px;*/
@@ -37,19 +49,6 @@
   font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
 }
 
-.treeAdd {
-
-  /*float:right;*/
-  /*margin-right:100px;*/
-  /*margin: 20px 20px;*/
-  margin-left:100px;
-  border: 1px solid lightgray;
-  width: 50%;
-  margin-top:30px;
-
-  height:48%;
-
-}
 .treeAddInput{
   margin:20px;
   display:flex;
@@ -57,4 +56,11 @@
 }
 .addInputValue{
   width:400px;
+}
+.validExample {
+  height: 33px;
+  margin-left: 20px;
+  width: 400px;
+  padding-top: 7px;
+  padding-left: 10px;
 }

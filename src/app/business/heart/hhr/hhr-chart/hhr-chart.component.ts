@@ -30,20 +30,58 @@ export class HhrChartComponent implements OnInit {
   dataList: Array<any> = [];
   valueList: Array<any> = [];
   chartOption: object = {};
-  optionInit: object = {};
   userInfo: string;
+  clickTime: string;
   dataIndex: number;
+  flag: number;
   field: string='';
   dataChart: Array<any>;
   chartDetailsData: Array<any>;
   isDetails: boolean = false;
-  chartInit: boolean = true;
   details_none: boolean = false;
   chartDetailsId: number = 1;
   selectedDateStart;
   selectedDateEnd;
   constructor(private http: ApiService, private toastService: ToastService,private modalService: ModalService) {
   }
+  ngOnInit() {
+        this.selectedDateStart = this.startValue.slice(0,10);
+        this.selectedDateEnd = this.endValue.slice(0,10);
+        this.chartOption = {
+            visualMap: [{
+                show: false,
+                type: 'continuous',
+                seriesIndex: 0,
+                min: 0,
+                max: 400
+            }],
+            title: [{
+                left: 'center',
+                text: ''
+            }],
+            tooltip: {
+                show:false,
+                trigger: 'axis'
+            },
+            xAxis: [{
+                axisLabel: {show: false},
+                data: [0]
+            }],
+            yAxis: [{
+                axisLabel: {show: false},
+                splitLine: {show: false},
+                axisTick: {show: false}
+            }],
+            grid: {
+                top: '12%'
+            },
+            series: [{
+                type: 'line',
+                showSymbol: false,
+                data: [0]
+            }]
+        };
+    }
 
   chartToggle(dataList: Array<any>,valueList: Array<any>) {
     this.chartOption = {
@@ -59,16 +97,21 @@ export class HhrChartComponent implements OnInit {
             text: ''
           }],
           tooltip: {
-            trigger: 'axis'
+              show:true,
+              trigger: 'axis'
           },
           xAxis: [{
+              axisLabel: {show: true},
               data: valueList
           }],
           yAxis: [{
-            splitLine: {show: false}
+            splitLine: {show: false},
+            axisLabel: {show: true},
+            axisTick: {show: true}
           }],
           grid: {
-            top: '15%'
+            top: '12%',
+            // height:'60%',
           },
           series: [{
               type: 'line',
@@ -83,82 +126,48 @@ export class HhrChartComponent implements OnInit {
     format:"YYYY-MM-DD"
   };
 
-  ngOnInit() {
-      this.selectedDateStart = this.startValue.slice(0,10);
-      this.selectedDateEnd = this.endValue.slice(0,10);
-      this.optionInit = {
-          visualMap: [{
-              show: false,
-              type: 'continuous',
-              seriesIndex: 0,
-              min: 0,
-              max: 400
-          }],
-          title: [{
-              left: 'center',
-              text: ''
-          }],
-          tooltip: {
-              show:false,
-              trigger: 'axis'
-          },
-          xAxis: [{
-              axisLabel: {show: false},
-              data: [0]
-          }],
-          yAxis: [{
-              axisLabel: {show: false},
-              splitLine: {show: false},
-              axisTick: {show: false}
-          }],
-          grid: {
-              top: '15%'
-          },
-          series: [{
-              type: 'line',
-              showSymbol: false,
-              data: [0]
-          }]
-      };
-  }
-
   chartView() {
     this.onChart.emit();
   }
 
   indicator1() {
       this.field='n_total_detbeat';
+      this.flag=1;
       this.chartToggle(this.dataList,this.valueList);
   }
 
   indicator2() {
       this.field='indicator2';
+      this.flag=2;
       this.chartToggle(this.dataList,this.valueList);
   }
 
   indicator3() {
       this.field='indicator3';
+      this.flag=3;
       this.chartToggle(this.dataList,this.valueList);
   }
 
   indicator4() {
       this.field='indicator4';
+      this.flag=4;
       this.chartToggle(this.dataList,this.valueList);
   }
 
   indicator5() {
       this.field='indicator5';
+      this.flag=5;
       this.chartToggle(this.dataList,this.valueList);
   }
   indicator6() {
       this.field='indicator6';
+      this.flag=6;
       this.chartToggle(this.dataList,this.valueList);
   }
 
   show(){
       if(this.selectedDateStart && this.selectedDateEnd){
           if(this.field){
-              this.chartInit = false;
               this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
                   console.log(data,'-------');
                   if (data['status'] == 'ok') {
@@ -200,8 +209,9 @@ export class HhrChartComponent implements OnInit {
   }
 
   chartClick(e){
-      console.log(e.dataIndex,'e.dataIndex');
+      console.log(e,'e');
       this.dataIndex = e.dataIndex;
+      this.clickTime = e.name;
       this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
 
       this.http.getHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {

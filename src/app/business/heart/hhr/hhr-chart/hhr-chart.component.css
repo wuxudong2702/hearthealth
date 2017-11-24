@@ -1,6 +1,6 @@
 .demo-chart {
-    height: 45vh;
-    margin-top:1%;
+    height: 40vh;
+    /*margin-top:1%;*/
 }
 
 .dateInput {
@@ -16,7 +16,14 @@
     vertical-align: middle;
     width:80px;
     height:32px;
+    border:none;
+    color: #fff;
+    background-color: #20a8d8;
 }
+.Btns:focus {
+    outline:none;
+}
+
 .clearBtn {
     margin:6px 5px;
     vertical-align: middle;
@@ -26,8 +33,9 @@
 .dateInputStyle {
   margin-left:100px;
 }
-.Btns:focus {
-    background-color: #868e96;
+.selected {
+    background-color: #a7a5a5;
+    border:none;
 }
 h4 {
   font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
@@ -35,6 +43,7 @@ h4 {
 .chartStyle{
    background: white;
    padding:10px;
+min-height: 90vh;
  }
 .details-panel{
 }
@@ -42,6 +51,12 @@ h4 {
     width: 28%;
     text-align: left;
     margin:4px 25px;
+}
+.details_time{
+    width: 28%;
+    text-align: left;
+    margin:13px 25px;
+    color: #20a8d8;
 }
 hr {
     width:100%;
@@ -51,12 +66,15 @@ hr {
     border-bottom: 2px solid;
 }
 
-h2{
+h3{
   font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
   text-align: left;
   margin-left: 20px;
-  margin-bottom: 20px;
-  /*margin: 8px 25px;*/
+  margin-bottom: 8px;
+}
+h2{
+  font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+  margin-top: 2%;
 }
 .text {
     margin-top:20px;

@@ -135,16 +135,17 @@ export class EcgdChartComponent implements OnInit {
                   type: 'inside',
                   start: 0,
                   end: 3,
-                  minValueSpan: 10
+                  // minValueSpan: 10
               },
               {
                   show: true,
                   type: 'slider',
+                  realtime:true,
                   // bottom: 60,
                   top:'70%',
                   start: 0,
                   end: 3,
-                  minValueSpan: 10
+                  // minValueSpan: 10
               }
           ],
           series: [

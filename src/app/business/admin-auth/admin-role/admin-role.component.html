@@ -1,98 +1,59 @@
 <c-table-list
-  *ngIf="tableView"
+        *ngIf="tableView"
 
-  (onDel)="del($event)"
-  (onDelAll)="delAll($event)"
-  (onEditZTree)="edit($event)"
-  (onAdd)="add($event)"
+        (onDel)="del($event)"
+        (onDelAll)="delAll($event)"
+        (onEditZTree)="edit($event)"
+        (onAdd)="add($event)"
 
-  (onSort)="sort($event)"
-  (onSearch)="search($event)"
-  (onSet)="set($event)"
+        (onSort)="sort($event)"
+        (onSearch)="search($event)"
+        (onSet)="set($event)"
 
-  [headers]="headers"
-  [data]="data"
-  [addBtn]="addBtn"
-  [deleteBtn]="deleteBtn"
-  [deleteAllBtn]="deleteAllBtn"
-  [editZTreeBtn]="editZTreeBtn"
-  [setOperate]="setOperate"
-  [searchBtn]="searchBtn"
-  [setBtn]="setBtn"
-  [paginationBtn]="paginationBtn"
-  [pagination]="pagination"
-  (onPaginationChange)="paginationChange($event)"
+        [headers]="headers"
+        [data]="data"
+        [addBtn]="addBtn"
+        [deleteBtn]="deleteBtn"
+        [deleteAllBtn]="deleteAllBtn"
+        [editZTreeBtn]="editZTreeBtn"
+        [setOperate]="setOperate"
+        [searchBtn]="searchBtn"
+        [setBtn]="setBtn"
+        [paginationBtn]="paginationBtn"
+        [pagination]="pagination"
+        (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
-<div *ngIf="!tableView"  class="Ztree">
-  <div class="adminZtree">
-    <h2 class="tittle ">{{addEditTitle}}</h2>
-    <app-admin-ztree
-      class="tree"
-      *ngIf="addTreeView"
-      [isShow]="isShow"
-      (onZTreeSubmit)="addSubmit($event)"
-      (onBack)="back($event)"
-      [nodes]="nodes"
-    >
-    </app-admin-ztree>
-    <app-admin-ztree
-      *ngIf="editTreeView"
-      [isShow]="isShow"
-      (onZTreeSubmit)="editSubmit($event)"
-      (onBack)="back($event)"
-      [nodes]="updateNodes"
-    >
-    </app-admin-ztree>
-  </div>
 
-  <div class="treeAdd">
-    <div class="treeAddInput" >
-      <label style="width: 120px" for="name">
-          <span *ngIf="addTreeView" style="color:red;">*&nbsp; </span> 管理员角色
-      </label>
-      <input
-        type="text"
-        class="form-control addInputValue"
-        id="name"
-        name="name"
-        [(ngModel)]="name"
-        placeholder="请输入"
-        onfocus="this.placeholder=''"
-        onblur="this.placeholder='请输入'"
-      >
+<div style="background-color: white;display: flex;flex-direction: row">
+    <div class="tableAdd">
+        <app-table-add
+                [headers]="headerAdd"
+                [addEditTitle]="addEditTitle"
+                (onAddCancel)="cancel($event)"
+                (onSubmit)="submit($event)"
+                [isShowTittle]="true"
+                (onSendFormValue)="sendFormValue($event)"
+                *ngIf="addView"
+        >
+        </app-table-add>
     </div>
-      <!--<div class=" " *ngIf="!isValid  && isDirty ">-->
-          <!--<div *ngIf="this.name" class="alert-danger validExample ">{{'是必填项！'}}</div>-->
-      <!--</div>-->
-    <div class="treeAddInput" >
-      <label style="width: 120px" for="description">&nbsp;&nbsp;备注 </label>
-      <input
-        type="text"
-        class="form-control addInputValue"
-        id="description"
-        [(ngModel)]="description"
-        placeholder="请输入"
-        onfocus="this.placeholder=''"
-        onblur="this.placeholder='请输入'"
-      >
+    <div class="adminZtree">
+        <app-admin-ztree
+                *ngIf="addTreeView"
+                [isShow]="isShow"
+                (onZTreeSubmit)="addSubmit($event)"
+
+                [nodes]="nodes"
+        >
+        </app-admin-ztree>
+        <app-admin-ztree
+                *ngIf="editTreeView"
+                [isShow]="isShow"
+                (onZTreeSubmit)="editSubmit($event)"
+
+                [nodes]="updateNodes"
+        >
+        </app-admin-ztree>
     </div>
-  </div>
-
-
-  <!--<div class="tableAdd">-->
-  <!--<app-table-add-->
-
-  <!--[headers]="headerAdd"-->
-  <!--[addEditTitle]="addEditTitle"-->
-  <!--(onAddCancel)="cancel($event)"-->
-
-  <!--[isShow]="isShow"-->
-  <!--[isShowTittle]="true"-->
-  <!--(onSendFormValue)="sendFormValue($event)"-->
-  <!--*ngIf="addView"-->
-  <!--&gt;-->
-  <!--</app-table-add>-->
-  <!--&lt;!&ndash;(onSubmit)="submit($event)"&ndash;&gt;-->
-  <!--</div>-->
 </div>

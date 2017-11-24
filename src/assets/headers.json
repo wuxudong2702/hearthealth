@@ -588,7 +588,7 @@
       "val": "",
       "select_val": "",
       "valid_example": "",
-      "required": false,
+      "required": true,
       "pattern": "",
       "input_type": 0
     },

@@ -25,25 +25,12 @@
 >
 </c-table-list>
 
-<div style="background-color: white;display: flex;flex-direction: row">
-    <div class="tableAdd">
-        <app-table-add
-                [headers]="headerAdd"
-                [addEditTitle]="addEditTitle"
-                (onAddCancel)="cancel($event)"
-                (onSubmit)="submit($event)"
-                [isShowTittle]="true"
-                (onSendFormValue)="sendFormValue($event)"
-                *ngIf="addView"
-        >
-        </app-table-add>
-    </div>
+<div *ngIf="!tableView" style="background-color: white;display: flex;flex-direction: row">
     <div class="adminZtree">
         <app-admin-ztree
                 *ngIf="addTreeView"
                 [isShow]="isShow"
                 (onZTreeSubmit)="addSubmit($event)"
-
                 [nodes]="nodes"
         >
         </app-admin-ztree>
@@ -51,9 +38,21 @@
                 *ngIf="editTreeView"
                 [isShow]="isShow"
                 (onZTreeSubmit)="editSubmit($event)"
-
                 [nodes]="updateNodes"
         >
         </app-admin-ztree>
     </div>
+    <div class="tableAdd">
+        <app-table-add
+                [headers]="headerAdd"
+                [addEditTitle]="addEditTitle"
+                (onAddCancel)="cancel($event)"
+                (onSubmit)="submit($event)"
+                [isShowTittle]="false"
+                (onSendFormValue)="sendFormValue($event)"
+                *ngIf="addView"
+        >
+        </app-table-add>
+    </div>
+
 </div>

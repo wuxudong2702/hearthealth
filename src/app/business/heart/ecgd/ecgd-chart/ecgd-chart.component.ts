@@ -65,9 +65,9 @@ export class EcgdChartComponent implements OnInit {
               {
                   left: '10%',
                   right: '8%',
-                  top:'8%',
+                  top:'5%',
                   // bottom: 150,
-                  height:'50%',
+                  height:'60%',
                   borderColor:'#FF6347'
               }
           ],
@@ -106,10 +106,12 @@ export class EcgdChartComponent implements OnInit {
           ],
           yAxis: [
               {
-                  // type: 'category',
+                  // type: 'value',
                   name : '单位：mv',
                   scale: true,
-                  interval:1,
+                  interval:5,
+                  max:80,
+                  min:-80,
                   splitLine: {
                       show:true,
                       lineStyle:{
@@ -134,7 +136,7 @@ export class EcgdChartComponent implements OnInit {
               {
                   type: 'inside',
                   start: 0,
-                  end: 3,
+                  end: 1.5,
                   // minValueSpan: 10
               },
               {
@@ -144,7 +146,7 @@ export class EcgdChartComponent implements OnInit {
                   // bottom: 60,
                   top:'70%',
                   start: 0,
-                  end: 3,
+                  end: 1.5,
                   // minValueSpan: 10
               }
           ],

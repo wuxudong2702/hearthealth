@@ -1,11 +1,10 @@
-.tableAdd {
+.ztree {
   width: 50%;
   height: 50%;
   margin-left:40%;
   /*margin: 5px auto;*/
   /*background-color: white;*/
   /*margin-top: 12%;*/
-
   /*margin-left: 10%;*/
 
   /*padding-top: 15px;*/
@@ -23,13 +22,13 @@
   font-family: KaiTi, SimSun, Microsoft Yahei, 微软雅黑, Arial, sans-serif;
 }
 
-.content {
-  height: 75%;
-  overflow-y: auto;
-  width: 100%;
-  text-align: center;
-  max-height: 500px;
-}
+/*.content {*/
+  /*height: 75%;*/
+  /*overflow-y: auto;*/
+  /*width: 100%;*/
+  /*text-align: center;*/
+  /*max-height: 500px;*/
+/*}*/
 
 .ztree-align {
   /*margin-left: 40%;*/

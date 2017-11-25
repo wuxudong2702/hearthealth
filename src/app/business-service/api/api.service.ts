@@ -39,14 +39,6 @@ export class ApiService {
     }
   }
 
-  postLogSort(headersId, order): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/log-data/log-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
-
   private handleError(error: any): Promise<any> {
     let msg = '请求发生异常', status = error.status;
     if (status === 0) {
@@ -66,6 +58,7 @@ export class ApiService {
    */
   login(userName: string, password: string): Promise<any> {
     const url: string = '/api/admin/auth/login';
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       name: userName,
       password: password
@@ -77,6 +70,7 @@ export class ApiService {
             this.sessionStorageService.set('token', this.token);
             this.getPerm();
             this.getHeaderConfig();
+            this.spinService.spin(false);
           }
           return data;
         }
@@ -267,6 +261,7 @@ export class ApiService {
 
   reset(oldPassword: string, password: string, certainPassword: string): Promise<any> {
     const url: string = '/api/admin/auth/reset';
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       password: oldPassword,
@@ -274,29 +269,34 @@ export class ApiService {
       new_password_confirmation: certainPassword
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        this.spinService.spin(false);
+        return data;
+      })
       .catch(this.handleError);
   }
 
   getSUbUserData(url: string = '/api/admin/app/user/index', parent_id: string = null, count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
     console.log(url, count, find_key, find_val, '');
-      return this.httpClient.post(url, {
-        token: this.sessionStorageService.get('token'),
-        parent_id: parent_id,
-        count: count,
-        find_key: find_key,
-        find_val: find_val,
-        sort_key: sort_key,
-        sort_val: sort_val,
+    this.spinService.spin(true);
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      parent_id: parent_id,
+      count: count,
+      find_key: find_key,
+      find_val: find_val,
+      sort_key: sort_key,
+      sort_val: sort_val,
+    })
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        console.log(data, 'getData全局获取data');
+        return data
       })
-        .toPromise()
-        .then(data => {
-          console.log(data, 'getData全局获取data');
-          return data
-        })
-        .catch(err => {
-          this.handleError(err);
-        });
+      .catch(err => {
+        this.handleError(err);
+      });
   }
 
   /*
@@ -304,35 +304,46 @@ export class ApiService {
   */
   postAvatar(avator: string): Promise<any> {
     const url: string = '/api/admin/auth/update';
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       avator: avator
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        this.spinService.spin(false);
+        return data;
+      })
       .catch(this.handleError);
   }
 
   getEcgdDataChart(chartId: number): Promise<any> {
     const url: string = ' /api/admin/heart/data';
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       heart_data_id: chartId
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        this.spinService.spin(false);
+        return data;
+      })
       .catch(this.handleError);
   }
 
 
   ecgdDelData(ids: string): Promise<any> {
     const url: string = '/api/admin/heart/del';
+
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       heart_data_id: ids
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        return data;
+      })
       .catch(this.handleError);
   }
 
@@ -391,13 +402,14 @@ export class ApiService {
 
   infoContent(info_id: string): Promise<any> {
     const url: string = "api/admin/info/content";
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       info_id: info_id
     })
       .toPromise()
       .then(data => {
-
+        this.spinService.spin(false);
         console.log(info_id, data, '6567890-9876567890-=');
         return data
       })
@@ -496,9 +508,13 @@ export class ApiService {
 
   getZtreeNodes(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/admin-auth-data/admin-role-ztreeNodes.json';
+    this.spinService.spin(true);
     return this.httpClient.get(url)
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        this.spinService.spin(false);
+        return data;
+      })
       .catch(this.handleError);
   }
 
@@ -736,8 +752,6 @@ export class ApiService {
   }
 
 
-
-
 //infos-guide
   getGuideHeader(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/infos-data/infos-guide-headers.json';
@@ -796,21 +810,9 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getMallData(): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/infos-data/infos-mall-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
 
-  postMallDel(id): Promise<any> {
-    const url: string = '../../../assets/hearthealthData/infos-data/infos-mall-data.json';
-    return this.httpClient.get(url)
-      .toPromise()
-      .then(data => data)
-      .catch(this.handleError);
-  }
+
+
 
   postMallDelAll(checkedList): Promise<any> {
     const url: string = '../../../assets/hearthealthData/infos-data/infos-mall-data.json';
@@ -839,17 +841,44 @@ export class ApiService {
 
   getNewsData(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
-
-      return this.httpClient.get(url)
-        .toPromise()
-        .then(data => {
-          console.log('getNewsData', data);
-          return data;
-        })
-        .catch(this.handleError);
+    this.spinService.spin(true);
+    return this.httpClient.get(url)
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        console.log('getNewsData', data);
+        return data;
+      })
+      .catch(this.handleError);
 
   }
 
+  getMallData(): Promise<any> {
+    const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
+    this.spinService.spin(true);
+    return this.httpClient.get(url)
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        console.log('getNewsData', data);
+        return data;
+      })
+      .catch(this.handleError);
+
+  }
+  postMallDel(): Promise<any> {
+    const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
+    this.spinService.spin(true);
+    return this.httpClient.get(url)
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        console.log('getNewsData', data);
+        return data;
+      })
+      .catch(this.handleError);
+
+  }
   postDevSubmit(addData): Promise<any> {
     const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
     return this.httpClient.get(url)
@@ -860,7 +889,7 @@ export class ApiService {
 
   getHhrDataChart(chartId: number, start_time: any, end_time: any, field: string): Promise<any> {
     const url: string = '/api/admin/report/series';
-    console.log('=======================');
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       user_id: chartId,
@@ -869,47 +898,58 @@ export class ApiService {
       field: field
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        this.spinService.spin(false);
+        return data;
+      })
       .catch(this.handleError);
   }
 
   getHhrDataDetails(chartId: number, id: number): Promise<any> {
     const url: string = '/api/admin/report/detail';
-
-      return this.httpClient.post(url, {
-        token: this.sessionStorageService.get('token'),
-        user_id: chartId,
-        heart_data_id: id
+    this.spinService.spin(true);
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      user_id: chartId,
+      heart_data_id: id
+    })
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        return data;
       })
-        .toPromise()
-        .then(data => data)
-        .catch(this.handleError);
+      .catch(this.handleError);
 
   }
 
   delHhrDataDetails(id: number, chartId: number): Promise<any> {
     const url: string = '/api/admin/report/del';
 
-      return this.httpClient.post(url, {
-        token: this.sessionStorageService.get('token'),
-        user_id: id,
-        heart_data_id: chartId
-      })
-        .toPromise()
-        .then(data => data)
-        .catch(this.handleError);
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      user_id: id,
+      heart_data_id: chartId
+    })
+      .toPromise()
+      .then(data => data)
+      .catch(this.handleError);
 
   }
+
   //home
 
   homeData(): Promise<any> {
     const url: string = '/api/admin/statistics/data';
-      return this.httpClient.post(url, {
-        token: this.sessionStorageService.get('token'),
+    this.spinService.spin(true);
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+    })
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        return data;
       })
-        .toPromise()
-        .then(data => data)
-        .catch(this.handleError);
+      .catch(this.handleError);
   }
 
   hasToken() {

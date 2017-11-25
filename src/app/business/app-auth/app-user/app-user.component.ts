@@ -29,7 +29,12 @@ export class AppUserComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.http.getHeader('users');
-
+     // this.parentsHeaders=this.headers;
+   for(let i=0;i>this.headers.length;i++){
+     if(this.headers['key']!='relationship'){
+       this.parentsHeaders.push(this.headers[i]);
+     }
+   }
     this.getHeartData(this.url);
     this.http.isHavePerm('app-user-del').then(v => {
       this.deleteBtn = v;
@@ -49,6 +54,7 @@ export class AppUserComponent implements OnInit {
   data: Array<any> = [];
   headerAdd: Array<cell> = [];
   subUsersheaderAdd: Array<cell> = [];
+  parentsHeaders: Array<cell> = [];
   subUserHeaders: Array<any> = [];
   subUserData: Array<any> = [];
   addEditTitle: string = '添加';
@@ -99,9 +105,9 @@ export class AppUserComponent implements OnInit {
 
   add(id: number) {
     for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'mobile') {
+      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'mobile'|| this.headers[i].key == 'relationship') {
         this.headers[i].show = true;
-        if (id == undefined) {
+        if (id == undefined&&this.headers[i].key != 'relationship') {
           this.headers[i].required = true;
         } else {
           this.headers[i].required = false;
@@ -154,6 +160,7 @@ export class AppUserComponent implements OnInit {
     this.addEditFlag = true;
     this.parentSubFlag = true;
   }
+
 
   submit(submitData) {
     if (this.addEditFlag) {//addEditFlag=true的时候是添加
@@ -308,7 +315,7 @@ export class AppUserComponent implements OnInit {
     if (this.flag) {
       this.flag = false;
       for (let i = 0; i < this.headers.length; i++) {
-        if (this.headers[i].key == 'birth' || this.headers[i].key == 'sex' || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
+        if (this.headers[i].key == 'zone' ||this.headers[i].key == 'relationship' || this.headers[i].key == 'sex' || this.headers[i].key == 'name' || this.headers[i].key == 'birth'   || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
           this.subUserHeaders.push(this.headers[i]);
         }
       }

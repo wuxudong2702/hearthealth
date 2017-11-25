@@ -59,6 +59,7 @@ export class InputComponent implements OnInit {
   date = '';
 
   get isValid() {
+    console.log(this.form.controls[this.field.key].valid,this.field.key);
     return this.form.controls[this.field.key].valid;
   }
 

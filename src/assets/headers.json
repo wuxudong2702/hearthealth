@@ -56,9 +56,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "wxd1887",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z_]{6,20}",
       "input_type": 0
     },
     {
@@ -73,7 +73,7 @@
       "select_val": [],
       "valid_example": "",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z_]{6,20}",
       "input_type": 0
     }
   ],
@@ -127,7 +127,7 @@
       "select_val": [],
       "valid_example": "V.1",
       "required": true,
-      "pattern": "",
+      "pattern": "^[\\u4e00-\u9FA5A-Za-z0-9_]+$",
       "input_type": 0
     },
     {
@@ -142,7 +142,7 @@
       "select_val": [],
       "valid_example": "本次更新了...",
       "required": false,
-      "pattern": "",
+      "pattern": "^[\\u4e00-\u9FA5A-Za-z0-9_]+$",
       "input_type": 0
     },
     {
@@ -587,9 +587,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
+      "valid_example": "admin",
+      "required": true,
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{3,16}$",
       "input_type": 0
     },
     {
@@ -602,9 +602,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "管理员",
       "required": false,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{3,16}$",
       "input_type": 0
     }
   ],
@@ -619,9 +619,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "15",
+      "valid_example": "wxd17739902",
       "required": false,
-      "pattern": "",
+      "pattern": "^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$",
       "input_type": 0
     },
     {
@@ -634,26 +634,12 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "15",
+      "valid_example": "512457154",
       "required": false,
       "pattern": "[1-9][0-9]{4,}",
       "input_type": 0
     },
-    {
-      "key": "relationship",
-      "show": false,
-      "name": "与主账户关系",
-      "index": 18,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": "",
-      "valid_example": "15",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
+
     {
       "key": "password",
       "show": false,
@@ -664,9 +650,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "15",
+      "valid_example": "wqy89098",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z_]{6,20}",
       "input_type": 0
     },
     {
@@ -679,9 +665,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "15",
+      "valid_example": "wqy89098",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z_]{6,20}",
       "input_type": 0
     },
     {
@@ -696,7 +682,7 @@
       "select_val": "",
       "valid_example": "18045142702",
       "required": true,
-      "pattern": "",
+      "pattern": "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$",
       "input_type": 0
     },
     {
@@ -711,7 +697,7 @@
       "select_val": [],
       "valid_example": "武旭东",
       "required": false,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{2,16}$",
       "input_type": 0
     },
 
@@ -763,7 +749,7 @@
       "select_val": "",
       "valid_example": "185",
       "required": false,
-      "pattern": "^[0-9]+$",
+      "pattern": "[1-2]\\d{1,2}",
       "input_type": 0
     },
     {
@@ -778,7 +764,7 @@
       "select_val": "",
       "valid_example": "65",
       "required": false,
-      "pattern": "^[0-9]+$",
+      "pattern": "^[1-9]\\d{1,2}$",
       "input_type": 0
     },
     {
@@ -788,10 +774,10 @@
       "index": 13,
       "order": 0,
       "pipe_type": 0,
-      "pipe_params": "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$",
+      "pipe_params": "^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+",
       "val": "",
       "select_val": "",
-      "valid_example": "15",
+      "valid_example": "4756632145@qq.com",
       "required": false,
       "pattern": "",
       "input_type": 0
@@ -806,13 +792,126 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "15",
+      "valid_example": "安徽省阜阳市",
       "required": false,
-      "pattern": "",
+      "pattern": "^[\\u4e00-\\u9fa5]+$",
       "input_type": 0
     }
   ],
+  "subUsers": [
+    {
+      "key": "relationship",
+      "show": true,
+      "name": "与主账户关系",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "父子",
+      "required": false,
+      "pattern": "^[\\u4e00-\\u9fa5]+$",
+      "input_type": 0
+    },
+    {
+      "key": "name",
+      "show": true,
+      "name": "用户名",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "武旭东",
+      "required": true,
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{3,16}$",
+      "input_type": 0
+    },
 
+    {
+      "key": "birth",
+      "show": true,
+      "name": "出生日期",
+      "index": 2,
+      "order": 0,
+      "pipe_type": 2,
+      "pipe_params": "yyyy-MM-dd",
+      "val": "",
+      "select_val": [],
+      "valid_example": "2018-11-17",
+      "required": false,
+      "pattern": "",
+      "input_type": 2
+    },
+    {
+      "key": "sex",
+      "show": true,
+      "name": "性别",
+      "index": 3,
+      "order": 0,
+      "pipe_type": 1,
+      "pipe_params": {
+        "2": "女",
+        "1": "男"
+      },
+      "val": "",
+      "select_val": [
+        "女",
+        "男"
+      ],
+      "valid_example": "",
+      "required": false,
+      "pattern": "",
+      "input_type": 1
+    },
+    {
+      "key": "height",
+      "show": true,
+      "name": "身高(cm)",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "185",
+      "required": false,
+      "pattern": "[1-2]\\d{1,2}",
+      "input_type": 0
+    },
+    {
+      "key": "weight",
+      "show": true,
+      "name": "体重(kg)",
+      "index": 5,
+      "order": false,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "65",
+      "required": false,
+      "pattern": "^[1-9]\\d{1,2}$",
+      "input_type": 0
+    },
+    {
+      "key": "zone",
+      "show": true,
+      "name": "地区",
+      "index": 6,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "安徽省阜阳市",
+      "required": false,
+      "pattern": "^[\\u4e00-\\u9fa5]+$",
+      "input_type": 0
+    }
+  ],
   "logs": [
     {
       "key": "log_name",
@@ -824,9 +923,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "武旭东",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{3,16}$",
       "input_type": 0
     },
     {

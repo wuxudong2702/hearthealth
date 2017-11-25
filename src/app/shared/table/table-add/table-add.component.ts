@@ -55,6 +55,7 @@ export class TableAddComponent implements OnInit {
     }
     for (let i in this.form.value) {
       if (!this.form.value[i]) {
+        console.log(!this.form.value[i],'pppppppp');
         this.form.value[i] = undefined;
       }
     }

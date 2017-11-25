@@ -59,7 +59,7 @@ export class InputComponent implements OnInit {
   date = '';
 
   get isValid() {
-    console.log(this.form.controls[this.field.key].valid,this.field.key);
+    // console.log(this.form.controls[this.field.key].valid,this.field.key);
     return this.form.controls[this.field.key].valid;
   }
 
@@ -70,14 +70,12 @@ export class InputComponent implements OnInit {
   constructor(private http: ApiService,private toastService: ToastService) {
   }
 
-  ngOnInit() {
-    // console.log('add and edit field ',this.field)
-  }
+  ngOnInit() {}
 
-  dateSelected(date){
-    console.log(date, '21212121');
-    this.onDate.emit(this.date);
-  }
+  // dateSelected(date){
+  //   console.log(date, '21212121');
+  //   this.onDate.emit(this.date);
+  // }
 
   datePickerConfig = {
     locale: 'zh-CN',

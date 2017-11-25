@@ -238,7 +238,7 @@ export class ApiService {
   // latest, true,4;
   // historicalTests,true,5;'
   setHeader(table: string, set: string): Promise<any> {
-    console.log(table, set, 'table,set');
+    this.spinService.spin(true);
     const url: string = '/api/admin/header/set';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -248,6 +248,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         if (data['status'] == 'ok') {
+          this.spinService.spin(false);
           return this.getHeaderConfig();
         } else {
           console.error('设置表头错误', data['message']);
@@ -703,7 +704,8 @@ export class ApiService {
   }
 
   getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
-    console.log(url, count, find_key, find_val, '');
+    console.log(url, count, find_key, find_val, '全局获取数据发送的参数');
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       count: count,
@@ -714,6 +716,7 @@ export class ApiService {
     })
       .toPromise()
       .then(data => {
+        this.spinService.spin(false);
         console.log(data, 'getData全局获取data');
         return data
       })

@@ -29,12 +29,7 @@ export class AppUserComponent implements OnInit {
 
   ngOnInit() {
     this.headers = this.http.getHeader('users');
-     // this.parentsHeaders=this.headers;
-   for(let i=0;i>this.headers.length;i++){
-     if(this.headers['key']!='relationship'){
-       this.parentsHeaders.push(this.headers[i]);
-     }
-   }
+
     this.getHeartData(this.url);
     this.http.isHavePerm('app-user-del').then(v => {
       this.deleteBtn = v;
@@ -53,12 +48,12 @@ export class AppUserComponent implements OnInit {
   headers: Array<cell> = [];
   data: Array<any> = [];
   headerAdd: Array<cell> = [];
-  subUsersheaderAdd: Array<cell> = [];
-  parentsHeaders: Array<cell> = [];
+
   subUserHeaders: Array<any> = [];
   subUserData: Array<any> = [];
-  addEditTitle: string = '添加';
+  subUsersheaderAdd: Array<cell> = [];
 
+  addEditTitle: string = '添加';
   deleteBtn: boolean = false;
   deleteAllBtn: boolean = false;
   addBtn: boolean = false;
@@ -125,7 +120,7 @@ export class AppUserComponent implements OnInit {
             break;
           case INPUTTYPE.SELECT:
             let val = this.data[id][d.key];
-            d.val = d.select_val[val];
+            d.val = d.pipe_params[val];
             break;
           default:
             d.val = this.data[id][d.key];
@@ -163,6 +158,7 @@ export class AppUserComponent implements OnInit {
 
 
   submit(submitData) {
+
     if (this.addEditFlag) {//addEditFlag=true的时候是添加
       let role = this.parentSubFlag ? '0' : '1';
       this.http.userAdd(this.parent_id, submitData, '0').then(data => {
@@ -314,11 +310,12 @@ export class AppUserComponent implements OnInit {
 
     if (this.flag) {
       this.flag = false;
-      for (let i = 0; i < this.headers.length; i++) {
-        if (this.headers[i].key == 'zone' ||this.headers[i].key == 'relationship' || this.headers[i].key == 'sex' || this.headers[i].key == 'name' || this.headers[i].key == 'birth'   || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
-          this.subUserHeaders.push(this.headers[i]);
-        }
-      }
+      this.subUserHeaders =  this.http.getHeader('subUsers');
+    //   for (let i = 0; i < this.headers.length; i++) {
+    //     if (this.headers[i].key == 'zone' ||this.headers[i].key == 'relationship' || this.headers[i].key == 'sex' || this.headers[i].key == 'name' || this.headers[i].key == 'birth'   || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
+    //       this.subUserHeaders.push(this.headers[i]);
+    //     }
+    //   }
     }
     this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
   }
@@ -361,7 +358,9 @@ export class AppUserComponent implements OnInit {
           default:
             d.val = this.subUserData[id][d.key];
         }
-
+        if(d['key']=='name'){
+          d['required']=false;
+        }
         return d;
       });
     }
@@ -370,6 +369,9 @@ export class AppUserComponent implements OnInit {
       this.addEditTitle = '添加';
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
         d.val = '';
+        if(d['key']=='name'){
+          d['required']=true;
+        }
         return d;
       });
     }
@@ -493,8 +495,8 @@ export class AppUserComponent implements OnInit {
   }
 
   sub_set(set: string) {
-    this.http.setHeader('users', set).then(v => v).then(w => {
-      this.headers = this.http.getHeader('users');
+    this.http.setHeader('subUsers', set).then(v => v).then(w => {
+      this.headers = this.http.getHeader('subUsers');
     });
   }
 

@@ -41,17 +41,18 @@
           [(ngModel)]="field.val"
           [formControlName]="field.key"
           placeholder="请输入"
+          autocomplete="off"
           onfocus="this.placeholder=''"
           onblur="this.placeholder='请输入'"
           (keyup)="change()"
           (change)="change()"
+          (click)="change()"
           list="list"
 
   >
     <datalist id="list" >
-      <option *ngFor="let val of remind;"  value={{val}}>{{val}}</option>
+      <option *ngFor="let val of remind;" onclick="change()" value={{val}}>{{val}}</option>
     </datalist>
-
 
   <select class="form-control addInputValue"
           *ngIf="field.input_type==1" name={{field.key}}

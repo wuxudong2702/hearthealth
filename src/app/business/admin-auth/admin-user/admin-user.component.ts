@@ -128,9 +128,11 @@ export class AdminUserComponent implements OnInit {
 
   submit(submitData) {
     console.log(submitData, 'submitData');
-    console.log(this.role_id, 'this.role_id');
+    console.log(this.role_id, 'this.role_id11111111');
     if (submitData.password_confirmation == submitData.password) {
-      if (this.role_id) {
+      if (this.role_id!=''&&this.role_id!=undefined) {
+          console.log(this.role_id, 'this.222222');
+
           if (this.flag) {
               this.http.adminsAdd(this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
                   if (data['status'] == 'ok') {

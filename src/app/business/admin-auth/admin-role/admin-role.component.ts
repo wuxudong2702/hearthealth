@@ -100,6 +100,7 @@ export class AdminRoleComponent implements OnInit {
             this.nodes = data['nodes'];
         });
         console.log(this.nodes,'-------默认全选');
+        this.permsAdd = 'hearthealth,ecgd-data-show,ecgd-chart-show,ecgd-del,ecgd-download,hhr-show,hhr-del,heart-dev-show,heart-dev-add,heart-dev-edit,heart-dev-del,info-show,info-add,info-edit,info-del,app-upgrade-show,app-upgrade-add,app-upgrade-edit,app-upgrade-del,app-auth-show,app-user-show,app-user-add,app-user-edit,app-user-del,app-role-show,app-role-edit,admin-show,admin-user-show,admin-user-add,admin-user-edit,admin-user-del,admin-role-show,admin-role-add,admin-role-edit,admin-role-del,log';
         this.isShow = false;
         this.isShowTittle = false;
         this.addView = true;
@@ -168,7 +169,6 @@ export class AdminRoleComponent implements OnInit {
             return v.key;
         });
         this.permsAdd = this.permsArrayAdd.join(',');
-
         console.log('--------添加----------',this.permsAdd);
         console.log(this.name,this.description);
         console.log(this.permsAdd,'this.permsAdd-------------');
@@ -231,6 +231,7 @@ export class AdminRoleComponent implements OnInit {
     }
 
     submit(){
+        console.log(this.permsAdd,'666');
 
             if(this.flag){
                 //添加
@@ -373,7 +374,7 @@ export class AdminRoleComponent implements OnInit {
         this.addView=false;
     }
     sendFormValue(formValue){
-        console.log(formValue,'formValue');
+        // console.log(formValue,'formValue');
         this.name = formValue.name;
         this.description = formValue.description;
     }

@@ -277,6 +277,7 @@ export class TableListComponent implements OnInit, OnChanges {
       if(this.selectValue=='sex'){
         if(searchVal=='男'){searchVal='1'}
         if(searchVal=='女'){searchVal='2'}
+        if(searchVal=='1'||searchVal=='2'){ searchVal='';}
       }
       this.onSearch.emit({
         selectValue: this.selectValue,

@@ -794,7 +794,7 @@
       "select_val": "",
       "valid_example": "安徽省阜阳市",
       "required": false,
-      "pattern": "^[\\u4e00-\\u9fa5]+$",
+      "pattern": "^[0-9\\u4e00-\\u9fa5]+$",
       "input_type": 0
     }
   ],
@@ -908,7 +908,7 @@
       "select_val": "",
       "valid_example": "安徽省阜阳市",
       "required": false,
-      "pattern": "^[\\u4e00-\\u9fa5]+$",
+      "pattern": "^[0-9\\u4e00-\\u9fa5]+$",
       "input_type": 0
     }
   ],

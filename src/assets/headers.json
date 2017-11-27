@@ -284,21 +284,7 @@
       "pattern": "",
       "input_type": 0
     },
-    {
-      "key": "relationship",
-      "show": true,
-      "name": "与主账户关系",
-      "index": 1,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "父子",
-      "required": true,
-      "pattern": "",
-      "input_type": 0
-    },
+
     {
       "key": "birth",
       "show": true,

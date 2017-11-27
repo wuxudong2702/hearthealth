@@ -30,7 +30,7 @@ export class InputComponent implements OnInit {
       this.onSendFormValue.emit(this.formValue);
       if(this.field.key=='role_name'){
           console.log(this.field.val,'输入的值');
-          this.isRemind = true;
+          // this.isRemind = true;
           this.http.adminsRemind(this.field.val).then(data => {
               console.log(data,'data');
               if (data['status'] == 'ok') {

@@ -240,46 +240,61 @@ export class AdminRoleComponent implements OnInit {
     }
 
     submit(){
-        if(this.flag){
-          //添加
-           this.http.rolesAdd(this.name,this.description,this.permsAdd).then(data => {
-                    if (data['status'] == 'ok') {
-                        this.data = data['data'];
-                        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
-                        this.tableView = true;
-                        this.addView=false;
-                        this.addTreeView=false;
-                        this.editTreeView=false;
-                    } else {
-                        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+            if(this.flag){
+                //添加
+                if(this.permsAdd){
+                    this.http.rolesAdd(this.name,this.description,this.permsAdd).then(data => {
+                        if (data['status'] == 'ok') {
+                            this.data = data['data'];
+                            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+
+                            this.tableView = true;
+                            this.addView=false;
+                            this.addTreeView=false;
+                            this.editTreeView=false;
+                        } else {
+                            const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                            this.toastService.toast(toastCfg);
+                        }
+                    }).catch(err => {
+                        const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色已存在', 3000);
                         this.toastService.toast(toastCfg);
-                    }
-                }).catch(err => {
-                    const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-                    this.toastService.toast(toastCfg);
-                });
-
-        }else{
-          //编辑
-            this.http.rolesUpdate(this.id, this.description, this.name, this.permsUpdate).then(data => {
-                if (data['status'] == 'ok') {
-                    this.data = data['data'];
-                    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-                    this.addView = false;
-                    this.addTreeView = false;
-                    this.editTreeView = false;
-                    this.tableView = true;
-                } else {
-                    const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                    });
+                }else{
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
                     this.toastService.toast(toastCfg);
                 }
-            }).catch(err => {
-                const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-                console.log('--------err---------',err);
-                this.toastService.toast(toastCfg);
-            });
-        }
+
+
+
+            }else{
+                //编辑
+                if(this.permsUpdate){
+                    this.http.rolesUpdate(this.id, this.description, this.name, this.permsUpdate).then(data => {
+                        if (data['status'] == 'ok') {
+                            this.data = data['data'];
+                            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                            this.addView = false;
+                            this.addTreeView = false;
+                            this.editTreeView = false;
+                            this.tableView = true;
+                        } else {
+                            const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                            this.toastService.toast(toastCfg);
+                        }
+                    }).catch(err => {
+                        const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色已存在', 3000);
+                        this.toastService.toast(toastCfg);
+                    });
+                }else{
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
+                    this.toastService.toast(toastCfg);
+                }
+
+            }
+
+
     }
 
 

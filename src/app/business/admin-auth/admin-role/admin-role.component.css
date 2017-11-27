@@ -1,75 +1,82 @@
-.tableAdd{
-  width: 45%;
-  border: 1px solid gray;
+.table {
+  width: 60%;
+  height: 80%;
+  border: 1px solid lightgray;
+  margin-top: 70px;
+  /*margin-left: 10%;*/
+
 }
+
+
 .adminZtree {
-width: 45%;
-height:500px;
-margin-left: -7%;
-margin-top: 2%;
+  width: 35%;
+  height: 500px;
+  margin-left: 2%;
+  margin-top: 70px;
 }
 
 /*.Ztree{*/
-  /*background:white;*/
-   /*display:flex;*/
-  /*flex-direction: row;*/
-  /*height:88vh;*/
+/*background:white;*/
+/*display:flex;*/
+/*flex-direction: row;*/
+/*height:88vh;*/
 /*}*/
 
 /*.treeAdd {*/
-  /*!*float:right;*!*/
-  /*!*margin-right:100px;*!*/
-  /*!*margin: 20px 20px;*!*/
-  /*margin-left:100px;*/
-  /*border: 1px solid lightgray;*/
-  /*width: 50%;*/
-  /*margin-top:70px;*/
-  /*height:48%;*/
+/*!*float:right;*!*/
+/*!*margin-right:100px;*!*/
+/*!*margin: 20px 20px;*!*/
+/*margin-left:100px;*/
+/*border: 1px solid lightgray;*/
+/*width: 50%;*/
+/*margin-top:70px;*/
+/*height:48%;*/
 
 /*}*/
 /*.adminZtree {*/
-  /*width: 45%;*/
-  /*!*max-height: 300px;*!*/
-  /*!*min-height: 100p;*!*/
-  /*!*margin-left: -7%;*!*/
-  /*!*margin-top: 2%;*!*/
+/*width: 45%;*/
+/*!*max-height: 300px;*!*/
+/*!*min-height: 100p;*!*/
+/*!*margin-left: -7%;*!*/
+/*!*margin-top: 2%;*!*/
 /*}*/
 
 /*.tree{*/
-   /*width:50%;*/
-  /*margin-left:30%;*/
-  /*!*max-height: 80%;*!*/
+/*width:50%;*/
+/*margin-left:30%;*/
+/*!*max-height: 80%;*!*/
 
-  /*!*min-height: 80%;*!*/
+/*!*min-height: 80%;*!*/
 
 /*}*/
 
-
-
-/*.tittle {*/
-  /*margin-top:20px;*/
-  /*!*margin-bottom: 15px;*!*/
-  /*font-size: 22px;*/
-  /*border-left: 3px solid #10a2e9;*/
-  /*padding-left:8px;*/
-  /*margin-left:10px;*/
-  /*font-weight: bold;*/
-  /*color:#555555;*/
-  /*font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;*/
-/*}*/
+.tittle {
+  margin-top: 20px;
+  height: 20px;
+  width:200px;
+  display:block;
+  /*margin-bottom: 15px;*/
+  font-size: 22px;
+  border-left: 3px solid #10a2e9;
+  padding-left: 8px;
+  margin-left: 10px;
+  font-weight: bold;
+  color: #555555;
+  font-family: KaiTi, SimSun, Microsoft Yahei, 微软雅黑, Arial, sans-serif;
+}
 
 /*.treeAddInput{*/
-  /*margin:20px;*/
-  /*display:flex;*/
-  /*flex-direction: row;*/
+/*margin:20px;*/
+/*display:flex;*/
+/*flex-direction: row;*/
 /*}*/
 /*.addInputValue{*/
-  /*width:400px;*/
+/*width:400px;*/
 /*}*/
 /*.validExample {*/
-  /*height: 33px;*/
-  /*margin-left: 20px;*/
-  /*width: 400px;*/
-  /*padding-top: 7px;*/
-  /*padding-left: 10px;*/
+/*height: 33px;*/
+/*margin-left: 20px;*/
+/*width: 400px;*/
+/*padding-top: 7px;*/
+/*padding-left: 10px;*/
 /*}*/

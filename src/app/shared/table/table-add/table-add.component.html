@@ -3,12 +3,12 @@
   <h2 class="tittle " *ngIf="isShowTittle">{{addEditTitle}}</h2>
   <div class="">
 
-    <form class="addForm " [formGroup]="form" >
-      <div class=" form-inline formCenter " *ngFor="let header of headers" [hidden]="header.key=='role_id'||header.key=='id'||header.name=='账户角色'" >
+    <form class="addForm " [formGroup]="form" [class.treeAddForm]="treeAdd" >
+      <div class=" form-inline formCenter" [class.treeAdd]="treeAdd"  *ngFor="let header of headers" [hidden]="header.key=='role_id'||header.key=='id'||header.name=='账户角色'" >
       <app-input [field]="header" [AddInput]="isShow" [form]="form" (onSendFormValue)="SendFormValue($event)"  (onSendId)="sendId($event)" ></app-input>
 
       </div>
-      <div class="form-button " >
+      <div class="form-button " [class.footerBtn]="treeAdd" >
         <button type="button" class="btn btn-success"  (click)="submit()" [disabled]="!form.valid">提交</button>
         <button type="button" class="btn btn-default" (click)="addCancel()">取消</button>
       </div>

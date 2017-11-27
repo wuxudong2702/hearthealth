@@ -58,6 +58,7 @@ export class AdminRoleComponent implements OnInit {
     setBtn: boolean = true;
     isShow: boolean = true;
     isShowTittle: boolean = true;
+   treeAdd: boolean = true;
 
     setOperate: boolean = true;
     editId: string;

@@ -21,6 +21,7 @@ export class TableAddComponent implements OnInit {
   @Input() addEditTitle: string;
   @Input() isRemind: boolean;
   @Input() remind: Array<any>;
+  @Input() treeAdd: boolean;
 
 
 
@@ -38,7 +39,6 @@ export class TableAddComponent implements OnInit {
   }
 
   ngOnInit() {
-        console.log(this.headers,'=================');
     this.form = this.fcs.toFormGroup(this.headers);
   }
 

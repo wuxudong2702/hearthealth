@@ -59,6 +59,8 @@ export class ApiService {
   login(userName: string, password: string): Promise<any> {
     const url: string = '/api/admin/auth/login';
     this.spinService.spin(true);
+    console.log(this.spinService.getSpin(), 'ppppppp');
+
     return this.httpClient.post(url, {
       name: userName,
       password: password
@@ -72,10 +74,25 @@ export class ApiService {
             this.getHeaderConfig();
             this.spinService.spin(false);
           }
+          this.spinService.spin(false);
           return data;
         }
       )
-      .catch(this.handleError);
+      .catch((error: any): Promise<any>=>{
+      this.spinService.spin(false);
+        let msg = '请求发生异常', status = error.status;
+        if (status === 0) {
+          msg = '请求失败，请求响应出错';
+        } else if (status === 404) {
+          msg = '请求失败，未找到请求地址';
+        } else if (status === 500) {
+          msg = '请求失败，服务器出错，请稍后再试';
+        } else {
+          msg = '未知错误，请检查网络';
+        }
+      return Promise.reject(msg||error.message || error)
+    }
+  )
   }
 
   logout() {
@@ -814,9 +831,6 @@ export class ApiService {
   }
 
 
-
-
-
   postMallDelAll(checkedList): Promise<any> {
     const url: string = '../../../assets/hearthealthData/infos-data/infos-mall-data.json';
     return this.httpClient.get(url)
@@ -869,6 +883,7 @@ export class ApiService {
       .catch(this.handleError);
 
   }
+
   postMallDel(): Promise<any> {
     const url: string = '../../../assets/hearthealthData/infos-data/infos-news-data.json';
     this.spinService.spin(true);
@@ -882,6 +897,7 @@ export class ApiService {
       .catch(this.handleError);
 
   }
+
   postDevSubmit(addData): Promise<any> {
     const url: string = '../../../assets/hearthealthData/dev-data/dev-data.json';
     return this.httpClient.get(url)

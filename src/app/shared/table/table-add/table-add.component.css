@@ -1,12 +1,12 @@
-.tableAdd{
-  width:100%;
-  height:100%;
-  margin:5px auto;
+.tableAdd {
+  width: 100%;
+  height: 100%;
+  margin: 5px auto;
   background-color: white;
-  padding-top:15px;
+  padding-top: 15px;
 }
 
-.addForm{
+.addForm {
   /*display:flex;*/
   padding-top: 50px;
   /*margin:0 auto;*/
@@ -16,50 +16,71 @@
   /*margin-left: 40%;*/
 }
 
-
-.addInfo{
-   display:flex;
+.addInfo {
+  display: flex;
   flex-direction: row;
-  margin:10px 0;
+  margin: 10px 0;
   /*margin:10px auto;*/
 }
-.addName{
+
+.addName {
   /*display:flex;*/
   /*justify-content: flex-end;*/
 }
-.addInput{
+
+.addInput {
   /*display:flex;*/
   /*justify-content: flex-start;*/
   /*margin-left:20px;*/
 }
 
-.form-button{
-  padding-bottom:30px;
+.form-button {
+  padding-bottom: 30px;
   text-align: right;
-  margin-right:46px;
+  margin-right: 46px;
   /*float:right;*/
   /*margin:0 35px;*/
   /*margin-left:30%;*/
 }
-.form-button button{
-  margin:16px 16px;
+
+.form-button button {
+  margin: 16px 16px;
 }
+
 .tittle {
-   /*margin-top:20px;*/
+  /*margin-top:20px;*/
   margin-bottom: 15px;
   font-size: 22px;
   border-left: 3px solid #10a2e9;
-  padding-left:8px;
-  margin-left:10px;
+  padding-left: 8px;
+  margin-left: 10px;
   font-weight: bold;
-  color:#555555;
-  font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+  color: #555555;
+  font-family: KaiTi, SimSun, Microsoft Yahei, 微软雅黑, Arial, sans-serif;
 }
-.formCenter{
-/*text-align: center;*/
+
+.formCenter {
+  /*text-align: center;*/
   /*margin:0 auto ;*/
-  width:100%;
-  margin-left:25%;
-  margin-top:20px;
+  width: 100%;
+  margin-left: 25%;
+  margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.treeAddForm{
+  padding-top:20px;
+  margin-left: 0;
+
+}
+.treeAdd {
+  width: 100%;
+  margin-left: 20px;
+  /*margin-top: 10px;*/
+  margin-bottom: 30px;
+}
+.footerBtn{
+  padding-bottom: 5px;
+  text-align: right;
+  margin-right: 46px;
 }

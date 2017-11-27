@@ -1,7 +1,8 @@
 .ztree {
   width: 50%;
-  height: 50%;
-  margin-left:40%;
+  height: 70%;
+  overflow:auto ;
+  /*margin-left:40%;*/
   /*margin: 5px auto;*/
   /*background-color: white;*/
   /*margin-top: 12%;*/
@@ -11,16 +12,16 @@
   /*line-height: 30px;*/
 }
 
-.tittle {
-  margin-bottom: 15px;
-  font-size: 22px;
-  border-left: 3px solid #10a2e9;
-  padding-left: 8px;
-  margin-left: 10px;
-  font-weight: bold;
-  color: #555555;
-  font-family: KaiTi, SimSun, Microsoft Yahei, 微软雅黑, Arial, sans-serif;
-}
+/*.tittle {*/
+  /*margin-bottom: 15px;*/
+  /*font-size: 22px;*/
+  /*border-left: 3px solid #10a2e9;*/
+  /*padding-left: 8px;*/
+  /*margin-left: 10px;*/
+  /*font-weight: bold;*/
+  /*color: #555555;*/
+  /*font-family: KaiTi, SimSun, Microsoft Yahei, 微软雅黑, Arial, sans-serif;*/
+/*}*/
 
 /*.content {*/
   /*height: 75%;*/

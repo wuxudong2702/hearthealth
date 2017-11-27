@@ -189,7 +189,7 @@
       "select_val": [],
       "valid_example": "武旭东",
       "required": true,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{2,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {
@@ -251,7 +251,7 @@
       "select_val": [],
       "valid_example": "武旭东",
       "required": true,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{2,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {
@@ -467,7 +467,7 @@
       "select_val": [],
       "valid_example": "武旭东",
       "required": false,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{2,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {
@@ -683,7 +683,7 @@
       "select_val": [],
       "valid_example": "武旭东",
       "required": false,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{2,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
 
@@ -812,7 +812,7 @@
       "select_val": [],
       "valid_example": "武旭东",
       "required": true,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{2,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
 
@@ -912,7 +912,7 @@
       "select_val": [],
       "valid_example": "武旭东",
       "required": true,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{2,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {

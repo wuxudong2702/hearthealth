@@ -93,6 +93,9 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
            this.quill.pasteHTML(this.HTML5Content);
       // this.onTextChange.emit(this.Html);
     }
+    // else{
+    //   this.quill.pasteHTML('');
+    // }
 
     if (this.Html) {
       this.quill.pasteHTML(this.Html);

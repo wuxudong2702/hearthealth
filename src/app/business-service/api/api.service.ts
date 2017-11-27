@@ -26,12 +26,10 @@ export class ApiService {
   headerConfig: any;
 
   constructor(private http: Http, private spinService: SpinService, private httpClient: HttpClient, private toastService: ToastService, private sessionStorageService: SessionStorageService) {
-    console.log('api service');
     this.getHeaders();
     let perm = this.sessionStorageService.getObject('perm');
     let headerConfig = this.sessionStorageService.getObject('headerConfig');
     let headers = this.sessionStorageService.getObject('headers');
-
     if (perm && headerConfig && headers) {
       this.perms = perm;
       this.headerConfig = headerConfig;
@@ -59,8 +57,6 @@ export class ApiService {
   login(userName: string, password: string): Promise<any> {
     const url: string = '/api/admin/auth/login';
     this.spinService.spin(true);
-    console.log(this.spinService.getSpin(), 'ppppppp');
-
     return this.httpClient.post(url, {
       name: userName,
       password: password
@@ -230,8 +226,6 @@ export class ApiService {
   getHeader(table: string): any {
     let header: any = this.headers[table];
     let config: any = this.headerConfig[table];
-    console.log(config, '1111111111111');
-
     let _header: Array<any> = [];
     _header = header.map(v => {
       let key: string = v['key'];
@@ -241,7 +235,7 @@ export class ApiService {
       }
       return v;
     });
-    console.log(_header, '2222222');
+    console.log(_header, 'getHeader');
     return _header;
   }
 
@@ -366,7 +360,6 @@ export class ApiService {
   }
 
   ecgdDownloadData(ids: string) {
-    console.log(ids);
     const url: string = '/api/admin/heart/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + ids;
     return this.http.get(url)
       .map(res => new Blob([res.text()], {type: 'txt/plain'}))
@@ -428,7 +421,6 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log(info_id, data, '6567890-9876567890-=');
         return data
       })
       .catch(this.handleError);
@@ -471,7 +463,6 @@ export class ApiService {
     })
       .toPromise()
       .then(data => {
-        console.log(data, '======');
         return data;
       })
       .catch(this.handleError);

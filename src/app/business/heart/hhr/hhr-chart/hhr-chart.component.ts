@@ -33,8 +33,8 @@ export class HhrChartComponent implements OnInit {
   userInfo: string;
   clickTime: string;
   dataIndex: number;
-  flag: number;
-  field: string='';
+  flag: number = 1;
+  field: string='n_total_detbeat';
   dataChart: Array<any>;
   chartDetailsData: Array<any>;
   isDetails: boolean = false;

@@ -53,21 +53,26 @@ export class AvatarCropperComponent {
      */
     upload() {
         console.info(this.avatar.image);
-        this.http.postAvatar(this.avatar.image).then(data => {
-            if (data['status'] == 'ok') {
-                this.userAvatar=data['data'];
-                const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '图片上传成功!', 2000);
+        if(this.avatar.image){
+            this.http.postAvatar(this.avatar.image).then(data => {
+                if (data['status'] == 'ok') {
+                    this.userAvatar=data['data'];
+                    const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '图片上传成功!', 2000);
+                    this.toastService.toast(toastCfg);
+                    this.activeModal.close({ status: 'closed' });
+                } else {
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                    this.toastService.toast(toastCfg);
+                }
+            }).catch(err => {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                console.error(err);
                 this.toastService.toast(toastCfg);
-                this.activeModal.close({ status: 'closed' });
-            } else {
-                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-                this.toastService.toast(toastCfg);
-            }
-        }).catch(err => {
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-            console.error(err);
+            });
+        }else{
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', '请先上传图片', 3000);
             this.toastService.toast(toastCfg);
-        });
+        }
 
     }
 

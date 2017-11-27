@@ -41,6 +41,8 @@ export class InputComponent implements OnInit {
                               this.role_id = k.id;
                               console.log(this.role_id,'this.role_id------------');
                               this.onSendId.emit(this.role_id);
+                          }else{
+                              this.role_id ='';
                           }
 
                       }

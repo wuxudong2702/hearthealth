@@ -89,6 +89,37 @@ export class AdminRoleComponent implements OnInit {
             this.updateNodes = data['nodes'];
         });
     }
+    add() {
+        this.addEditTitle = '添加';
+        this.flag = true;
+        this.headerAdd = this.headers.map(d => {
+            d.val = '';
+            return d;
+        });
+        this.http.getZtreeNodes().then(data => {
+            this.nodes = data['nodes'];
+        });
+        console.log(this.nodes,'-------默认全选');
+        this.isShow = false;
+        this.isShowTittle = false;
+        this.addView = true;
+        this.addTreeView=true;
+        this.editTreeView=false;
+        this.tableView = false;
+    }
+    del(id){
+        this.http.rolesDel(id).then(data => {
+            if (data['status'] == 'ok') {
+                this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            } else {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                this.toastService.toast(toastCfg);
+            }
+        }).catch(err => {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+            this.toastService.toast(toastCfg);
+        });
+    }
     edit(id) {
 
         this.id = this.data[id]['id'];
@@ -131,52 +162,17 @@ export class AdminRoleComponent implements OnInit {
 
 
     }
-    add() {
-        this.addEditTitle = '添加';
-        this.flag = true;
-        this.headerAdd = this.headers.map(d => {
-            d.val = '';
-            return d;
-        });
-        this.http.getZtreeNodes().then(data => {
-            this.nodes = data['nodes'];
-        });
-        console.log(this.nodes,'-------默认全选');
-        this.isShow = false;
-        this.isShowTittle = false;
-        this.addView = true;
-        this.addTreeView=true;
-        this.editTreeView=false;
-        this.tableView = false;
-    }
-    del(id){
-        this.http.rolesDel(id).then(data => {
-            if (data['status'] == 'ok') {
-                this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-            } else {
-                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-                this.toastService.toast(toastCfg);
-            }
-        }).catch(err => {
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-            this.toastService.toast(toastCfg);
-        });
-    }
-
-
     addSubmit(CheckedNodes:any){
         console.log('CheckedNodes',CheckedNodes);
-        this.permsArrayUpdate = CheckedNodes['CheckedNodes'].map(v =>{
-            return v.id;
-        });
         this.permsArrayAdd = CheckedNodes['CheckedNodes'].map(v =>{
             return v.key;
         });
-        this.permsUpdate = this.permsArrayUpdate.join(',');
         this.permsAdd = this.permsArrayAdd.join(',');
 
         console.log('--------添加----------',this.permsAdd);
         console.log(this.name,this.description);
+        console.log(this.permsAdd,'this.permsAdd-------------');
+
 
         // if(this.name=='' || this.description==''){
         //     const toastCfg = new ToastConfig(ToastType.ERROR, '','有未填项！', 3000);
@@ -201,19 +197,14 @@ export class AdminRoleComponent implements OnInit {
         //     });
         // }
     }
-
     editSubmit(CheckedNodes:any){
-        console.log('--------编辑----------',this.permsUpdate);
         console.log('CheckedNodes',CheckedNodes);
         this.permsArrayUpdate = CheckedNodes['CheckedNodes'].map(v =>{
             return v.id;
         });
-        this.permsArrayAdd = CheckedNodes['CheckedNodes'].map(v =>{
-            return v.key;
-        });
         this.permsUpdate = this.permsArrayUpdate.join(',');
-        this.permsAdd = this.permsArrayAdd.join(',');
         console.log(this.name,this.description);
+        console.log(this.permsUpdate,'this.permsUpdate-----------');
 
         // if(this.name=='' || this.description==''){
         //     const toastCfg = new ToastConfig(ToastType.ERROR, '','有未填项！', 3000);
@@ -243,6 +234,8 @@ export class AdminRoleComponent implements OnInit {
 
             if(this.flag){
                 //添加
+                console.log(this.permsAdd,'this.permsAdd');
+
                 if(this.permsAdd){
                     this.http.rolesAdd(this.name,this.description,this.permsAdd).then(data => {
                         if (data['status'] == 'ok') {
@@ -268,6 +261,8 @@ export class AdminRoleComponent implements OnInit {
 
             }else{
                 //编辑
+                console.log(this.permsUpdate,'this.permsUpdate');
+
                 if(this.permsUpdate){
                     this.http.rolesUpdate(this.id, this.description, this.name, this.permsUpdate).then(data => {
                         if (data['status'] == 'ok') {

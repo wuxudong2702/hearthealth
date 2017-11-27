@@ -5,6 +5,7 @@ import {DOCUMENT} from '@angular/common';
 import {news} from '../../shared/table/table-list.component';
 import {ToastService} from '../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
+import {isNullOrUndefined} from "util";
 
 export class UEditorHtml {
   htmlValue: string;
@@ -155,11 +156,14 @@ export class Editorh5Component implements OnInit {
 
   preview() {
     this.previews = false;
-    // this.prePhone=true;
     if (this.htmlValue) {
       this.html5 = this.htmlValue;
     }else{
       this.html5=this.HTML5Content;
+    }
+    if(isNullOrUndefined(this.title)||isNullOrUndefined(this.html5)){
+      this.title='';
+      this.html5='';
     }
     let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
     doc.open();
@@ -186,6 +190,16 @@ export class Editorh5Component implements OnInit {
   }
 
   save() {
+    if(isNullOrUndefined(this.title)){
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', '请输入标题！', 3000);
+        this.toastService.toast(toastCfg);
+      return ;
+    }
+    if(isNullOrUndefined(this.label)){
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', '请输入标签！', 3000);
+        this.toastService.toast(toastCfg);
+      return ;
+    }
     this.onSave.emit({
       header: htmlH,
       content: this.html5,

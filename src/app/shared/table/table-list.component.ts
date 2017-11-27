@@ -297,13 +297,12 @@ export class TableListComponent implements OnInit, OnChanges {
   showModalSetFunc() {//设置模态框
     let setConfig = new SetConfig('', this.headers);
     let result = this.modalService.set(setConfig);
-    // console.log(result,'table list set');
     result.then(v => {
       let set = '';
+      // console.log(v,'table list set v');
       v.configHeaders.forEach((v, index) => {
         set += v.key + ',' + v.show + ',' + v.index + ';';
       });
-      // console.log(set,'table list set');
       this.onSet.emit(set);
     }).catch(v => {
     });

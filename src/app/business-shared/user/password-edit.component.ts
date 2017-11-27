@@ -23,8 +23,8 @@ export class PasswordEditComponent {
 
 
     constructor(private router: Router,public activeModal: NgbActiveModal, private toastService: ToastService,private formBuilder: FormBuilder,private api:ApiService) {
-        let oldPasswordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(5),Validators.maxLength(15)]));
-        let passwordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(5),Validators.maxLength(15)]));
+        let oldPasswordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(15)]));
+        let passwordFc = new FormControl('', Validators.compose([Validators.required, Validators.minLength(6),Validators.maxLength(15)]));
         let certainPasswordFc  = new FormControl('',CustomValidators.equalTo(passwordFc));
 
         this.passwordEditForm=this.formBuilder.group({

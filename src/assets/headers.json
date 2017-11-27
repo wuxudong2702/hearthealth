@@ -127,7 +127,7 @@
       "select_val": [],
       "valid_example": "V.1",
       "required": true,
-      "pattern": "^[\\u4e00-\u9FA5A-Za-z0-9_]+$",
+      "pattern": "^[\\u4e00-\u9FA5A-Za-z0-9_.]+$",
       "input_type": 0
     },
     {
@@ -575,7 +575,7 @@
       "select_val": "",
       "valid_example": "admin",
       "required": true,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{3,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {
@@ -590,7 +590,7 @@
       "select_val": [],
       "valid_example": "管理员",
       "required": false,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{3,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]*$",
       "input_type": 0
     }
   ],
@@ -607,7 +607,7 @@
       "select_val": "",
       "valid_example": "wxd17739902",
       "required": false,
-      "pattern": "^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$",
+      "pattern": "^[a-zA-Z0-9]([-_a-zA-Z0-9]{5,19})+$",
       "input_type": 0
     },
     {
@@ -760,15 +760,17 @@
       "index": 13,
       "order": 0,
       "pipe_type": 0,
-      "pipe_params": "^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+",
+      "pipe_params": "",
       "val": "",
       "select_val": "",
       "valid_example": "4756632145@qq.com",
       "required": false,
-      "pattern": "",
+      "pattern": "[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm",
       "input_type": 0
     },
     {
+
+
       "key": "zone",
       "show": true,
       "name": "地区",

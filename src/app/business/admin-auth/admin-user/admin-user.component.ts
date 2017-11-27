@@ -128,53 +128,59 @@ export class AdminUserComponent implements OnInit {
 
   submit(submitData) {
     console.log(submitData, 'submitData');
+    console.log(this.role_id, 'this.role_id');
     if (submitData.password_confirmation == submitData.password) {
-      if (this.flag) {
-        this.http.adminsAdd(this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
-          if (data['status'] == 'ok') {
-            this.data = data['data'];
-            this.getHeartData();
-            for (let i = 0; i < this.headers.length; i++) {
-              if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
-                this.headers[i].show = false;
-                this.headers[i].required = false;
-              }
-            }
-            this.addView = false;
-            this.tableView = true;
+      if (this.role_id) {
+          if (this.flag) {
+              this.http.adminsAdd(this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
+                  if (data['status'] == 'ok') {
+                      this.data = data['data'];
+                      this.getHeartData();
+                      for (let i = 0; i < this.headers.length; i++) {
+                          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
+                              this.headers[i].show = false;
+                              this.headers[i].required = false;
+                          }
+                      }
+                      this.addView = false;
+                      this.tableView = true;
+                  } else {
+                      const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                      this.toastService.toast(toastCfg);
+                  }
+              }).catch(err => {
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                  this.toastService.toast(toastCfg);
+              });
           } else {
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-            this.toastService.toast(toastCfg);
+              this.http.adminsUpdate('' + this.data[this.editId]['id'], this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
+                  console.log(data);
+                  if (data['status'] == 'ok') {
+                      this.data = data['data'];
+                      this.getHeartData();
+                      for (let i = 0; i < this.headers.length; i++) {
+                          if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
+                              this.headers[i].show = false;
+                              this.headers[i].required = false;
+                          }
+                      }
+                      this.addView = false;
+                      this.tableView = true;
+                  } else {
+                      const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                      this.toastService.toast(toastCfg);
+                  }
+              }).catch(err => {
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                  this.toastService.toast(toastCfg);
+              });
           }
-        }).catch(err => {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      }else{
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色不存在！', 3000);
           this.toastService.toast(toastCfg);
-        });
-      } else {
-        this.http.adminsUpdate('' + this.data[this.editId]['id'], this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
-          console.log(data);
-          if (data['status'] == 'ok') {
-            this.data = data['data'];
-            this.getHeartData();
-            for (let i = 0; i < this.headers.length; i++) {
-              if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
-                this.headers[i].show = false;
-                this.headers[i].required = false;
-              }
-            }
-            this.addView = false;
-            this.tableView = true;
-          } else {
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-            this.toastService.toast(toastCfg);
-          }
-        }).catch(err => {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-          this.toastService.toast(toastCfg);
-        });
       }
     } else {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', '密码不一致', 3000);
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', '密码不一致！', 3000);
       this.toastService.toast(toastCfg);
     }
   }

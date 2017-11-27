@@ -102,7 +102,7 @@ export class AppUserComponent implements OnInit {
     for (let i = 0; i < this.headers.length; i++) {
       if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'mobile'|| this.headers[i].key == 'relationship') {
         this.headers[i].show = true;
-        if (id == undefined&&this.headers[i].key != 'relationship') {
+        if (id == undefined ) {
           this.headers[i].required = true;
         } else {
           this.headers[i].required = false;

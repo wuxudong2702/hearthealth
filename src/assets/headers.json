@@ -750,7 +750,7 @@
       "select_val": "",
       "valid_example": "",
       "required": false,
-      "pattern": "^[1-9]\\d{1,2}$",
+      "pattern": "^[1-9]\\d{0,2}$",
       "input_type": 0
     },
     {
@@ -866,7 +866,7 @@
       "select_val": "",
       "valid_example": "",
       "required": false,
-      "pattern": "[1-2]\\d{1,2}",
+      "pattern": "[1-9]\\d{1,2}",
       "input_type": 0
     },
     {
@@ -881,7 +881,7 @@
       "select_val": "",
       "valid_example": "",
       "required": false,
-      "pattern": "^[1-9]\\d{1,2}$",
+      "pattern": "^[1-9]\\d{0,2}$",
       "input_type": 0
     },
     {
@@ -896,7 +896,7 @@
       "select_val": "",
       "valid_example": "",
       "required": false,
-      "pattern": "^[0-9\\u4e00-\\u9fa5]+$",
+      "pattern": "",
       "input_type": 0
     }
   ],

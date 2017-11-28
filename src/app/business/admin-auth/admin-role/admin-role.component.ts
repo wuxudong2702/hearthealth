@@ -281,6 +281,12 @@ export class AdminRoleComponent implements OnInit {
                         const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色已存在', 3000);
                         this.toastService.toast(toastCfg);
                     });
+                }else if(this.permsUpdate==undefined){
+                  console.log('微电影')
+                  this.addView = false;
+                  this.addTreeView = false;
+                  this.editTreeView = false;
+                  this.tableView = true;
                 }else{
                     const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
                     this.toastService.toast(toastCfg);

@@ -295,7 +295,7 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
-      "valid_example": "：如 2017-11-17",
+      "valid_example": "",
       "required": true,
       "pattern": "",
       "input_type": 2
@@ -388,7 +388,7 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
-      "valid_example": "：如 2017-11-17",
+      "valid_example": "",
       "required": true,
       "pattern": "",
       "input_type": 2
@@ -430,10 +430,10 @@
       "index": 2,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyyMMdd",
+      "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
-      "valid_example": "：如 2017-11-17",
+      "valid_example": "",
       "required": true,
       "pattern": "",
       "input_type": 2
@@ -541,7 +541,7 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
-      "valid_example": "：如 2018-11-14",
+      "valid_example": "",
       "required": false,
       "pattern": "",
       "input_type": 0
@@ -556,7 +556,7 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
-      "valid_example": "：如 2018-11-14",
+      "valid_example": "",
       "required": false,
       "pattern": "",
       "input_type": 2
@@ -697,7 +697,7 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "2018-11-17",
       "select_val": [],
-      "valid_example": "：如 2018-11-17",
+      "valid_example": "",
       "required": false,
       "pattern": "",
       "input_type": 2
@@ -828,7 +828,7 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
-      "valid_example": "：如 2018-11-17",
+      "valid_example": "",
       "required": false,
       "pattern": "",
       "input_type": 2
@@ -942,9 +942,9 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
-      "valid_example": "：如 2018-11-17",
+      "valid_example": "",
       "required": true,
-      "pattern": "yyyy-MM-dd",
+      "pattern": "",
       "input_type": 2
     }
   ]

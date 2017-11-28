@@ -134,8 +134,8 @@ export class Editorh5Component implements OnInit {
     //   return false;
     // });
     // if(this.dataEditor.length!=1){
-
     console.log('1001', this.dataEditor, this.HTML5Content);
+    this.html5=this.HTML5Content;
     this.title = this.dataEditor['title'];
     this.description = this.dataEditor['description'];
     this.label = this.dataEditor['label'];
@@ -161,8 +161,10 @@ export class Editorh5Component implements OnInit {
     }else{
       this.html5=this.HTML5Content;
     }
-    if(isNullOrUndefined(this.title)||isNullOrUndefined(this.html5)){
+    if(isNullOrUndefined(this.title)){
       this.title='';
+    }
+    if(isNullOrUndefined(this.html5)){
       this.html5='';
     }
     let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
@@ -200,6 +202,7 @@ export class Editorh5Component implements OnInit {
         this.toastService.toast(toastCfg);
       return ;
     }
+    console.log(this.html5,'this.html5');
     this.onSave.emit({
       header: htmlH,
       content: this.html5,

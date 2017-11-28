@@ -584,6 +584,20 @@ export class ApiService {
       })
       .catch(this.handleError);
   }
+  rolesUpdateTreeEdit(id: string, description: string, name: string) {
+    const urls: string = "/api/admin/admins/role/update";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      id: id,
+      description: description,
+      name: name,
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
 
   rolesPerms(id: string) {
     const urls: string = "/api/admin/admins/role/perms";

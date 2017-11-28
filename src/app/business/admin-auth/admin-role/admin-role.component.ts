@@ -135,7 +135,6 @@ export class AdminRoleComponent implements OnInit {
   }
 
   edit(id) {
-
     this.id = this.data[id]['id'];
     console.log(this.id, '编辑的id');
     this.isShow = false;
@@ -214,28 +213,24 @@ export class AdminRoleComponent implements OnInit {
   }
 
   editSubmit(CheckedNodes: any) {
-    console.log('CheckedNodes', CheckedNodes);
+    this.treeEditFlag=true;
+    // console.log('CheckedNodes', CheckedNodes);
     this.permsArrayUpdate = CheckedNodes['CheckedNodes'].map(v => {
       return v.id;
     });
-
     this.permsUpdate = this.permsArrayUpdate.join(',');
-    console.log(this.name, this.description);
-    console.log(this.permsUpdate, 'this.permsUpdate-----------');
-
+    // console.log(this.name, this.description);
+    // console.log(this.permsUpdate, 'this.permsUpdate-----------');
   }
 
   submit() {
-    if (this.flag) {
-      //添加
+    if (this.flag) {//添加
       console.log(this.permsAdd, 'this.permsAdd');
-
       if (this.permsAdd) {
         this.http.rolesAdd(this.name, this.description, this.permsAdd).then(data => {
           if (data['status'] == 'ok') {
             this.data = data['data'];
             this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-
             this.tableView = true;
             this.addView = false;
             this.addTreeView = false;
@@ -256,7 +251,6 @@ export class AdminRoleComponent implements OnInit {
     } else {
       //编辑
       console.log(this.permsUpdate, 'this.permsUpdate');
-
       if (this.permsUpdate) {
         this.http.rolesUpdate(this.id, this.description, this.name, this.permsUpdate).then(data => {
           if (data['status'] == 'ok') {
@@ -276,9 +270,27 @@ export class AdminRoleComponent implements OnInit {
         });
       }
       else {
-
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
-        this.toastService.toast(toastCfg);
+        if(this.treeEditFlag==false){
+          this.http.rolesUpdateTreeEdit(this.id, this.description, this.name).then(data => {
+            if (data['status'] == 'ok') {
+              this.data = data['data'];
+              this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+              this.addView = false;
+              this.addTreeView = false;
+              this.editTreeView = false;
+              this.tableView = true;
+            } else {
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+              this.toastService.toast(toastCfg);
+            }
+          }).catch(err => {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+            this.toastService.toast(toastCfg);
+          });
+        }else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
+          this.toastService.toast(toastCfg);
+        }
       }
 
     }

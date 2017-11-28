@@ -1,18 +1,19 @@
 .table {
-  width: 60%;
+  width: 65%;
   height: 80%;
   border: 1px solid lightgray;
-  margin-top: 70px;
-  /*margin-left: 10%;*/
+  margin-top: 79px;
+  margin-left: -15%;
 
 }
 
 
 .adminZtree {
-  width: 35%;
+  width: 45%;
   height: 500px;
-  margin-left: 2%;
+  /*margin-left: 2%;*/
   margin-top: 70px;
+  /*margin-left: -120px;*/
 }
 
 /*.Ztree{*/

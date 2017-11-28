@@ -575,7 +575,7 @@
       "select_val": "",
       "valid_example": "：长度最多16位，不得包含非法字符",
       "required": true,
-      "pattern": "^[0-9a-zA-Z_\\u4e00-\\u9fa5]{1,16}$",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {

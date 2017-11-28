@@ -137,6 +137,7 @@ export class AdminRoleComponent implements OnInit {
   edit(id) {
     this.id = this.data[id]['id'];
     console.log(this.id, '编辑的id');
+    console.log(this.data[id], '编辑的数据');
     this.isShow = false;
     this.isShowTittle = true;
     this.flag = false;
@@ -155,7 +156,7 @@ export class AdminRoleComponent implements OnInit {
       }
       return d;
     });
-    this.http.rolesPerms(this.data[id]['id']).then(data => {
+    this.http.rolesPerms(this.id).then(data => {
       if (data['status'] == 'ok') {
         console.log(data, '获取编辑树');
         this.updateNodes = data['data'];
@@ -223,11 +224,13 @@ export class AdminRoleComponent implements OnInit {
     // console.log(this.permsUpdate, 'this.permsUpdate-----------');
   }
 
-  submit() {
-    if (this.flag) {//添加
+  submit(submiData) {
+      console.log(submiData, 'submiData');
+
+      if (this.flag) {//添加
       console.log(this.permsAdd, 'this.permsAdd');
       if (this.permsAdd) {
-        this.http.rolesAdd(this.name, this.description, this.permsAdd).then(data => {
+        this.http.rolesAdd(submiData.name, submiData.description, this.permsAdd).then(data => {
           if (data['status'] == 'ok') {
             this.data = data['data'];
             this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
@@ -252,7 +255,7 @@ export class AdminRoleComponent implements OnInit {
       //编辑
       console.log(this.permsUpdate, 'this.permsUpdate');
       if (this.permsUpdate) {
-        this.http.rolesUpdate(this.id, this.description, this.name, this.permsUpdate).then(data => {
+        this.http.rolesUpdate(this.id, submiData.description, submiData.name, this.permsUpdate).then(data => {
           if (data['status'] == 'ok') {
             this.data = data['data'];
             this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);

@@ -231,9 +231,10 @@ export class AdminRoleComponent implements OnInit {
           //编辑
           console.log(this.permsUpdate, 'this.permsUpdate');
           if (this.permsUpdate) {
-            this.http.rolesUpdate(this.id, submiData.description, submiData.name, this.permsUpdate).then(data => {
+              this.http.rolesUpdate(this.id, submiData.description, submiData.name, this.permsUpdate).then(data => {
               if (data['status'] == 'ok') {
                 this.data = data['data'];
+                this.permsUpdate='';
                 this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
                 this.addView = false;
                 this.addTreeView = false;
@@ -250,8 +251,8 @@ export class AdminRoleComponent implements OnInit {
             });
           }
           else {
-            if(this.treeEditFlag==false){
-              this.http.rolesUpdateTreeEdit(this.id, this.description, this.name).then(data => {
+              if(this.treeEditFlag==false){
+                this.http.rolesUpdateTreeEdit(this.id, this.description, this.name).then(data => {
                 if (data['status'] == 'ok') {
                   this.data = data['data'];
                   this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);

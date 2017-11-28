@@ -127,11 +127,14 @@ export class AdminUserComponent implements OnInit {
   }
 
   submit(submitData) {
-    console.log(submitData, 'submitData');
-    console.log(this.role_id, 'this.role_id11111111');
+
+      this.remind.map( k =>{
+          if(k.name == submitData['role_name']){
+                  this.role_id = k.id;
+          }
+      });
     if (submitData.password_confirmation == submitData.password) {
       if (this.role_id!=''&&this.role_id!=undefined) {
-          console.log(this.role_id, 'this.222222');
 
           if (this.flag) {
               this.http.adminsAdd(this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
@@ -283,8 +286,8 @@ export class AdminUserComponent implements OnInit {
     this.tableView = true;
   }
 
-  getRoleId(role_id) {
-    this.role_id = role_id;
+  getSendRemind(remind) {
+    this.remind = remind;
   };
 }
 

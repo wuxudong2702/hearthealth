@@ -27,7 +27,7 @@ export class TableAddComponent implements OnInit {
 
   @Output() onAddCancel = new EventEmitter<any>();
   @Output() onSubmit = new EventEmitter<any>();
-  @Output() onSend = new EventEmitter<any>();
+  @Output() onSendRemind = new EventEmitter<any>();
   @Output() onSendFormValue = new EventEmitter<any>();
 
   submitData: string;
@@ -62,8 +62,8 @@ export class TableAddComponent implements OnInit {
     this.onSubmit.emit(this.form.value);
   }
 
-  sendId(role_id) {
-    this.onSend.emit(role_id);
+  sendRemind(remind) {
+    this.onSendRemind.emit(remind);
   }
 
   SendFormValue(formValue) {

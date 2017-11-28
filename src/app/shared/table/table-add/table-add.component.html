@@ -5,7 +5,7 @@
 
     <form class="addForm " [formGroup]="form" [class.treeAddForm]="treeAdd" >
       <div class=" form-inline formCenter" [class.treeAdd]="treeAdd"  *ngFor="let header of headers" [hidden]="header.key=='role_id'||header.key=='id'||header.name=='账户角色'" >
-      <app-input [field]="header"  [treeAdd]="treeAdd" [AddInput]="isShow" [form]="form" (onSendFormValue)="SendFormValue($event)"  (onSendId)="sendId($event)" ></app-input>
+      <app-input [field]="header"  [treeAdd]="treeAdd" [AddInput]="isShow" [form]="form" (onSendFormValue)="SendFormValue($event)"  (onSendRemind)="sendRemind($event)"></app-input>
 
       </div>
       <div class="form-button " [class.footerBtn]="treeAdd" >

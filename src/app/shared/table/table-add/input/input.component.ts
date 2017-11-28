@@ -19,6 +19,7 @@ export class InputComponent implements OnInit {
   @Input() AddInput: boolean;
   @Input() treeAdd: boolean;
   @Output() onSendId = new EventEmitter<any>();
+  @Output() onSendRemind = new EventEmitter<any>();
   @Output() onSendFormValue = new EventEmitter<any>();
 
   isRemind:boolean = false;
@@ -28,27 +29,20 @@ export class InputComponent implements OnInit {
 
   change(){
       this.formValue = this.form.value;
+      console.log(this.formValue,'this.formValue');
+      console.log(this.remind,'remind--input');
+
       this.onSendFormValue.emit(this.formValue);
       if(this.field.key=='role_name'){
           console.log(this.field.val,'输入的值');
-          // this.isRemind = true;
-          this.http.adminsRemind(this.field.val).then(data => {
+          this.isRemind = true;
+          this.http.adminsRemind(this.formValue['role_name']).then(data => {
               console.log(data,'data');
               if (data['status'] == 'ok') {
                   this.remind = data['data'].map( k =>{
-                      if(k.name.indexOf(this.field.val)>-1 && this.field.val!=''){
-                          if(k.name == this.field.val){
-                              this.role_id = k.id;
-                          }else{
-                              this.role_id ='';
-                          }
-                          this.onSendId.emit(this.role_id);
-
-                      }
-                      console.log(this.role_id,'---------------this.role_id------------');
                       return k.name;
                   });
-                  console.log(this.remind,'remind------------');
+                  this.onSendRemind.emit(data['data']);
               } else {
                   const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                   this.toastService.toast(toastCfg);

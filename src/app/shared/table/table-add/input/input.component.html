@@ -46,12 +46,11 @@
           onblur="this.placeholder='请输入'"
           (keyup)="change()"
           (change)="change()"
-          (click)="change()"
           list="list"
 
   >
     <datalist id="list" >
-      <option *ngFor="let val of remind;" onclick="change()" value={{val}}>{{val}}</option>
+      <option *ngFor="let val of remind;" value={{val}}>{{val}}</option>
     </datalist>
 
   <select class="form-control addInputValue"

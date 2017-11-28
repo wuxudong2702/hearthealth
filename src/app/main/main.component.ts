@@ -155,7 +155,7 @@ export class MainComponent implements OnInit {
         ]
     };
 
-    // title: string = '首页';
+    title: string = '首页';
 
     constructor(private router: Router,private modalService: ModalService, private ngbModalService: NgbModal, private apiService: ApiService, private toastService: ToastService) {
 
@@ -218,7 +218,7 @@ export class MainComponent implements OnInit {
      * 跳转首页
      */
     toHome() {
-        // this.title = '首页';
+        this.title = '首页';
         this.router.navigate(['/app/home']);
     }
 

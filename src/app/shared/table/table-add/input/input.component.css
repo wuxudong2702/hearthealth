@@ -30,3 +30,16 @@
 .treeInput{
   width:250px;
 }
+
+@media screen and (min-width:1200px){
+  .TreeValidExample{
+    height: 33px;
+    margin-left: 20px;
+    width: 200px;
+    padding-top: 7px;
+    padding-left: 10px;
+  }
+  .treeInput{
+    width:150px;
+  }
+}

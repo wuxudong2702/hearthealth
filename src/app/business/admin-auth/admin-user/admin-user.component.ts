@@ -127,16 +127,18 @@ export class AdminUserComponent implements OnInit {
   }
 
   submit(submitData) {
-
+      this.role_id ='';
       this.remind.map( k =>{
           if(k.name == submitData['role_name']){
                   this.role_id = k.id;
           }
       });
+    console.log(this.role_id ,'this.role_id ~~~~~~~~`');
     if (submitData.password_confirmation == submitData.password) {
       if (this.role_id!=''&&this.role_id!=undefined) {
 
           if (this.flag) {
+              //添加
               this.http.adminsAdd(this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
                   if (data['status'] == 'ok') {
                       this.data = data['data'];
@@ -158,6 +160,7 @@ export class AdminUserComponent implements OnInit {
                   this.toastService.toast(toastCfg);
               });
           } else {
+              //编辑
               this.http.adminsUpdate('' + this.data[this.editId]['id'], this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
                   console.log(data);
                   if (data['status'] == 'ok') {

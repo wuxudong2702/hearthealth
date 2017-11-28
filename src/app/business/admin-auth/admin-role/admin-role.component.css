@@ -1,17 +1,18 @@
 .table {
-  width: 60%;
+  width: 70%;
   height: 80%;
   border: 1px solid lightgray;
   margin-top: 70px;
   /*margin-left: 10%;*/
+  flex:1;
 
 }
 
 
 .adminZtree {
-  width: 35%;
+  width: 25%;
   height: 500px;
-  margin-left: 2%;
+  margin-left: 5%;
   margin-top: 70px;
 }
 
@@ -53,7 +54,7 @@
 .tittle {
   margin-top: 20px;
   height: 20px;
-  width:200px;
+  width:70px;
   display:block;
   /*margin-bottom: 15px;*/
   font-size: 22px;

@@ -75,7 +75,7 @@
 
   <div class="" *ngIf="!isValid  && isDirty ">
      <div *ngIf="field.required==true&&field.val==''" class="alert-danger valid " [class.TreeValidExample]="treeAdd" >{{field.name+'是必填项！'}}</div>
-    <div *ngIf="field.val!=''" class="alert-danger validExample " [class.TreeValidExample]="treeAdd">请输入正确格式{{field.valid_example}}</div>
+    <div *ngIf="field.val!=''" class="alert-danger validExample " [class.TreeValidExample]="treeAdd">{{field.valid_example}}</div>
   </div>
 </div>
 

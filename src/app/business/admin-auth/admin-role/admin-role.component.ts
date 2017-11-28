@@ -231,8 +231,6 @@ export class AdminRoleComponent implements OnInit {
     }
 
     submit(){
-        console.log(this.permsAdd,'666');
-
             if(this.flag){
                 //添加
                 console.log(this.permsAdd,'this.permsAdd');
@@ -252,7 +250,7 @@ export class AdminRoleComponent implements OnInit {
                             this.toastService.toast(toastCfg);
                         }
                     }).catch(err => {
-                        const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色已存在', 3000);
+                        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
                         this.toastService.toast(toastCfg);
                     });
                 }else{
@@ -278,15 +276,9 @@ export class AdminRoleComponent implements OnInit {
                             this.toastService.toast(toastCfg);
                         }
                     }).catch(err => {
-                        const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色已存在', 3000);
+                        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
                         this.toastService.toast(toastCfg);
                     });
-                }else if(this.permsUpdate==undefined){
-                  console.log('微电影')
-                  this.addView = false;
-                  this.addTreeView = false;
-                  this.editTreeView = false;
-                  this.tableView = true;
                 }else{
                     const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
                     this.toastService.toast(toastCfg);

@@ -10,9 +10,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "请输入正确格式",
+      "valid_example": "格式：最多16位，不得包含非法字符",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 3
     },
     {
@@ -25,9 +25,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "格式：最多16位，不得包含非法字符",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
 
@@ -41,9 +41,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "格式：最多16位，不得包含非法字符",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {

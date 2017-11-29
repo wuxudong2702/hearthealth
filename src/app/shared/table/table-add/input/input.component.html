@@ -1,6 +1,7 @@
 <div [formGroup]="form" class="form-inline" >
 
   <label style="width: 140px" for="name" > <span *ngIf="field.required" style="color:red;" >* &nbsp;&nbsp;&nbsp; </span>  {{field.name+":"}}</label>
+  <!--<input type="text" style="display: none;" disabled autocomplete = "off"/>-->
   <input
     type="text"
     class="form-control addInputValue"
@@ -19,10 +20,10 @@
     (click)="change()"
     pattern={{field.pattern}}
   >
+  <input type="password" style="display: none;" disabled autocomplete = "off"/>
   <input
     type="password"
     class="form-control addInputValue"
-
     name="name"
     *ngIf="field.key=='password'||field.key=='password_confirmation'"
     [(ngModel)]="field.val"
@@ -30,7 +31,7 @@
     placeholder="请输入"
     onfocus="this.placeholder=''"
     onblur="this.placeholder='请输入'"
-    autocomplete="off"
+    autocomplete="new-password"
     (keyup)="change()"
     (click)="change()"
   >

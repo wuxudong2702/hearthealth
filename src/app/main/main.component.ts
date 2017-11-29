@@ -167,13 +167,13 @@ export class MainComponent implements OnInit {
      * 初始化
      */
     ngOnInit() {
-      console.log(this.apiService.hasToken(),'hastoken');
+      // console.log(this.apiService.hasToken(),'hastoken');
       if(this.apiService.hasToken()){
 
         this.router.navigate(['/login']);
         return;
       }
-      console.log(this.apiService.hasToken(),'hastoken33');
+      console.log(this.apiService.hasToken(),'hastoken_');
       this.apiService.getMenu().then(data => {
         if (data['status'] == 'ok') {
           this.mainData.menuData = data['data'];

@@ -13,7 +13,7 @@ export class FormControlService {
     // let a=this.headers[0].key;
 
     headers.forEach(header => {
-      console.log('header.required', header.pattern);
+      // console.log('header.required', header.pattern);
       group[header.key] = header.required ? new FormControl(header.val || '', [Validators.pattern(header.pattern), Validators.required])
         : new FormControl(header.val || '');
     });

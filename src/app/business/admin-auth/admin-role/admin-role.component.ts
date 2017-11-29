@@ -197,7 +197,7 @@ export class AdminRoleComponent implements OnInit {
   submit(submiData) {
       if (this.flag) {
           //添加
-          console.log(this.permsAdd, 'this.permsAdd');
+          // console.log(this.permsAdd, 'this.permsAdd');
           if (this.permsAdd) {
         this.http.rolesAdd(submiData.name, submiData.description, this.permsAdd).then(data => {
           if (data['status'] == 'ok') {
@@ -221,7 +221,7 @@ export class AdminRoleComponent implements OnInit {
       }
       } else {
           //编辑
-          console.log(this.permsUpdate, 'this.permsUpdate');
+          // console.log(this.permsUpdate, 'this.permsUpdate');
           if (this.permsUpdate) {
               this.http.rolesUpdate(this.id, submiData.description, submiData.name, this.permsUpdate).then(data => {
               if (data['status'] == 'ok') {

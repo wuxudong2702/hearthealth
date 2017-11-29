@@ -47,7 +47,9 @@ export class PasswordEditComponent {
                 that.router.navigate(['/app/home']);
                 this.close();
               } else {
-                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                // const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                // that.toastService.toast(toastCfg);
+                const toastCfg = new ToastConfig(ToastType.ERROR, '','旧密码错误！', 3000);
                 that.toastService.toast(toastCfg);
                 // that.router.navigate(['/reset']);
               }

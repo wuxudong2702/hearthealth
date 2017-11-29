@@ -23,6 +23,7 @@ export class InputComponent implements OnInit {
   @Output() onSendFormValue = new EventEmitter<any>();
 
   isRemind:boolean = false;
+  userEditFlag:boolean = false;
   remind:Array<any>=[];
   role_id:string;
   formValue:string;
@@ -36,17 +37,22 @@ export class InputComponent implements OnInit {
       if(this.field.key=='role_name'){
           console.log(this.field.val,'输入的值');
           this.isRemind = true;
+          this.userEditFlag = true;
           this.http.adminsRemind(this.formValue['role_name']).then(data => {
               console.log(data,'data');
               if (data['status'] == 'ok') {
                   this.remind = data['data'].map( k =>{
                       return k.name;
                   });
-                  this.onSendRemind.emit(data['data']);
+                  this.onSendRemind.emit({
+                      remind:data['data'],
+                      userEditFlag:this.userEditFlag
+                  });
               } else {
                   const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                   this.toastService.toast(toastCfg);
               }
+              this.userEditFlag = false;
           }).catch(err => {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
               this.toastService.toast(toastCfg);

@@ -568,6 +568,21 @@ export class ApiService {
       })
       .catch(this.handleError);
   }
+  remindUpdate(id: string, user_name: string, name: string, password: string) {
+    const urls: string = "/api/admin/admins/update";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      id: id,
+      user_name: user_name,
+      name: name,
+      password: password
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
 
   rolesUpdate(id: string, description: string, name: string, perms: string) {
     const urls: string = "/api/admin/admins/role/update";

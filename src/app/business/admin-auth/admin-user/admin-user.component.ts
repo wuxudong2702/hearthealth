@@ -56,13 +56,6 @@ export class AdminUserComponent implements OnInit {
   flag: boolean = true;
   userEditFlag: boolean = false;
 
-  // adminUserDel: boolean =false;// this.http.isHavePerm('admin-user-del');
-  // adminUserAdd: boolean = false;//this.http.isHavePerm('admin-user-add');
-  // adminUserEdit: boolean = false;//this.http.isHavePerm('admin-user-edit');
-  // deleteBtn: boolean = this.adminUserDel;
-  // deleteAllBtn: boolean = this.adminUserDel;
-  // addBtn: boolean = this.adminUserAdd;
-  // editBtn: boolean = this.adminUserEdit;
   deleteBtn: boolean = false;
   deleteAllBtn: boolean = false;
   addBtn: boolean = false;
@@ -128,15 +121,14 @@ export class AdminUserComponent implements OnInit {
   }
 
   submit(submitData) {
-      // this.role_id ='';
-      this.remind.map( k =>{
+    this.remind.map( k =>{
           if(k.name == submitData['role_name']){
                   this.role_id = k.id;
           }
-      });
-    console.log(this.role_id ,'this.role_id ~~~~~~~~`');
-    console.log(this.remind ,'this.remind ~~~~~~~~`');
-    console.log(this.userEditFlag ,'this.userEditFlag ~~~~~~~~`');
+    });
+    // console.log(this.role_id ,'this.role_id ~~~~~~~~`');
+    // console.log(this.remind ,'this.remind ~~~~~~~~`');
+    // console.log(this.userEditFlag ,'this.userEditFlag ~~~~~~~~`');
     if (submitData.password_confirmation == submitData.password) {
       if (this.flag) {
           //添加
@@ -169,11 +161,8 @@ export class AdminUserComponent implements OnInit {
           //编辑
           if(this.userEditFlag){
               //模糊搜索框被编辑
-              console.log('模糊搜索框被编辑');
-
               if (this.role_id!=''&&this.role_id!=undefined) {
                   this.http.adminsUpdate('' + this.data[this.editId]['id'], this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
-                      console.log(data);
                       if (data['status'] == 'ok') {
                           this.data = data['data'];
                           this.getHeartData();
@@ -243,7 +232,6 @@ export class AdminUserComponent implements OnInit {
         this.pagination.next_page_url = data['data']['next_page_url'];
         this.pagination.prev_page_url = data['data']['prev_page_url'];
         this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);

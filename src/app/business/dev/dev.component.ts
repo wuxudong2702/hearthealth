@@ -40,8 +40,8 @@ export class DevComponent implements OnInit {
   data: Array<any> = [];
   addEditTitle: string = '添加';
 
-  devDel: boolean = false;//this.http.isHavePerm('heart-dev-del');
-  devAdd: boolean = false;// this.http.isHavePerm('heart-dev-add');
+  devDel: boolean = false;
+  devAdd: boolean = false;
   deleteBtn: boolean = this.devDel;
   deleteAllBtn: boolean = this.devDel;
   addBtn: boolean = this.devAdd;
@@ -157,7 +157,6 @@ export class DevComponent implements OnInit {
         this.pagination.next_page_url = data['data']['next_page_url'];
         this.pagination.prev_page_url = data['data']['prev_page_url'];
         this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);

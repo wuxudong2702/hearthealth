@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
                 // this.valueList = Object.keys(data['data']);
                 this.valueList = ["用户人数","账户个数","管理员人数","心电个数","档案个数"];
                 this.dataList = Object.values(data['data']);
-                console.log(this.dataList);
+                // console.log(this.dataList);
 
                 this.chartOption = {
                     color: ['#3aafdb'],

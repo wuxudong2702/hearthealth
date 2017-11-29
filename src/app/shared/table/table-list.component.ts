@@ -153,8 +153,6 @@ export class TableListComponent implements OnInit, OnChanges {
   @Input() backBtn: boolean;
   @Input() setOperate: boolean;
   @Input() uploadBtn: boolean;
-  // @Input() flag: boolean;
-
   @Input() pagination: paginationObj;
 
   @Output() onAdd = new EventEmitter<any>();
@@ -187,10 +185,7 @@ export class TableListComponent implements OnInit, OnChanges {
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
   checkedListIds: Array<number> = [];
-  // ids:string=''
-// CLIDS:string='';
 
-  // submitData:object;
   delAllChecked() {
     if (!this.isDelAll) {
       this.checkedList = this.data.map(v => true);
@@ -209,20 +204,18 @@ export class TableListComponent implements OnInit, OnChanges {
   }
 
   edit(id: number) {
-    console.log(id, 'table edit id');
+    // console.log(id, 'table edit id');
     this.onAdd.emit(id);
   }
 
   editH5(id: number) {
     // console.log('editH5', id);
-
     this.onEditH5.emit(id);
   }
 
   editZTree(id: number) {
     this.onEditZTree.emit(id);
   }
-
 
   delAll() {
     let checkedListIds = [];
@@ -248,7 +241,7 @@ export class TableListComponent implements OnInit, OnChanges {
       this.checkedList[i] = false;
     }
     this.isDelAll = false;
-    console.log(checkedListIds, 'qaqaqaqa');
+    // console.log(checkedListIds, 'checkedListIds');
     this.onDelAll.emit(checkedListIds);
   }
 
@@ -269,7 +262,7 @@ export class TableListComponent implements OnInit, OnChanges {
   }
 
   search() {//用户点击查询按钮
-    console.log(this.headers, 'table list');
+    // console.log(this.headers, 'table list');
     if (!this.selectValue) {
       this.openError('请选择搜索项！');
     } else {
@@ -287,7 +280,7 @@ export class TableListComponent implements OnInit, OnChanges {
         searchValue: searchVal,
       });
     }
-    console.log(this.headers, 'table list 22');
+    // console.log(this.headers, 'table list');
   }
 
   set () {
@@ -332,8 +325,8 @@ export class TableListComponent implements OnInit, OnChanges {
     result.then(v => {
 
       if (this.data[i]['heart_data_id'] == undefined) {
-        console.log(this.delId, '00000000');
-        if (this.data[i]['dev_id'] == undefined) {
+        // console.log(this.delId, 'this.delId');
+        if (this.data[i]['dev_id'] == undefined1) {
           this.delId = '' + this.data[i]['id'];
         } else {
           this.delId = '' + this.data[i]['dev_id'];
@@ -341,7 +334,7 @@ export class TableListComponent implements OnInit, OnChanges {
       } else {
         this.delId = '' + this.data[i]['heart_data_id'];
       }
-      console.log(this.delId, '111111');
+      // console.log(this.delId, 'this.delId2');
       this.onDel.emit(this.delId);
       this.checkedList[i] = false;
     }).catch(v => {

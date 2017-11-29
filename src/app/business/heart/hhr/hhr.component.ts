@@ -54,14 +54,12 @@ export class HhrComponent implements OnInit {
 
 
   chart(data) {
-      console.log(data,'-----');
-      console.log(this.data,'this.data');
+      // console.log(data,'-----');
+      // console.log(this.data,'this.data');
       this.userName = data.name;
       this.chartId = data.id;
       this.startValue = this.data[data.i]['earliest'];
       this.endValue = this.data[data.i]['latest'];
-      console.log(this.startValue,'默认开始时间');
-      console.log(this.endValue,'默认结束时间');
       this.showChartView = !this.showChartView;
   }
 

@@ -625,7 +625,6 @@
       "pattern": "[1-9][0-9]{4,}",
       "input_type": 0
     },
-
     {
       "key": "password",
       "show": false,
@@ -900,7 +899,6 @@
       "input_type": 0
     }
   ],
-
   "logs": [
     {
       "key": "log_name",

@@ -21,7 +21,9 @@ export class InputComponent implements OnInit {
   @Output() onSendId = new EventEmitter<any>();
   @Output() onSendRemind = new EventEmitter<any>();
   @Output() onSendFormValue = new EventEmitter<any>();
+  @Output() onDate = new EventEmitter<any>();
 
+  date = '';
   isRemind:boolean = false;
   userEditFlag:boolean = false;
   remind:Array<any>=[];
@@ -30,16 +32,12 @@ export class InputComponent implements OnInit {
 
   change(){
       this.formValue = this.form.value;
-      console.log(this.formValue,'this.formValue');
-      console.log(this.remind,'remind--input');
-
+      // console.log(this.formValue,'this.formValue');
       this.onSendFormValue.emit(this.formValue);
       if(this.field.key=='role_name'){
-          console.log(this.field.val,'输入的值');
           this.isRemind = true;
           this.userEditFlag = true;
           this.http.adminsRemind(this.formValue['role_name']).then(data => {
-              console.log(data,'data');
               if (data['status'] == 'ok') {
                   this.remind = data['data'].map( k =>{
                       return k.name;
@@ -60,10 +58,6 @@ export class InputComponent implements OnInit {
       }
   }
 
-  @Output() onDate = new EventEmitter<any>();
-
-  date = '';
-
   get isValid() {
     // console.log(this.form.controls[this.field.key].valid,this.field.key);
     return this.form.controls[this.field.key].valid;
@@ -78,14 +72,8 @@ export class InputComponent implements OnInit {
 
   ngOnInit() {}
 
-  // dateSelected(date){
-  //   console.log(date, '21212121');
-  //   this.onDate.emit(this.date);
-  // }
-
   datePickerConfig = {
     locale: 'zh-CN',
     format:"YYYY-MM-DD"
   };
-
 }

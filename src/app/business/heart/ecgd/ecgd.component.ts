@@ -27,44 +27,16 @@ export class EcgdComponent implements OnInit {
 
   ngOnInit(): void {
     this.headers = this.http.getHeader('heart-data');
-
     this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-
-    console.log(this.headers, this.data);
+    // console.log(this.headers, this.data);
     this.http.isHavePerm('ecgd-del').then(v => {
       this.deleteBtn = v;
       this.deleteAllBtn = v;
     });
-
     this.http.isHavePerm('ecgd-download').then(v => {
       this.downloadBtn = v;
     });
 
-    // this.http.getDevHeader().then(data => {
-    //
-    //   if (data.status == 'ok') {
-    //     this.headers=data['headers'];
-    //   } else {
-    //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-    //     this.toastService.toast(toastCfg);
-    //     // this.router.navigate(['/login']);
-    //   }
-    // }).catch(err => {
-    //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-    //   this.toastService.toast(toastCfg);
-    // });
-    // this.http.getDevData().then(data => {
-    //   if (data.status == 'ok') {
-    //     this.data = data['data'];
-    //   } else {
-    //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-    //     this.toastService.toast(toastCfg);
-    //     // this.router.navigate(['/login']);
-    //   }
-    // }).catch(err => {
-    //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-    //   this.toastService.toast(toastCfg);
-    // });
   }
 
   headers: Array<cell> = [];
@@ -94,7 +66,6 @@ export class EcgdComponent implements OnInit {
   url: string = '/api/admin/heart/index';
 
   chart(params) {
-    console.log(params,'-=-=-=-=');
     this.userName = params['name'];
     this.sense_time = params['sense_time'];
     this.http.getEcgdDataChart(params['id']).then(data => {
@@ -109,7 +80,7 @@ export class EcgdComponent implements OnInit {
       }
     }).catch(err => {
       const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      console.error(err);
+      // console.error(err);
       this.toastService.toast(toastCfg);
     });
 
@@ -118,7 +89,6 @@ export class EcgdComponent implements OnInit {
   back() {
     this.showChartView = !this.showChartView;
   }
-
 
   //用户下载的时间转换函数，现在不需要了
   formatDate(time: any) {
@@ -142,7 +112,7 @@ export class EcgdComponent implements OnInit {
              return ;
            }
          });
-         console.log(this.data,downloadData,'downdata');
+         // console.log(this.data,downloadData,'downdata');
         link.setAttribute("download", downloadData['name']+'_' +downloadData['mobile']+'_'+ this.formatDate(new Date().getTime()) + '.txt');
         link.style.visibility = 'hidden';
         document.body.appendChild(link);

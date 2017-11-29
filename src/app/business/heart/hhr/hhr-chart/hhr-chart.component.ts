@@ -173,7 +173,7 @@ export class HhrChartComponent implements OnInit {
       }else{
           if(this.field){
               this.http.getHhrDataChart(this.chartId,this.selectedDateStart,this.selectedDateEnd,this.field).then(data => {
-                  console.log(data,'-------');
+                  // console.log(data,'-------');
                   if (data['status'] == 'ok') {
                       if(data['data'].length){
                           this.dataChart1 = data['data'];
@@ -193,7 +193,7 @@ export class HhrChartComponent implements OnInit {
                   }
               }).catch(err => {
                   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-                  console.error(err);
+                  // console.error(err);
                   this.toastService.toast(toastCfg);
               });
           }else{
@@ -212,13 +212,13 @@ export class HhrChartComponent implements OnInit {
   }
 
   chartClick(e){
-      console.log(e,'e');
+      // console.log(e,'e');
       this.dataIndex = e.dataIndex;
       this.clickTime = e.name;
       this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
 
       this.http.getHhrDataDetails(this.chartId,this.chartDetailsId).then(data => {
-          console.log(data,'data');
+          // console.log(data,'data');
           if (data['status'] == 'ok') {
                if(data['data']){
                   this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
@@ -251,7 +251,7 @@ export class HhrChartComponent implements OnInit {
           }
       }).catch(err => {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-          console.error(err);
+          // console.error(err);
           this.toastService.toast(toastCfg);
       });
 

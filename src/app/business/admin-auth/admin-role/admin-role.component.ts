@@ -244,7 +244,7 @@ export class AdminRoleComponent implements OnInit {
           }
           else {
               if(this.treeEditFlag==false){
-                this.http.rolesUpdateTreeEdit(this.id, this.description, this.name).then(data => {
+                this.http.rolesUpdateTreeEdit(this.id, submiData.description, submiData.name).then(data => {
                 if (data['status'] == 'ok') {
                   this.data = data['data'];
                   this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);

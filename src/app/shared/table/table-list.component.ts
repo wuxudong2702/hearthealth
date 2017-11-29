@@ -326,7 +326,7 @@ export class TableListComponent implements OnInit, OnChanges {
 
       if (this.data[i]['heart_data_id'] == undefined) {
         // console.log(this.delId, 'this.delId');
-        if (this.data[i]['dev_id'] == undefined1) {
+        if (this.data[i]['dev_id'] == undefined) {
           this.delId = '' + this.data[i]['id'];
         } else {
           this.delId = '' + this.data[i]['dev_id'];

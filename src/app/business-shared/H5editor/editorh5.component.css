@@ -142,7 +142,17 @@ div.preview-layer .preview-phone{
   background: url(images/iphone-bg.png) no-repeat no-repeat;
   z-index: 9999;
 }
-
+/*@media screen and (max-width:1370px){*/
+  /*div.preview-layer .preview-phone{*/
+    /*position: fixed;*/
+    /*width: 310px;*/
+    /*height: 640px;*/
+    /*left: 40%;*/
+    /*text-align: center;*/
+    /*background: url(images/iphone-bg.png) no-repeat no-repeat;*/
+    /*z-index: 9999;*/
+  /*}*/
+/*}*/
 #preview-html{
   position: absolute;
   width:361px;

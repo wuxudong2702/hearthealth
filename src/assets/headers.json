@@ -10,9 +10,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "请输入正确格式",
+      "valid_example": "格式：最多16位，不得包含非法字符",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 3
     },
     {
@@ -25,9 +25,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "格式：最多16位，不得包含非法字符",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
 
@@ -41,9 +41,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "格式：最多16位，不得包含非法字符",
       "required": true,
-      "pattern": "",
+      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {
@@ -106,7 +106,7 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": 12,
+      "valid_example": "请输入正确格式",
       "required": true,
       "pattern": "[0-9]+$",
       "input_type": 0
@@ -125,9 +125,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "长度超出限制",
       "required": true,
-      "pattern": "",
+      "pattern": "^.{0,50}$",
       "input_type": 0
     },
     {
@@ -140,9 +140,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "长度超出限制",
       "required": false,
-      "pattern": "",
+      "pattern": "^.{0,100}$",
       "input_type": 0
     },
     {
@@ -155,9 +155,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "长度超出限制",
       "required": true,
-      "pattern": "",
+      "pattern": "^.{0,50}$",
       "input_type": 0
     }
   ],
@@ -575,7 +575,7 @@
       "select_val": "",
       "valid_example": "格式：最多16位，不得包含非法字符",
       "required": true,
-      "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
+      "pattern": "^[0-9a-zA-Z_\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
     {
@@ -588,9 +588,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "长度超出限制",
       "required": false,
-      "pattern": "",
+      "pattern": "^.{0,50}$",
       "input_type": 0
     }
   ],
@@ -607,7 +607,7 @@
       "select_val": "",
       "valid_example": "请输入正确格式",
       "required": false,
-      "pattern": "^[a-zA-Z0-9]([-_a-zA-Z0-9]{5,19})+$",
+      "pattern": "^[a-zA-Z0-9][-_a-zA-Z0-9]{5,19}$",
       "input_type": 0
     },
     {
@@ -622,10 +622,9 @@
       "select_val": "",
       "valid_example": "请输入正确格式",
       "required": false,
-      "pattern": "[1-9][0-9]{4,}",
+      "pattern": "[1-9][0-9]{4,19}",
       "input_type": 0
     },
-
     {
       "key": "password",
       "show": false,
@@ -697,7 +696,7 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "2018-11-17",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "请输入正确格式",
       "required": false,
       "pattern": "",
       "input_type": 2
@@ -780,9 +779,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "请输入正确格式",
+      "valid_example": "长度超出限制",
       "required": false,
-      "pattern": "^[0-9\\u4e00-\\u9fa5]+$",
+      "pattern": "^.{0,50}$",
       "input_type": 0
     }
   ],
@@ -797,9 +796,9 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "请输入正确格式",
+      "valid_example": "格式：最多20位，不得包含非法字符",
       "required": false,
-      "pattern": "^[\\u4e00-\\u9fa5]+$",
+      "pattern": "^[\\u4e00-\\u9fa5]{1,20}$",
       "input_type": 0
     },
     {
@@ -828,7 +827,7 @@
       "pipe_params": "yyyy-MM-dd",
       "val": "",
       "select_val": [],
-      "valid_example": "",
+      "valid_example": "请输入正确格式",
       "required": false,
       "pattern": "",
       "input_type": 2
@@ -894,13 +893,12 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "",
+      "valid_example": "长度超出限制",
       "required": false,
-      "pattern": "",
+      "pattern": "^.{0,50}$",
       "input_type": 0
     }
   ],
-
   "logs": [
     {
       "key": "log_name",

@@ -84,7 +84,7 @@ export class NewsComponent implements OnInit {
       if (data['status'] == 'ok') {
         // this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
         this.HTML5Content = data['data'];
-        console.log(this.HTML5Content,' vcccccccccccccccccccc');
+        // console.log(this.HTML5Content,' vcccccccccccccccccccc');
         this.editor = true;
         this.isSelectShow = false;
 
@@ -166,7 +166,7 @@ export class NewsComponent implements OnInit {
   }
 
   save(html) {
-    console.log( html,'===============');
+    // console.log( html,'===============');
     if (this.flag) {
       this.http.uploadHtml5Page(html.title, html.description, html.label, html.header, html.content, html.footer).then(data => {
         if (data['status'] == 'ok') {
@@ -181,7 +181,7 @@ export class NewsComponent implements OnInit {
         this.toastService.toast(toastCfg);
       });
     } else {
-      console.log(html, ']]]]]]]]]]]]]]]]]');
+      // console.log(html, ']]]]]]]]]]]]]]]]]');
       this.http.upDataHtml5Page(this.id, html.title, html.description, html.label, html.header, html.content, html.footer).then(data => {
         if (data['status'] == 'ok') {
           this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);

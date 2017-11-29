@@ -54,14 +54,8 @@ export class AdminUserComponent implements OnInit {
   role_id: string;
   editId: number;
   flag: boolean = true;
+  userEditFlag: boolean = false;
 
-  // adminUserDel: boolean =false;// this.http.isHavePerm('admin-user-del');
-  // adminUserAdd: boolean = false;//this.http.isHavePerm('admin-user-add');
-  // adminUserEdit: boolean = false;//this.http.isHavePerm('admin-user-edit');
-  // deleteBtn: boolean = this.adminUserDel;
-  // deleteAllBtn: boolean = this.adminUserDel;
-  // addBtn: boolean = this.adminUserAdd;
-  // editBtn: boolean = this.adminUserEdit;
   deleteBtn: boolean = false;
   deleteAllBtn: boolean = false;
   addBtn: boolean = false;
@@ -127,18 +121,18 @@ export class AdminUserComponent implements OnInit {
   }
 
   submit(submitData) {
-      this.role_id ='';
-      this.remind.map( k =>{
+    this.remind.map( k =>{
           if(k.name == submitData['role_name']){
                   this.role_id = k.id;
           }
-      });
-    console.log(this.role_id ,'this.role_id ~~~~~~~~`');
+    });
+    // console.log(this.role_id ,'this.role_id ~~~~~~~~`');
+    // console.log(this.remind ,'this.remind ~~~~~~~~`');
+    // console.log(this.userEditFlag ,'this.userEditFlag ~~~~~~~~`');
     if (submitData.password_confirmation == submitData.password) {
-      if (this.role_id!=''&&this.role_id!=undefined) {
-
-          if (this.flag) {
-              //添加
+      if (this.flag) {
+          //添加
+          if (this.role_id!=''&&this.role_id!=undefined) {
               this.http.adminsAdd(this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
                   if (data['status'] == 'ok') {
                       this.data = data['data'];
@@ -159,9 +153,43 @@ export class AdminUserComponent implements OnInit {
                   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
                   this.toastService.toast(toastCfg);
               });
-          } else {
-              //编辑
-              this.http.adminsUpdate('' + this.data[this.editId]['id'], this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
+          }else{
+              const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色不存在！', 3000);
+              this.toastService.toast(toastCfg);
+          }
+      } else {
+          //编辑
+          if(this.userEditFlag){
+              //模糊搜索框被编辑
+              if (this.role_id!=''&&this.role_id!=undefined) {
+                  this.http.adminsUpdate('' + this.data[this.editId]['id'], this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
+                      if (data['status'] == 'ok') {
+                          this.data = data['data'];
+                          this.getHeartData();
+                          this.role_id = '';
+                          for (let i = 0; i < this.headers.length; i++) {
+                              if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
+                                  this.headers[i].show = false;
+                                  this.headers[i].required = false;
+                              }
+                          }
+                          this.addView = false;
+                          this.tableView = true;
+                          this.userEditFlag = false;
+                      } else {
+                          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                          this.toastService.toast(toastCfg);
+                      }
+                  }).catch(err => {
+                      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                      this.toastService.toast(toastCfg);
+                  });
+              }else{
+                  const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色不存在！', 3000);
+                  this.toastService.toast(toastCfg);
+              }
+          }else{
+              this.http.remindUpdate('' + this.data[this.editId]['id'], submitData.user_name, submitData.name, submitData.password).then(data => {
                   console.log(data);
                   if (data['status'] == 'ok') {
                       this.data = data['data'];
@@ -174,6 +202,7 @@ export class AdminUserComponent implements OnInit {
                       }
                       this.addView = false;
                       this.tableView = true;
+                      this.userEditFlag = false;
                   } else {
                       const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                       this.toastService.toast(toastCfg);
@@ -183,9 +212,6 @@ export class AdminUserComponent implements OnInit {
                   this.toastService.toast(toastCfg);
               });
           }
-      }else{
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色不存在！', 3000);
-          this.toastService.toast(toastCfg);
       }
     } else {
       const toastCfg = new ToastConfig(ToastType.ERROR, '', '密码不一致！', 3000);
@@ -206,7 +232,6 @@ export class AdminUserComponent implements OnInit {
         this.pagination.next_page_url = data['data']['next_page_url'];
         this.pagination.prev_page_url = data['data']['prev_page_url'];
         this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -289,8 +314,9 @@ export class AdminUserComponent implements OnInit {
     this.tableView = true;
   }
 
-  getSendRemind(remind) {
-    this.remind = remind;
+  getSendRemind(data) {
+    this.remind = data.remind;
+    this.userEditFlag = data.userEditFlag;
   };
 }
 

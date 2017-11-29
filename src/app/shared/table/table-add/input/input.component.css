@@ -1,13 +1,13 @@
 .addInputValue {
-  width: 400px;
+  width: 380px;
 }
 
 .validExample {
   height: 33px;
-  margin-left: 15px;
-  width: 355px;
+  margin-left: 10px;
+  width: 285px;
   padding-top: 7px;
-  padding-left: 50px;
+  padding-left: 10px;
 }
 .valid {
   height: 33px;
@@ -22,7 +22,7 @@
 }
 .TreeValidExample{
   height: 33px;
-  margin-left: 20px;
+  margin-left: 5px;
   width: 250px;
   padding-top: 7px;
   padding-left: 10px;
@@ -31,15 +31,16 @@
   width:300px;
 }
 
+
 @media screen and (max-width:1585px){
   .TreeValidExample{
     height: 33px;
-    margin-left: 10px;
-    width: 230px;
+    margin-left: 5px;
+    width: 200px;
     padding-top: 7px;
-    padding-left: 5px;
+    padding-left: 10px;
   }
   .treeInput{
-    width:180px;
+    width:150px;
   }
 }

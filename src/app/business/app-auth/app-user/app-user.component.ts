@@ -68,19 +68,16 @@ export class AppUserComponent implements OnInit {
 
   addView: boolean = false;
   tableView: boolean = true;
-
   addSubUserView: boolean = false;
   subUsersView: boolean = false;
 
   pagination: paginationObj = new paginationObj();
-
   per_page: string = null;
   find_key: string = null;
   find_val: string = null;
   sort_key: string = null;
   sort_val: string = null;
   url: string = '/api/admin/app/user/index';
-
 
   sub_pagination: paginationObj = new paginationObj();
   sub_per_page: string = null;
@@ -159,7 +156,8 @@ export class AppUserComponent implements OnInit {
 
   submit(submitData) {
 
-    if (this.addEditFlag) {//addEditFlag=true的时候是添加
+    if (this.addEditFlag) {
+      //添加
       let role = this.parentSubFlag ? '0' : '1';
       this.http.userAdd(this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {
@@ -182,7 +180,8 @@ export class AppUserComponent implements OnInit {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
         this.toastService.toast(toastCfg);
       });
-    } else {//编辑提交
+    } else {
+      //编辑提交
       let role = this.parentSubFlag ? '0' : '1';
       this.http.userUpdate(this.editId, this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {

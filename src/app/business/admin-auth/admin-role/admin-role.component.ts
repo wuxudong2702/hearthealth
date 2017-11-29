@@ -110,7 +110,6 @@ export class AdminRoleComponent implements OnInit {
     this.http.getZtreeNodes().then(data => {
       this.nodes = data['nodes'];
     });
-    console.log(this.nodes, '-------默认全选');
     this.permsAdd = 'hearthealth,ecgd-data-show,ecgd-chart-show,ecgd-del,ecgd-download,hhr-show,hhr-del,heart-dev-show,heart-dev-add,heart-dev-edit,heart-dev-del,info-show,info-add,info-edit,info-del,app-upgrade-show,app-upgrade-add,app-upgrade-edit,app-upgrade-del,app-auth-show,app-user-show,app-user-add,app-user-edit,app-user-del,app-role-show,app-role-edit,admin-show,admin-user-show,admin-user-add,admin-user-edit,admin-user-del,admin-role-show,admin-role-add,admin-role-edit,admin-role-del,log';
     this.isShow = false;
     this.isShowTittle = false;
@@ -138,8 +137,8 @@ export class AdminRoleComponent implements OnInit {
 
   edit(id) {
     this.id = this.data[id]['id'];
-    console.log(this.id, '编辑的id');
-    console.log(this.data[id], '编辑的数据');
+    // console.log(this.id, '编辑的id');
+    // console.log(this.data[id], '编辑的数据');
     this.isShow = false;
     this.isShowTittle = true;
     this.flag = false;
@@ -161,7 +160,6 @@ export class AdminRoleComponent implements OnInit {
     });
     this.http.rolesPerms(this.id).then(data => {
       if (data['status'] == 'ok') {
-        console.log(data, '获取编辑树data');
         this.updateNodes = data['data'];
         this.addView = true;
         this.tableView = false;
@@ -182,30 +180,24 @@ export class AdminRoleComponent implements OnInit {
   }
 
   addSubmit(CheckedNodes: any) {
-    console.log('CheckedNodes', CheckedNodes);
     this.permsArrayAdd = CheckedNodes['CheckedNodes'].map(v => {
       return v.key;
     });
     this.permsAdd = this.permsArrayAdd.join(',');
-    // console.log('--------添加----------', this.permsAdd);
   }
 
   editSubmit(CheckedNodes: any) {
     this.treeEditFlag=true;
-    // console.log('CheckedNodes', CheckedNodes);
     this.permsArrayUpdate = CheckedNodes['CheckedNodes'].map(v => {
       return v.id;
     });
     this.permsUpdate = this.permsArrayUpdate.join(',');
-    // console.log(this.name, this.description);
-    // console.log(this.permsUpdate, 'this.permsUpdate-----------');
   }
 
   submit(submiData) {
-      // console.log(submiData, 'submiData');
       if (this.flag) {
           //添加
-          console.log(this.permsAdd, 'this.permsAdd');
+          // console.log(this.permsAdd, 'this.permsAdd');
           if (this.permsAdd) {
         this.http.rolesAdd(submiData.name, submiData.description, this.permsAdd).then(data => {
           if (data['status'] == 'ok') {
@@ -229,7 +221,7 @@ export class AdminRoleComponent implements OnInit {
       }
       } else {
           //编辑
-          console.log(this.permsUpdate, 'this.permsUpdate');
+          // console.log(this.permsUpdate, 'this.permsUpdate');
           if (this.permsUpdate) {
               this.http.rolesUpdate(this.id, submiData.description, submiData.name, this.permsUpdate).then(data => {
               if (data['status'] == 'ok') {
@@ -252,7 +244,7 @@ export class AdminRoleComponent implements OnInit {
           }
           else {
               if(this.treeEditFlag==false){
-                this.http.rolesUpdateTreeEdit(this.id, this.description, this.name).then(data => {
+                this.http.rolesUpdateTreeEdit(this.id, submiData.description, submiData.name).then(data => {
                 if (data['status'] == 'ok') {
                   this.data = data['data'];
                   this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
@@ -291,7 +283,6 @@ export class AdminRoleComponent implements OnInit {
         this.pagination.next_page_url = data['data']['next_page_url'];
         this.pagination.prev_page_url = data['data']['prev_page_url'];
         this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -359,7 +350,6 @@ export class AdminRoleComponent implements OnInit {
   }
 
   sendFormValue(formValue) {
-    // console.log(formValue,'formValue');
     this.name = formValue.name;
     this.description = formValue.description;
   }

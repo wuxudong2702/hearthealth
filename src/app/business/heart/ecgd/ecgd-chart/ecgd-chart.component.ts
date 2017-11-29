@@ -22,13 +22,6 @@ export class EcgdChartComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.dateList = this.dataChart1.map(function (item) {
-    //   return item[0];
-    // });
-    // this.valueList = this.dataChart1.map(function (item) {
-    //   return item[1];
-    // });
-
     this.valueList=this.dataChart1;
     this.dateList=this.dataChart1.map(function (item,index) {
         return index+1;

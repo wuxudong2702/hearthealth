@@ -185,7 +185,6 @@ export class EcgdComponent implements OnInit {
   set (set: string) {
     this.http.setHeader('heart-data', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('heart-data');
-      console.log(this.headers, '------0-0-0-');
     });
   }
 
@@ -202,7 +201,6 @@ export class EcgdComponent implements OnInit {
         this.pagination.next_page_url = data['data']['next_page_url'];
         this.pagination.prev_page_url = data['data']['prev_page_url'];
         this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);

@@ -134,7 +134,7 @@ export class Editorh5Component implements OnInit {
     //   return false;
     // });
     // if(this.dataEditor.length!=1){
-    console.log('1001', this.dataEditor, this.HTML5Content);
+    // console.log('1001', this.dataEditor, this.HTML5Content);
     this.html5=this.HTML5Content;
     this.title = this.dataEditor['title'];
     this.description = this.dataEditor['description'];
@@ -200,8 +200,8 @@ export class Editorh5Component implements OnInit {
         this.toastService.toast(toastCfg);
       return ;
     }
-    if(!this.label.match(/[a-zA-Z]+/)){
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', '标签必须是字母！', 3000);
+    if(!this.label.match(/^[A-Za-z]{1,50}$/)){
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', '标签必须是英文字母,最多50位！', 3000);
         this.toastService.toast(toastCfg);
       return ;
     }

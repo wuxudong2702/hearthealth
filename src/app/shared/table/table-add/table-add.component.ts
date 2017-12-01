@@ -34,7 +34,7 @@ export class TableAddComponent implements OnInit {
   submitData: string;
   addFormValue: string;
   checkValue: boolean = false;
-  matchUnValid: boolean = true;
+  matchUnValid: boolean = false;
   form: FormGroup;
 
   constructor(private fcs: FormControlService, private service: ShareService) {

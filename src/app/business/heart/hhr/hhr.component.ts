@@ -55,7 +55,6 @@ export class HhrComponent implements OnInit {
 
 
   chart(data) {
-      // console.log(data,'-----');
       // console.log(this.data,'this.data');
       this.userName = data.name;
       this.chartId = data.id;

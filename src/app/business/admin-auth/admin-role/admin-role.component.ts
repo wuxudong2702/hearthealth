@@ -217,6 +217,9 @@ export class AdminRoleComponent implements OnInit {
       } else {
           //编辑
           // console.log(this.permsUpdate, 'this.permsUpdate');
+          if(submiData.description==undefined){
+             submiData.description='';
+          }
           if (this.permsUpdate) {
               this.http.rolesUpdate(this.id, submiData.description, submiData.name, this.permsUpdate).then(data => {
                   if (data['status'] == 'ok') {

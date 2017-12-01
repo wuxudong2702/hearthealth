@@ -75,7 +75,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
 
     let editorElement = this.el.nativeElement.querySelector('div.c-editor-content');
     let toolbarElement = this.el.nativeElement.querySelector('div.c-editor-toolbar');
-    console.log("editor component", this.dataEditor,editorElement.children[0]);
+    // console.log("editor component", this.dataEditor,editorElement.children[0]);
 
     this.quill = new Quill(editorElement, {
       modules: {
@@ -89,8 +89,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
 
 
     if (this.HTML5Content) {
-         console.log(this.HTML5Content,'999');
-           this.quill.pasteHTML(this.HTML5Content);
+      this.quill.pasteHTML(this.HTML5Content);
       // this.onTextChange.emit(this.Html);
     }
     // else{

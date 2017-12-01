@@ -269,7 +269,6 @@ export class AppUserComponent implements OnInit {
   }
 
   set (set: string) {
-    console.log(set,'set000');
     this.http.setHeader('users', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('users');
     });

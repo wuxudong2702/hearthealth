@@ -953,6 +953,7 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+
   getHhrDataDetails(chartId: number, id: number): Promise<any> {
     const url: string = '/api/admin/report/detail';
     this.spinService.spin(true);
@@ -985,7 +986,6 @@ export class ApiService {
   }
 
   //home
-
   homeData(): Promise<any> {
     const url: string = '/api/admin/statistics/data';
     this.spinService.spin(true);

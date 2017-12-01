@@ -28,21 +28,20 @@ export class AppUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('users');
-
-    this.getHeartData(this.url);
-    this.http.isHavePerm('app-user-del').then(v => {
-      this.deleteBtn = v;
-      this.deleteAllBtn = v;
-    });
-
-    this.http.isHavePerm('app-user-add').then(v => {
-      this.addBtn = v;
-    });
-    this.http.isHavePerm('app-user-edit').then(v => {
-      this.editBtn = v;
-    });
-
+    if(this.http.hasToken()){
+        this.headers = this.http.getHeader('users');
+        this.getHeartData(this.url);
+        this.http.isHavePerm('app-user-del').then(v => {
+            this.deleteBtn = v;
+            this.deleteAllBtn = v;
+        });
+        this.http.isHavePerm('app-user-add').then(v => {
+            this.addBtn = v;
+        });
+        this.http.isHavePerm('app-user-edit').then(v => {
+            this.editBtn = v;
+        });
+    }
   }
 
   headers: Array<cell> = [];
@@ -258,7 +257,7 @@ export class AppUserComponent implements OnInit {
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.pagination.first_page_url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   paginationChange(parmas) {

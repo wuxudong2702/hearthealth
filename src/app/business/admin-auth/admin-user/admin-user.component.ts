@@ -30,19 +30,21 @@ export class AdminUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('admins');
-    this.getHeartData(this.url);
-    console.log(this.headers, this.data);
-    this.http.isHavePerm('admin-user-del').then(v => {
-      this.deleteBtn = v;
-      this.deleteAllBtn = v;
-    });
-    this.http.isHavePerm('admin-user-edit').then(v => {
-      this.editBtn = v;
-    });
-    this.http.isHavePerm('admin-user-add').then(v => {
-      this.addBtn = v;
-    });
+    if(this.http.hasToken()){
+        this.headers = this.http.getHeader('admins');
+        this.getHeartData(this.url);
+        console.log(this.headers, this.data);
+        this.http.isHavePerm('admin-user-del').then(v => {
+            this.deleteBtn = v;
+            this.deleteAllBtn = v;
+        });
+        this.http.isHavePerm('admin-user-edit').then(v => {
+            this.editBtn = v;
+        });
+        this.http.isHavePerm('admin-user-add').then(v => {
+            this.addBtn = v;
+        });
+    }
   }
 
   nodes: any;
@@ -265,7 +267,7 @@ export class AdminUserComponent implements OnInit {
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.pagination.first_page_url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   del(id: string) {

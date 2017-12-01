@@ -29,63 +29,63 @@ export class HomeComponent implements OnInit {
 
 
     ngOnInit() {
-        this.http.homeData().then(data => {
-            if (data['status'] == 'ok') {
-                // this.valueList = Object.keys(data['data']);
-                this.valueList = ["用户人数","账户个数","管理员人数","心电个数","档案个数"];
-                this.dataList = Object.values(data['data']);
-                // console.log(this.dataList);
+        if(this.http.hasToken()){
+            this.http.homeData().then(data => {
+                if (data['status'] == 'ok') {
+                    // this.valueList = Object.keys(data['data']);
+                    this.valueList = ["用户人数","账户个数","管理员人数","心电个数","档案个数"];
+                    this.dataList = Object.values(data['data']);
+                    // console.log(this.dataList);
 
-                this.chartOption = {
-                    color: ['#3aafdb'],
-                    tooltip : {
-                        trigger: 'axis',
-                        axisPointer : {
-                            type : 'shadow',
-                            shadowStyle:{
-                                color:'rgba(224,224,224,0.3)'
+                    this.chartOption = {
+                        color: ['#3aafdb'],
+                        tooltip : {
+                            trigger: 'axis',
+                            axisPointer : {
+                                type : 'shadow',
+                                shadowStyle:{
+                                    color:'rgba(224,224,224,0.3)'
+                                }
                             }
-                        }
-                    },
-                    grid: {
-                        left: '8%',
-                        right: '10%',
-                        top: '30%',
-                        containLabel: true,
-                    },
-                    xAxis : [
-                        {
-                            type : 'category',
-                            data : this.valueList,
-                            axisTick: {
-                                alignWithLabel: true
+                        },
+                        grid: {
+                            left: '8%',
+                            right: '10%',
+                            top: '30%',
+                            containLabel: true,
+                        },
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data : this.valueList,
+                                axisTick: {
+                                    alignWithLabel: true
+                                }
                             }
-                        }
-                    ],
-                    yAxis : [
-                        {
-                            type : 'value',
-                            // splitLine:{show: false}
-                        }
-                    ],
-                    series : [
-                        {
-                            type:'bar',
-                            barWidth: '50%',
-                            data:this.dataList
-                        }
-                    ]
-                };
-            } else {
-                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value',
+                                // splitLine:{show: false}
+                            }
+                        ],
+                        series : [
+                            {
+                                type:'bar',
+                                barWidth: '50%',
+                                data:this.dataList
+                            }
+                        ]
+                    };
+                } else {
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                    this.toastService.toast(toastCfg);
+                }
+            }).catch(err => {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
                 this.toastService.toast(toastCfg);
-            }
-        }).catch(err => {
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-            this.toastService.toast(toastCfg);
-        });
-
-
+            });
+        }
     }
 
 

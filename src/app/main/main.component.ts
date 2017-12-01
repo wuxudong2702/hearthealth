@@ -168,9 +168,7 @@ export class MainComponent implements OnInit {
      */
     ngOnInit() {
       let hasToken = this.apiService.hasToken();
-      console.log("--------------------------main");
       if(!hasToken){
-        console.log("--------------------------navigate login");
         this.router.navigate(['/login']);
       }else{
         this.apiService.getMenu().then(data => {

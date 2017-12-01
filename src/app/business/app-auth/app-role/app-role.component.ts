@@ -26,13 +26,13 @@ export class AppRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('app-roles');
-    this.getHeartData(this.url);
-    // console.log(this.headers, this.data);
-
-    this.http.isHavePerm('app-role-edit').then(v => {
-      this.editBtn = v;
-    });
+    if(this.http.hasToken()){
+        this.headers = this.http.getHeader('app-roles');
+        this.getHeartData(this.url);
+        this.http.isHavePerm('app-role-edit').then(v => {
+            this.editBtn = v;
+        });
+    }
   }
 
   headers: Array<cell> = [];
@@ -123,9 +123,9 @@ export class AppRoleComponent implements OnInit {
   }
 
   search(searchObj: searchObj) {
-    this.find_val = searchObj.searchValue;
-    this.find_key = searchObj.selectValue;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+      this.find_val = searchObj.searchValue;
+      this.find_key = searchObj.selectValue;
+      this.getHeartData(this.pagination.first_page_url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   set (set: string) {

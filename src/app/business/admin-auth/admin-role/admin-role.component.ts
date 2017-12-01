@@ -194,68 +194,67 @@ export class AdminRoleComponent implements OnInit {
           //添加
           // console.log(this.permsAdd, 'this.permsAdd');
           if (this.permsAdd) {
-        this.http.rolesAdd(submiData.name, submiData.description, this.permsAdd).then(data => {
-          if (data['status'] == 'ok') {
-            this.data = data['data'];
-            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-            this.tableView = true;
-            this.addView = false;
-            this.addTreeView = false;
-            this.editTreeView = false;
+              this.http.rolesAdd(submiData.name, submiData.description, this.permsAdd).then(data => {
+                  if (data['status'] == 'ok') {
+                    this.data = data['data'];
+                    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                    this.tableView = true;
+                    this.addView = false;
+                    this.addTreeView = false;
+                    this.editTreeView = false;
+                  } else {
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                    this.toastService.toast(toastCfg);
+                  }
+              }).catch(err => {
+                const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                this.toastService.toast(toastCfg);
+              });
           } else {
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
             this.toastService.toast(toastCfg);
           }
-        }).catch(err => {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-          this.toastService.toast(toastCfg);
-        });
-      } else {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
-        this.toastService.toast(toastCfg);
-      }
       } else {
           //编辑
           // console.log(this.permsUpdate, 'this.permsUpdate');
           if (this.permsUpdate) {
               this.http.rolesUpdate(this.id, submiData.description, submiData.name, this.permsUpdate).then(data => {
-              if (data['status'] == 'ok') {
-                this.data = data['data'];
-                this.permsUpdate='';
-                this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-                this.addView = false;
-                this.addTreeView = false;
-                this.editTreeView = false;
-                this.tableView = true;
-                this.treeEditFlag=false;
-              } else {
-                const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-                this.toastService.toast(toastCfg);
-              }
-            }).catch(err => {
-              const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-              this.toastService.toast(toastCfg);
-            });
-          }
-          else {
-              if(this.treeEditFlag==false){
-                this.http.rolesUpdateTreeEdit(this.id, submiData.description, submiData.name).then(data => {
-                if (data['status'] == 'ok') {
-                  this.data = data['data'];
-                  this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-                  this.addView = false;
-                  this.addTreeView = false;
-                  this.editTreeView = false;
-                  this.tableView = true;
-                  this.treeEditFlag=false;
-                } else {
-                  const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-                  this.toastService.toast(toastCfg);
-                }
+                  if (data['status'] == 'ok') {
+                    this.data = data['data'];
+                    this.permsUpdate='';
+                    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                    this.addView = false;
+                    this.addTreeView = false;
+                    this.editTreeView = false;
+                    this.tableView = true;
+                    this.treeEditFlag=false;
+                  } else {
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                    this.toastService.toast(toastCfg);
+                  }
               }).catch(err => {
                 const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
                 this.toastService.toast(toastCfg);
               });
+          }else {
+              if(this.treeEditFlag==false){
+                  this.http.rolesUpdateTreeEdit(this.id, submiData.description, submiData.name).then(data => {
+                      if (data['status'] == 'ok') {
+                        this.data = data['data'];
+                        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                        this.addView = false;
+                        this.addTreeView = false;
+                        this.editTreeView = false;
+                        this.tableView = true;
+                        this.treeEditFlag=false;
+                      } else {
+                        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+                        this.toastService.toast(toastCfg);
+                      }
+                  }).catch(err => {
+                    const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+                    this.toastService.toast(toastCfg);
+                  });
             }else {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择权限', 3000);
               this.toastService.toast(toastCfg);
@@ -311,7 +310,7 @@ export class AdminRoleComponent implements OnInit {
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.pagination.first_page_url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   delAll(arr: Array<any>) {

@@ -59,7 +59,7 @@ export class ApiService {
   login(userName: string, password: string): Promise<any> {
     const url: string = '/api/admin/auth/login';
     this.spinService.spin(true);
-    console.log(this.spinService.getSpin(), 'ppppppp');
+    // console.log(this.spinService.getSpin(), 'ppppppp');
 
     return this.httpClient.post(url, {
       name: userName,
@@ -107,7 +107,7 @@ export class ApiService {
         this.sessionStorageService.remove('headers');
         this.sessionStorageService.remove('token');
         this.sessionStorageService.remove('menu');
-        // conso
+
         return data;
       })
       .catch(this.handleError);
@@ -228,11 +228,11 @@ export class ApiService {
 
   //获取users表头
   getHeader(table: string): any {
-
     let header: any = this.headers[table];
     let config: any = this.headerConfig[table];
+    // console.log(config, '1111111111111');
+
     let _header: Array<any> = [];
-    if(!header) return;
     _header = header.map(v => {
       let key: string = v['key'];
       if (config && config[key]) {
@@ -241,7 +241,7 @@ export class ApiService {
       }
       return v;
     });
-    console.log(_header, '2222222');
+    // console.log(_header, '2222222');
     return _header;
   }
 
@@ -295,7 +295,7 @@ export class ApiService {
   }
 
   getSUbUserData(url: string = '/api/admin/app/user/index', parent_id: string = null, count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
-    console.log(url, count, find_key, find_val, '');
+    // console.log(url, count, find_key, find_val, '');
     this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -309,7 +309,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log(data, 'getData全局获取data');
+        // console.log(data, 'getData全局获取data');
         return data
       })
       .catch(err => {
@@ -366,7 +366,7 @@ export class ApiService {
   }
 
   ecgdDownloadData(ids: string) {
-    console.log(ids);
+    // console.log(ids);
     const url: string = '/api/admin/heart/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + ids;
     return this.http.get(url)
       .map(res => new Blob([res.text()], {type: 'txt/plain'}))
@@ -428,7 +428,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log(info_id, data, '6567890-9876567890-=');
+        // console.log(info_id, data, '6567890-9876567890-=');
         return data
       })
       .catch(this.handleError);
@@ -471,7 +471,7 @@ export class ApiService {
     })
       .toPromise()
       .then(data => {
-        console.log(data, '======');
+        // console.log(data, '======');
         return data;
       })
       .catch(this.handleError);
@@ -685,7 +685,7 @@ export class ApiService {
 //app-user
 
   userAdd(parent_id: string = null, submitData, role) {
-    console.log(submitData, '0000000000000000000000');
+    // console.log(submitData, '0000000000000000000000');
     const url: string = '/api/admin/app/user/add';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -750,7 +750,7 @@ export class ApiService {
   }
 
   getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
-    console.log(url, count, find_key, find_val, '全局获取数据发送的参数');
+    // console.log(url, count, find_key, find_val, '全局获取数据发送的参数');
     this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -763,7 +763,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log(data, 'getData全局获取data');
+        // console.log(data, 'getData全局获取data');
         return data
       })
       .catch(err => {
@@ -772,7 +772,7 @@ export class ApiService {
   }
 
   appRoleSubmit(id: string, users_count: number) {
-    console.log(id, users_count, '89000000000000');
+    // console.log(id, users_count, '89000000000000');
     const url: string = "/api/admin/app/role/update";
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -781,7 +781,7 @@ export class ApiService {
     })
       .toPromise()
       .then(data => {
-        console.log(data, '======');
+        // console.log(data, '======');
         return data;
       })
       .catch(this.handleError);
@@ -892,7 +892,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log('getNewsData', data);
+        // console.log('getNewsData', data);
         return data;
       })
       .catch(this.handleError);
@@ -906,7 +906,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log('getNewsData', data);
+        // console.log('getNewsData', data);
         return data;
       })
       .catch(this.handleError);
@@ -920,7 +920,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log('getNewsData', data);
+        // console.log('getNewsData', data);
         return data;
       })
       .catch(this.handleError);

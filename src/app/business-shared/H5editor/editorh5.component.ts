@@ -161,15 +161,13 @@ export class Editorh5Component implements OnInit {
     }else{
       this.html5=this.HTML5Content;
     }
-    if(isNullOrUndefined(this.title)){
-      this.title='';
-    }
+
     if(isNullOrUndefined(this.html5)){
       this.html5='';
     }
     let doc = this.iframe.nativeElement.contentDocument || this.iframe.nativeElement.contentWindow;
     doc.open();
-    doc.write(htmlH + `<h3>` + this.title + `</h3>`  + this.html5 + htmlL);
+    doc.write(htmlH    + this.html5 + htmlL);
     doc.close();
   }
 
@@ -202,7 +200,12 @@ export class Editorh5Component implements OnInit {
         this.toastService.toast(toastCfg);
       return ;
     }
-    console.log(this.html5,'this.html5');
+    // console.log(this.label.match(/[a-zA-Z]+/),'--------------lable');
+    if(!this.label.match(/[a-zA-Z]+/)){
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', '标签必须是字母！', 3000);
+        this.toastService.toast(toastCfg);
+      return ;
+    }
     this.onSave.emit({
       header: htmlH,
       content: this.html5,

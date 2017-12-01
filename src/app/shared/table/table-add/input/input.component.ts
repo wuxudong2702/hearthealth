@@ -21,6 +21,7 @@ export class InputComponent implements OnInit {
   @Output() onSendId = new EventEmitter<any>();
   @Output() onSendRemind = new EventEmitter<any>();
   @Output() onSendFormValue = new EventEmitter<any>();
+  @Output() onSendMatchValid = new EventEmitter<any>();
   @Output() onDate = new EventEmitter<any>();
 
   date = '';
@@ -30,13 +31,20 @@ export class InputComponent implements OnInit {
   role_id:string;
   formValue:string;
   isMatch:boolean = true;
+  matchUnValid:boolean = false;
 
 
   change(){
       this.formValue = this.form.value;
-      // console.log(this.formValue,'this.formValue');
+      console.log(this.formValue,'this.formValue');
       this.onSendFormValue.emit(this.formValue);
       this.isMatch = this.formValue['password'] == this.formValue['password_confirmation'];
+      if(this.field.key=='password'|| this.field.key=='password_confirmation'){
+          this.matchUnValid = !this.isMatch && this.isDirty && this.field.key=='password_confirmation'&&this.field.val!='';
+      }else{
+          this.matchUnValid = false;
+      }
+      this.onSendMatchValid.emit(this.matchUnValid);
       if(this.field.key=='role_name'){
           this.isRemind = true;
           this.userEditFlag = true;

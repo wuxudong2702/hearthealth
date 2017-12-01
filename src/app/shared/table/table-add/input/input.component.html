@@ -36,6 +36,8 @@
     autocomplete="new-password"
     (keyup)="change()"
     (click)="change()"
+    (change)="change()"
+    (mouseleave)="change()"
   >
 
   <input
@@ -83,8 +85,8 @@
      <div *ngIf="field.required==true&&field.val==''" class="alert-danger valid " [class.TreeValidExample]="treeAdd" >{{field.name+'是必填项！'}}</div>
     <div *ngIf="field.val!=''" class="alert-danger validExample " [class.TreeValidExample]="treeAdd">{{field.valid_example}}</div>
   </div>
-  <div class="" *ngIf="!isMatch">
-    <div *ngIf="field.required==true&&field.val==''" class="alert-danger valid " [class.TreeValidExample]="treeAdd" >{{
+  <div class="" *ngIf="!isMatch && isDirty && field.key=='password_confirmation'">
+    <div  *ngIf="field.val!=''" class="alert-danger valid " [class.TreeValidExample]="treeAdd" >{{
       '两次密码不匹配'}}</div>
   </div>
 </div>

@@ -21,21 +21,20 @@ export class PackagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('app-upgrades');
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-
-
-    this.http.isHavePerm('app-upgrade-del').then(v => {
-      this.deleteBtn = v;
-      this.deleteAllBtn = v;
-    });
-
-    this.http.isHavePerm('app-upgrade-edit').then(v => {
-      this.editBtn = v;
-    });
-    this.http.isHavePerm('app-upgrade-add').then(v => {
-      this.addBtn = v;
-    });
+      if(this.http.hasToken()){
+          this.headers = this.http.getHeader('app-upgrades');
+          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.http.isHavePerm('app-upgrade-del').then(v => {
+              this.deleteBtn = v;
+              this.deleteAllBtn = v;
+          });
+          this.http.isHavePerm('app-upgrade-edit').then(v => {
+              this.editBtn = v;
+          });
+          this.http.isHavePerm('app-upgrade-add').then(v => {
+              this.addBtn = v;
+          });
+      }
   }
 
   headers: Array<cell> = [];

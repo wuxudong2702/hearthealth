@@ -26,13 +26,13 @@ export class AppRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('app-roles');
-    this.getHeartData(this.url);
-    // console.log(this.headers, this.data);
-
-    this.http.isHavePerm('app-role-edit').then(v => {
-      this.editBtn = v;
-    });
+    if(this.http.hasToken()){
+        this.headers = this.http.getHeader('app-roles');
+        this.getHeartData(this.url);
+        this.http.isHavePerm('app-role-edit').then(v => {
+            this.editBtn = v;
+        });
+    }
   }
 
   headers: Array<cell> = [];

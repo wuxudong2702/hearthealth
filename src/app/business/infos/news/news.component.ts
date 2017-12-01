@@ -26,19 +26,21 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('infos');
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-    this.http.isHavePerm('info-del').then(v => {
-      this.deleteBtn = v;
-      this.deleteAllBtn = v;
-    });
+    if(this.http.hasToken()){
+        this.headers = this.http.getHeader('infos');
+        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+        this.http.isHavePerm('info-del').then(v => {
+            this.deleteBtn = v;
+            this.deleteAllBtn = v;
+        });
 
-    this.http.isHavePerm('info-edit').then(v => {
-      this.editH5Btn = v;
-    });
-    this.http.isHavePerm('info-add').then(v => {
-      this.addBtn = v;
-    });
+        this.http.isHavePerm('info-edit').then(v => {
+            this.editH5Btn = v;
+        });
+        this.http.isHavePerm('info-add').then(v => {
+            this.addBtn = v;
+        });
+    }
   }
 
   headers: Array<cell> = [];

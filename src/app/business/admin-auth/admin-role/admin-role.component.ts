@@ -27,27 +27,22 @@ export class AdminRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('roles');
-
-    this.getHeartData(this.url);
-    console.log(this.headers, this.data);
-    this.http.isHavePerm('admin-role-del').then(v => {
-      this.deleteBtn = v;
-      this.deleteAllBtn = v;
-    });
-    this.http.isHavePerm('admin-role-edit').then(v => {
-      this.editZTreeBtn = v;
-    });
-    this.http.isHavePerm('admin-role-add').then(v => {
-      this.addBtn = v;
-    });
-    this.getNodes();
-    //  this.http.getAdminRoleHeader().then(data => {
-    //      this.headers = data['headers'];
-    //  });
-    //  this.http.getAdminRoleData().then(data => {
-    //      this.data = data['data'];
-    //  });
+    if(this.http.hasToken()){
+      this.headers = this.http.getHeader('roles');
+        this.getHeartData(this.url);
+        console.log(this.headers, this.data);
+        this.http.isHavePerm('admin-role-del').then(v => {
+            this.deleteBtn = v;
+            this.deleteAllBtn = v;
+        });
+        this.http.isHavePerm('admin-role-edit').then(v => {
+            this.editZTreeBtn = v;
+        });
+        this.http.isHavePerm('admin-role-add').then(v => {
+            this.addBtn = v;
+        });
+        this.getNodes();
+    }
   }
 
   nodes: any;

@@ -30,19 +30,21 @@ export class AdminUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('admins');
-    this.getHeartData(this.url);
-    console.log(this.headers, this.data);
-    this.http.isHavePerm('admin-user-del').then(v => {
-      this.deleteBtn = v;
-      this.deleteAllBtn = v;
-    });
-    this.http.isHavePerm('admin-user-edit').then(v => {
-      this.editBtn = v;
-    });
-    this.http.isHavePerm('admin-user-add').then(v => {
-      this.addBtn = v;
-    });
+    if(this.http.hasToken()){
+        this.headers = this.http.getHeader('admins');
+        this.getHeartData(this.url);
+        console.log(this.headers, this.data);
+        this.http.isHavePerm('admin-user-del').then(v => {
+            this.deleteBtn = v;
+            this.deleteAllBtn = v;
+        });
+        this.http.isHavePerm('admin-user-edit').then(v => {
+            this.editBtn = v;
+        });
+        this.http.isHavePerm('admin-user-add').then(v => {
+            this.addBtn = v;
+        });
+    }
   }
 
   nodes: any;

@@ -17,8 +17,10 @@ export class LogComponent implements OnInit {
   constructor(private http: ApiService,private toastService: ToastService) {}
 
   ngOnInit() {
-     this.headers= this.http.getHeader('logs');
-     this.getHeartData(this.url);
+      if(this.http.hasToken()){
+          this.headers= this.http.getHeader('logs');
+          this.getHeartData(this.url);
+      }
   }
 
   // setOperate

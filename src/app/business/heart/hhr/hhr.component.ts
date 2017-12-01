@@ -18,9 +18,10 @@ export class HhrComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('reports');
-    this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-
+    if(this.http.hasToken()){
+        this.headers = this.http.getHeader('reports');
+        this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    }
   }
 
   dataChart: Array<any> = [];

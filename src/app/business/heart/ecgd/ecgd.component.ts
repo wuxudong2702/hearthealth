@@ -26,17 +26,18 @@ export class EcgdComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.headers = this.http.getHeader('heart-data');
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
-    // console.log(this.headers, this.data);
-    this.http.isHavePerm('ecgd-del').then(v => {
-      this.deleteBtn = v;
-      this.deleteAllBtn = v;
-    });
-    this.http.isHavePerm('ecgd-download').then(v => {
-      this.downloadBtn = v;
-    });
-
+    if(this.http.hasToken()){
+        this.headers = this.http.getHeader('heart-data');
+        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+        // console.log(this.headers, this.data);
+        this.http.isHavePerm('ecgd-del').then(v => {
+            this.deleteBtn = v;
+            this.deleteAllBtn = v;
+        });
+        this.http.isHavePerm('ecgd-download').then(v => {
+            this.downloadBtn = v;
+        });
+    }
   }
 
   headers: Array<cell> = [];

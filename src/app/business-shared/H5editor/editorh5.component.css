@@ -139,7 +139,7 @@ div.preview-layer .preview-phone{
   left: 40%;
   text-align: center;
 
-  background: url(images/iphone-bg.png) no-repeat no-repeat;
+  background: url(images/iphone-md.png) no-repeat no-repeat;
   z-index: 9999;
 }
 /*@media screen and (max-width:1370px){*/
@@ -345,14 +345,14 @@ input:-ms-input-placeholder{color:#FFF;font-size:14px;
 /*}*/
 .iframe1{
   position: fixed;
-  width: 363px;
-  height: 636px;
+  width: 309px;
+  height: 544px;
   left: 40%;
   background: white;
   text-align: center;
   z-index: 9999;
-  margin-left: 23px;
-  margin-top: 100px;
+  margin-left: 20px;
+  margin-top: 84px;
 
 }
 

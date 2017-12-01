@@ -101,10 +101,12 @@ export class EcgdChartComponent implements OnInit {
               {
                   // type: 'value',
                   name : '单位：mv',
-                  scale: true,
-                  interval:5,
-                  max:80,
-                  min:-80,
+                  // scale: true,
+                  // interval:1,
+                  // max:80,
+                  // min:-80,
+                  // max:'dataMax',
+                  // min:'dataMin',
                   splitLine: {
                       show:true,
                       lineStyle:{
@@ -112,16 +114,18 @@ export class EcgdChartComponent implements OnInit {
                       width: 0.4,//网格线宽度
                       type: 'solid',//网格线样式
                       // interval:1000
-                  }}
+                  }},
+                  splitNumber:25
                   // axisLabel: {
-                  //     show: false,
-                  //     // interval:200
+                  //     // show: false,
+                  //     // interval:0.1
                   //     // areaStyle:{
                   //     //     color:'#ccc'
                   //     // }
+                  //     // lineHeight:50
                   // },
                   // axisTick: {
-                  //     show: false,
+                  //     length:5
                   // }
               }
           ],
@@ -129,7 +133,7 @@ export class EcgdChartComponent implements OnInit {
               {
                   type: 'inside',
                   start: 0,
-                  end: 1.5,
+                  end: 1.3,
                   // minValueSpan: 10
               },
               {

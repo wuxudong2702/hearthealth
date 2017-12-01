@@ -40,9 +40,10 @@ export class InputComponent implements OnInit {
 
     constructor(private http: ApiService, private toastService: ToastService, public service: ShareService) {
         this.subscription = service.Val$.subscribe(message => {
-            console.log("------------", message);
+
             if(message['key'] == 'password' || message['key'] == 'password_confirmation' ){
                 this.isMatch = this.formValue['password'] == this.formValue['password_confirmation'];
+                console.log("------------", this.isMatch);
             }
         });
     }
@@ -52,7 +53,7 @@ export class InputComponent implements OnInit {
 
     change() {
         this.formValue = this.form.value;
-        console.log(this.formValue, 'this.formValue');
+        // console.log(this.formValue, 'this.formValue');
         this.onSendFormValue.emit(this.formValue);
         this.service.formValMission({'key': this.field.key, 'val': this.formValue});
 

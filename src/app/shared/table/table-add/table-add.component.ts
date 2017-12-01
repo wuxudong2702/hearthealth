@@ -4,12 +4,13 @@ import {DatepickerI18n, DatepickerI18nType} from '../../datepickerI18n/datepicke
 import {NgbDatepickerI18n} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormControlService} from "./form-controll.service"
+import {ShareService} from "./input/share.service";
 
 @Component({
   selector: 'app-table-add',
   templateUrl: './table-add.component.html',
   styleUrls: ['./table-add.component.css'],
-  providers: [DatepickerI18nType, FormControlService, {provide: NgbDatepickerI18n, useClass: DatepickerI18n}]
+  providers: [ShareService, DatepickerI18nType, FormControlService, {provide: NgbDatepickerI18n, useClass: DatepickerI18n}]
 })
 export class TableAddComponent implements OnInit {
 
@@ -36,7 +37,7 @@ export class TableAddComponent implements OnInit {
   matchUnValid: boolean = true;
   form: FormGroup;
 
-  constructor(private fcs: FormControlService) {
+  constructor(private fcs: FormControlService, private service: ShareService) {
   }
 
   ngOnInit() {
@@ -69,6 +70,7 @@ export class TableAddComponent implements OnInit {
 
   SendFormValue(formValue) {
     this.onSendFormValue.emit(formValue);
+    this.service.formValMission(formValue);
   }
   sendMatchValid(matchUnValid) {
     this.matchUnValid = matchUnValid;

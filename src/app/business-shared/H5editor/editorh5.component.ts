@@ -200,7 +200,6 @@ export class Editorh5Component implements OnInit {
         this.toastService.toast(toastCfg);
       return ;
     }
-    // console.log(this.label.match(/[a-zA-Z]+/),'--------------lable');
     if(!this.label.match(/[a-zA-Z]+/)){
         const toastCfg = new ToastConfig(ToastType.ERROR, '', '标签必须是字母！', 3000);
         this.toastService.toast(toastCfg);

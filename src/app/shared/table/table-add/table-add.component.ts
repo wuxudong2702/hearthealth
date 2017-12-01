@@ -33,6 +33,7 @@ export class TableAddComponent implements OnInit {
   submitData: string;
   addFormValue: string;
   checkValue: boolean = false;
+  matchUnValid: boolean = true;
   form: FormGroup;
 
   constructor(private fcs: FormControlService) {
@@ -68,6 +69,9 @@ export class TableAddComponent implements OnInit {
 
   SendFormValue(formValue) {
     this.onSendFormValue.emit(formValue);
+  }
+  sendMatchValid(matchUnValid) {
+    this.matchUnValid = matchUnValid;
   }
 
   addCancel() {

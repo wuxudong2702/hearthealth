@@ -1,23 +1,47 @@
-<div [class.tableAdd]="!treeAdd"  >
+
+<div class=" tableAdd">
   <h2 class="tittle " *ngIf="isShowTittle">{{addEditTitle}}</h2>
   <div class="">
 
-    <form class="addForm " [formGroup]="form" [class.treeAddForm]="treeAdd">
-      <div [class.tableAddBorder]="treeAdd">
-        <div class=" form-inline formCenter" [class.treeAdd]="treeAdd" *ngFor="let header of headers"
-             [hidden]="header.key=='role_id'||header.key=='id'||header.name=='账户角色'">
-          <app-input [field]="header" [treeAdd]="treeAdd" [AddInput]="isShow" [form]="form"
-                     (onSendFormValue)="SendFormValue($event)" (onSendRemind)="sendRemind($event)"></app-input>
+    <form class="addForm " [formGroup]="form" [class.treeAddForm]="treeAdd" >
+      <div class=" form-inline formCenter" [class.treeAdd]="treeAdd"  *ngFor="let header of headers" [hidden]="header.key=='role_id'||header.key=='id'||header.name=='账户角色'" >
+      <app-input [field]="header"  [treeAdd]="treeAdd" [AddInput]="isShow" [form]="form"
+                 (onSendFormValue)="SendFormValue($event)"
+                 (onSendRemind)="sendRemind($event)"
+                 (onSendMatchValid)="sendMatchValid($event)"></app-input>
 
-        </div>
       </div>
-      <div class="form-button " [class.footerBtn]="treeAdd">
-        <button type="button" class="btn btn-success" (click)="submit()" [disabled]="!form.valid">提交</button>
+      <div class="form-button " [class.footerBtn]="treeAdd" >
+        <button type="button" class="btn btn-success"  (click)="submit()" [disabled]="!form.valid || matchUnValid">提交</button>
         <button type="button" class="btn btn-default" (click)="addCancel()">取消</button>
       </div>
     </form>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!--<div class="tableAdd">-->

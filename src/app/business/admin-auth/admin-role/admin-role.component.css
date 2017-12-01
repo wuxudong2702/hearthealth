@@ -1,18 +1,32 @@
+.roleAdd{
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  height:800px;
+  border:1px solid lightgray;
+   padding:10px;
+}
 .table {
   width: 60%;
   height: 80%;
-  border: 1px solid lightgray;
+  /*border-top: 1px solid lightgray;*/
+  /*border-left: none;*/
+  /*border-right: none;*/
+  /*border-bottom: none;*/
   margin-top: 70px;
-  /*margin-left: 10%;*/
+  margin-right:60px;
   flex:1;
 
 }
 
 .adminZtree {
-  width: 35%;
-  height: 500px;
-  margin-left: 5%;
+  border-right:1px solid lightgray;
+  width: 45%;
+  height: 80%;
+  /*margin-left: 5%;*/
   margin-top: 70px;
+  padding-top:20px;
+  padding-left:30px;
 }
 
 
@@ -20,7 +34,7 @@
   .table {
     width: 65%;
     height: 80%;
-    border: 1px solid lightgray;
+    /*border: 1px solid lightgray;*/
     margin-top: 70px;
     /*margin-left: 10%;*/
     flex:1;

@@ -1,8 +1,18 @@
 .ztree {
-  width: 80%;
-  height: 70%;
+  width: 90%;
+  height: 90%;
   overflow:auto ;
+  /*padding-right: 20px;*/
   margin-right: 2%;
+  border-left:1px solid lightgray;
+  border-right:1px solid lightgray;
+  border-top:25px solid lightgray;
+  border-bottom:1px solid lightgray;
+  border-radius:12px 12px 0 0;
+
+
+  padding-right: 30px;
+
   /*margin-left:40%;*/
   /*margin: 5px auto;*/
   /*background-color: white;*/

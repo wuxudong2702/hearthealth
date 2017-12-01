@@ -29,11 +29,14 @@ export class InputComponent implements OnInit {
   remind:Array<any>=[];
   role_id:string;
   formValue:string;
+  isMatch:boolean = true;
+
 
   change(){
       this.formValue = this.form.value;
       // console.log(this.formValue,'this.formValue');
       this.onSendFormValue.emit(this.formValue);
+      this.isMatch = this.formValue['password'] == this.formValue['password_confirmation'];
       if(this.field.key=='role_name'){
           this.isRemind = true;
           this.userEditFlag = true;

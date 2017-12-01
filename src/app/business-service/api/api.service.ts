@@ -228,11 +228,11 @@ export class ApiService {
 
   //获取users表头
   getHeader(table: string): any {
+
     let header: any = this.headers[table];
     let config: any = this.headerConfig[table];
-    console.log(config, '1111111111111');
-
     let _header: Array<any> = [];
+    if(!header) return;
     _header = header.map(v => {
       let key: string = v['key'];
       if (config && config[key]) {
@@ -1000,7 +1000,7 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  hasToken() {
-    return isNullOrUndefined(this.sessionStorageService.get('token'));
+  hasToken():string {
+    return this.sessionStorageService.get('token');
   }
 }

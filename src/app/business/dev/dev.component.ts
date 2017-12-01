@@ -25,14 +25,15 @@ export class DevComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.headers = this.http.getHeader('devs');
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    if(this.http.hasToken()){
+      this.headers = this.http.getHeader('devs');
+      this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
 
-    this.http.isHavePerm('heart-dev-del').then(v => {
-      this.deleteBtn = v;
-      this.deleteAllBtn = v;
-    });
-
+      this.http.isHavePerm('heart-dev-del').then(v => {
+        this.deleteBtn = v;
+        this.deleteAllBtn = v;
+      });
+    }
   }
 
   headers: Array<cell> = [];

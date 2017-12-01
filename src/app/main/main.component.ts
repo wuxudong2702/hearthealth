@@ -167,39 +167,39 @@ export class MainComponent implements OnInit {
      * 初始化
      */
     ngOnInit() {
-      // console.log(this.apiService.hasToken(),'hastoken');
-      if(this.apiService.hasToken()){
-
+      let hasToken = this.apiService.hasToken();
+      console.log("--------------------------main");
+      if(!hasToken){
+        console.log("--------------------------navigate login");
         this.router.navigate(['/login']);
-        return;
-      }
-      console.log(this.apiService.hasToken(),'hastoken_');
-      this.apiService.getMenu().then(data => {
-        if (data['status'] == 'ok') {
-          this.mainData.menuData = data['data'];
-        } else {
-          console.error('获取用户菜单失败', data.message )
-          this.router.navigate(['/login']);
-        }
-      }).catch(err => {
-        console.error('获取用户菜单异常', err)
-        this.router.navigate(['/login']);
-      });
-
-      this.apiService.me().then(data => {
-        if (data.status == 'ok') {
-          this.mainData.userData = data['data'];
-          if (data['data']['avator'] == null) {
-            this.mainData.userData.avator = this.defatltImage;
+      }else{
+        this.apiService.getMenu().then(data => {
+          if (data['status'] == 'ok') {
+            this.mainData.menuData = data['data'];
+          } else {
+            console.error('获取用户菜单失败', data.message )
+            this.router.navigate(['/login']);
           }
-        } else {
-          console.error('获取用户信息失败', data.message );
+        }).catch(err => {
+          console.error('获取用户菜单异常', err)
           this.router.navigate(['/login']);
-        }
-      }).catch(err => {
-        console.error('获取用户异常', err );
-        this.router.navigate(['/login']);
-      });
+        });
+
+        this.apiService.me().then(data => {
+          if (data.status == 'ok') {
+            this.mainData.userData = data['data'];
+            if (data['data']['avator'] == null) {
+              this.mainData.userData.avator = this.defatltImage;
+            }
+          } else {
+            console.error('获取用户信息失败', data.message );
+            this.router.navigate(['/login']);
+          }
+        }).catch(err => {
+          console.error('获取用户异常', err );
+          this.router.navigate(['/login']);
+        });
+      }
     }
 
     /**

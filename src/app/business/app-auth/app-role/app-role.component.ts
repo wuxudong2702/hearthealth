@@ -136,10 +136,7 @@ export class AppRoleComponent implements OnInit {
 
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
-    if (parmas['url'] != undefined) {
-      this.url = parmas['url'];
-    }
-    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1',find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {

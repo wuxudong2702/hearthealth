@@ -67,10 +67,7 @@ export class LogComponent implements OnInit {
 
     paginationChange(parmas) {
         this.per_page = parmas['per_page'];
-        if(parmas['url']!=undefined){
-            this.url = parmas['url'];
-        }
-        this.getHeartData( this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+        this.getHeartData( this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
     }
 
     sort(sort: sortObj) {

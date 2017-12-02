@@ -262,10 +262,7 @@ export class AppUserComponent implements OnInit {
 
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
-    if (parmas['url'] != undefined) {
-      this.url = parmas['url'];
-    }
-    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   set (set: string) {
@@ -456,12 +453,13 @@ export class AppUserComponent implements OnInit {
 
   getSubHeartData(sub_url: string = this.sub_url,
                   parent_id: string = this.parent_id,
+                  page:string = '1',
                   sub_per_page: string = this.sub_per_page,
                   sub_find_key: string = this.sub_find_key,
                   sub_find_val: string = this.sub_find_val,
                   sub_sort_key: string = this.sub_sort_key,
                   sub_sort_val: string = this.sub_sort_val) {
-    this.http.getSUbUserData(sub_url, parent_id, sub_per_page, sub_find_key, sub_find_val, sub_sort_key, sub_sort_val).then(data => {
+    this.http.getSUbUserData(sub_url, parent_id, sub_per_page, page, sub_find_key, sub_find_val, sub_sort_key, sub_sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.subUserData = data['data']['data'];
         this.sub_pagination.current_page = data['data']['current_page'];
@@ -486,10 +484,7 @@ export class AppUserComponent implements OnInit {
 
   sub_paginationChange(parmas) {
     this.sub_per_page = parmas['per_page'];
-    if (parmas['url'] != undefined) {
-      this.sub_url = parmas['url'];
-    }
-    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, parmas['page'], this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
   }
 
   sub_set(set: string) {

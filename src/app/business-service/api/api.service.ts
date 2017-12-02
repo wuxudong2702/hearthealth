@@ -294,13 +294,14 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getSUbUserData(url: string = '/api/admin/app/user/index', parent_id: string = null, count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
+  getSUbUserData(url: string = '/api/admin/app/user/index', parent_id: string = null, count: string = '8',  page:string = '1', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
     // console.log(url, count, find_key, find_val, '');
     this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       parent_id: parent_id,
       count: count,
+      page:page,
       find_key: find_key,
       find_val: find_val,
       sort_key: sort_key,

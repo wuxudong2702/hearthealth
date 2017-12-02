@@ -73,11 +73,13 @@
             list="list"
 
     >
-    <datalist id="list">
+    <datalist id="list"  *ngIf="field.input_type == 3">
         <option *ngFor="let val of remind;" value={{val}}>{{val}}</option>
     </datalist>
 
-    <select class="form-control addInputValue"
+
+
+<select class="form-control addInputValue"
             *ngIf="field.input_type==1" name={{field.key}}
             [formControlName]="field.key"
             [(ngModel)]="field.val"

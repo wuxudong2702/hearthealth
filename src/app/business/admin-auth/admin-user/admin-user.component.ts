@@ -154,7 +154,7 @@ export class AdminUserComponent implements OnInit {
                 this.toastService.toast(toastCfg);
             });
         }else{
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色不存在！', 3000);
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', '管理员角色不存在！建议从下拉框中选择。', 3000);
             this.toastService.toast(toastCfg);
         }
     } else {

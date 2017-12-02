@@ -994,6 +994,7 @@ export class ApiService {
     })
       .toPromise()
       .then(data => {
+        console.log(data,'data');
         this.spinService.spin(false);
         return data;
       })

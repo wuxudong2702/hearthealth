@@ -33,7 +33,6 @@ export class AdminUserComponent implements OnInit {
     if(this.http.hasToken()){
         this.headers = this.http.getHeader('admins');
         this.getHeartData(this.url);
-        // console.log(this.headers, this.data);
         this.http.isHavePerm('admin-user-del').then(v => {
             this.deleteBtn = v;
             this.deleteAllBtn = v;

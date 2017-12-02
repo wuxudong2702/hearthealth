@@ -79,7 +79,6 @@ export class HomeComponent implements OnInit {
             ]
           };
         } else {
-          console.log(data, 'data');
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
           this.toastService.toast(toastCfg);
         }
@@ -90,6 +89,4 @@ export class HomeComponent implements OnInit {
       });
     }
   }
-
-
 }

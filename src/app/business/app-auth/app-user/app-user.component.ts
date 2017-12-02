@@ -161,7 +161,7 @@ export class AppUserComponent implements OnInit {
       this.http.userAdd(this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
           this.tableView = true;
           this.addSubUserView = false;
           this.addView = false;
@@ -185,7 +185,7 @@ export class AppUserComponent implements OnInit {
       this.http.userUpdate(this.editId, this.parent_id, submitData, '0').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
           this.tableView = true;
           this.addSubUserView = false;
           this.addView = false;
@@ -210,13 +210,13 @@ export class AppUserComponent implements OnInit {
   sort(sort: sortObj) {
     this.sort_key = sort.key;
     this.sort_val = sort.val;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   del(ids: string) {
     this.http.userDelData(ids).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+        this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -236,7 +236,7 @@ export class AppUserComponent implements OnInit {
             this.delAll(arr);
           } else {
             if (this.parentSubFlag) {
-              this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+              this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
             } else {
               this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
             }
@@ -265,7 +265,7 @@ export class AppUserComponent implements OnInit {
     if (parmas['url'] != undefined) {
       this.url = parmas['url'];
     }
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   set (set: string) {
@@ -274,8 +274,8 @@ export class AppUserComponent implements OnInit {
     });
   }
 
-  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
-    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
+  getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+    this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];
@@ -381,7 +381,7 @@ export class AppUserComponent implements OnInit {
 
   subUsersback() {
 
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
     this.addView = false;
     this.subUsersView = false;
     this.tableView = true;

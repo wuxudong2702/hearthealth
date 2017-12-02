@@ -27,7 +27,7 @@ export class DevComponent implements OnInit {
   ngOnInit() {
     if(this.http.hasToken()){
       this.headers = this.http.getHeader('devs');
-      this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+      this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
       this.http.isHavePerm('heart-dev-del').then(v => {
         this.deleteBtn = v;
@@ -72,7 +72,7 @@ export class DevComponent implements OnInit {
   del(dev_id: string) {
     this.http.unbind(dev_id).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+        this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -90,7 +90,7 @@ export class DevComponent implements OnInit {
           if (arr.length) {
             this.delAll(arr);
           } else {
-            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
             return;
           }
         } else {
@@ -121,7 +121,7 @@ export class DevComponent implements OnInit {
   sort(sort: sortObj) {
     this.sort_key = sort.key;
     this.sort_val = sort.val;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   search(searchObj: searchObj) {
@@ -145,8 +145,8 @@ export class DevComponent implements OnInit {
     });
   }
 
-  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
-    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
+  getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+    this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];

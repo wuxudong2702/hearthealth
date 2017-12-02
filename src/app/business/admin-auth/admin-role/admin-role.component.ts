@@ -119,7 +119,7 @@ export class AdminRoleComponent implements OnInit {
   del(id) {
     this.http.rolesDel(id).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+        this.getHeartData(this.url, this.per_page,'1', this.find_key, this.find_val, this.sort_key, this.sort_val);
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -197,7 +197,7 @@ export class AdminRoleComponent implements OnInit {
               this.http.rolesAdd(submiData.name, submiData.description, this.permsAdd).then(data => {
                   if (data['status'] == 'ok') {
                     this.data = data['data'];
-                    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
                     this.tableView = true;
                     this.addView = false;
                     this.addTreeView = false;
@@ -225,7 +225,7 @@ export class AdminRoleComponent implements OnInit {
                   if (data['status'] == 'ok') {
                     this.data = data['data'];
                     this.permsUpdate='';
-                    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
                     this.addView = false;
                     this.addTreeView = false;
                     this.editTreeView = false;
@@ -244,7 +244,7 @@ export class AdminRoleComponent implements OnInit {
                   this.http.rolesUpdateTreeEdit(this.id, submiData.description, submiData.name).then(data => {
                       if (data['status'] == 'ok') {
                         this.data = data['data'];
-                        this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+                        this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
                         this.addView = false;
                         this.addTreeView = false;
                         this.editTreeView = false;
@@ -266,8 +266,8 @@ export class AdminRoleComponent implements OnInit {
       }
   }
 
-  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
-    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
+  getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+    this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
         console.log(data['data']['data'], '111111');
         this.data = data['data']['data'];
@@ -295,13 +295,13 @@ export class AdminRoleComponent implements OnInit {
     if (parmas['url'] != undefined) {
       this.url = parmas['url'];
     }
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   sort(sort: sortObj) {
     this.sort_key = sort.key;
     this.sort_val = sort.val;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   set (set: string) {
@@ -313,7 +313,7 @@ export class AdminRoleComponent implements OnInit {
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
-    this.getHeartData(this.pagination.first_page_url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.pagination.first_page_url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   delAll(arr: Array<any>) {
@@ -324,7 +324,7 @@ export class AdminRoleComponent implements OnInit {
           if (arr.length) {
             this.delAll(arr);
           } else {
-            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
           }
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);

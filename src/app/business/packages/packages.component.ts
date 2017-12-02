@@ -23,7 +23,7 @@ export class PackagesComponent implements OnInit {
   ngOnInit() {
       if(this.http.hasToken()){
           this.headers = this.http.getHeader('app-upgrades');
-          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
           this.http.isHavePerm('app-upgrade-del').then(v => {
               this.deleteBtn = v;
               this.deleteAllBtn = v;
@@ -67,7 +67,7 @@ export class PackagesComponent implements OnInit {
     // console.log(packages_id,'0-0-0-0');
       this.http.packagesDel(packages_id).then(data => {
           if (data['status'] == 'ok') {
-            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
           } else {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
@@ -86,7 +86,7 @@ export class PackagesComponent implements OnInit {
           if (arr.length) {
             this.delAll(arr);
           } else {
-            this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+            this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
             return;
           }
@@ -143,7 +143,7 @@ export class PackagesComponent implements OnInit {
       this.http.upgradeAdd(submitData.ver,submitData.desc,submitData.url).then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
           this.addView = false;
           this.tableView = true;
@@ -159,7 +159,7 @@ export class PackagesComponent implements OnInit {
       this.http.upgradeUpdate( ''+this.data[this.editId]['id'],submitData.ver,submitData.desc,submitData.url).then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
           this.addView = false;
           this.tableView = true;
@@ -178,7 +178,7 @@ export class PackagesComponent implements OnInit {
   sort(sort: sortObj) {
     this.sort_key = sort.key;
     this.sort_val = sort.val;
-    this.getHeartData(this.url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   search(searchObj: searchObj) {
@@ -200,8 +200,8 @@ export class PackagesComponent implements OnInit {
   }
 
 
-  getHeartData(url: string = this.url, per_page: string = this.per_page, find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
-    this.http.getData(url, per_page, find_key, find_val, sort_key, sort_val).then(data => {
+  getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+    this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];
         this.pagination.current_page = data['data']['current_page'];

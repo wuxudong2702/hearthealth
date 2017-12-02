@@ -749,12 +749,13 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getData(url: string = '/api/admin/heart/index', count: string = '8', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
+  getData(url: string, count: string = '8', page:string = '1', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
     // console.log(url, count, find_key, find_val, '全局获取数据发送的参数');
     this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       count: count,
+      page: page,
       find_key: find_key,
       find_val: find_val,
       sort_key: sort_key,
@@ -772,7 +773,6 @@ export class ApiService {
   }
 
   appRoleSubmit(id: string, users_count: number) {
-    // console.log(id, users_count, '89000000000000');
     const url: string = "/api/admin/app/role/update";
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -781,7 +781,6 @@ export class ApiService {
     })
       .toPromise()
       .then(data => {
-        // console.log(data, '======');
         return data;
       })
       .catch(this.handleError);
@@ -973,7 +972,6 @@ export class ApiService {
 
   delHhrDataDetails(id: number, chartId: number): Promise<any> {
     const url: string = '/api/admin/report/del';
-
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       user_id: id,
@@ -982,7 +980,6 @@ export class ApiService {
       .toPromise()
       .then(data => data)
       .catch(this.handleError);
-
   }
 
   //home

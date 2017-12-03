@@ -292,6 +292,7 @@ export class AdminRoleComponent implements OnInit {
 
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
+    console.log(this.url);
     this.getHeartData(this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
@@ -310,7 +311,7 @@ export class AdminRoleComponent implements OnInit {
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
-    this.getHeartData(this.pagination.first_page_url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   delAll(arr: Array<any>) {

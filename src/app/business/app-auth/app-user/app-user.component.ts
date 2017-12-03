@@ -257,7 +257,7 @@ export class AppUserComponent implements OnInit {
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
-    this.getHeartData(this.pagination.first_page_url, this.per_page, this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page,'1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   paginationChange(parmas) {
@@ -444,6 +444,7 @@ export class AppUserComponent implements OnInit {
     this.getSubHeartData(
       this.sub_url,
       this.parent_id,
+      '1',
       this.sub_per_page,
       this.sub_find_key,
       this.sub_find_val,

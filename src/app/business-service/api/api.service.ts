@@ -295,7 +295,6 @@ export class ApiService {
   }
 
   getSUbUserData(url: string = '/api/admin/app/user/index', parent_id: string = null, count: string = '8',  page:string = '1', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
-    // console.log(url, count, find_key, find_val, '');
     this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -310,7 +309,6 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        // console.log(data, 'getData全局获取data');
         return data
       })
       .catch(err => {

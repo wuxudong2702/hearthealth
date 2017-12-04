@@ -312,7 +312,7 @@ export class AppUserComponent implements OnInit {
     //     }
     //   }
     }
-    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page,'1',  this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
   }
 
 
@@ -454,8 +454,9 @@ export class AppUserComponent implements OnInit {
 
   getSubHeartData(sub_url: string = this.sub_url,
                   parent_id: string = this.parent_id,
-                  page:string = '1',
+
                   sub_per_page: string = this.sub_per_page,
+                  page:string = '1',
                   sub_find_key: string = this.sub_find_key,
                   sub_find_val: string = this.sub_find_val,
                   sub_sort_key: string = this.sub_sort_key,

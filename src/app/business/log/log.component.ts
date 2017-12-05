@@ -35,11 +35,9 @@ export class LogComponent implements OnInit {
   per_page: string=null;
   find_key: string=null;
   find_val: string=null;
-  sort_key: string=null;
-  sort_val: string=null;
+  sort_key: string='created_at';
+  sort_val: string='desc';
   url: string = '/api/admin/log/index';
-
-
 
     getHeartData(url: string = this.url, per_page: string = this.per_page,  page:string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
         this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
@@ -54,7 +52,6 @@ export class LogComponent implements OnInit {
                 this.pagination.next_page_url = data['data']['next_page_url'];
                 this.pagination.prev_page_url = data['data']['prev_page_url'];
                 this.pagination.to = data['data']['to'];
-                // console.log(this.pagination,'pagination======');
             } else {
                 const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
                 this.toastService.toast(toastCfg);

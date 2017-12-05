@@ -1,15 +1,22 @@
+.chartStyle{
+  background: white;
+  padding:10px;
+  min-height: 68vh;
+  border:1px solid lightgray;
+}
 .demo-chart {
     height: 40vh;
     /*margin-top:1%;*/
 }
-
+.chart_none {
+  margin-top: 12%;
+  margin-bottom: 12%;
+  font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+}
 .dateInput {
   width:130px;
   display:inline;
-    vertical-align: middle;
-}
-.chartFileBtns{
-
+  vertical-align: middle;
 }
 .Btns{
     margin:6px 5px;
@@ -20,31 +27,33 @@
     color: #fff;
     background-color: #20a8d8;
 }
+.showBtn{
+    margin:6px 25px;
+    vertical-align: middle;
+    width:80px;
+    height:32px;
+    border:none;
+    color: #fff;
+    background-color: #20a8d8;
+}
 .Btns:focus {
     outline:none;
 }
-
+.button_disabled {
+    cursor:not-allowed;
+}
 .clearBtn {
     margin:6px 5px;
     vertical-align: middle;
     width:100px;
 }
-
 .dateInputStyle {
-  margin-left:100px;
+    margin-left:100px;
 }
 .selected {
     background-color: #a7a5a5;
     border:none;
 }
-h4 {
-  font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
-}
-.chartStyle{
-   background: white;
-   padding:10px;
-min-height: 90vh;
- }
 .details-panel{
 }
 .details{
@@ -65,17 +74,20 @@ hr {
     border: 0;
     border-bottom: 2px solid;
 }
-
-h3{
+h4 {
   font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
-  text-align: left;
-  margin-left: 20px;
-  margin-bottom: 8px;
+}
+h3{
+    font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: 8px;
 }
 h2{
-  font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
-  margin-top: 2%;
+    font-family: KaiTi , SimSun , Microsoft Yahei , 微软雅黑, Arial, sans-serif;
+    margin-top: 2%;
 }
 .text {
     margin-top:20px;
 }
+

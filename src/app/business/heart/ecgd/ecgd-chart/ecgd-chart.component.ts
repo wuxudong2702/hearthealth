@@ -17,12 +17,20 @@ export class EcgdChartComponent implements OnInit {
   valueList: Array<any>;
   chartOption: object = {};
   userInfo:object;
-
+  dataZoomEnd :number = 13;
   constructor() {
   }
 
   ngOnInit() {
     this.valueList=this.dataChart1;
+    if(this.valueList.length < 800){
+      for(let i = 0;i<800-this.valueList.length;i++){
+        this.valueList.push('null');
+      }
+      this.dataZoomEnd = 100;
+    }else{
+      this.dataZoomEnd = 15;
+    }
     this.dateList=this.dataChart1.map(function (item,index) {
         return index+1;
       });
@@ -133,7 +141,8 @@ export class EcgdChartComponent implements OnInit {
               {
                   type: 'inside',
                   start: 0,
-                  end: 1.3,
+                  // end: 1.3,
+                  end: this.dataZoomEnd,
                   // minValueSpan: 10
               },
               {
@@ -143,7 +152,8 @@ export class EcgdChartComponent implements OnInit {
                   // bottom: 60,
                   top:'70%',
                   start: 0,
-                  end: 1.5,
+                  end: this.dataZoomEnd,
+                // end: 1.5,
                   // minValueSpan: 10
               }
           ],

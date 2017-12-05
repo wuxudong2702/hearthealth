@@ -50,7 +50,6 @@ export class InputComponent implements OnInit {
 
   change() {
     this.formValue = this.form.value;
-    console.log(this.formValue, 'this.formValue');
     this.onSendFormValue.emit(this.formValue);
     if (this.field.key == 'password' || this.field.key == 'password_confirmation') {
       this.matchUnValid = this.isValid && !this.isMatch && this.isDirty && this.field.val != '';

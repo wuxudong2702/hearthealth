@@ -236,6 +236,21 @@
       "required": true,
       "pattern": "",
       "input_type": 0
+    },
+    {
+      "key": "dev_id",
+      "show": true,
+      "name": "设备ID",
+      "index": 8,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 0
     }
   ],
   "heart-data": [
@@ -734,7 +749,7 @@
       "select_val": "",
       "valid_example": "请输入正确格式",
       "required": false,
-      "pattern": "[1-2]\\d{1,2}",
+      "pattern": "^[1-9][0-9]{1,2}$",
       "input_type": 0
     },
     {
@@ -749,7 +764,7 @@
       "select_val": "",
       "valid_example": "请输入正确格式",
       "required": false,
-      "pattern": "^[1-9]\\d{0,2}$",
+      "pattern": "^([1-9][0-9]{1,2}[.][0-9]{1,2})|([1-9][0-9]{1,2})$",
       "input_type": 0
     },
     {
@@ -865,7 +880,7 @@
       "select_val": "",
       "valid_example": "请输入正确格式",
       "required": false,
-      "pattern": "[1-9]\\d{1,2}",
+      "pattern": "^[1-9][0-9]{1,2}$",
       "input_type": 0
     },
     {
@@ -880,7 +895,7 @@
       "select_val": "",
       "valid_example": "请输入正确格式",
       "required": false,
-      "pattern": "^[1-9]\\d{0,2}$",
+      "pattern": "^([1-9][0-9]{1,2}[.][0-9]{1,2})|([1-9][0-9]{1,2})$",
       "input_type": 0
     },
     {
@@ -937,7 +952,7 @@
       "index": 2,
       "order": 0,
       "pipe_type": 2,
-      "pipe_params": "yyyy-MM-dd",
+      "pipe_params": "yyyy-MM-dd HHmm分ss秒",
       "val": "",
       "select_val": [],
       "valid_example": "",

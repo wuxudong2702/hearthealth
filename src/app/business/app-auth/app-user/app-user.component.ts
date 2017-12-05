@@ -348,6 +348,11 @@ export class AppUserComponent implements OnInit {
             break;
           case INPUTTYPE.SELECT:
             let val = this.subUserData[id][d.key];
+            if(val=='2'){
+              d.select_val[val] = '女'
+            }else{
+              d.select_val[val] = '男'
+            }
             d.val = d.select_val[val];
             break;
           default:

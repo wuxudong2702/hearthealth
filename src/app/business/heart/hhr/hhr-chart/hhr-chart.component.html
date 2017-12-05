@@ -3,29 +3,30 @@
   <div>
     <button class="btn btn-success btn-md Btns" (click)="chartView()">返回</button>
       <input [(ngModel)]="selectedDateStart" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
-             class="form-control dateInput dateInputStyle " placeholder="开始时间" />
+             class="form-control dateInput dateInputStyle " placeholder="开始时间" />&nbsp;&nbsp;-&nbsp;&nbsp;
       <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
              class="form-control dateInput" placeholder="结束时间" />
-      <button class="btn btn-primary Btns" (click)="show()">显示</button>
+      <button class="btn btn-primary showBtn" (click)="show()">显示</button>
   </div>
   <div class="text-center text-primary text">
     <h4>用户：&nbsp;{{userName}}</h4>
   </div>
-  <div echarts [options]="chartOption"  (chartClick) ="chartClick($event)" class="demo-chart" id="myChart"></div>
-  <div class="text-center chartFileBtns">
-    <button class=" Btns" [class.selected]="this.flag==1" (click)="indicator1()">指标1
+  <div echarts *ngIf="!chart_none" [options]="chartOption"  (chartClick) ="chartClick($event)" class="demo-chart" id="myChart"></div>
+  <h1 *ngIf="chart_none" class="text-center chart_none">暂无数据</h1>
+  <div class="text-center">
+    <button class=" Btns" [class.selected]="this.flag==1" [class.button_disabled]="chart_none" (click)="indicator1()" [disabled]="chart_none">指标1
     </button>
-    <button class=" Btns" [class.selected]="this.flag==2" (click)="indicator2()">指标2
+    <button class=" Btns" [class.selected]="this.flag==2" [class.button_disabled]="chart_none" (click)="indicator2()" [disabled]="chart_none">指标2
     </button>
-    <button class=" Btns" [class.selected]="this.flag==3" (click)="indicator3()">指标3
+    <button class=" Btns" [class.selected]="this.flag==3" [class.button_disabled]="chart_none" (click)="indicator3()" [disabled]="chart_none">指标3
     </button>
-    <button class=" Btns" [class.selected]="this.flag==4" (click)="indicator4()">指标4
+    <button class=" Btns" [class.selected]="this.flag==4" [class.button_disabled]="chart_none" (click)="indicator4()" [disabled]="chart_none">指标4
     </button>
-    <button class=" Btns" [class.selected]="this.flag==5" (click)="indicator5()">指标5
+    <button class=" Btns" [class.selected]="this.flag==5" [class.button_disabled]="chart_none" (click)="indicator5()" [disabled]="chart_none">指标5
     </button>
-    <button class=" Btns" [class.selected]="this.flag==6" (click)="indicator6()">指标6
+    <button class=" Btns" [class.selected]="this.flag==6" [class.button_disabled]="chart_none" (click)="indicator6()" [disabled]="chart_none">指标6
     </button>
-    <button class="btn btn-danger btn-md clearBtn" (click)="clear()">清空本次数据</button>
+    <button class="btn btn-danger btn-md clearBtn" [class.button_disabled]="chart_none" (click)="clear()" [disabled]="chart_none">清空本次数据</button>
   </div>
   <div class="details-panel" *ngIf="isDetails">
     <hr>

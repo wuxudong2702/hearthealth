@@ -39,6 +39,7 @@ export class HhrChartComponent implements OnInit {
   chartDetailsData: Array<any>;
   isDetails: boolean = false;
   details_none: boolean = false;
+  chart_none: boolean = false;
   chartDetailsId: number = 1;
   selectedDateStart;
   selectedDateEnd;
@@ -174,6 +175,7 @@ export class HhrChartComponent implements OnInit {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', '开始时间大于结束时间！', 3000);
         this.toastService.toast(toastCfg);
       } else {
+        //选择指标
         if (this.field) {
           this.http.getHhrDataChart(this.chartId, this.selectedDateStart, this.selectedDateEnd, this.field).then(data => {
             // console.log(data,'-------');
@@ -187,8 +189,11 @@ export class HhrChartComponent implements OnInit {
                   return item['data'];
                 });
                 this.chartToggle(this.dataList, this.valueList);
+                this.details_none = false;
+                this.chart_none = false;
               } else {
                 this.details_none = true;
+                this.chart_none = true;
               }
             } else {
               const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);

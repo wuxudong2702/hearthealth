@@ -77,14 +77,11 @@
         <option *ngFor="let val of remind;" value={{val}}>{{val}}</option>
     </datalist>
 
-
-
-<select class="form-control addInputValue"
+    <select class="form-control addInputValue"
             *ngIf="field.input_type==1" name={{field.key}}
             [formControlName]="field.key"
             [(ngModel)]="field.val"
     >
-
         <option *ngFor="let val of field.select_val;" value={{val}}>{{val}}</option>
     </select>
 

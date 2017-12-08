@@ -345,11 +345,12 @@ export class TableListComponent implements OnInit, OnChanges {
     this.onDetails.emit(id);
   }
 
-  chart(id: number, name: string, sense_time: any) {
+  chart(row: any) {
     this.onChart.emit({
-      id: id,
-      name: name,
-      sense_time: sense_time
+      id: row['heart_data_id'],
+      user_id: row['user_id'],
+      name: row['name'],
+      sense_time: row['sense_time']
     });
   }
 

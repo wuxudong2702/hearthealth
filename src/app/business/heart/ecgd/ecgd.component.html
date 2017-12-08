@@ -25,5 +25,11 @@
 >
 </c-table-list>
 
-    <app-ecgd-chart  class="ecgdChart" *ngIf="showChartView" [dataChart1]="dataChart1" [userName]="userName" [sense_time]="sense_time" (back)="back($event)" ></app-ecgd-chart>
+<app-ecgd-chart  class="ecgdChart" *ngIf="showChartView"
+                 [dataChart1]="dataChart1"
+                 [userName]="userName"
+                 [sense_time]="sense_time"
+                 [params]="params"
+                 (back)="back($event)" >
+</app-ecgd-chart>
 

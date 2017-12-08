@@ -1,4 +1,7 @@
 import {Component, OnInit, NgModule, Input, Output, EventEmitter,HostListener} from '@angular/core';
+import {ToastService} from '../../../../shared/toast/toast.service';
+import {ToastConfig, ToastType} from '../../../../shared/toast/toast-model';
+import {ApiService} from '../../../../business-service/api/api.service';
 
 @Component({
   selector: 'app-ecgd-chart',
@@ -9,7 +12,9 @@ export class EcgdChartComponent implements OnInit {
 
   @Input() dataChart1: Array<any>;
   @Input() userName: string;
+  @Input() userId: string;
   @Input() sense_time: any;
+  @Input() params: any;
 
   @Output() back = new EventEmitter<any>();
 
@@ -18,7 +23,11 @@ export class EcgdChartComponent implements OnInit {
   chartOption: object = {};
   userInfo:object;
   dataZoomEnd :number = 13;
-  constructor() {
+  chartDetailsData: Array<any>;
+  chartDetailsId: number;
+  details_none:boolean = false;
+
+  constructor(private http: ApiService, private toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -66,7 +75,7 @@ export class EcgdChartComponent implements OnInit {
               {
                   left: '10%',
                   right: '8%',
-                  top:'5%',
+                  top:'10%',
                   // bottom: 150,
                   height:'60%',
                   borderColor:'#FF6347'
@@ -144,13 +153,15 @@ export class EcgdChartComponent implements OnInit {
                   // end: 1.3,
                   end: this.dataZoomEnd,
                   // minValueSpan: 10
+                  top:'20',
+
               },
               {
                   show: true,
                   type: 'slider',
                   realtime:true,
                   // bottom: 60,
-                  top:'70%',
+                  // top:'70%',
                   start: 0,
                   end: this.dataZoomEnd,
                 // end: 1.5,
@@ -172,6 +183,60 @@ export class EcgdChartComponent implements OnInit {
               }
           ]
     }
+    this.chartDetailsId = this.params['id'];
+    this.http.getHhrDataDetails(this.params['user_id'], this.chartDetailsId).then(data => {
+      if (data['status'] == 'ok') {
+        if (data['data']) {
+          this.chartDetailsData=[];
+          for(let i  in data['data'] ){
+            let arr=[];
+            arr.push(i);
+            arr.push(data['data'][i]);
+            this.chartDetailsData.push(arr);
+          }
+          this.chartDetailsData.forEach(function (v) {
+            if (v[0] == "bpm_code") {
+              switch (v[1]) {
+                case '0' :
+                  v[1] = "过慢";
+                  break;
+                case '1' :
+                  v[1] = "正常";
+                  break;
+                case '2' :
+                  v[1] = "过快";
+                  break;
+                default:
+                  v[1] = "";
+              }
+            }
+            if (v[0] == "n_arrhythmia_code") {
+              switch (v[1]) {
+                case '0' :
+                  v[1] = "正常";
+                  break;
+                case '1' :
+                  v[1] = "隐患";
+                  break;
+                case '2' :
+                  v[1] = "高风险";
+                  break;
+                default:
+                  v[1] = "";
+              }
+            }
+          });
+          this.details_none = false;
+
+        } else {
+          this.details_none = true;
+        }
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      // console.error(err);
+      this.toastService.toast(toastCfg);
+    });
   }
 
    chartView(){

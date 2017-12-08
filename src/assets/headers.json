@@ -333,7 +333,7 @@
     {
       "key": "len",
       "show": true,
-      "name": "心跳数据长度",
+      "name": "心跳数据长度(秒)",
       "index": 4,
       "order": 0,
       "pipe_type": 0,

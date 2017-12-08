@@ -45,7 +45,10 @@ export class EcgdComponent implements OnInit {
   result: Array<any> = [];
   dataChart1: Array<any> = [];
   userName: string;
+  userId: string;
+  chartId: string;
   sense_time: any;
+  params: any;
   deleteBtn: boolean = false;
   deleteAllBtn: boolean = false;
   downloadBtn: boolean = false;
@@ -67,7 +70,10 @@ export class EcgdComponent implements OnInit {
   url: string = '/api/admin/heart/index';
 
   chart(params) {
+    this.params = params;
     this.userName = params['name'];
+    this.userId = params['id'];
+    this.chartId = params['chart_id'];
     this.sense_time = params['sense_time'];
     this.http.getEcgdDataChart(params['id']).then(data => {
       if (data['status'] == 'ok') {

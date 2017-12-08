@@ -71,10 +71,8 @@ export class EcgdComponent implements OnInit {
 
   chart(params) {
     this.params = params;
-    this.userName = params['name'];
     this.userId = params['id'];
     this.chartId = params['chart_id'];
-    this.sense_time = params['sense_time'];
     this.http.getEcgdDataChart(params['id']).then(data => {
       if (data['status'] == 'ok') {
         this.dataChart1 = data['data'].map( v=>{

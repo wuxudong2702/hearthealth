@@ -11,9 +11,9 @@ import {ApiService} from '../../../../business-service/api/api.service';
 export class EcgdChartComponent implements OnInit {
 
   @Input() dataChart1: Array<any>;
-  @Input() userName: string;
+  // @Input() userName: string;
   @Input() userId: string;
-  @Input() sense_time: any;
+  // @Input() sense_time: any;
   @Input() params: any;
 
   @Output() back = new EventEmitter<any>();
@@ -26,7 +26,8 @@ export class EcgdChartComponent implements OnInit {
   chartDetailsData: Array<any>;
   chartDetailsId: number;
   details_none:boolean = false;
-
+  userName: string;
+  sense_time: any;
   constructor(private http: ApiService, private toastService: ToastService) {
   }
 
@@ -43,7 +44,7 @@ export class EcgdChartComponent implements OnInit {
     this.dateList=this.dataChart1.map(function (item,index) {
         return index+1;
       });
-      this.chartOption = {
+    this.chartOption = {
 
           animation: false,
           tooltip: {
@@ -150,21 +151,19 @@ export class EcgdChartComponent implements OnInit {
               {
                   type: 'inside',
                   start: 0,
-                  // end: 1.3,
                   end: this.dataZoomEnd,
                   // minValueSpan: 10
-                  top:'20',
+                  top:'80%',
 
               },
               {
                   show: true,
                   type: 'slider',
                   realtime:true,
-                  // bottom: 60,
-                  // top:'70%',
+                  top:'80%',
                   start: 0,
                   end: this.dataZoomEnd,
-                // end: 1.5,
+
                   // minValueSpan: 10
               }
           ],
@@ -183,7 +182,10 @@ export class EcgdChartComponent implements OnInit {
               }
           ]
     }
+
     this.chartDetailsId = this.params['id'];
+    this.userName = this.params['name'];
+    this.sense_time = this.params['sense_time'];
     this.http.getHhrDataDetails(this.params['user_id'], this.chartDetailsId).then(data => {
       if (data['status'] == 'ok') {
         if (data['data']) {

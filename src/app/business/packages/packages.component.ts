@@ -7,6 +7,7 @@ import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
+import {componentFactoryName} from "@angular/compiler";
 
 
 @Component({
@@ -43,6 +44,7 @@ export class PackagesComponent implements OnInit {
   editId: number;
   addEditTitle: string = '添加';
   addView: boolean = false;
+  uploadView: boolean = false;
   tableView: boolean = true;
 
   deleteBtn: boolean = false;
@@ -51,6 +53,7 @@ export class PackagesComponent implements OnInit {
   editBtn: boolean = false;
   searchBtn: boolean = true;
   setBtn: boolean = true;
+  uploadBtn: boolean = true;
 
   setOperate: boolean = true;
   paginationBtn: boolean = true;
@@ -130,11 +133,13 @@ export class PackagesComponent implements OnInit {
       });
     }
     this.addView = true;
+    this.uploadView = false;
     this.tableView = false;
   }
 
   cancel() {
     this.addView = false;
+    this.uploadView = false;
     this.tableView = true;
   }
 
@@ -146,6 +151,7 @@ export class PackagesComponent implements OnInit {
           this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
           this.addView = false;
+          this.uploadView = false;
           this.tableView = true;
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
@@ -162,6 +168,7 @@ export class PackagesComponent implements OnInit {
           this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
           this.addView = false;
+          this.uploadView = false;
           this.tableView = true;
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
@@ -196,6 +203,12 @@ export class PackagesComponent implements OnInit {
     this.getHeartData( this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
+  upload(data){
+    console.log(data,'data');
+    this.uploadView = true;
+    this.addView = false;
+    this.tableView = false;
+  }
 
   getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
     this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {

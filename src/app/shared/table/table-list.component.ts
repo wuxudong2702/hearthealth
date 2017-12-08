@@ -383,8 +383,8 @@ export class TableListComponent implements OnInit, OnChanges {
     this.onBack.emit();
   }
 
-  upload() {
-    this.onUpload.emit();
+  upload(row) {
+    this.onUpload.emit(row);
   }
 
   openError(errorInfo) {

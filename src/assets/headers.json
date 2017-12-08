@@ -159,6 +159,23 @@
       "required": true,
       "pattern": "^.{0,50}$",
       "input_type": 0
+    },
+    {
+      "key": "isDefault",
+      "show": true,
+      "name": "是否为默认下载",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": {
+
+      },
+      "val": "",
+      "select_val": ["设为默认下载包","非默认下载包"],
+      "valid_example": "",
+      "required": true,
+      "pattern": "",
+      "input_type": 1
     }
   ],
   "devs": [

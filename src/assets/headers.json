@@ -166,10 +166,8 @@
       "name": "是否为默认下载",
       "index": 4,
       "order": 0,
-      "pipe_type": 0,
-      "pipe_params": {
-
-      },
+      "pipe_type": 1,
+      "pipe_params": {"0":"是", "1":"否"},
       "val": "",
       "select_val": ["设为默认下载包","非默认下载包"],
       "valid_example": "",

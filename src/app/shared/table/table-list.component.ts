@@ -345,6 +345,7 @@ export class TableListComponent implements OnInit, OnChanges {
     this.onDetails.emit(id);
   }
 
+  //Ecgd
   chart(row: any) {
     this.onChart.emit({
       id: row['heart_data_id'],
@@ -353,7 +354,7 @@ export class TableListComponent implements OnInit, OnChanges {
       sense_time: row['sense_time']
     });
   }
-
+  //Hhr
   chart2(id: number, name: string, i: number) {
     this.onChart2.emit({
       id: id,

@@ -372,6 +372,14 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+  ecgdDownloadReportDetails(heart_data_id: string,user_id:string) {
+    console.log(user_id,'userId');
+    const url: string = '/api/admin/report/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + heart_data_id + "&user_id="+user_id;
+    return this.http.get(url)
+      .map(res => new Blob([res.text()], {type: 'txt/plain'}))
+      .catch(this.handleError);
+  }
+
   unbind(dev_id: string) {
     const url: string = '/api/admin/dev/unbind';
     return this.httpClient.post(url, {

@@ -153,6 +153,8 @@ export class TableListComponent implements OnInit, OnChanges {
   @Input() backBtn: boolean;
   @Input() setOperate: boolean;
   @Input() uploadBtn: boolean;
+  @Input() unBindBtn: boolean;
+  @Input() unBindAllBtn: boolean;
   @Input() pagination: paginationObj;
 
   @Output() onAdd = new EventEmitter<any>();
@@ -171,7 +173,8 @@ export class TableListComponent implements OnInit, OnChanges {
   @Output() onEditZTree = new EventEmitter<any>();
   @Output() onEditH5 = new EventEmitter<any>();
   @Output() onPaginationChange = new EventEmitter<any>();
-
+  // @Output() unBindBtn = new EventEmitter<any>();
+  // @Output() unBindAllBtn = new EventEmitter<any>();
 
   url: string = '';
   isDelAll: boolean = false;
@@ -258,12 +261,11 @@ export class TableListComponent implements OnInit, OnChanges {
       const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择下载的数据！', 3000);
       this.toastService.toast(toastCfg);
     }
-
   }
 
   search() {//用户点击查询按钮
     // console.log(this.headers, 'table list');
-    if (!this.selectValue) {
+      if (!this.selectValue) {
       this.openError('请选择搜索项！');
     } else {
       let searchVal=this.searchValue;

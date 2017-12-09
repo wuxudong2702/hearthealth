@@ -26,17 +26,17 @@ export class EcgdComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.http.hasToken()){
-        this.headers = this.http.getHeader('heart-data');
-        this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
-        // console.log(this.headers, this.data);
-        this.http.isHavePerm('ecgd-del').then(v => {
-            this.deleteBtn = v;
-            this.deleteAllBtn = v;
-        });
-        this.http.isHavePerm('ecgd-download').then(v => {
-            this.downloadBtn = v;
-        });
+    if (this.http.hasToken()) {
+      this.headers = this.http.getHeader('heart-data');
+      this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+      // console.log(this.headers, this.data);
+      this.http.isHavePerm('ecgd-del').then(v => {
+        this.deleteBtn = v;
+        this.deleteAllBtn = v;
+      });
+      this.http.isHavePerm('ecgd-download').then(v => {
+        this.downloadBtn = v;
+      });
     }
   }
 
@@ -62,11 +62,11 @@ export class EcgdComponent implements OnInit {
   downloadData: Array<any>;
 
   pagination: paginationObj = new paginationObj();
-  per_page: string=null;
-  find_key: string=null;
-  find_val: string=null;
-  sort_key: string=null;
-  sort_val: string=null;
+  per_page: string = null;
+  find_key: string = null;
+  find_val: string = null;
+  sort_key: string = null;
+  sort_val: string = null;
   url: string = '/api/admin/heart/index';
 
   chart(params) {
@@ -75,8 +75,8 @@ export class EcgdComponent implements OnInit {
     this.chartId = params['chart_id'];
     this.http.getEcgdDataChart(params['id']).then(data => {
       if (data['status'] == 'ok') {
-        this.dataChart1 = data['data'].map( v=>{
-            return v*0.002;
+        this.dataChart1 = data['data'].map(v => {
+          return v * 0.002;
         });
         this.showChartView = !this.showChartView;
       } else {
@@ -106,25 +106,37 @@ export class EcgdComponent implements OnInit {
 
   download(arr: Array<any>) {
     let link = document.createElement("a");
-    if(arr.length){
+    let userId = '';
+    let downloadData;
+    if (arr.length) {
       this.http.ecgdDownloadData(arr[0]).subscribe(data => {
         // Blob转化为链接
         link.setAttribute("href", window.URL.createObjectURL(data));
-         let downloadData;
-        this.data.forEach(v=>{
-           if(v['heart_data_id']==arr[0]){
-             downloadData=v;
-             return ;
-           }
-         });
-         // console.log(this.data,downloadData,'downdata');
-        link.setAttribute("download", downloadData['name']+'_' +downloadData['mobile']+'_'+ this.formatDate(new Date().getTime()) + '.txt');
+        this.data.forEach(v => {
+          if (v['heart_data_id'] == arr[0]) {
+            downloadData = v;
+            userId = v['user_id'];
+            console.log(userId, 'userId');
+            return;
+          }
+        });
+        link.setAttribute("download", downloadData['name'] + '_' + downloadData['mobile'] + '_' + this.formatDate(new Date().getTime()) + '.txt');
         link.style.visibility = 'hidden';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        arr.splice(0,1);
-        this.download(arr);
+
+        //诊断结果下载
+        this.http.ecgdDownloadReportDetails(arr[0], userId).subscribe(data => {
+          link.setAttribute("href", window.URL.createObjectURL(data));
+          link.setAttribute("download", downloadData['name'] + '_' + '诊断结果_' + downloadData['mobile'] + '_' + this.formatDate(new Date().getTime()) + '.txt');
+          link.style.visibility = 'hidden';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          arr.splice(0, 1);
+          this.download(arr);
+        });
       });
     }
   }
@@ -154,13 +166,14 @@ export class EcgdComponent implements OnInit {
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
-    this.getHeartData(this.url, this.per_page,'1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
-    this.getHeartData( this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
+
   delAll(arr: Array<any>) {
     if (arr.length) {
       this.http.ecgdDelData('' + arr[0]).then(data => {
@@ -183,6 +196,7 @@ export class EcgdComponent implements OnInit {
       });
     }
   }
+
   set (set: string) {
     this.http.setHeader('heart-data', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('heart-data');

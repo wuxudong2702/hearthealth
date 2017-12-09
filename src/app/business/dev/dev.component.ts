@@ -30,8 +30,8 @@ export class DevComponent implements OnInit {
       this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
       this.http.isHavePerm('heart-dev-del').then(v => {
-        this.deleteBtn = v;
-        this.deleteAllBtn = v;
+        this.unBindBtn = v;
+        this.unBindAllBtn = v;
       });
     }
   }
@@ -43,8 +43,8 @@ export class DevComponent implements OnInit {
 
   devDel: boolean = false;
   devAdd: boolean = false;
-  deleteBtn: boolean = this.devDel;
-  deleteAllBtn: boolean = this.devDel;
+  unBindBtn: boolean = this.devDel;
+  unBindAllBtn: boolean = this.devDel;
   addBtn: boolean = this.devAdd;
 
   searchBtn: boolean = true;

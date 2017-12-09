@@ -17,6 +17,9 @@
           <button class="btn btn-danger btn-sm" *ngIf="deleteAllBtn" (click)="showModalDelAll()"><i
             class="fa fa-trash-o fa-fw"></i> 全部删除
           </button>
+          <button class="btn btn-danger btn-sm" *ngIf="unBindAllBtn" (click)="showModalDelAll()"><i
+            class="fa fa-trash-o fa-fw"></i> 全部解绑
+          </button>
           <button class="btn btn-primary btn-sm" *ngIf="uploadBtn" (click)="upload()"><i
             class="fa fa-upload fa-fw"></i>上传
           </button>
@@ -101,6 +104,10 @@
             <button class="btn btn-danger btn-sm" *ngIf="deleteBtn" (click)="showModalDel(i)"><i
               class="fa fa-trash-o fa-fw"></i>
               删除
+            </button>
+            <button class="btn btn-danger btn-sm" *ngIf="unBindBtn" (click)="showModalDel(i)"><i
+              class="fa fa-trash-o fa-fw"></i>
+              解绑
             </button>
             <button class="btn btn-warning btn-sm" *ngIf="chartBtn"
                     (click)="chart(row)"><i

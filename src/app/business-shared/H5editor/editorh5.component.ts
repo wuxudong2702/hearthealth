@@ -58,15 +58,17 @@ const htmlL: string = "</div>\n" +
     <div style="background-color: white">
       <div class="form-group" [hidden]="!previews" style="">
         <div style="margin-left: 2%;">
-          <label>标签：</label><input
-          style="border: 1px solid #dddddd;width: 35%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text"
+          <label>标签：</label>
+          <input
+          style="border: 1px solid #dddddd;width: 25%;height: 35px;margin: 10px 0;border-radius: 5px;" type="text"
           [(ngModel)]="label">
-          <label style="margin-left: 27px;">标题：</label><input
+          <input type="button" style="border: 1px solid #dddddd;width: 10%;height: 35px;margin: 10px 0;border-radius: 5px;" (click)="generateLabel()" value="生成标签">
+          <label style="margin-left: 5%;">标题：</label><input
           style="border: 1px solid #dddddd;width: 35%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text"
           [(ngModel)]="title">
         </div>
         <div style="margin-left: 2%;"><label>描述：</label><input
-          style="border: 1px solid #dddddd;width: 74%;height: 35px;margin: 10px 0px;border-radius: 5px;" type="text"
+          style="border: 1px solid #dddddd;width: 78%;height: 35px;margin: 10px 0;border-radius: 5px;" type="text"
           [(ngModel)]="description"></div>
       </div>
       <div class="c-content-inner " [hidden]="!previews">
@@ -153,6 +155,22 @@ export class Editorh5Component implements OnInit {
     // this.source = html.source;
   }
 
+  formatDate(time: any) {
+    const Dates = new Date(time);
+    const year: number = Dates.getFullYear();
+    const month: any = ( Dates.getMonth() + 1 ) < 10 ? '0' + ( Dates.getMonth() + 1 ) : ( Dates.getMonth() + 1 );
+    const day: any = Dates.getDate() < 10 ? '0' + Dates.getDate() : Dates.getDate();
+    const hour:any=Dates.getHours();
+    const minute:any=Dates.getMinutes();
+    const seconds:any=Dates.getSeconds();
+
+    return year + '_' + month + '_' + day+'_' +hour+'_' +minute+'_' +seconds;
+  }
+
+  generateLabel(){
+    let time=this.formatDate(new Date().getTime());
+    this.label='label_'+time;
+  }
 
   preview() {
     this.previews = false;
@@ -200,7 +218,7 @@ export class Editorh5Component implements OnInit {
         this.toastService.toast(toastCfg);
       return ;
     }
-    if(!this.label.match(/^[A-Za-z]{1,50}$/)){
+    if(!this.label.match(/^[A-Za-z0-9_\-]{1,50}$/)){
         const toastCfg = new ToastConfig(ToastType.ERROR, '', '标签必须是英文字母,最多50位！', 3000);
         this.toastService.toast(toastCfg);
       return ;

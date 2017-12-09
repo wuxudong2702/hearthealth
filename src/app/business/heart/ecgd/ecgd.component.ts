@@ -85,7 +85,6 @@ export class EcgdComponent implements OnInit {
       }
     }).catch(err => {
       const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      // console.error(err);
       this.toastService.toast(toastCfg);
     });
 
@@ -95,7 +94,7 @@ export class EcgdComponent implements OnInit {
     this.showChartView = !this.showChartView;
   }
 
-  //用户下载的时间转换函数，现在不需要了
+  //用户下载的时间转换函数
   formatDate(time: any) {
     const Dates = new Date(time);
     const year: number = Dates.getFullYear();
@@ -140,7 +139,6 @@ export class EcgdComponent implements OnInit {
       });
     }
   }
-
 
   sort(sort: sortObj) {
     this.sort_key = sort.key;

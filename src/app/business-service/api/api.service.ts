@@ -394,6 +394,7 @@ export class ApiService {
 // admin-role
   uploadHtml5Page(title: string, description: string, label: string, header: string, content: string, footer: string): Promise<any> {
     const url: string = "api/admin/info/add";
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       title: title,
@@ -404,12 +405,16 @@ export class ApiService {
       description: description,
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        this.spinService.spin(false);
+        return data
+      })
       .catch(this.handleError);
   }
 
   upDataHtml5Page(info_id: string, title: string, description: string, label: string, header: string, content: string, footer: string) {
     const url: string = "api/admin/info/update";
+    this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       title: title,
@@ -421,7 +426,10 @@ export class ApiService {
       info_id: info_id
     })
       .toPromise()
-      .then(data => data)
+      .then(data => {
+        this.spinService.spin(false);
+        return data
+      })
       .catch(this.handleError);
   }
 
@@ -1006,6 +1014,10 @@ export class ApiService {
   }
 
   hasToken():string {
+    return this.sessionStorageService.get('token');
+  }
+
+  getToken():string {
     return this.sessionStorageService.get('token');
   }
 }

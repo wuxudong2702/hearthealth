@@ -5,6 +5,7 @@ import {NgbDatepickerI18n} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormControlService} from "./form-controll.service"
 import {ShareService} from "./input/share.service";
+import {FileUploader} from "ng2-file-upload";
 
 @Component({
   selector: 'app-table-add',
@@ -15,6 +16,7 @@ import {ShareService} from "./input/share.service";
 export class TableAddComponent implements OnInit {
 
   @Input() tableAdd: boolean;
+  @Input() flag: boolean;
 
   @Input() isShow: boolean = true;
   @Input() isShowTittle: boolean = true;
@@ -37,11 +39,14 @@ export class TableAddComponent implements OnInit {
   matchUnValid: boolean = false;
   form: FormGroup;
 
+
+
   constructor(private fcs: FormControlService, private service: ShareService) {
   }
 
   ngOnInit() {
-    this.form = this.fcs.toFormGroup(this.headers);
+     this.form = this.fcs.toFormGroup(this.headers);
+
   }
 
   datePickerConfig = {
@@ -49,12 +54,19 @@ export class TableAddComponent implements OnInit {
   };
 
   submit() {
-    console.log(this.form.value, 'this.form.value');
+    // this.form.push();
+    console.log(this.form,this.form.value, 'this.form.value');
     if (this.form.value.sex =='男') {
       this.form.value.sex = '1';
     } else {
       this.form.value.sex = '2'
     }
+    if (this.form.value.default =='设为默认下载包') {
+      this.form.value['default'] = '1';
+    } else {
+      this.form.value['default'] = '0'
+    }
+    console.log(this.form.value['default']);
     for (let i in this.form.value) {
       if (!this.form.value[i]) {
         // console.log(!this.form.value[i],'!this.form.value[i]');

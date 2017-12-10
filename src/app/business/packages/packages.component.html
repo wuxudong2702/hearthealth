@@ -29,11 +29,13 @@
 <app-table-add
         [headers]="headerAdd"
         [addEditTitle]="addEditTitle"
-
+       [flag]="flag"
         (onAddCancel)="cancel()"
         (onSubmit)="submit($event)"
 
         *ngIf="addView"
 >
 </app-table-add>
-<app-upload  *ngIf="uploadView" (onUpload)="cancel()"></app-upload>
+<div class="progress" style="margin-bottom: 0;" *ngIf="addView" >
+  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': progress + '%' }"></div>
+</div>

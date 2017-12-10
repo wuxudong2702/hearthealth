@@ -7,35 +7,35 @@ import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
-import {componentFactoryName} from "@angular/compiler";
+import {HttpClient, HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";
 
 
 @Component({
   selector: 'app-packages',
   templateUrl: './packages.component.html',
   styleUrls: ['./packages.component.css'],
-  providers:[]
+  providers: []
 })
 export class PackagesComponent implements OnInit {
 
-  constructor(private http: ApiService, private toastService: ToastService) {
+  constructor(private http: ApiService, private toastService: ToastService, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-      if(this.http.hasToken()){
-          this.headers = this.http.getHeader('app-upgrades');
-          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
-          this.http.isHavePerm('app-upgrade-del').then(v => {
-              this.deleteBtn = v;
-              this.deleteAllBtn = v;
-          });
-          this.http.isHavePerm('app-upgrade-edit').then(v => {
-              this.editBtn = v;
-          });
-          this.http.isHavePerm('app-upgrade-add').then(v => {
-              this.addBtn = v;
-          });
-      }
+    if (this.http.hasToken()) {
+      this.headers = this.http.getHeader('app-upgrades');
+      this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+      this.http.isHavePerm('app-upgrade-del').then(v => {
+        this.deleteBtn = v;
+        this.deleteAllBtn = v;
+      });
+      this.http.isHavePerm('app-upgrade-edit').then(v => {
+        this.editBtn = v;
+      });
+      this.http.isHavePerm('app-upgrade-add').then(v => {
+        this.addBtn = v;
+      });
+    }
   }
 
   headers: Array<cell> = [];
@@ -55,9 +55,10 @@ export class PackagesComponent implements OnInit {
   setBtn: boolean = true;
   uploadBtn: boolean = true;
 
+
   setOperate: boolean = true;
   paginationBtn: boolean = true;
-  flag:boolean=true;
+  flag: boolean = true;
   pagination: paginationObj = new paginationObj();
   per_page: string = null;
   find_key: string = null;
@@ -65,22 +66,24 @@ export class PackagesComponent implements OnInit {
   sort_key: string = null;
   sort_val: string = null;
   url: string = '/api/admin/upgrade/index';
+  progress: number;
 
-  del(packages_id:string){
+  del(packages_id: string) {
     // console.log(packages_id,'0-0-0-0');
-      this.http.packagesDel(packages_id).then(data => {
-          if (data['status'] == 'ok') {
-            this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.http.packagesDel(packages_id).then(data => {
+      if (data['status'] == 'ok') {
+        this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
-          } else {
-              const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-              this.toastService.toast(toastCfg);
-          }
-      }).catch(err => {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-          this.toastService.toast(toastCfg);
-      });
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
   }
+
   delAll(arr: Array<any>) {
     if (arr.length) {
       this.http.packagesDel('' + arr[0]).then(data => {
@@ -90,7 +93,6 @@ export class PackagesComponent implements OnInit {
             this.delAll(arr);
           } else {
             this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
-
             return;
           }
         } else {
@@ -104,11 +106,13 @@ export class PackagesComponent implements OnInit {
       });
     }
   }
+
   add(id: number) {
     if (id >= 0) {
-      this.flag=false;
+      this.flag = false;
       this.addEditTitle = '编辑';
       this.editId = id;
+      console.log(this.headers,'00000===000');
       this.headerAdd = this.headers.map(d => {
         switch (d.input_type) {
           case INPUTTYPE.INPUT:
@@ -123,14 +127,24 @@ export class PackagesComponent implements OnInit {
         }
         return d;
       });
+      for (let i = 0; i < this.headerAdd.length; i++) {
+        if (this.headerAdd[i].key == 'ver'||this.headerAdd[i].key == 'default') {
+          this.headerAdd[i].required = false;
+        }
+      }
     }
     else {
-      this.flag=true;
+      this.flag = true;
       this.addEditTitle = '添加';
       this.headerAdd = this.headers.map(d => {
         d.val = '';
         return d;
       });
+      for (let i = 0; i < this.headerAdd.length; i++) {
+        if (this.headerAdd[i].key == 'ver'||this.headerAdd[i].key == 'default') {
+          this.headerAdd[i].required = true;
+        }
+      }
     }
     this.addView = true;
     this.uploadView = false;
@@ -141,42 +155,109 @@ export class PackagesComponent implements OnInit {
     this.addView = false;
     this.uploadView = false;
     this.tableView = true;
+    this.flag=true;
+    // for (let i = 0; i < this.headerAdd.length; i++) {
+    //   if (this.headerAdd[i].key == 'url') {
+    //     this.headerAdd[i].show = true;
+    //   }
+    // }
   }
 
   submit(submitData) {
-    if(this.flag){
-      this.http.upgradeAdd(submitData.ver,submitData.desc,submitData.url).then(data => {
-        if (data['status'] == 'ok') {
-          this.data = data['data'];
-          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
-
-          this.addView = false;
-          this.uploadView = false;
-          this.tableView = true;
-        } else {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-          this.toastService.toast(toastCfg);
-        }
-      }).catch(err => {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-        this.toastService.toast(toastCfg);
+    let formData = new FormData();
+    formData.append('app', submitData['app']);
+    formData.append('ver', submitData['ver']);
+    formData.append('desc', submitData['desc']);
+    formData.append('token', this.http.getToken());
+    formData.append('default', submitData['default']);
+     console.log(submitData['default'],'default');
+    if (this.flag) {
+      const req = new HttpRequest('POST', "api/admin/upgrade/add", formData, {
+        reportProgress: true,
       });
-    }else{
-      this.http.upgradeUpdate( ''+this.data[this.editId]['id'],submitData.ver,submitData.desc,submitData.url).then(data => {
-        if (data['status'] == 'ok') {
-          this.data = data['data'];
-          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
 
-          this.addView = false;
-          this.uploadView = false;
-          this.tableView = true;
-        } else {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-          this.toastService.toast(toastCfg);
+      this.httpClient.request(req).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+          console.log(this.progress);
         }
-      }).catch(err => {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-        this.toastService.toast(toastCfg);
+        else if (event instanceof HttpResponse) {
+          if (event.body['status'] == 'ok') {
+            this.addView = false;
+            this.uploadView = false;
+            this.tableView = true;
+            this.flag=true;
+            this.progress =0;
+            // for (let i = 0; i < this.headerAdd.length; i++) {
+            //   if (this.headerAdd[i].key == 'url') {
+            //     this.headerAdd[i].show = true;
+            //   }
+            // }
+            console.log('Files uploaded!', event);
+          } else {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', event.body['message'], 3000);
+            this.toastService.toast(toastCfg);
+          }
+        }
+      });
+
+      // this.http.upgradeAdd(submitData.ver,submitData.desc,submitData.url).then(data => {
+      //   if (data['status'] == 'ok') {
+      //     this.data = data['data'];
+      //     this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+      //
+      //     this.addView = false;
+      //     this.uploadView = false;
+      //     this.tableView = true;
+      //   } else {
+      //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+      //     this.toastService.toast(toastCfg);
+      //   }
+      // }).catch(err => {
+      //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      //   this.toastService.toast(toastCfg);
+      // });
+    } else {
+      // this.http.upgradeUpdate( ''+this.data[this.editId]['id'],submitData.ver,submitData.desc,submitData.url).then(data => {
+      //   if (data['status'] == 'ok') {
+      //     this.data = data['data'];
+      //     this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+      //
+      //     this.addView = false;
+      //     this.uploadView = false;
+      //     this.tableView = true;
+      //   } else {
+      //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+      //     this.toastService.toast(toastCfg);
+      //   }
+      // }).catch(err => {
+      //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      //   this.toastService.toast(toastCfg);
+      // });
+
+      formData.append('id', '' + this.data[this.editId]['id']);
+      const req = new HttpRequest('POST', "api/admin/upgrade/update", formData, {
+        reportProgress: true,
+      });
+
+      this.httpClient.request(req).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+          console.log(this.progress);
+        }
+        else if (event instanceof HttpResponse) {
+          if (event.body['status'] == 'ok') {
+            this.addView = false;
+            this.uploadView = false;
+            this.tableView = true;
+            this.flag=true;
+            this.progress =0;
+            console.log('Files uploaded!', event);
+          } else {
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', event.body['message'], 3000);
+            this.toastService.toast(toastCfg);
+          }
+        }
       });
     }
   }
@@ -191,26 +272,28 @@ export class PackagesComponent implements OnInit {
   search(searchObj: searchObj) {
     this.find_val = searchObj.searchValue;
     this.find_key = searchObj.selectValue;
-    this.getHeartData(this.url, this.per_page,'1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
+
   set (set: string) {
     this.http.setHeader('app-upgrades', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('app-upgrades');
     });
   }
+
   paginationChange(parmas) {
     this.per_page = parmas['per_page'];
-    this.getHeartData( this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.getHeartData(this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
   }
 
-  upload(data){
-    console.log(data,'data');
+  upload(data) {
+    console.log(data, 'data');
     this.uploadView = true;
     this.addView = false;
     this.tableView = false;
   }
 
-  getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
+  getHeartData(url: string = this.url, per_page: string = this.per_page, page: string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
     this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data']['data'];

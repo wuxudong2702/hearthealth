@@ -169,12 +169,11 @@ export class TableListComponent implements OnInit, OnChanges {
   @Output() onChart2 = new EventEmitter<any>();
   @Output() onSort = new EventEmitter<any>();
   @Output() onBack = new EventEmitter<any>();
-  @Output() onUpload = new EventEmitter<any>();
+  @Output() onDefault = new EventEmitter<any>();
   @Output() onEditZTree = new EventEmitter<any>();
   @Output() onEditH5 = new EventEmitter<any>();
   @Output() onPaginationChange = new EventEmitter<any>();
-  // @Output() unBindBtn = new EventEmitter<any>();
-  // @Output() unBindAllBtn = new EventEmitter<any>();
+
 
   url: string = '';
   isDelAll: boolean = false;
@@ -385,8 +384,8 @@ export class TableListComponent implements OnInit, OnChanges {
     this.onBack.emit();
   }
 
-  upload(row) {
-    this.onUpload.emit(row);
+  default(id) {
+    this.onDefault.emit(id);
   }
 
   openError(errorInfo) {

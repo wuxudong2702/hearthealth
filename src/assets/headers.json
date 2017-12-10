@@ -131,10 +131,25 @@
       "input_type": 0
     },
     {
+      "key": "url",
+      "show": true,
+      "name": "地址",
+      "index": 1,
+      "order": 0,
+      "pipe_type": 0,
+      "pipe_params": "",
+      "val": "",
+      "select_val": [],
+      "valid_example": "",
+      "required": false,
+      "pattern": "^.{0,50}$",
+      "input_type": 0
+    },
+    {
       "key": "desc",
       "show": true,
       "name": "描述",
-      "index": 1,
+      "index": 2,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -145,26 +160,12 @@
       "pattern": "^.{0,100}$",
       "input_type": 0
     },
+
     {
-      "key": "url",
-      "show": true,
-      "name": "地址",
-      "index": 1,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "长度超出限制",
-      "required": true,
-      "pattern": "^.{0,50}$",
-      "input_type": 0
-    },
-    {
-      "key": "isDefault",
+      "key": "default",
       "show": true,
       "name": "是否为默认下载",
-      "index": 4,
+      "index": 3,
       "order": 0,
       "pipe_type": 1,
       "pipe_params": {"0":"是", "1":"否"},
@@ -174,6 +175,21 @@
       "required": true,
       "pattern": "",
       "input_type": 1
+    },
+    {
+      "key": "app",
+      "show": true,
+      "name": "app升级包",
+      "index": 4,
+      "order": 0,
+      "pipe_type": 4,
+      "pipe_params": "",
+      "val": "",
+      "select_val": "",
+      "valid_example": "",
+      "required": false,
+      "pattern": "",
+      "input_type": 4
     }
   ],
   "devs": [

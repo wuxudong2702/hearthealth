@@ -4,8 +4,9 @@
   <div class="">
 
     <form class="addForm " [formGroup]="form" [class.treeAddForm]="treeAdd" >
-      <div class=" form-inline formCenter" [class.treeAdd]="treeAdd"  *ngFor="let header of headers" [hidden]="header.key=='role_id'||header.key=='id'||header.name=='账户角色'" >
-      <app-input [field]="header"  [treeAdd]="treeAdd" [AddInput]="isShow" [form]="form"
+      <div class=" form-inline formCenter" [class.treeAdd]="treeAdd"  *ngFor="let header of headers"
+           [hidden]="header.key=='role_id'||header.key=='id'||header.name=='账户角色'||header.key=='url'" >
+      <app-input [field]="header" [flag]="flag" [treeAdd]="treeAdd" [AddInput]="isShow" [form]="form"
                  (onSendFormValue)="SendFormValue($event)"
                  (onSendRemind)="sendRemind($event)"
                  (onSendMatchValid)="sendMatchValid($event)"></app-input>
@@ -16,6 +17,7 @@
         <button type="button" class="btn btn-default" (click)="addCancel()">取消</button>
       </div>
     </form>
+
   </div>
 </div>
 

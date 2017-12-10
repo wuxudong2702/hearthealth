@@ -20,9 +20,9 @@
           <button class="btn btn-danger btn-sm" *ngIf="unBindAllBtn" (click)="showModalDelAll()"><i
             class="fa fa-trash-o fa-fw"></i> 全部解绑
           </button>
-          <button class="btn btn-primary btn-sm" *ngIf="uploadBtn" (click)="upload()"><i
-            class="fa fa-upload fa-fw"></i>上传
-          </button>
+          <!--<button class="btn btn-primary btn-sm" *ngIf="uploadBtn" (click)="upload()"><i-->
+            <!--class="fa fa-upload fa-fw"></i>上传-->
+          <!--</button>-->
         </div>
       </div>
     </div>
@@ -116,8 +116,8 @@
             <button class="btn btn-warning btn-sm" *ngIf="chartBtn2" (click)="chart2(row['id'],row['name'],i)"><i
                     class="fa fa-area-chart fa-fw"></i> 图表
             </button>
-            <button class="btn btn-warning btn-sm" *ngIf="uploadBtn" (click)="upload(row)"><i
-                    class="fa fa-upload fa-fw"></i> 上传
+            <button class="btn btn-warning btn-sm" *ngIf="uploadBtn" (click)="default(row['id'])"><i
+                    class="fa fa-upload fa-fw"></i> 设为默认
             </button>
           </td>
         </tr>

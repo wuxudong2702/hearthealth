@@ -22,6 +22,7 @@ export class InputComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() AddInput: boolean;
   @Input() treeAdd: boolean;
+  @Input() flag: boolean;
   @Output() onSendId = new EventEmitter<any>();
   @Output() onSendRemind = new EventEmitter<any>();
   @Output() onSendFormValue = new EventEmitter<any>();
@@ -80,6 +81,36 @@ export class InputComponent implements OnInit {
       });
     }
   }
+
+
+
+  upload(files) {
+    this.form.value[this.field.key] = files[0];
+    // console.log(this.form.value[this.field.key], this.form,'form ---');
+    // if (files.length === 0)
+    //   return;
+    //
+    // let formData = new FormData();
+    //
+    // for (let file of files){
+    //   formData.append(file.name, file);
+    //   console.dir(formData);
+    // }
+
+
+
+    // const req = new HttpRequest('POST', `api/files`, formData, {
+    //   reportProgress: true,
+    // });
+
+    // this.http.request(req).subscribe(event => {
+    //   if (event.type === HttpEventType.UploadProgress)
+    //     this.uploadProgress = Math.round(100 * event.loaded / event.total);
+    //   else if (event instanceof HttpResponse)
+    //     console.log('Files uploaded!');
+    // });
+  }
+
 
   get isValid() {
     // console.log(this.form.controls[this.field.key].valid,this.field.key);

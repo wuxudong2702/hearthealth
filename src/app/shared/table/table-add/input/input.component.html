@@ -1,6 +1,8 @@
 <div [formGroup]="form" class="form-inline">
 
-    <label style="width: 140px" for="name"> <span *ngIf="field.required" style="color:red;">* &nbsp;&nbsp;&nbsp; </span>
+    <label style="width: 140px" for="name">
+      <span *ngIf="field.required && flag==true" style="color:red;">* &nbsp;&nbsp;&nbsp; </span>
+      <span *ngIf="field.key=='app' && flag==true" style="color:red;">* &nbsp;&nbsp;&nbsp; </span>
         {{field.name+":"}}</label>
     <!--<input type="text" style="display: none;" disabled autocomplete = "off"/>-->
     <input
@@ -94,6 +96,16 @@
            *ngIf="field.input_type==2"
            class="form-control dateInput dateInputStyle addInputValue "
            placeholder="请选择日期"/>
+
+  <input
+    type="file"
+    class="form-control addInputValue"
+    *ngIf="field.input_type == 4"
+    [(ngModel)]="field.val"
+    [formControlName]="field.key"
+     #file
+    (change)="upload(file.files)"
+  >
 
 
     <div class="" *ngIf="!isValid  && isDirty ">

@@ -38,7 +38,7 @@ export class InputComponent implements OnInit {
   isMatch: boolean = true;
   matchUnValid: boolean = true;
   subscription: Subscription;
-
+  fieldVer:string;
   constructor(private http: ApiService, private toastService: ToastService, private service: ShareService) {}
 
   ngOnInit(): void {
@@ -47,9 +47,31 @@ export class InputComponent implements OnInit {
         this.isMatch = this.form.value['password'] == this.form.value['password_confirmation'];
       }
     });
+    if (this.field.key == 'ver') {
+      this.fieldVer=this.field.val;
+    }
+    // this.fieldVer=this.field.
   }
-
+  checkVer() {
+    if(this.field.key == 'ver'&&this.formValue&&this.formValue['ver']!=this.fieldVer){
+      this.http.verUnique(this.formValue['ver']).then(data => {
+        if (data['status'] == 'ok') {
+          if(data['data']=='1'){
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', '此版本号已存在!', 3000);
+            this.toastService.toast(toastCfg);
+          }
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+          this.toastService.toast(toastCfg);
+        }
+      }).catch(err => {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+        this.toastService.toast(toastCfg);
+      });
+    }
+  }
   change() {
+
     this.formValue = this.form.value;
     this.onSendFormValue.emit(this.formValue);
     if (this.field.key == 'password' || this.field.key == 'password_confirmation') {
@@ -83,7 +105,6 @@ export class InputComponent implements OnInit {
   }
 
 
-
   upload(files) {
     this.form.value[this.field.key] = files[0];
     // console.log(this.form.value[this.field.key], this.form,'form ---');
@@ -96,13 +117,9 @@ export class InputComponent implements OnInit {
     //   formData.append(file.name, file);
     //   console.dir(formData);
     // }
-
-
-
     // const req = new HttpRequest('POST', `api/files`, formData, {
     //   reportProgress: true,
     // });
-
     // this.http.request(req).subscribe(event => {
     //   if (event.type === HttpEventType.UploadProgress)
     //     this.uploadProgress = Math.round(100 * event.loaded / event.total);

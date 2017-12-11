@@ -56,19 +56,24 @@ export class SetComponent implements OnInit {
 
   customSetOrder(i, index) {
     if (i === 0) {
-      this.headersTemp[i + 1]['index']--;
-      this.headersTemp[i]['index']++;
+      // this.headersTemp[i + 1]['index']--;
+      // this.headersTemp[i]['index']++;
+
+      let index= this.headersTemp[0]['index'];
+      this.headersTemp[0]['index']=this.headersTemp[1]['index'];
+      this.headersTemp[1]['index']=index;
 
       let temp = this.headersTemp[i + 1];
       this.headersTemp[i + 1] = this.headersTemp[i];
       this.headersTemp[i] = temp;
     }
     if (i > 0) {
-      this.headersTemp[i - 1]['index']++;
-      this.headersTemp[i]['index']--;
+      let index= this.headersTemp[i - 1]['index'];
+      this.headersTemp[i - 1]['index']=this.headersTemp[i]['index'];
+      this.headersTemp[i]['index']=index;
 
       let temp = this.headersTemp[i - 1];
-      this.headersTemp[i - 1] = this.headersTemp[i]
+      this.headersTemp[i - 1] = this.headersTemp[i];
       this.headersTemp[i] = temp;
     }
   }

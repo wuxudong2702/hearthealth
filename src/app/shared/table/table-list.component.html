@@ -116,8 +116,11 @@
             <button class="btn btn-warning btn-sm" *ngIf="chartBtn2" (click)="chart2(row['id'],row['name'],i)"><i
                     class="fa fa-area-chart fa-fw"></i> 图表
             </button>
-            <button class="btn btn-warning btn-sm" *ngIf="uploadBtn" (click)="default(row['id'])"><i
+            <button class="btn btn-warning btn-sm" *ngIf="uploadBtn&&row['default']=='0'" (click)="default(row['id'])"><i
                     class="fa fa-upload fa-fw"></i> 设为默认
+            </button>
+            <button class="btn btn-warning btn-sm" *ngIf="uploadBtn&&row['default']=='1'" (click)="default(row['id'])"><i
+                    class="fa fa-upload fa-fw"></i> 取消默认
             </button>
           </td>
         </tr>

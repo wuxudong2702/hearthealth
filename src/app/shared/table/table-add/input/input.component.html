@@ -1,9 +1,6 @@
 <div [formGroup]="form" class="form-inline">
 
-    <label style="width: 140px" for="name">
-      <span *ngIf="field.required && flag==true" style="color:red;">* &nbsp;&nbsp;&nbsp; </span>
-      <span *ngIf="field.key=='app' && flag==true" style="color:red;">* &nbsp;&nbsp;&nbsp; </span>
-        {{field.name+":"}}</label>
+    <div style="width: 240px" class="text-right" for="name">{{field.name+":"}}</div>
     <!--<input type="text" style="display: none;" disabled autocomplete = "off"/>-->
     <input
             type="text"
@@ -21,6 +18,7 @@
             autocomplete="off"
             (keyup)="change()"
             (click)="change()"
+            (blur)="checkVer()"
             pattern={{field.pattern}}
     >
 

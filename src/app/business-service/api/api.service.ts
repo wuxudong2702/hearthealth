@@ -668,6 +668,19 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+  verUnique(ver: string) {
+    const urls: string = "/api/admin/upgrade/ver";
+    return this.httpClient.post(urls, {
+      token: this.sessionStorageService.get('token'),
+      ver: ver
+    })
+      .toPromise()
+      .then(data => {
+        return data;
+      })
+      .catch(this.handleError);
+  }
+
 //admin-user
   rolesAdd(name: string, description: string, perms: string) {
     const urls: string = "/api/admin/admins/role/add";

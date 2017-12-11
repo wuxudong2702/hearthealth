@@ -97,11 +97,11 @@ export class AppUserComponent implements OnInit {
   add(id: number) {
     for (let i = 0; i < this.headers.length; i++) {
       if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'mobile'|| this.headers[i].key == 'relationship') {
-        this.headers[i].show = true;
-        if (id == undefined ) {
-          this.headers[i].required = true;
-        } else {
+        // this.headers[i].show = true;
+        if (id >=0 ) {
           this.headers[i].required = false;
+        } else {
+          this.headers[i].required = true;
         }
       }
     }
@@ -121,7 +121,8 @@ export class AppUserComponent implements OnInit {
           default:
             d.val = this.data[id][d.key];
         }
-        return d;
+
+        return d  ;
       });
     }
     else {
@@ -139,11 +140,11 @@ export class AppUserComponent implements OnInit {
   }
 
   cancel() {
-    for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
-        this.headers[i].show = false;
-      }
-    }
+    // for (let i = 0; i < this.headers.length; i++) {
+    //   if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+    //     this.headers[i].show = false;
+    //   }
+    // }
     this.addView = false;
     this.subUsersView = false;
     this.tableView = true;
@@ -166,11 +167,11 @@ export class AppUserComponent implements OnInit {
           this.addSubUserView = false;
           this.addView = false;
           this.subUsersView = false;
-          for (let i = 0; i < this.headers.length; i++) {
-            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
-              this.headers[i].show = false;
-            }
-          }
+          // for (let i = 0; i < this.headers.length; i++) {
+          //   if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+          //     this.headers[i].show = false;
+          //   }
+          // }
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
           this.toastService.toast(toastCfg);
@@ -190,12 +191,12 @@ export class AppUserComponent implements OnInit {
           this.addSubUserView = false;
           this.addView = false;
           this.subUsersView = false;
-          for (let i = 0; i < this.headers.length; i++) {
-            if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
-              this.headers[i].required = false;
-              this.headers[i].show = false;
-            }
-          }
+          // for (let i = 0; i < this.headers.length; i++) {
+          //   if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password') {
+          //     this.headers[i].required = false;
+          //     this.headers[i].show = false;
+          //   }
+          // }
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
           this.toastService.toast(toastCfg);
@@ -358,9 +359,9 @@ export class AppUserComponent implements OnInit {
           default:
             d.val = this.subUserData[id][d.key];
         }
-        if(d['key']=='name'){
-          d['required']=false;
-        }
+        // if(d['key']=='name'){
+        //   d['required']=false;
+        // }
         return d;
       });
     }
@@ -369,9 +370,9 @@ export class AppUserComponent implements OnInit {
       this.addEditTitle = '添加';
       this.subUsersheaderAdd = this.subUserHeaders.map(d => {
         d.val = '';
-        if(d['key']=='name'){
-          d['required']=true;
-        }
+        // if(d['key']=='name'){
+        //   d['required']=true;
+        // }
         return d;
       });
     }

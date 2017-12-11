@@ -306,7 +306,6 @@ export class TableListComponent implements OnInit, OnChanges {
     function isChecked(i) {
       return i == true;
     }
-
     if (this.checkedList.some(isChecked)) {
       let confirmCfg = new ConfirmConfig('您确认删除吗？！');
       let result = this.modalService.confirm(confirmCfg);
@@ -324,7 +323,6 @@ export class TableListComponent implements OnInit, OnChanges {
     let confirmCfg = new ConfirmConfig('您确认删除吗？！');
     let result = this.modalService.confirm(confirmCfg);
     result.then(v => {
-
       if (this.data[i]['heart_data_id'] == undefined) {
         // console.log(this.delId, 'this.delId');
         if (this.data[i]['dev_id'] == undefined) {

@@ -64,22 +64,19 @@ export class AppRoleComponent implements OnInit {
     this.headerAdd = this.headers.map(d => {
       switch (d.input_type) {
         case INPUTTYPE.INPUT:
-          d.val = this.data[id][d.key];
-          break;
-        case INPUTTYPE.SELECT:
-          let val = this.data[id][d.key];
-          d.val = d.select_val[val];
+          d.val = ''+this.data[id][d.key];
           break;
         default:
           d.val = this.data[id][d.key];
       }
       return d;
     });
-    for (let i = 0; i < this.headerAdd.length; i++) {
-      if (this.headerAdd[i].key == 'name') {
-        this.headerAdd[i].show = false;
-      }
-    }
+    console.log(this.headerAdd,'headeradd');
+    // for (let i = 0; i < this.headerAdd.length; i++) {
+    //   if (this.headerAdd[i].key == 'name') {
+    //     this.headerAdd[i].show = false;
+    //   }
+    // }
     this.addView = true;
     this.tableView = false;
   }
@@ -87,11 +84,11 @@ export class AppRoleComponent implements OnInit {
   cancel() {
     this.addView = false;
     this.tableView = true;
-    for (let i = 0; i < this.headers.length; i++) {
-      if (this.headers[i].key == 'name') {
-        this.headers[i].show = true;
-      }
-    }
+    // for (let i = 0; i < this.headers.length; i++) {
+    //   if (this.headers[i].key == 'name') {
+    //     this.headers[i].show = true;
+    //   }
+    // }
   }
 
   submit(submitData) {
@@ -101,11 +98,11 @@ export class AppRoleComponent implements OnInit {
         this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
         this.addView = false;
         this.tableView = true;
-        for (let i = 0; i < this.headers.length; i++) {
-          if (this.headers[i].key == 'name') {
-            this.headers[i].show = true;
-          }
-        }
+        // for (let i = 0; i < this.headers.length; i++) {
+        //   if (this.headers[i].key == 'name') {
+        //     this.headers[i].show = true;
+        //   }
+        // }
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);

@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../shared/toast/toast-model';
 import {HttpClient, HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";
+import {isNullOrUndefined} from "util";
 
 
 @Component({
@@ -112,7 +113,6 @@ export class PackagesComponent implements OnInit {
       this.flag = false;
       this.addEditTitle = '编辑';
       this.editId = id;
-      console.log(this.headers,'00000===000');
       this.headerAdd = this.headers.map(d => {
         switch (d.input_type) {
           case INPUTTYPE.INPUT:
@@ -125,11 +125,15 @@ export class PackagesComponent implements OnInit {
           default:
             d.val = this.data[id][d.key];
         }
+
         return d;
       });
       for (let i = 0; i < this.headerAdd.length; i++) {
         if (this.headerAdd[i].key == 'ver'||this.headerAdd[i].key == 'default') {
           this.headerAdd[i].required = false;
+        }
+        if(this.headerAdd[i].key == 'app'){
+          this.headerAdd[i].show=true;
         }
       }
     }
@@ -144,6 +148,9 @@ export class PackagesComponent implements OnInit {
         if (this.headerAdd[i].key == 'ver'||this.headerAdd[i].key == 'default') {
           this.headerAdd[i].required = true;
         }
+        if(this.headerAdd[i].key == 'app'){
+          this.headerAdd[i].show=true;
+        }
       }
     }
     this.addView = true;
@@ -157,8 +164,8 @@ export class PackagesComponent implements OnInit {
     this.tableView = true;
     this.flag=true;
     // for (let i = 0; i < this.headerAdd.length; i++) {
-    //   if (this.headerAdd[i].key == 'url') {
-    //     this.headerAdd[i].show = true;
+    //   if(this.headerAdd[i].key == 'app'){
+    //     this.headerAdd[i].show=false;
     //   }
     // }
   }
@@ -170,8 +177,12 @@ export class PackagesComponent implements OnInit {
     formData.append('desc', submitData['desc']);
     formData.append('token', this.http.getToken());
     formData.append('default', submitData['default']);
-     console.log(submitData['default'],'default');
     if (this.flag) {
+      if(isNullOrUndefined(submitData['app'])){
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', '未选择APP包！', 3000);
+        this.toastService.toast(toastCfg);
+        return ;
+      }
       const req = new HttpRequest('POST', "api/admin/upgrade/add", formData, {
         reportProgress: true,
       });
@@ -188,58 +199,23 @@ export class PackagesComponent implements OnInit {
             this.tableView = true;
             this.flag=true;
             this.progress =0;
-            // for (let i = 0; i < this.headerAdd.length; i++) {
-            //   if (this.headerAdd[i].key == 'url') {
-            //     this.headerAdd[i].show = true;
-            //   }
-            // }
-            console.log('Files uploaded!', event);
+            for (let i = 0; i < this.headerAdd.length; i++) {
+              if(this.headerAdd[i].key == 'app'){
+                this.headerAdd[i].show=false;
+              }
+            }
+            this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
           } else {
             const toastCfg = new ToastConfig(ToastType.ERROR, '', event.body['message'], 3000);
             this.toastService.toast(toastCfg);
           }
         }
       });
-
-      // this.http.upgradeAdd(submitData.ver,submitData.desc,submitData.url).then(data => {
-      //   if (data['status'] == 'ok') {
-      //     this.data = data['data'];
-      //     this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
-      //
-      //     this.addView = false;
-      //     this.uploadView = false;
-      //     this.tableView = true;
-      //   } else {
-      //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-      //     this.toastService.toast(toastCfg);
-      //   }
-      // }).catch(err => {
-      //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      //   this.toastService.toast(toastCfg);
-      // });
     } else {
-      // this.http.upgradeUpdate( ''+this.data[this.editId]['id'],submitData.ver,submitData.desc,submitData.url).then(data => {
-      //   if (data['status'] == 'ok') {
-      //     this.data = data['data'];
-      //     this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
-      //
-      //     this.addView = false;
-      //     this.uploadView = false;
-      //     this.tableView = true;
-      //   } else {
-      //     const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-      //     this.toastService.toast(toastCfg);
-      //   }
-      // }).catch(err => {
-      //   const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      //   this.toastService.toast(toastCfg);
-      // });
-
       formData.append('id', '' + this.data[this.editId]['id']);
       const req = new HttpRequest('POST', "api/admin/upgrade/update", formData, {
         reportProgress: true,
       });
-
       this.httpClient.request(req).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
@@ -252,7 +228,13 @@ export class PackagesComponent implements OnInit {
             this.tableView = true;
             this.flag=true;
             this.progress =0;
-            console.log('Files uploaded!', event);
+            for (let i = 0; i < this.headerAdd.length; i++) {
+              if(this.headerAdd[i].key == 'app'){
+                this.headerAdd[i].show=false;
+              }
+            }
+            this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+            console.log('Files uploaded!');
           } else {
             const toastCfg = new ToastConfig(ToastType.ERROR, '', event.body['message'], 3000);
             this.toastService.toast(toastCfg);
@@ -262,6 +244,36 @@ export class PackagesComponent implements OnInit {
     }
   }
 
+  setDefault(id:string){
+    let defaultData;
+    for(let i=0;i<this.data.length;i++){
+      if(this.data[i]['id']==id){
+         defaultData=this.data[i];
+      }
+    }
+    defaultData['default']=defaultData['default']=='0'? '1':'0';
+    let formData = new FormData();
+    formData.append('app', defaultData['app']);
+    formData.append('ver', defaultData['ver']);
+    formData.append('desc', defaultData['desc']);
+    formData.append('token', this.http.getToken());
+    formData.append('default', defaultData['default']);
+    formData.append('id', ''+ id);
+     console.log(defaultData,'defaultData');
+    const req = new HttpRequest('POST', "api/admin/upgrade/update", formData, {
+      reportProgress: true,
+    });
+    this.httpClient.request(req).subscribe(event => {
+       if (event instanceof HttpResponse) {
+        if (event['body']['status'] == 'ok') {
+          this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+        } else {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', event['body']['message'], 3000);
+          this.toastService.toast(toastCfg);
+        }
+      }
+    });
+  }
 
   sort(sort: sortObj) {
     this.sort_key = sort.key;
@@ -287,7 +299,6 @@ export class PackagesComponent implements OnInit {
   }
 
   upload(data) {
-    console.log(data, 'data');
     this.uploadView = true;
     this.addView = false;
     this.tableView = false;
@@ -306,7 +317,6 @@ export class PackagesComponent implements OnInit {
         this.pagination.next_page_url = data['data']['next_page_url'];
         this.pagination.prev_page_url = data['data']['prev_page_url'];
         this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -316,5 +326,4 @@ export class PackagesComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
-
 }

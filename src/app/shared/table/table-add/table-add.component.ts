@@ -46,7 +46,6 @@ export class TableAddComponent implements OnInit {
 
   ngOnInit() {
      this.form = this.fcs.toFormGroup(this.headers);
-
   }
 
   datePickerConfig = {
@@ -54,22 +53,18 @@ export class TableAddComponent implements OnInit {
   };
 
   submit() {
-    // this.form.push();
-    console.log(this.form,this.form.value, 'this.form.value');
     if (this.form.value.sex =='男') {
       this.form.value.sex = '1';
-    } else {
+    } else  if (this.form.value.sex =='女') {
       this.form.value.sex = '2'
     }
-    if (this.form.value.default =='设为默认下载包') {
+    if (this.form.value.default =='是') {
       this.form.value['default'] = '1';
-    } else {
+    } else if (this.form.value.default =='否'){
       this.form.value['default'] = '0'
     }
-    console.log(this.form.value['default']);
     for (let i in this.form.value) {
       if (!this.form.value[i]) {
-        // console.log(!this.form.value[i],'!this.form.value[i]');
         this.form.value[i] = undefined;
       }
     }

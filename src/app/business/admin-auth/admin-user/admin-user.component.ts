@@ -114,7 +114,6 @@ export class AdminUserComponent implements OnInit {
         d.val = '';
         return d;
       });
-      // console.log(this.headerAdd, 'headerAdd----');
     }
     this.addView = true;
     this.tableView = false;
@@ -127,9 +126,6 @@ export class AdminUserComponent implements OnInit {
                   this.role_id = k.id;
           }
     });
-    // console.log(this.role_id ,'this.role_id ~~~~~~~~`');
-    // console.log(this.remind ,'this.remind ~~~~~~~~`');
-    // console.log(this.userEditFlag ,'this.userEditFlag ~~~~~~~~`');
     if (this.flag) {
         //添加
         if (this.role_id!=''&&this.role_id!=undefined) {

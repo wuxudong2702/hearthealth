@@ -68,9 +68,9 @@ export class EcgdComponent implements OnInit {
 
   chart(params) {
     this.Params = params;
-    this.userId = params['id'];
+    this.userId = ''+params['id'];
     this.chartId = params['chart_id'];
-    this.http.getEcgdDataChart(params['id']).then(data => {
+    this.http.getEcgdDataChart(''+params['id']).then(data => {
       if (data['status'] == 'ok') {
         this.dataChart1 = data['data'].map(v => {
           return v * 0.002;
@@ -85,6 +85,7 @@ export class EcgdComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
+
 
   back() {
     this.showChartView = !this.showChartView;

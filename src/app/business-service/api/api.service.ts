@@ -338,8 +338,8 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getEcgdDataChart(chartId: number): Promise<any> {
-    const url: string = ' /api/admin/heart/data';
+  getEcgdDataChart(chartId: string): Promise<any> {
+    const url: string = '/api/admin/heart/data';
     this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -1042,7 +1042,7 @@ export class ApiService {
   }
 
 
-  getHhrDataDetails(chartId: number, id: number): Promise<any> {
+  getHhrDataDetails(chartId: string, id: string): Promise<any> {
     const url: string = '/api/admin/report/detail';
     this.spinService.spin(true);
     return this.httpClient.post(url, {

@@ -14,7 +14,7 @@ export class EcgdChartComponent implements OnInit {
   // @Input() userName: string;
   @Input() userId: string;
   // @Input() sense_time: any;
-  @Input() params: any;
+  @Input() Params: any;
 
   @Output() back = new EventEmitter<any>();
 
@@ -59,7 +59,7 @@ export class EcgdChartComponent implements OnInit {
               textStyle: {
                   color: '#000'
               },
-              position: function (pos, params, el, elRect, size) {
+              position: function (pos, Params, el, elRect, size) {
                   let obj = {top: 10};
                   obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
                   return obj;
@@ -183,10 +183,11 @@ export class EcgdChartComponent implements OnInit {
           ]
     }
 
-    this.chartDetailsId = this.params['id'];
-    this.userName = this.params['name'];
-    this.sense_time = this.params['sense_time'];
-    this.http.getHhrDataDetails(this.params['user_id'], this.chartDetailsId).then(data => {
+    this.chartDetailsId = this.Params['id'];
+    this.userName = this.Params['name'];
+    this.sense_time = this.Params['sense_time'];
+    console.log(this.Params,'this.params');
+    this.http.getHhrDataDetails(''+this.Params['user_id'],''+ this.chartDetailsId).then(data => {
       if (data['status'] == 'ok') {
         if (data['data']) {
           this.chartDetailsData=[];

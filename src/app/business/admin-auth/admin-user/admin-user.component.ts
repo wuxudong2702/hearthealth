@@ -6,7 +6,7 @@ import {
   DataType,
   INPUTTYPE,
   searchObj,
-  paginationObj
+  paginationObj, params
 } from '../../../shared/table/table-list.component';
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from '../../../business-service/api/api.service';
@@ -32,7 +32,8 @@ export class AdminUserComponent implements OnInit {
   ngOnInit() {
     if(this.http.hasToken()){
         this.headers = this.http.getHeader('admins');
-        this.getHeartData(this.url);
+      this.params['page']='1';
+      this.getHeartData(this.url,this.params);
         this.http.isHavePerm('admin-user-del').then(v => {
             this.deleteBtn = v;
             this.deleteAllBtn = v;
@@ -70,12 +71,8 @@ export class AdminUserComponent implements OnInit {
   addView: boolean = false;
 
   pagination: paginationObj = new paginationObj();
-  per_page: string = null;
-  find_key: string = null;
-  find_val: string = null;
-  sort_key: string = null;
-  sort_val: string = null;
   url: string = '/api/admin/admins/index';
+  params:params=new params();
 
   add(id: number) {
     for (let i = 0; i < this.headers.length; i++) {
@@ -132,7 +129,8 @@ export class AdminUserComponent implements OnInit {
             this.http.adminsAdd(this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
                 if (data['status'] == 'ok') {
                     this.data = data['data'];
-                    this.getHeartData();
+                  this.params['page']='1';
+                  this.getHeartData(this.url, this.params);
                     for (let i = 0; i < this.headers.length; i++) {
                         if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
                             this.headers[i].show = false;
@@ -161,7 +159,8 @@ export class AdminUserComponent implements OnInit {
                 this.http.adminsUpdate('' + this.data[this.editId]['id'], this.role_id, submitData.user_name, submitData.name, submitData.password).then(data => {
                     if (data['status'] == 'ok') {
                         this.data = data['data'];
-                        this.getHeartData();
+                      this.params['page']='1';
+                      this.getHeartData(this.url, this.params);
                         this.role_id = '';
                         for (let i = 0; i < this.headers.length; i++) {
                             if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
@@ -189,7 +188,8 @@ export class AdminUserComponent implements OnInit {
                 // console.log(data);
                 if (data['status'] == 'ok') {
                     this.data = data['data'];
-                    this.getHeartData();
+                  this.params['page']='1';
+                  this.getHeartData(this.url, this.params);
                     for (let i = 0; i < this.headers.length; i++) {
                         if (this.headers[i].key == 'password_confirmation' || this.headers[i].key == 'password' || this.headers[i].key == 'name') {
                             this.headers[i].show = false;
@@ -212,38 +212,37 @@ export class AdminUserComponent implements OnInit {
 
   }
 
-  getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1', find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
-    this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
-        if (data['status'] == 'ok') {
-          this.data = data['data']['data'];
-          this.pagination.current_page = data['data']['current_page'];
-          this.pagination.last_page = data['data']['last_page'];
-          this.pagination.per_page = data['data']['per_page'];
-          this.pagination.total = data['data']['total'];
-          this.pagination.first_page_url = data['data']['first_page_url'];
-          this.pagination.last_page_url = data['data']['last_page_url'];
-          this.pagination.next_page_url = data['data']['next_page_url'];
-          this.pagination.prev_page_url = data['data']['prev_page_url'];
-          this.pagination.to = data['data']['to'];
-        } else {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
-          this.toastService.toast(toastCfg);
-        }
-      }).catch(err => {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-        this.toastService.toast(toastCfg);
-    });
-  }
-
-  paginationChange(parmas) {
-    this.per_page = parmas['per_page'];
-    this.getHeartData(this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
-  }
-
   sort(sort: sortObj) {
-    this.sort_key = sort.key;
-    this.sort_val = sort.val;
-    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+    this.params['sort_key'] = sort.key;
+    this.params['sort_val'] = sort.val;
+    this.getHeartData(this.url,this.params);
+  }
+
+  search(searchObj: searchObj) {
+    this.params['find_key']=searchObj.selectValue;
+    this.params['find_val']=searchObj.searchValue;
+    this.getHeartData(this.url,this.params);
+  }
+
+  paginationChange(params) {
+    this.params['page']=params['page'];
+    this.params['count'] =params['per_page'];
+    this.getHeartData(this.url,this.params);
+  }
+
+  getHeartData(url,params){
+    this.http.getTableData(url,params).then(data => {
+      if (data['status'] == 'ok') {
+        this.data = data['data'];
+        this.pagination =data['pagination'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data['message'], 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
   }
 
   set (set: string) {
@@ -252,16 +251,12 @@ export class AdminUserComponent implements OnInit {
     });
   }
 
-  search(searchObj: searchObj) {
-    this.find_val = searchObj.searchValue;
-    this.find_key = searchObj.selectValue;
-    this.getHeartData(this.url, this.per_page,'1',this.find_key, this.find_val, this.sort_key, this.sort_val);
-  }
 
   del(id: string) {
     this.http.adminsDel(id).then(data => {
       if (data['status'] == 'ok') {
-        this.getHeartData();
+        this.params['page']='1';
+        this.getHeartData(this.url, this.params);
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -280,7 +275,8 @@ export class AdminUserComponent implements OnInit {
           if (arr.length) {
             this.delAll(arr);
           } else {
-            this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+            this.params['page']='1';
+            this.getHeartData(this.url, this.params);
           }
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);

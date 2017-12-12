@@ -6,7 +6,8 @@ import {
   sortObj,
   DataType,
   searchObj,
-  paginationObj
+  paginationObj,
+  params
 } from '../../shared/table/table-list.component';
 import {ApiService} from '../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
@@ -55,26 +56,10 @@ export class DevComponent implements OnInit {
   tableView: boolean = true;
   addView: boolean = false;
   pagination: paginationObj = new paginationObj();
+  params:params=new params();
 
-  per_page: string = null;
-  find_key: string = null;
-  find_val: string = null;
-  sort_key: string = null;
-  sort_val: string = null;
   url: string = '/api/admin/dev/index';
-   params:object={
-    per_page:  this.per_page,
-    page:'1',
-    find_key:  this.find_key,
-    find_val: this.find_val,
-    sort_key:  this.sort_key,
-    sort_val:  this.sort_val
-  };
 
-  add() {
-    this.addView = true;
-    this.tableView = false;
-  }
 
   del(dev_id: string) {
     this.http.unbind(dev_id).then(data => {
@@ -90,6 +75,7 @@ export class DevComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
+
   delAll(arr: Array<any>) {
     if (arr.length) {
       this.http.unbind('' + arr[0]).then(data => {
@@ -113,6 +99,7 @@ export class DevComponent implements OnInit {
       });
     }
   }
+
   submit(AddData: string) {
     this.http.postDevSubmit(AddData).then(data => {
       this.data = data['data'];
@@ -126,35 +113,47 @@ export class DevComponent implements OnInit {
     this.tableView = true;
   }
 
-  sort(sort: sortObj) {
-    this.sort_key = sort.key;
-    this.sort_val = sort.val;
-    this.params['page']='1';
-    this.getHeartData(this.url,this.params);
-  }
-
-  search(searchObj: searchObj) {
-    this.find_val = searchObj.searchValue;
-    this.find_key = searchObj.selectValue;
-    this.params['page']='1';
-    this.params['find_key']=this.find_key;
-    this.params['find_val']=this.find_val;
-    this.getHeartData(this.url,this.params);
-  }
-
-  paginationChange(parmas) {
-    this.per_page = parmas['per_page'];
-    this.params['page']=parmas['page'];
-    this.getHeartData(this.url,this.params);
-  }
-
   set (set: string) {
     this.http.setHeader('devs', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('devs');
     });
   }
 
-  // getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1',
+
+  sort(sort: sortObj) {
+    this.params['sort_key'] = sort.key;
+    this.params['sort_val'] = sort.val;
+    this.getHeartData(this.url,this.params);
+  }
+
+  search(searchObj: searchObj) {
+    this.params['find_key']=searchObj.selectValue;
+    this.params['find_val']=searchObj.searchValue;
+    this.getHeartData(this.url,this.params);
+  }
+
+  paginationChange(params) {
+    this.params['page']=params['page'];
+    this.params['count'] =params['per_page'];
+    this.getHeartData(this.url,this.params);
+  }
+
+  getHeartData(url,params){
+    this.http.getTableData(url,params).then(data => {
+      if (data['status'] == 'ok') {
+         this.data = data['data'];
+         this.pagination =data['pagination'];
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data['message'], 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
+  }
+
+// getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1',
   //              find_key: string = this.find_key, find_val: string = this.find_val,
   //              sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
   //   this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
@@ -178,19 +177,5 @@ export class DevComponent implements OnInit {
   //     this.toastService.toast(toastCfg);
   //   });
   // }
-  getHeartData(url,params){
-    this.http.getTableData(url,params).then(data => {
-      if (data['status'] == 'ok') {
-         this.data = data['data'];
-         this.pagination =data['pagination'];
-      } else {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', data['message'], 3000);
-        this.toastService.toast(toastCfg);
-      }
-    }).catch(err => {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-      this.toastService.toast(toastCfg);
-    });
-  }
 
 }

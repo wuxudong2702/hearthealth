@@ -41,6 +41,15 @@ export class sortObj {
   val: string;
   key: string;
 }
+export class params{
+  count: string;
+  page:'1';
+  find_key:  string;
+  find_val: string;
+  sort_key:  string;
+  sort_val:  string;
+  parent_id: string
+}
 
 export class searchObj {
   selectValue: string;

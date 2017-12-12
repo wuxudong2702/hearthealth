@@ -6,7 +6,7 @@ import {
   searchObj,
   paginationObj,
   DataType,
-  INPUTTYPE
+  INPUTTYPE, params
 } from '../../../shared/table/table-list.component';
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
@@ -28,7 +28,8 @@ export class AppRoleComponent implements OnInit {
   ngOnInit() {
     if(this.http.hasToken()){
         this.headers = this.http.getHeader('app-roles');
-        this.getHeartData(this.url);
+      this.params['page']='1';
+      this.getHeartData(this.url,this.params);
         this.http.isHavePerm('app-role-edit').then(v => {
             this.editBtn = v;
         });
@@ -50,14 +51,8 @@ export class AppRoleComponent implements OnInit {
   addView: boolean = false;
   tableView: boolean = true;
   pagination: paginationObj = new paginationObj();
-
-  per_page: string = null;
-  find_key: string = null;
-  find_val: string = null;
-  sort_key: string = null;
-  sort_val: string = null;
   url: string = '/api/admin/app/role/index';
-
+  params:params=new params();
   add(id: number) {
     this.id = this.data[id]['id'];
     this.editId = id;
@@ -95,7 +90,8 @@ export class AppRoleComponent implements OnInit {
     this.http.appRoleSubmit(this.id, submitData.users_count).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data'];
-        this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
+        this.params['page']='1';
+        this.getHeartData(this.url,this.params);
         this.addView = false;
         this.tableView = true;
         // for (let i = 0; i < this.headers.length; i++) {
@@ -113,17 +109,6 @@ export class AppRoleComponent implements OnInit {
     });
   }
 
-  sort(sort: sortObj) {
-    this.sort_key = sort.key;
-    this.sort_val = sort.val;
-    this.getHeartData(this.url, this.per_page, '1', this.find_key, this.find_val, this.sort_key, this.sort_val);
-  }
-
-  search(searchObj: searchObj) {
-      this.find_val = searchObj.searchValue;
-      this.find_key = searchObj.selectValue;
-      this.getHeartData(this.url, this.per_page,'1', this.find_key, this.find_val, this.sort_key, this.sort_val);
-  }
 
   set (set: string) {
     this.http.setHeader('app-roles', set).then(v => v).then(w => {
@@ -131,27 +116,31 @@ export class AppRoleComponent implements OnInit {
     });
   }
 
-  paginationChange(parmas) {
-    this.per_page = parmas['per_page'];
-    this.getHeartData(this.url, this.per_page, parmas['page'], this.find_key, this.find_val, this.sort_key, this.sort_val);
+  sort(sort: sortObj) {
+    this.params['sort_key'] = sort.key;
+    this.params['sort_val'] = sort.val;
+    this.getHeartData(this.url,this.params);
   }
 
-  getHeartData(url: string = this.url, per_page: string = this.per_page, page:string = '1',find_key: string = this.find_key, find_val: string = this.find_val, sort_key: string = this.sort_key, sort_val: string = this.sort_val) {
-    this.http.getData(url, per_page, page, find_key, find_val, sort_key, sort_val).then(data => {
+  search(searchObj: searchObj) {
+    this.params['find_key']=searchObj.selectValue;
+    this.params['find_val']=searchObj.searchValue;
+    this.getHeartData(this.url,this.params);
+  }
+
+  paginationChange(params) {
+    this.params['page']=params['page'];
+    this.params['count'] =params['per_page'];
+    this.getHeartData(this.url,this.params);
+  }
+
+  getHeartData(url,params){
+    this.http.getTableData(url,params).then(data => {
       if (data['status'] == 'ok') {
-        this.data = data['data']['data'];
-        this.pagination.current_page = data['data']['current_page'];
-        this.pagination.last_page = data['data']['last_page'];
-        this.pagination.per_page = data['data']['per_page'];
-        this.pagination.total = data['data']['total'];
-        this.pagination.first_page_url = data['data']['first_page_url'];
-        this.pagination.last_page_url = data['data']['last_page_url'];
-        this.pagination.next_page_url = data['data']['next_page_url'];
-        this.pagination.prev_page_url = data['data']['prev_page_url'];
-        this.pagination.to = data['data']['to'];
-        // console.log(this.pagination,'pagination======');
+        this.data = data['data'];
+        this.pagination =data['pagination'];
       } else {
-        const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data['message'], 3000);
         this.toastService.toast(toastCfg);
       }
     }).catch(err => {
@@ -159,5 +148,4 @@ export class AppRoleComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
-
 }

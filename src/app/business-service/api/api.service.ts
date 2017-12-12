@@ -15,6 +15,10 @@ import {isNullOrUndefined} from "util";
  * http服务
  */
 @Injectable()
+// export class params {
+//   data: Array<any>;
+//   key: string;
+// }
 export class ApiService {
 
   token: string = '';
@@ -777,8 +781,65 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+
+
+  // getHeartDatas(params) {
+  //   this.getTableData(params).then(data => {
+  //     if (data['status'] == 'ok') {
+  //       let Data={};
+  //       Data['pagination']={};
+  //       Data['data'] = data['data']['data'];
+  //       Data['pagination']['current_page'] = data['data']['current_page'];
+  //       Data['pagination']['last_page'] = data['data']['last_page'];
+  //       Data['pagination']['per_page'] = data['data']['per_page'];
+  //       Data['pagination']['total']= data['data']['total'];
+  //       Data['pagination']['first_page_url'] = data['data']['first_page_url'];
+  //       Data['pagination']['last_page_url'] = data['data']['last_page_url'];
+  //       Data['pagination']['next_page_url'] = data['data']['next_page_url'];
+  //       Data['pagination']['prev_page_url'] = data['data']['prev_page_url'];
+  //       Data['pagination']['to'] = data['data']['to'];
+  //       return Data;
+  //     } else {
+  //       const toastCfg = new ToastConfig(ToastType.ERROR, '', data['message'], 3000);
+  //       this.toastService.toast(toastCfg);
+  //     }
+  //   }).catch(err => {
+  //     const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+  //     this.toastService.toast(toastCfg);
+  //   });
+  // }
+
+
+  getTableData(url,params){
+    params['token'] = this.sessionStorageService.get('token');
+    this.spinService.spin(true);
+    return this.httpClient.post(url, params)
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        console.log('所有表格初始值',data);
+        let Data={};
+        Data['pagination']={};
+        Data['data'] = data['data']['data'];
+        Data['pagination']['current_page'] = data['data']['current_page'];
+        Data['pagination']['last_page'] = data['data']['last_page'];
+        Data['pagination']['per_page'] = data['data']['per_page'];
+        Data['pagination']['total']= data['data']['total'];
+        Data['pagination']['first_page_url'] = data['data']['first_page_url'];
+        Data['pagination']['last_page_url'] = data['data']['last_page_url'];
+        Data['pagination']['next_page_url'] = data['data']['next_page_url'];
+        Data['pagination']['prev_page_url'] = data['data']['prev_page_url'];
+        Data['pagination']['to'] = data['data']['to'];
+        Data['status']=data['status'];
+        return Data;
+      })
+      .catch(err => {
+        console.log(err);
+        this.handleError(err);
+      });
+  }
+
   getData(url: string, count: string = '8', page:string = '1', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
-    // console.log(url, count, find_key, find_val, '全局获取数据发送的参数');
     this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),

@@ -31,7 +31,7 @@ export class AppUserComponent implements OnInit {
     if(this.http.hasToken()){
         this.headers = this.http.getHeader('users');
         this.getHeartData(this.url);
-        this.http.isHavePerm('app-user-del').then(v => {
+      this.http.isHavePerm('app-user-del').then(v => {
             this.deleteBtn = v;
             this.deleteAllBtn = v;
         });

@@ -1,7 +1,13 @@
 <div [formGroup]="form" class="form-inline">
 
-    <div style="width: 240px" class="text-right" for="name">{{field.name+":"}}</div>
-    <!--<input type="text" style="display: none;" disabled autocomplete = "off"/>-->
+    <div style="width: 240px" class="text-right" for="name">
+      <span *ngIf="field.required && flag==true" style="color:red;">* &nbsp;&nbsp; </span>
+      <span *ngIf="field.key=='app' && flag==true" style="color:red;">* &nbsp;&nbsp; </span>
+      {{field.name+":"}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+
+
+  <!--<input type="text" style="display: none;" disabled autocomplete = "off"/>-->
     <input
             type="text"
             class="form-control addInputValue"
@@ -122,24 +128,3 @@
 </div>
 
 
-<!--<div-->
-<!--[hidden]="name.valid || name.pristine"-->
-<!--class="alert alert-danger">-->
-<!--Name is required-->
-<!--</div>-->
-
-
-<!--<select class="form-control addInputValue" *ngIf="word.inputType==1" name={{word.key}}-->
-<!--[(ngModel)]="word.val">-->
-<!--<option *ngFor="let val of word.selectVal;" value={{val}}>{{val}}</option>-->
-<!--</select>-->
-
-<!--<input [dpDayPicker]="datePickerConfig" name={{word.key}} [theme]="'dp-material'" [mode]="'day'"-->
-<!--[(ngModel)]="word.val"-->
-<!--*ngIf="word.inputType==2" class="form-control dateInput dateInputStyle addInputValue "-->
-<!--placeholder="请选择日期"/>-->
-<!--{{word.validExample}}{{checkValue}}-->
-<!--<div *ngIf="checkValue  " class=" alert-danger validExample " >-->
-<!--2345678  {{word.validExample}}{{checkValue}}-->
-<!--</div>-->
-<!--<div  class=" alert-danger validExample " *ngIf="!required && word.val.pattern(word.pattern) " >{{word.validExample}}</div>-->

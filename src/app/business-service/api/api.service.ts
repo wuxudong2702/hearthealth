@@ -378,7 +378,7 @@ export class ApiService {
   }
 
   ecgdDownloadReportDetails(heart_data_id: string,user_id:string) {
-    console.log(user_id,'userId');
+    // console.log(user_id,'userId');
     const url: string = '/api/admin/report/download?token=' + this.sessionStorageService.get('token') + "&heart_data_id=" + heart_data_id + "&user_id="+user_id;
     return this.http.get(url)
       .map(res => new Blob([res.text()], {type: 'txt/plain'}))
@@ -832,6 +832,7 @@ export class ApiService {
         Data['pagination']['prev_page_url'] = data['data']['prev_page_url'];
         Data['pagination']['to'] = data['data']['to'];
         Data['status']=data['status'];
+        Data['message']=data['message'];
         return Data;
       })
       .catch(err => {
@@ -1077,7 +1078,6 @@ export class ApiService {
   homeData(): Promise<any> {
     const url: string = '/api/admin/statistics/data';
     this.spinService.spin(true);
-    console.log('00000');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
     })

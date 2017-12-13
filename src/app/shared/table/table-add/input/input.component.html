@@ -101,15 +101,15 @@
            class="form-control dateInput dateInputStyle addInputValue "
            placeholder="请选择日期"/>
 
-  <input
-    type="file"
-    class="form-control addInputValue"
-    *ngIf="field.input_type == 4"
-    [(ngModel)]="field.val"
-    [formControlName]="field.key"
-     #file
-    (change)="upload(file.files)"
-  >
+    <input
+      type="file"
+      class="form-control addInputValue"
+      *ngIf="field.input_type == 4"
+      [(ngModel)]="field.val"
+      [formControlName]="field.key"
+       #file
+      (change)="upload(file.files)"
+    >
 
 
     <div class="" *ngIf="!isValid  && isDirty ">

@@ -410,8 +410,8 @@ export class TableListComponent implements OnInit, OnChanges {
     console.info($event);
   }
 
-  paginationChange(parmas) {
-    this.onPaginationChange.emit(parmas);
+  paginationChange(params) {
+    this.onPaginationChange.emit(params);
   }
 
 }

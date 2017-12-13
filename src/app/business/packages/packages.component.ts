@@ -315,7 +315,6 @@ export class PackagesComponent implements OnInit {
     this.http.getTableData(url,params).then(data => {
       if (data['status'] == 'ok') {
         this.data = data['data'];
-        console.log(this.data)
         this.data.map(v=>{
           if(v['desc'] == 'undefined'){
             v['desc'] = '';

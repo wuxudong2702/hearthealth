@@ -841,7 +841,7 @@
       "pipe_params": "",
       "val": "",
       "select_val": "",
-      "valid_example": "格式：最多20位，不得包含非法字符",
+      "valid_example": "格式：最多20位，只能是汉字",
       "required": false,
       "pattern": "^[\\u4e00-\\u9fa5]{1,20}$",
       "input_type": 0

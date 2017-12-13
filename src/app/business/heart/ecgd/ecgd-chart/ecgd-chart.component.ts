@@ -190,7 +190,7 @@ export class EcgdChartComponent implements OnInit {
               }
           ]
     }
-
+    console.log(this.Params,'this.Params-ecgd-detail');
     this.chartDetailsId = this.Params['id'];
     this.userName = this.Params['name'];
     this.sense_time = this.Params['sense_time'];

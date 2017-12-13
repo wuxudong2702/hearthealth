@@ -28,13 +28,13 @@
 >
 </c-table-list>
 <app-table-add
-        [headers]="headerAdd"
-        [addEditTitle]="addEditTitle"
-       [flag]="flag"
-        (onAddCancel)="cancel()"
-        (onSubmit)="submit($event)"
+    [headers]="headerAdd"
+    [addEditTitle]="addEditTitle"
+    [flag]="flag"
+    (onAddCancel)="cancel()"
+    (onSubmit)="submit($event)"
 
-        *ngIf="addView"
+    *ngIf="addView"
 >
 </app-table-add>
 <div class="progress" style="margin-bottom: 0;" *ngIf="addView" >

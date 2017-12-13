@@ -466,16 +466,16 @@ export class AppUserComponent implements OnInit {
                   sub_sort_val: string = this.sub_sort_val) {
     this.http.getSUbUserData(sub_url, parent_id, sub_per_page, page, sub_find_key, sub_find_val, sub_sort_key, sub_sort_val).then(data => {
       if (data['status'] == 'ok') {
-        this.subUserData = data['data']['data'];
-        this.sub_pagination.current_page = data['data']['current_page'];
-        this.sub_pagination.last_page = data['data']['last_page'];
-        this.sub_pagination.per_page = data['data']['per_page'];
-        this.sub_pagination.total = data['data']['total'];
-        this.sub_pagination.first_page_url = data['data']['first_page_url'];
-        this.sub_pagination.last_page_url = data['data']['last_page_url'];
-        this.sub_pagination.next_page_url = data['data']['next_page_url'];
-        this.sub_pagination.prev_page_url = data['data']['prev_page_url'];
-        this.sub_pagination.to = data['data']['to'];
+          this.subUserData = data['data']['data'];
+          this.sub_pagination.current_page = data['data']['current_page'];
+          this.sub_pagination.last_page = data['data']['last_page'];
+          this.sub_pagination.per_page = data['data']['per_page'];
+          this.sub_pagination.total = data['data']['total'];
+          this.sub_pagination.first_page_url = data['data']['first_page_url'];
+          this.sub_pagination.last_page_url = data['data']['last_page_url'];
+          this.sub_pagination.next_page_url = data['data']['next_page_url'];
+          this.sub_pagination.prev_page_url = data['data']['prev_page_url'];
+          this.sub_pagination.to = data['data']['to'];
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);

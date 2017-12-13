@@ -251,6 +251,7 @@ export class AppUserComponent implements OnInit {
       this.headers = this.http.getHeader('users');
     });
   }
+
   sort(sort: sortObj) {
     this.params['sort_key'] = sort.key;
     this.params['sort_val'] = sort.val;
@@ -413,7 +414,8 @@ export class AppUserComponent implements OnInit {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
         this.toastService.toast(toastCfg);
       });
-    } else {//编辑提交
+    } else {
+      //编辑提交
       let role = this.parentSubFlag ? '0' : '1';
       this.http.userUpdate(this.subEditId, this.parent_id, submitData, '1').then(data => {
         if (data['status'] == 'ok') {
@@ -458,6 +460,7 @@ export class AppUserComponent implements OnInit {
 
   getSubHeartData(sub_url: string = this.sub_url,
                   parent_id: string = this.parent_id,
+
                   sub_per_page: string = this.sub_per_page,
                   page:string = '1',
                   sub_find_key: string = this.sub_find_key,
@@ -466,16 +469,16 @@ export class AppUserComponent implements OnInit {
                   sub_sort_val: string = this.sub_sort_val) {
     this.http.getSUbUserData(sub_url, parent_id, sub_per_page, page, sub_find_key, sub_find_val, sub_sort_key, sub_sort_val).then(data => {
       if (data['status'] == 'ok') {
-          this.subUserData = data['data']['data'];
-          this.sub_pagination.current_page = data['data']['current_page'];
-          this.sub_pagination.last_page = data['data']['last_page'];
-          this.sub_pagination.per_page = data['data']['per_page'];
-          this.sub_pagination.total = data['data']['total'];
-          this.sub_pagination.first_page_url = data['data']['first_page_url'];
-          this.sub_pagination.last_page_url = data['data']['last_page_url'];
-          this.sub_pagination.next_page_url = data['data']['next_page_url'];
-          this.sub_pagination.prev_page_url = data['data']['prev_page_url'];
-          this.sub_pagination.to = data['data']['to'];
+        this.subUserData = data['data']['data'];
+        this.sub_pagination.current_page = data['data']['current_page'];
+        this.sub_pagination.last_page = data['data']['last_page'];
+        this.sub_pagination.per_page = data['data']['per_page'];
+        this.sub_pagination.total = data['data']['total'];
+        this.sub_pagination.first_page_url = data['data']['first_page_url'];
+        this.sub_pagination.last_page_url = data['data']['last_page_url'];
+        this.sub_pagination.next_page_url = data['data']['next_page_url'];
+        this.sub_pagination.prev_page_url = data['data']['prev_page_url'];
+        this.sub_pagination.to = data['data']['to'];
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -485,6 +488,7 @@ export class AppUserComponent implements OnInit {
       this.toastService.toast(toastCfg);
     });
   }
+
 
   sub_paginationChange(parmas) {
     this.sub_per_page = parmas['per_page'];

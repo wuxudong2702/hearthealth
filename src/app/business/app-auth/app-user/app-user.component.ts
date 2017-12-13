@@ -21,19 +21,19 @@ export class AppUserComponent implements OnInit {
   ngOnInit() {
     if(this.http.hasToken()){
         this.headers = this.http.getHeader('users');
-      this.params['page']='1';
-      this.getHeartData(this.url, this.params);
-      this.http.isHavePerm('app-user-del').then(v => {
-            this.deleteBtn = v;
-            this.deleteAllBtn = v;
-        });
-        this.http.isHavePerm('app-user-add').then(v => {
-            this.addBtn = v;
-        });
-        this.http.isHavePerm('app-user-edit').then(v => {
-            this.editBtn = v;
-        });
-    }
+        this.params['page']='1';
+        this.getHeartData(this.url, this.params);
+        this.http.isHavePerm('app-user-del').then(v => {
+              this.deleteBtn = v;
+              this.deleteAllBtn = v;
+          });
+          this.http.isHavePerm('app-user-add').then(v => {
+              this.addBtn = v;
+          });
+          this.http.isHavePerm('app-user-edit').then(v => {
+              this.editBtn = v;
+          });
+      }
   }
 
   headers: Array<cell> = [];
@@ -226,7 +226,7 @@ export class AppUserComponent implements OnInit {
               this.params['page']='1';
               this.getHeartData(this.url, this.params);
             } else {
-              this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+              this.getSubHeartData(this.sub_url, this.parent_id,this.params);
             }
             return;
           }
@@ -251,6 +251,7 @@ export class AppUserComponent implements OnInit {
       this.headers = this.http.getHeader('users');
     });
   }
+
   sort(sort: sortObj) {
     this.params['sort_key'] = sort.key;
     this.params['sort_val'] = sort.val;
@@ -305,20 +306,14 @@ export class AppUserComponent implements OnInit {
     if (this.flag) {
       this.flag = false;
       this.subUserHeaders =  this.http.getHeader('subUsers');
-    //   for (let i = 0; i < this.headers.length; i++) {
-    //     if (this.headers[i].key == 'zone' ||this.headers[i].key == 'relationship' || this.headers[i].key == 'sex' || this.headers[i].key == 'name' || this.headers[i].key == 'birth'   || this.headers[i].key == 'height' || this.headers[i].key == 'weight') {
-    //       this.subUserHeaders.push(this.headers[i]);
-    //     }
-    //   }
     }
-    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page,'1',  this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+    this.getSubHeartData(this.sub_url, this.parent_id,this.params);
   }
-
 
   subUsersDel(ids: string) {
     this.http.userDelData(ids).then(data => {
       if (data['status'] == 'ok') {
-        this.getSubHeartData(this.sub_url, this.parent_id);
+        this.getSubHeartData(this.sub_url, this.parent_id,this.params);
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -332,7 +327,7 @@ export class AppUserComponent implements OnInit {
   subUsersSort(sort: sortObj) {
     this.sub_sort_key = sort.key;
     this.sub_sort_val = sort.val;
-    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+    this.getSubHeartData(this.sub_url, this.parent_id,this.params);
   }
 
   subUsersAdd(id: number) {
@@ -395,11 +390,12 @@ export class AppUserComponent implements OnInit {
   }
 
   subUserSubmit(submitData) {
-    if (this.addEditFlag) {//addEditFlag=true的时候是添加
+    if (this.addEditFlag) {
+      //添加
       this.http.userAdd(this.parent_id, submitData, '1').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+          this.getSubHeartData(this.sub_url, this.parent_id,this.params);
           this.tableView = false;
           this.addSubUserView = false;
           this.addView = false;
@@ -412,12 +408,13 @@ export class AppUserComponent implements OnInit {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
         this.toastService.toast(toastCfg);
       });
-    } else {//编辑提交
+    } else {
+      //编辑提交
       let role = this.parentSubFlag ? '0' : '1';
       this.http.userUpdate(this.subEditId, this.parent_id, submitData, '1').then(data => {
         if (data['status'] == 'ok') {
           this.data = data['data'];
-          this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+          this.getSubHeartData(this.sub_url, this.parent_id,this.params);
           this.tableView = false;
           this.addSubUserView = false;
           this.addView = false;
@@ -444,38 +441,46 @@ export class AppUserComponent implements OnInit {
   subUserSearch(searchObj: searchObj) {
     this.sub_find_val = searchObj.searchValue;
     this.sub_find_key = searchObj.selectValue;
-    this.getSubHeartData(
-      this.sub_url,
-      this.parent_id,
-      '1',
-      this.sub_per_page,
-      this.sub_find_key,
-      this.sub_find_val,
-      this.sub_sort_key,
-      this.sub_sort_val);
+    this.getSubHeartData(this.sub_url, this.parent_id, this.params);
   }
 
-  getSubHeartData(sub_url: string = this.sub_url,
-                  parent_id: string = this.parent_id,
+  // getSubHeartData(sub_url: string = this.sub_url,
+  //                 parent_id: string = this.parent_id,
+  //
+  //                 sub_per_page: string = this.sub_per_page,
+  //                 page:string = '1',
+  //                 sub_find_key: string = this.sub_find_key,
+  //                 sub_find_val: string = this.sub_find_val,
+  //                 sub_sort_key: string = this.sub_sort_key,
+  //                 sub_sort_val: string = this.sub_sort_val) {
+  //   this.http.getSUbUserData(sub_url, parent_id, sub_per_page, page, sub_find_key, sub_find_val, sub_sort_key, sub_sort_val).then(data => {
+  //     if (data['status'] == 'ok') {
+  //       this.subUserData = data['data']['data'];
+  //       this.sub_pagination.current_page = data['data']['current_page'];
+  //       this.sub_pagination.last_page = data['data']['last_page'];
+  //       this.sub_pagination.per_page = data['data']['per_page'];
+  //       this.sub_pagination.total = data['data']['total'];
+  //       this.sub_pagination.first_page_url = data['data']['first_page_url'];
+  //       this.sub_pagination.last_page_url = data['data']['last_page_url'];
+  //       this.sub_pagination.next_page_url = data['data']['next_page_url'];
+  //       this.sub_pagination.prev_page_url = data['data']['prev_page_url'];
+  //       this.sub_pagination.to = data['data']['to'];
+  //     } else {
+  //       const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
+  //       this.toastService.toast(toastCfg);
+  //     }
+  //   }).catch(err => {
+  //     const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+  //     this.toastService.toast(toastCfg);
+  //   });
+  // }
 
-                  sub_per_page: string = this.sub_per_page,
-                  page:string = '1',
-                  sub_find_key: string = this.sub_find_key,
-                  sub_find_val: string = this.sub_find_val,
-                  sub_sort_key: string = this.sub_sort_key,
-                  sub_sort_val: string = this.sub_sort_val) {
-    this.http.getSUbUserData(sub_url, parent_id, sub_per_page, page, sub_find_key, sub_find_val, sub_sort_key, sub_sort_val).then(data => {
+  getSubHeartData(url, parent_id,params) {
+    this.http.getSUbUserData(url, parent_id,params).then(data => {
       if (data['status'] == 'ok') {
+        console.log(data,'subdata-------------------------');
         this.subUserData = data['data']['data'];
-        this.sub_pagination.current_page = data['data']['current_page'];
-        this.sub_pagination.last_page = data['data']['last_page'];
-        this.sub_pagination.per_page = data['data']['per_page'];
-        this.sub_pagination.total = data['data']['total'];
-        this.sub_pagination.first_page_url = data['data']['first_page_url'];
-        this.sub_pagination.last_page_url = data['data']['last_page_url'];
-        this.sub_pagination.next_page_url = data['data']['next_page_url'];
-        this.sub_pagination.prev_page_url = data['data']['prev_page_url'];
-        this.sub_pagination.to = data['data']['to'];
+        this.pagination =data['pagination'];
       } else {
         const toastCfg = new ToastConfig(ToastType.ERROR, '', data.message, 3000);
         this.toastService.toast(toastCfg);
@@ -486,10 +491,9 @@ export class AppUserComponent implements OnInit {
     });
   }
 
-
   sub_paginationChange(parmas) {
     this.sub_per_page = parmas['per_page'];
-    this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, parmas['page'], this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);
+    this.getSubHeartData(this.sub_url, this.parent_id,this.params);
   }
 
   sub_set(set: string) {

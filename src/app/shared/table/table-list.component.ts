@@ -48,7 +48,7 @@ export class params{
   find_val: string;
   sort_key:  string;
   sort_val:  string;
-  parent_id: string
+  // parent_id: string
 }
 
 export class searchObj {

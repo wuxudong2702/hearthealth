@@ -32,6 +32,7 @@ export class EcgdChartComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.valueList=this.dataChart1;
     // console.log(this.valueList.length,'this.valueList.length');
     if(this.valueList.length < 800){
@@ -194,6 +195,7 @@ export class EcgdChartComponent implements OnInit {
     this.userName = this.Params['name'];
     this.sense_time = this.Params['sense_time'];
     this.http.getHhrDataDetails(''+this.Params['user_id'],''+ this.chartDetailsId).then(data => {
+      console.log(this.Params['user_id'],'user_id');
       console.log(data);
       if (data['status'] == 'ok') {
         if (data['data']) {

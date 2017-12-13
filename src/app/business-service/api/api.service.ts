@@ -298,28 +298,81 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-  getSUbUserData(url: string = '/api/admin/app/user/index', parent_id: string = null, count: string = '8',  page:string = '1', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
+  // getSUbUserData(url: string = '/api/admin/app/user/index', parent_id: string = null, count: string = '8',  page:string = '1', find_key: string = null, find_val: string = null, sort_key: string = null, sort_val: string = null): Promise<any> {
+  //   this.spinService.spin(true);
+  //   return this.httpClient.post(url, {
+  //     token: this.sessionStorageService.get('token'),
+  //     parent_id: parent_id,
+  //     count: count,
+  //     page:page,
+  //     find_key: find_key,
+  //     find_val: find_val,
+  //     sort_key: sort_key,
+  //     sort_val: sort_val,
+  //   })
+  //     .toPromise()
+  //     .then(data => {
+  //       this.spinService.spin(false);
+  //       return data
+  //     })
+  //     .catch(err => {
+  //       this.handleError(err);
+  //     });
+  // }
+
+  getSUbUserData(url, parent_id,params): Promise<any> {
     this.spinService.spin(true);
-    return this.httpClient.post(url, {
-      token: this.sessionStorageService.get('token'),
-      parent_id: parent_id,
-      count: count,
-      page:page,
-      find_key: find_key,
-      find_val: find_val,
-      sort_key: sort_key,
-      sort_val: sort_val,
-    })
+    return this.httpClient.post(url, params)
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        return data
+        let Data={};
+        Data['pagination']={};
+        Data['data'] = data['data']['data'];
+        Data['pagination']['current_page'] = data['data']['current_page'];
+        Data['pagination']['last_page'] = data['data']['last_page'];
+        Data['pagination']['per_page'] = data['data']['per_page'];
+        Data['pagination']['total']= data['data']['total'];
+        Data['pagination']['first_page_url'] = data['data']['first_page_url'];
+        Data['pagination']['last_page_url'] = data['data']['last_page_url'];
+        Data['pagination']['next_page_url'] = data['data']['next_page_url'];
+        Data['pagination']['prev_page_url'] = data['data']['prev_page_url'];
+        Data['pagination']['to'] = data['data']['to'];
+        Data['status']=data['status'];
+        return Data;
       })
       .catch(err => {
         this.handleError(err);
       });
   }
-
+  // getTableData(url,params){
+  //   params['token'] = this.sessionStorageService.get('token');
+  //   this.spinService.spin(true);
+  //   return this.httpClient.post(url, params)
+  //     .toPromise()
+  //     .then(data => {
+  //       this.spinService.spin(false);
+  //       // console.log('所有表格初始值',data);
+  //       let Data={};
+  //       Data['pagination']={};
+  //       Data['data'] = data['data']['data'];
+  //       Data['pagination']['current_page'] = data['data']['current_page'];
+  //       Data['pagination']['last_page'] = data['data']['last_page'];
+  //       Data['pagination']['per_page'] = data['data']['per_page'];
+  //       Data['pagination']['total']= data['data']['total'];
+  //       Data['pagination']['first_page_url'] = data['data']['first_page_url'];
+  //       Data['pagination']['last_page_url'] = data['data']['last_page_url'];
+  //       Data['pagination']['next_page_url'] = data['data']['next_page_url'];
+  //       Data['pagination']['prev_page_url'] = data['data']['prev_page_url'];
+  //       Data['pagination']['to'] = data['data']['to'];
+  //       Data['status']=data['status'];
+  //       return Data;
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //       this.handleError(err);
+  //     });
+  // }
   /*
    设置个人信息
   */
@@ -817,7 +870,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log('所有表格初始值',data);
+        // console.log('所有表格初始值',data);
         let Data={};
         Data['pagination']={};
         Data['data'] = data['data']['data'];

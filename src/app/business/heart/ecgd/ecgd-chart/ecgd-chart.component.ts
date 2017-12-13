@@ -33,13 +33,20 @@ export class EcgdChartComponent implements OnInit {
 
   ngOnInit() {
     this.valueList=this.dataChart1;
+    // console.log(this.valueList.length,'this.valueList.length');
     if(this.valueList.length < 800){
       for(let i = 0;i<800-this.valueList.length;i++){
         this.valueList.push('null');
       }
       this.dataZoomEnd = 100;
-    }else{
-      this.dataZoomEnd = 15;
+    }else if(this.valueList.length >= 800 && this.valueList.length < 2000){
+      this.dataZoomEnd = 32;
+    }else if(this.valueList.length > 2000 && this.valueList.length <= 5000){
+      this.dataZoomEnd = 12;
+    }else if(this.valueList.length > 5000 && this.valueList.length <= 8000){
+      this.dataZoomEnd = 8;
+    }else {
+      this.dataZoomEnd = 3;
     }
     this.dateList=this.dataChart1.map(function (item,index) {
         return index+1;
@@ -187,6 +194,7 @@ export class EcgdChartComponent implements OnInit {
     this.userName = this.Params['name'];
     this.sense_time = this.Params['sense_time'];
     this.http.getHhrDataDetails(''+this.Params['user_id'],''+ this.chartDetailsId).then(data => {
+      console.log(data);
       if (data['status'] == 'ok') {
         if (data['data']) {
           this.chartDetailsData=[];
@@ -196,8 +204,6 @@ export class EcgdChartComponent implements OnInit {
             arr.push(data['data'][i]);
             this.chartDetailsData.push(arr);
           }
-          console.log(this.chartDetailsData);
-
           this.chartDetailsData.forEach(function (v) {
             if (v[0] == "bpm_code") {
               switch (v[1]) {

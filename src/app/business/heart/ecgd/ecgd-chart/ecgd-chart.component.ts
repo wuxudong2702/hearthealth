@@ -196,6 +196,8 @@ export class EcgdChartComponent implements OnInit {
             arr.push(data['data'][i]);
             this.chartDetailsData.push(arr);
           }
+          console.log(this.chartDetailsData);
+
           this.chartDetailsData.forEach(function (v) {
             if (v[0] == "bpm_code") {
               switch (v[1]) {

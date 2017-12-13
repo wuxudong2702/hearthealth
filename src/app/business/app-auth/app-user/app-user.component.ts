@@ -486,7 +486,6 @@ export class AppUserComponent implements OnInit {
     });
   }
 
-
   sub_paginationChange(parmas) {
     this.sub_per_page = parmas['per_page'];
     this.getSubHeartData(this.sub_url, this.parent_id, this.sub_per_page, parmas['page'], this.sub_find_key, this.sub_find_val, this.sub_sort_key, this.sub_sort_val);

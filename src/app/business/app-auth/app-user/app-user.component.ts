@@ -457,7 +457,6 @@ export class AppUserComponent implements OnInit {
 
   getSubHeartData(sub_url: string = this.sub_url,
                   parent_id: string = this.parent_id,
-
                   sub_per_page: string = this.sub_per_page,
                   page:string = '1',
                   sub_find_key: string = this.sub_find_key,

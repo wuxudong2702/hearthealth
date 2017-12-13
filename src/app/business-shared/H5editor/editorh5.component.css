@@ -134,8 +134,8 @@ div.preview-layer .preview-bg{
 
 div.preview-layer .preview-phone{
   position: fixed;
-  width: 410px;
-  height: 840px;
+  width: 266px;
+  height: 539px;
   left: 40%;
   text-align: center;
 
@@ -337,44 +337,21 @@ input:-ms-input-placeholder{color:#FFF;font-size:14px;
 .clear-float{
   clear: both;
 }
-/*.prePhone{*/
-/*position:fixed;*/
-/*left:30%;*/
-/*right:30%;*/
 
-/*}*/
 .iframe1{
   position: fixed;
-  width: 309px;
-  height: 544px;
+  width: 236px;
+  height: 411px;
   left: 40%;
   background: white;
   text-align: center;
   z-index: 9999;
-  margin-left: 20px;
-  margin-top: 84px;
-
+  margin-left: 14px;
+  margin-top: 63px;
 }
 
-/*.editorDocument{*/
-/*!*margin:0 auto;*!*/
-/*width:100%;*/
-/*margin-left:36%;*/
-
-/*}*/
-/*.editorBtns{*/
-/*margin:0 auto;*/
-/*margin-bottom: 12%;*/
-/*margin-left: 40%;*/
-/*}*/
 .editorBtns button{
   margin-top:1px;
-  /*width:45px;*/
-  /*height:35px;*/
-  /*margin:0 20px;*/
-  /*background-color:#20a8d8;*/
-  /*color:white;*/
-
 }
 .h5Select{
   margin-bottom: 10px;

@@ -86,7 +86,7 @@ const htmlL: string = "</div>\n" +
           <button class="" (click)="editBack()">返回</button>
         </div>
       </div>
-      <div class="preview-layer" [hidden]="previews" style="height: 840px; overflow: auto" (click)="noPreviews()">
+      <div class="preview-layer" [hidden]="previews" style="height: 539px; overflow: auto" (click)="noPreviews()">
         <div class="preview-bg"></div>
         <div class="preview-phone prephone">
           <iframe #iframe class="iframe1"></iframe>

@@ -1071,16 +1071,18 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+
   //home
   homeData(): Promise<any> {
     const url: string = '/api/admin/statistics/data';
     this.spinService.spin(true);
+    console.log('00000');
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
     })
       .toPromise()
       .then(data => {
-        console.log(data,'data');
+        console.log(data,'data00000');
         this.spinService.spin(false);
         return data;
       })

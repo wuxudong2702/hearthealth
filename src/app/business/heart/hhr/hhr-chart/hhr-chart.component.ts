@@ -225,7 +225,7 @@ export class HhrChartComponent implements OnInit {
     this.clickTime = e.name;
     this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
 
-    this.http.getHhrDataDetails(this.chartId, this.chartDetailsId).then(data => {
+    this.http.getHhrDataDetails(''+this.chartId, ''+this.chartDetailsId).then(data => {
       if (data['status'] == 'ok') {
         if (data['data']) {
           this.chartDetailsId = this.dataChart1[this.dataIndex]['id'];
@@ -270,7 +270,6 @@ export class HhrChartComponent implements OnInit {
           });
           this.isDetails = true;
           this.details_none = false;
-
         } else {
           this.isDetails = true;
           this.details_none = true;

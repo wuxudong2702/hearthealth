@@ -125,6 +125,7 @@ export class AppRoleComponent implements OnInit {
   search(searchObj: searchObj) {
     this.params['find_key']=searchObj.selectValue;
     this.params['find_val']=searchObj.searchValue;
+    this.params['page']='1';
     this.getHeartData(this.url,this.params);
   }
 

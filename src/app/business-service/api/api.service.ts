@@ -817,7 +817,7 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log('所有表格初始值',data);
+        // console.log('所有表格初始值',data);
         let Data={};
         Data['pagination']={};
         Data['data'] = data['data']['data'];
@@ -1082,7 +1082,6 @@ export class ApiService {
     })
       .toPromise()
       .then(data => {
-        console.log(data,'data00000');
         this.spinService.spin(false);
         return data;
       })

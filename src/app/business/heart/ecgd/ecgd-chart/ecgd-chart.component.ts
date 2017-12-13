@@ -186,7 +186,6 @@ export class EcgdChartComponent implements OnInit {
     this.chartDetailsId = this.Params['id'];
     this.userName = this.Params['name'];
     this.sense_time = this.Params['sense_time'];
-    console.log(this.Params,'this.params');
     this.http.getHhrDataDetails(''+this.Params['user_id'],''+ this.chartDetailsId).then(data => {
       if (data['status'] == 'ok') {
         if (data['data']) {

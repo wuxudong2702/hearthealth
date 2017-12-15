@@ -24,6 +24,8 @@ export class LogComponent implements OnInit {
           this.headers= this.http.getHeader('logs');
 
         this.params['page']='1';
+        this.params['sort_val']='desc';
+        this.params['sort_key']='created_at';
         this.getHeartData(this.url,this.params);
       }
   }

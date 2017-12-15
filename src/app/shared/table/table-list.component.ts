@@ -110,7 +110,8 @@ export class CPipePipe implements PipeTransform {
         return originalValue;
       case DataType.DATATIME:
         // console.log(originalValue, (new DatePipe('zh-CN')).transform(originalValue, pipe_params));
-        return (new DatePipe('zh-CN')).transform(originalValue, pipe_params);
+        // return (new DatePipe('zh-CN')).transform(originalValue, pipe_params);
+        return originalValue;
       case DataType.ENUM:
         return pipe_params[originalValue];
       default:

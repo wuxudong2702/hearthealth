@@ -170,7 +170,7 @@ body,ul,li,a,img,p,h1,h2,h3,h4,input,form,button{padding:0;margin:0;border:0;lis
 
 body{margin: 0 auto;padding-top: 20px; position: relative;word-break:break-all;max-width: 640px;min-width: 320px;background: #ededed;}
 .article-title h1{font-size: 1.3em;margin-bottom: 10px;padding: 0 10px;text-align: center;}
-.article-content{font-size: 1.1em;padding: 10px 10px 30px;color: #000000;}
+.article-content{font-size: 1.1em;color: #000000;}
 .article-top{
   margin-bottom: 2.5em;
 
@@ -355,4 +355,8 @@ input:-ms-input-placeholder{color:#FFF;font-size:14px;
 }
 .h5Select{
   margin-bottom: 10px;
+}
+.ql-align-center {
+  margin: 0 auto;
+  background-color: red;
 }

@@ -62,9 +62,6 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
   quill: any;
 
   constructor(public el: ElementRef) {
-
-
-
   }
 
   ngOnInit() {
@@ -76,6 +73,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
     let editorElement = this.el.nativeElement.querySelector('div.c-editor-content');
     let toolbarElement = this.el.nativeElement.querySelector('div.c-editor-toolbar');
     // console.log("editor component", this.dataEditor,editorElement.children[0]);
+    console.log("editor component", editorElement,toolbarElement);
 
     this.quill = new Quill(editorElement, {
       modules: {
@@ -86,7 +84,6 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
       theme: 'snow',
       formats: this.formats
     });
-
 
     if (this.HTML5Content) {
       this.quill.pasteHTML(this.HTML5Content);
@@ -104,6 +101,8 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
     this.quill.on('text-change', (delta, oldContents, source) => {
       let html = editorElement.children[0].innerHTML;
       let text = this.quill.getText();
+      // console.log(this.Html,html ,'this,html');
+      // console.log(delta, source,'------text-change------');
       if (html == '<p><br></p>') {
         html = null;
       }
@@ -123,6 +122,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
     });
 
     this.quill.on('selection-change', (range, oldRange, source) => {
+      console.log(range, oldRange, source,'===selection-change====');
       this.onSelectionChange.emit({
         range: range,
         oldRange: oldRange,
@@ -137,7 +137,7 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
 
   writeValue(value: any): void {
     this.value = value;
-
+    // console.log( value,'value=');
     if (this.quill) {
       if (value)
         this.quill.pasteHTML(value);
@@ -145,7 +145,6 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
         this.quill.setText('');
     }
   }
-
   registerOnChange(fn: Function): void {
     this.onModelChange = fn;
   }

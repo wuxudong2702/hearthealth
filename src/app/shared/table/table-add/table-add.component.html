@@ -13,8 +13,8 @@
 
       </div>
       <div class="form-button " [class.footerBtn]="treeAdd" >
-        <button type="button" class="btn btn-success"  (click)="submit()" [disabled]="!form.valid || matchUnValid">提交</button>
-        <button type="button" class="btn btn-default" (click)="addCancel()">取消</button>
+        <button type="button" class="btn btn-success"  (click)="submit()" [disabled]="!form.valid || matchUnValid || cancel_disabled">提交</button>
+        <button type="button" class="btn btn-default" (click)="addCancel()" [disabled]="cancel_disabled" >取消</button>
       </div>
     </form>
 

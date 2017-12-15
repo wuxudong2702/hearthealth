@@ -48,6 +48,7 @@ export class PackagesComponent implements OnInit {
   addView: boolean = false;
   uploadView: boolean = false;
   tableView: boolean = true;
+  cancel_disabled: boolean = false;
 
   deleteBtn: boolean = false;
   deleteAllBtn: boolean = false;
@@ -176,6 +177,7 @@ export class PackagesComponent implements OnInit {
     formData.append('token', this.http.getToken());
     formData.append('default', submitData['default']);
     if (this.flag) {
+      console.log(submitData,formData,'-----');
       if(isNullOrUndefined(submitData['app'])){
         const toastCfg = new ToastConfig(ToastType.ERROR, '', '未选择APP包！', 3000);
         this.toastService.toast(toastCfg);
@@ -184,11 +186,16 @@ export class PackagesComponent implements OnInit {
       const req = new HttpRequest('POST', "/api/admin/upgrade/add", formData, {
         reportProgress: true,
       });
-
+   // this.httpClient.request(req).
       this.httpClient.request(req).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
           // console.log(this.progress);
+          if(this.progress<=100 || this.progress>0){
+            this.cancel_disabled = true;
+          }else{
+            this.cancel_disabled = false;
+          }
         }
         else if (event instanceof HttpResponse) {
           if (event.body['status'] == 'ok') {

@@ -237,31 +237,136 @@ export class HhrChartComponent implements OnInit {
             this.chartDetailsData.push(arr);
           }
           this.chartDetailsData.forEach(function (v) {
-            if (v[0] == "bpm_code") {
+            if (v[0] == "n_bpm_code") {
               switch (v[1]) {
+                //0未处理异常；1过慢；2稍慢；3正常；4稍慢；5过快；6测量结果异常
                 case '0' :
-                  v[1] = "过慢";
+                  v[1] = "未处理异常";
                   break;
                 case '1' :
-                  v[1] = "正常";
+                  v[1] = "过慢";
                   break;
                 case '2' :
+                  v[1] = "稍慢";
+                  break;
+                case '3' :
+                  v[1] = "正常";
+                  break;
+                case '4' :
+                  v[1] = "稍慢";
+                  break;
+                case '5' :
                   v[1] = "过快";
+                  break;
+                case '6' :
+                  v[1] = "测量结果异常";
                   break;
                 default:
                   v[1] = "";
               }
             }
-            if (v[0] == "n_arrhythmia_code") {
+            if (v[0] == "n_rythm_code") {
               switch (v[1]) {
+                //0未处理异常；1正常；2轻度异常；3中度异常；4明显异常
                 case '0' :
-                  v[1] = "正常";
+                  v[1] = "未处理异常";
                   break;
                 case '1' :
-                  v[1] = "隐患";
+                  v[1] = "正常";
                   break;
                 case '2' :
-                  v[1] = "高风险";
+                  v[1] = "轻度异常";
+                  break;
+                case '3' :
+                  v[1] = "中度异常";
+                  break;
+                case '4' :
+                  v[1] = "明显异常";
+                  break;
+                default:
+                  v[1] = "";
+              }
+            }
+            if (v[0] == "n_arrhythmia_code" || v[0] == "n_heart_health_code") {
+              switch (v[1]) {
+                case '0' :
+                  v[1] = "未处理异常";
+                  break;
+                case '1' :
+                  v[1] = "健康";
+                  break;
+                case '2' :
+                  v[1] = "隐患";
+                  break;
+                case '3' :
+                  v[1] = "风险";
+                  break;
+                default:
+                  v[1] = "";
+              }
+            }
+            if (v[0] == "n_pressure_code") {
+              switch (v[1]) {
+                case '0' :
+                  v[1] = "未处理异常";
+                  break;
+                case '1' :
+                  v[1] = "较小";
+                  break;
+                case '2' :
+                  v[1] = "较大";
+                  break;
+                default:
+                  v[1] = "";
+              }
+            }
+            if (v[0] == "n_sdnn_zzsjzzl_code" || v[0] == "n_rmssd_xxgtjnl_code" || v[0] == "n_tp_zzsjtjnl_code") {
+              switch (v[1]) {
+                case '0' :
+                  v[1] = "未处理异常";
+                  break;
+                case '1' :
+                  v[1] = "正常";
+                  break;
+                case '2' :
+                  v[1] = "异常";
+                  break;
+                default:
+                  v[1] = "";
+              }
+            }
+            if (v[0] == "n_lf_yjfynl_code" || v[0] == "n_hf_hfnl_code" || v[0] == "n_tp_zzsjtjnl_code") {
+              switch (v[1]) {
+                case '0' :
+                  v[1] = "未处理异常";
+                  break;
+                case '1' :
+                  v[1] = "弱";
+                  break;
+                case '2' :
+                  v[1] = "中";
+                  break;
+                case '3' :
+                  v[1] = "强";
+                  break;
+                default:
+                  v[1] = "";
+              }
+            }
+            if (v[0] == "n_lfhf_zzsjphx_code") {
+              //0未处理异常；1交感神经活跃；2平衡；3副交感神经活跃
+              switch (v[1]) {
+                case '0' :
+                  v[1] = "未处理异常";
+                  break;
+                case '1' :
+                  v[1] = "交感神经活跃";
+                  break;
+                case '2' :
+                  v[1] = "平衡";
+                  break;
+                case '3' :
+                  v[1] = "副交感神经活跃";
                   break;
                 default:
                   v[1] = "";

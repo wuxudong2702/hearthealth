@@ -25,6 +25,7 @@ export class TableAddComponent implements OnInit {
   @Input() isRemind: boolean;
   @Input() remind: Array<any>;
   @Input() treeAdd: boolean;
+  @Input() cancel_disabled: boolean;
 
 
 
@@ -68,6 +69,8 @@ export class TableAddComponent implements OnInit {
         this.form.value[i] = undefined;
       }
     }
+    console.log(this.form.value,'===this.form.value===');
+
     this.onSubmit.emit(this.form.value);
   }
 

@@ -190,13 +190,10 @@ export class EcgdChartComponent implements OnInit {
               }
           ]
     }
-    console.log(this.Params,'this.Params-ecgd-detail');
     this.chartDetailsId = this.Params['id'];
     this.userName = this.Params['name'];
     this.sense_time = this.Params['sense_time'];
     this.http.getHhrDataDetails(''+this.Params['user_id'],''+ this.chartDetailsId).then(data => {
-      // console.log(this.Params['user_id'],'user_id');
-      // console.log(data);
       if (data['status'] == 'ok') {
         if (data['data']) {
           this.chartDetailsData=[];

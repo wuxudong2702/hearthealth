@@ -181,14 +181,14 @@ export class PackagesComponent implements OnInit {
         this.toastService.toast(toastCfg);
         return ;
       }
-      const req = new HttpRequest('POST', "api/admin/upgrade/add", formData, {
+      const req = new HttpRequest('POST', "/api/admin/upgrade/add", formData, {
         reportProgress: true,
       });
 
       this.httpClient.request(req).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
-          console.log(this.progress);
+          // console.log(this.progress);
         }
         else if (event instanceof HttpResponse) {
           if (event.body['status'] == 'ok') {
@@ -218,7 +218,7 @@ export class PackagesComponent implements OnInit {
       this.httpClient.request(req).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
-          console.log(this.progress);
+          // console.log(this.progress);
         }
         else if (event instanceof HttpResponse) {
           if (event.body['status'] == 'ok') {
@@ -234,7 +234,7 @@ export class PackagesComponent implements OnInit {
             }
             this.params['page']='1';
             this.getHeartData(this.url,this.params);
-            console.log('Files uploaded!');
+            // console.log('Files uploaded!');
           } else {
             const toastCfg = new ToastConfig(ToastType.ERROR, '', event.body['message'], 3000);
             this.toastService.toast(toastCfg);
@@ -259,7 +259,7 @@ export class PackagesComponent implements OnInit {
     formData.append('token', this.http.getToken());
     formData.append('default', defaultData['default']);
     formData.append('id', ''+ id);
-     console.log(defaultData,'defaultData');
+     // console.log(defaultData,'defaultData');
     const req = new HttpRequest('POST', "api/admin/upgrade/update", formData, {
       reportProgress: true,
     });

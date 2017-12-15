@@ -112,7 +112,6 @@ export class EcgdComponent implements OnInit {
           if (v['heart_data_id'] == arr[0]) {
             downloadData = v;
             userId = v['user_id'];
-            console.log(userId, 'userId');
             return;
           }
         });

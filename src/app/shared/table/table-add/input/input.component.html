@@ -108,12 +108,13 @@
       [(ngModel)]="field.val"
       [formControlName]="field.key"
        #file
-      (change)="upload(file.files)"
+      (blur)="upload(file.files)"
+
     >
 
 
     <div class="" *ngIf="!isValid  && isDirty ">
-        <div *ngIf="field.required==true&&field.val==''" class="alert-danger valid " [class.TreeValidExample]="treeAdd">
+        <div *ngIf="field.required==true && field.val==''" class="alert-danger valid " [class.TreeValidExample]="treeAdd">
             {{field.name+'是必填项！'}}
         </div>
         <div *ngIf="field.val!=''" class="alert-danger validExample " [class.TreeValidExample]="treeAdd">

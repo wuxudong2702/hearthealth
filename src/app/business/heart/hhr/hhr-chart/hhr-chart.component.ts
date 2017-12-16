@@ -253,7 +253,7 @@ export class HhrChartComponent implements OnInit {
                   v[1] = "正常";
                   break;
                 case '4' :
-                  v[1] = "稍慢";
+                  v[1] = "稍快";
                   break;
                 case '5' :
                   v[1] = "过快";

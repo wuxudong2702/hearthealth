@@ -28,7 +28,7 @@ const htmlH: string = "<!DOCTYPE html>\n" +
   "  .article-content p{\n" +
   "    word-wrap: break-word;line-height: 1.2em;\n" +
   "  }\n" +
-  "  .article-content img {max-width: 100%;border-radius: 4px;float:left }\n" +
+  "  .article-content img {max-width: 100%;border-radius: 4px; }\n" +
   "  .ql-container {\n" +
   "    box-sizing: border-box;\n" +
   "    font-family: Helvetica, Arial, sans-serif;\n" +
@@ -402,7 +402,7 @@ const htmlH: string = "<!DOCTYPE html>\n" +
   "    direction: rtl;\n" +
   "    text-align: inherit;\n" +
   "  }\n" +
-  "  .ql-align-center {\n" +
+  "  .ql-editor .ql-align-center {\n" +
   "    text-align: center;\n" +
   "  }\n" +
   "  .ql-editor .ql-align-justify {\n" +
@@ -410,17 +410,16 @@ const htmlH: string = "<!DOCTYPE html>\n" +
   "  }\n" +
   "  .ql-editor .ql-align-right {\n" +
   "    text-align: right;\n}" +
-  ".ql-editor .ql-align-right img {\n" +
-  "  max-width: 100%; float:right\n" +
-  "}"+
-
+  "  .ql-editor .dom-mark-MarkThisHere {\n" +
+  "    float:none;\n}" +
+  "  .ql-editor .dom-mark-MarkThisHere img {\n" +
+  "    float: left;\n}" +
   "</style>\n" +
   "<div class=\"article-content ql-editor\">";
 
 const htmlL: string = "</div>\n" +
   "\t\n" +
   "</body>\n" +
-  "<img src=\"http://img.baidu.com/hi/youa/y_0034.gif\" width=\"60\" height=\"300\" _src=\"http://img.baidu.com/hi/youa/y_0034.gif\" style=\"float: right;\"><p>1. 图片居左，文字围绕图片排版</p><p>方法：在文字前面插入图片，设置居左对齐，然后即可在右边输入多行文本</p>" +
   "</html>";
 // const htmlTitle = "<div class=\"article-title\">\n" +
 //   "  <h1 class=\"title\">我是预览页面</h1>\n" +
@@ -531,8 +530,8 @@ export class Editorh5Component implements OnInit {
   }
 
   onTextChange(html: UEditorHtml) {
-    console.log(html.delta,'delta');
-    console.log(html.source,'source');
+    // console.log(html.delta,'delta');
+    // console.log(html.source,'source');
     this.htmlValue = html.htmlValue;
     if (html.htmlValue) {
       this.html5 = html.htmlValue;

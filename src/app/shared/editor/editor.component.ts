@@ -28,7 +28,7 @@ export const EDITOR_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'c-editor',
   templateUrl: './editor.component.html',
-  providers: [EDITOR_VALUE_ACCESSOR]
+  providers: [EDITOR_VALUE_ACCESSOR],
 })
 export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnInit {
   @Output() onTextChange: EventEmitter<any> = new EventEmitter();
@@ -72,8 +72,13 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
 
     let editorElement = this.el.nativeElement.querySelector('div.c-editor-content');
     let toolbarElement = this.el.nativeElement.querySelector('div.c-editor-toolbar');
-    // console.log("editor component", this.dataEditor,editorElement.children[0]);
-    console.log("editor component", editorElement,toolbarElement);
+
+    // let Parchment = Quill.import('parchment');
+    // let config = {
+    //   scope: Parchment.Scope.BLOCK,
+    // };
+    // let MClass = new Parchment.Attributor.Class('mark', 'dom-mark', config);
+    // Quill.register(MClass,true);
 
     this.quill = new Quill(editorElement, {
       modules: {
@@ -84,6 +89,13 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
       theme: 'snow',
       formats: this.formats
     });
+
+    // let customButton = document.querySelector('#custom-button');
+    // customButton.addEventListener('click', ()=>{
+    //   // console.log('Clicked!');
+    //   // this.quill.format('float', 'left');
+    //   this.quill.format('mark', 'MarkThisHere');
+    // });
 
     if (this.HTML5Content) {
       this.quill.pasteHTML(this.HTML5Content);
@@ -101,8 +113,6 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
     this.quill.on('text-change', (delta, oldContents, source) => {
       let html = editorElement.children[0].innerHTML;
       let text = this.quill.getText();
-      // console.log(this.Html,html ,'this,html');
-      // console.log(delta, source,'------text-change------');
       if (html == '<p><br></p>') {
         html = null;
       }
@@ -122,7 +132,6 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
     });
 
     this.quill.on('selection-change', (range, oldRange, source) => {
-      console.log(range, oldRange, source,'===selection-change====');
       this.onSelectionChange.emit({
         range: range,
         oldRange: oldRange,
@@ -137,7 +146,6 @@ export class EditorComponent implements AfterViewInit, ControlValueAccessor, OnI
 
   writeValue(value: any): void {
     this.value = value;
-    // console.log( value,'value=');
     if (this.quill) {
       if (value)
         this.quill.pasteHTML(value);

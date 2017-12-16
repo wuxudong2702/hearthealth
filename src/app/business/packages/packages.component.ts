@@ -191,10 +191,8 @@ export class PackagesComponent implements OnInit {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
           // console.log(this.progress);
-          if(this.progress<=100 || this.progress>0){
+          if(this.progress<=100 &&  this.progress>0){
             this.cancel_disabled = true;
-          }else{
-            this.cancel_disabled = false;
           }
         }
         else if (event instanceof HttpResponse) {
@@ -204,6 +202,7 @@ export class PackagesComponent implements OnInit {
             this.tableView = true;
             this.flag=true;
             this.progress =0;
+            this.cancel_disabled=false;
             for (let i = 0; i < this.headerAdd.length; i++) {
               if(this.headerAdd[i].key == 'app'){
                 this.headerAdd[i].show=false;
@@ -225,6 +224,9 @@ export class PackagesComponent implements OnInit {
       this.httpClient.request(req).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
+            if(this.progress<=100 &&  this.progress>0){
+                this.cancel_disabled = true;
+            }
           // console.log(this.progress);
         }
         else if (event instanceof HttpResponse) {
@@ -234,6 +236,7 @@ export class PackagesComponent implements OnInit {
             this.tableView = true;
             this.flag=true;
             this.progress =0;
+            this.cancel_disabled=false;
             for (let i = 0; i < this.headerAdd.length; i++) {
               if(this.headerAdd[i].key == 'app'){
                 this.headerAdd[i].show=false;

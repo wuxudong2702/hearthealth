@@ -108,7 +108,7 @@ export class InputComponent implements OnInit {
   upload(files) {
      console.log(files,'files');
     this.form.value[this.field.key] = files[0];
-    // console.log(this.form.value[this.field.key], this.form,'form ---');
+      console.log(this.form.value[this.field.key], this.form,'form ---');
     // if (files.length === 0)
     //   return;
     //

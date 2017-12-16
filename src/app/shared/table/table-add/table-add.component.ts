@@ -33,6 +33,8 @@ export class TableAddComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<any>();
   @Output() onSendRemind = new EventEmitter<any>();
   @Output() onSendFormValue = new EventEmitter<any>();
+  @Output() onAddFile = new EventEmitter<any>();
+
 
   submitData: string;
   addFormValue: string;
@@ -52,7 +54,9 @@ export class TableAddComponent implements OnInit {
   datePickerConfig = {
     locale: 'zh-CN'
   };
-
+  addFile(file){
+    this.onAddFile.emit(file);
+  }
   submit() {
     if (this.form.value.sex =='男') {
       this.form.value.sex = '1';
@@ -70,7 +74,6 @@ export class TableAddComponent implements OnInit {
       }
     }
     console.log(this.form.value,'===this.form.value===');
-
     this.onSubmit.emit(this.form.value);
   }
 

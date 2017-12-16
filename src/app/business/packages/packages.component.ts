@@ -66,6 +66,7 @@ export class PackagesComponent implements OnInit {
   url: string = '/api/admin/upgrade/index';
   params:params=new params();
   progress: number;
+  file: any;
 
   del(packages_id: string) {
     // console.log(packages_id,'0-0-0-0');
@@ -168,16 +169,20 @@ export class PackagesComponent implements OnInit {
     //   }
     // }
   }
-
+  addFile(file){
+    this.file=file;
+  }
   submit(submitData) {
     let formData = new FormData();
+    if(isNullOrUndefined(submitData['app'])){
+      submitData['app']=this.file;
+    }
     formData.append('app', submitData['app']);
     formData.append('ver', submitData['ver']);
     formData.append('desc', submitData['desc']);
     formData.append('token', this.http.getToken());
     formData.append('default', submitData['default']);
     if (this.flag) {
-      console.log(submitData,formData,'-----');
       if(isNullOrUndefined(submitData['app'])){
         const toastCfg = new ToastConfig(ToastType.ERROR, '', '未选择APP包！', 3000);
         this.toastService.toast(toastCfg);

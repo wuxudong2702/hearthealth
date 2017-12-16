@@ -28,6 +28,8 @@ export class InputComponent implements OnInit {
   @Output() onSendFormValue = new EventEmitter<any>();
   @Output() onSendMatchValid = new EventEmitter<any>();
   @Output() onDate = new EventEmitter<any>();
+  @Output() onAddFile = new EventEmitter<any>();
+
 
   date = '';
   isRemind: boolean = false;
@@ -39,6 +41,7 @@ export class InputComponent implements OnInit {
   matchUnValid: boolean = true;
   subscription: Subscription;
   fieldVer:string;
+  tempFile:any;
   constructor(private http: ApiService, private toastService: ToastService, private service: ShareService) {}
 
   ngOnInit(): void {
@@ -52,12 +55,14 @@ export class InputComponent implements OnInit {
     }
     // this.fieldVer=this.field.
   }
+
+
   checkVer() {
     if(this.field.key == 'ver'&&this.formValue&&this.formValue['ver']!=this.fieldVer){
       this.http.verUnique(this.formValue['ver']).then(data => {
         if (data['status'] == 'ok') {
           if(data['data']=='1'){
-            const toastCfg = new ToastConfig(ToastType.ERROR, '', '此版本号已存在!', 3000);
+            const toastCfg = new ToastConfig(ToastType.ERROR, '', '此版本号已存在!', 5000);
             this.toastService.toast(toastCfg);
           }
         } else {
@@ -71,7 +76,6 @@ export class InputComponent implements OnInit {
     }
   }
   change() {
-
     this.formValue = this.form.value;
     this.onSendFormValue.emit(this.formValue);
     if (this.field.key == 'password' || this.field.key == 'password_confirmation') {
@@ -106,9 +110,12 @@ export class InputComponent implements OnInit {
 
 
   upload(files) {
+
      console.log(files,'files');
-    this.form.value[this.field.key] = files[0];
-      console.log(this.form.value[this.field.key], this.form,'form ---');
+    this.tempFile=this.form.value[this.field.key] = files[0];
+    this.onAddFile.emit(files[0]);
+    // console.log(this.tempFile,'ooooooooooooo');
+      // console.log(this.form.value[this.field.key], this.form,'form -----------');
     // if (files.length === 0)
     //   return;
     //
@@ -131,11 +138,13 @@ export class InputComponent implements OnInit {
 
 
   get isValid() {
+
     // console.log(this.form.controls[this.field.key].valid,this.field.key);
     return this.form.controls[this.field.key].valid;
   }
 
   get isDirty() {
+
     return this.form.controls[this.field.key].dirty;
   }
 

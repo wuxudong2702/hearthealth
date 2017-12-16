@@ -108,7 +108,8 @@
       [(ngModel)]="field.val"
       [formControlName]="field.key"
        #file
-      (blur)="upload(file.files)"
+
+      (change)="upload(file.files)"
 
     >
 

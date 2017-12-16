@@ -9,7 +9,10 @@
       <app-input [field]="header" [flag]="flag" [treeAdd]="treeAdd" [AddInput]="isShow" [form]="form"
                  (onSendFormValue)="SendFormValue($event)"
                  (onSendRemind)="sendRemind($event)"
-                 (onSendMatchValid)="sendMatchValid($event)"></app-input>
+                 (onSendMatchValid)="sendMatchValid($event)"
+                 (onAddFile)="addFile($event)"
+
+      ></app-input>
 
       </div>
       <div class="form-button " [class.footerBtn]="treeAdd" >

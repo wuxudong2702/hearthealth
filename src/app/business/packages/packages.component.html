@@ -34,6 +34,7 @@
     (onAddCancel)="cancel()"
     [cancel_disabled]="cancel_disabled"
     (onSubmit)="submit($event)"
+    (onAddFile)="addFile($event)"
 
     *ngIf="addView"
 >
@@ -41,3 +42,5 @@
 <div class="progress" style="margin-bottom: 0;" *ngIf="addView" >
   <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': progress + '%' }"></div>
 </div>
+
+

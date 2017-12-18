@@ -205,8 +205,8 @@ export class EcgdChartComponent implements OnInit {
           }
           this.chartDetailsData.forEach(function (v) {
             if (v[0] == "n_bpm_code") {
+              v[0] = "n_bpm_code(心率结论)";
               switch (v[1]) {
-                //0未处理异常；1过慢；2稍慢；3正常；4稍慢；5过快；6测量结果异常
                 case '0' :
                   v[1] = "未处理异常";
                   break;
@@ -233,6 +233,7 @@ export class EcgdChartComponent implements OnInit {
               }
             }
             if (v[0] == "n_rythm_code") {
+              v[0] = "n_rythm_code(节律结论)";
               switch (v[1]) {
                 //0未处理异常；1正常；2轻度异常；3中度异常；4明显异常
                 case '0' :
@@ -255,6 +256,12 @@ export class EcgdChartComponent implements OnInit {
               }
             }
             if (v[0] == "n_arrhythmia_code" || v[0] == "n_heart_health_code") {
+              if(v[0] == "n_arrhythmia_code"){
+                v[0] = "n_arrhythmia_code(心律失常解决)";
+              }
+              if(v[0] == "n_heart_health_code"){
+                v[0] = "n_heart_health_code(心脏健康结论)";
+              }
               switch (v[1]) {
                 case '0' :
                   v[1] = "未处理异常";
@@ -273,6 +280,7 @@ export class EcgdChartComponent implements OnInit {
               }
             }
             if (v[0] == "n_pressure_code") {
+              v[0] = "n_pressure_code(压力等级)";
               switch (v[1]) {
                 case '0' :
                   v[1] = "未处理异常";
@@ -288,6 +296,15 @@ export class EcgdChartComponent implements OnInit {
               }
             }
             if (v[0] == "n_sdnn_zzsjzzl_code" || v[0] == "n_rmssd_xxgtjnl_code" || v[0] == "n_tp_zzsjtjnl_code") {
+              if(v[0] == "n_sdnn_zzsjzzl_code"){
+                v[0] = "n_sdnn_zzsjzzl_code(自主神经总张力)";
+              }
+              if(v[0] == "n_rmssd_xxgtjnl_code"){
+                v[0] = "n_rmssd_xxgtjnl_code(心血管调节能力)";
+              }
+              if(v[0] == "n_tp_zzsjtjnl_code"){
+                v[0] = "n_tp_zzsjtjnl_code(自主神经调节能力)";
+              }
               switch (v[1]) {
                 case '0' :
                   v[1] = "未处理异常";
@@ -302,7 +319,13 @@ export class EcgdChartComponent implements OnInit {
                   v[1] = "";
               }
             }
-            if (v[0] == "n_lf_yjfynl_code" || v[0] == "n_hf_hfnl_code" || v[0] == "n_tp_zzsjtjnl_code") {
+            if (v[0] == "n_lf_yjfynl_code" || v[0] == "n_hf_hfnl_code") {
+              if(v[0] == "n_lf_yjfynl_code"){
+                v[0] = "n_lf_yjfynl_code(应激反应能力)";
+              }
+              if(v[0] == "n_hf_hfnl_code"){
+                v[0] = "n_hf_hfnl_code(情绪恢复能力)";
+              }
               switch (v[1]) {
                 case '0' :
                   v[1] = "未处理异常";
@@ -321,7 +344,7 @@ export class EcgdChartComponent implements OnInit {
               }
             }
             if (v[0] == "n_lfhf_zzsjphx_code") {
-              //0未处理异常；1交感神经活跃；2平衡；3副交感神经活跃
+              v[0] = "n_lfhf_zzsjphx_code(自主神经平衡性)";
               switch (v[1]) {
                 case '0' :
                   v[1] = "未处理异常";

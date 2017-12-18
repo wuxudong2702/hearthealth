@@ -34,7 +34,7 @@
     <label class="details_time">检测时间：{{this.clickTime}}</label>
     <h2 *ngIf="details_none" class="text-center">暂无数据</h2>
     <div *ngIf="!details_none">
-    <label class="details" *ngFor="let data of chartDetailsData" title={{data}}>{{data[0]}}：&nbsp;{{data[1]}}
+    <label class="details" *ngFor="let data of chartDetailsData" title={{data[0]}}>{{data[0]}}：&nbsp;{{data[1]}}
     </label>
     </div>
   </div>

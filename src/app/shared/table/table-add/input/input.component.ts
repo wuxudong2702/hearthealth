@@ -111,7 +111,7 @@ export class InputComponent implements OnInit {
 
   upload(files) {
 
-     console.log(files,'files');
+     // console.log(files,'files');
     this.tempFile=this.form.value[this.field.key] = files[0];
     this.onAddFile.emit(files[0]);
     // console.log(this.tempFile,'ooooooooooooo');

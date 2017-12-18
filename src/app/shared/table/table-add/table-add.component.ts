@@ -73,7 +73,6 @@ export class TableAddComponent implements OnInit {
         this.form.value[i] = undefined;
       }
     }
-    console.log(this.form.value,'===this.form.value===');
     this.onSubmit.emit(this.form.value);
   }
 

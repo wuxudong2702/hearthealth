@@ -236,7 +236,6 @@ export class HhrChartComponent implements OnInit {
             arr.push(data['data'][i]);
             this.chartDetailsData.push(arr);
           }
-          console.log(this.chartDetailsData,'this.chartDetailsData');
           this.chartDetailsData.forEach(function (v) {
             if (v[0] == "n_bpm_code") {
               v[0] = "n_bpm_code(心率结论)";

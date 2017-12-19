@@ -27,7 +27,7 @@
         "../node_modules/select2/dist/js/select2.full.js",
         "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js",
         "../node_modules/imageviewer/dist/viewer.min.js",
-        "../node_modules/quill/dist/quill.js",
+        "../src/lib/quill/dist/quill.js",
         "../node_modules/echarts/dist/echarts.min.js"
       ],
       "environmentSource": "environments/environment.ts",

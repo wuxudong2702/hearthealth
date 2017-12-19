@@ -11,7 +11,6 @@ import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
-import {timestamp} from "rxjs/operators";
 
 @Component({
   selector: 'app-ecgd',

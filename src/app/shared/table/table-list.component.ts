@@ -166,6 +166,7 @@ export class TableListComponent implements OnInit, OnChanges {
   @Input() unBindBtn: boolean;
   @Input() unBindAllBtn: boolean;
   @Input() pagination: paginationObj;
+  @Input() addServiceBtn: boolean;
 
   @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
@@ -183,6 +184,7 @@ export class TableListComponent implements OnInit, OnChanges {
   @Output() onEditZTree = new EventEmitter<any>();
   @Output() onEditH5 = new EventEmitter<any>();
   @Output() onPaginationChange = new EventEmitter<any>();
+  @Output() onAddService = new EventEmitter<any>();
 
 
   url: string = '';
@@ -197,7 +199,9 @@ export class TableListComponent implements OnInit, OnChanges {
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
   checkedListIds: Array<number> = [];
-
+    addService(){
+      this.onAddService.emit();
+    }
   delAllChecked() {
     if (!this.isDelAll) {
       this.checkedList = this.data.map(v => true);

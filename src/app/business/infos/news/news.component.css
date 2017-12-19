@@ -1,0 +1,34 @@
+.preview-layer{
+    /*display: none;*/
+    position: relative;
+
+}
+ .preview-md{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index:999;
+    background-color:#000;
+    opacity:0.7;
+}
+ .preview-phone {
+    position: fixed;
+    width: 266px;
+    height: 539px;
+    margin:0 auto;
+     top:10%;
+     left:42%;
+    text-align: center;
+    background: url(../../../business-shared/H5editor/images/iphone-md.png) no-repeat no-repeat;
+    z-index: 9999;
+}
+ .banner{
+     width:200px;
+     height:100px;
+ }
+ .banner-img{
+     width:200px;
+     height:100px;
+ }

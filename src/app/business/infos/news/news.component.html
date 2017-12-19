@@ -1,27 +1,32 @@
 <c-table-list
-  *ngIf="!editor"
-  (onSort)="sort($event)"
-  (onDel)="del($event)"
-  (onDelAll)="delAll($event)"
-  (onEditH5)="editH5($event)"
-  (onAdd)="add($event)"
-  (onSearch)="search($event)"
-  (onSet)="set($event)"
+        *ngIf="!editor"
+        (onSort)="sort($event)"
+        (onDel)="del($event)"
+        (onDelAll)="delAll($event)"
+        (onEditH5)="editH5($event)"
+        (onAdd)="add($event)"
+        (onSearch)="search($event)"
+        (onSet)="set($event)"
+        (onAddService)="addService($event)"
 
-  [headers]="headers"
-  [data]="data"
-  [addBtn]="addBtn"
-  [deleteBtn]="deleteBtn"
-  [editH5Btn]="editH5Btn"
-  [searchBtn]="searchBtn"
-  [deleteAllBtn]="deleteAllBtn"
-  [setBtn]="setBtn"
-  [setOperate]="setOperate"
-  [paginationBtn]="paginationBtn"
-  [pagination]="pagination"
-  (onPaginationChange)="paginationChange($event)"
+        [addServiceBtn]="addServiceBtn"
+
+        [headers]="headers"
+        [data]="data"
+        [addBtn]="addBtn"
+        [deleteBtn]="deleteBtn"
+        [editH5Btn]="editH5Btn"
+        [searchBtn]="searchBtn"
+        [deleteAllBtn]="deleteAllBtn"
+        [setBtn]="setBtn"
+        [setOperate]="setOperate"
+        [paginationBtn]="paginationBtn"
+        [pagination]="pagination"
+        (onPaginationChange)="paginationChange($event)"
 >
 </c-table-list>
+
+
 <c-editor-h5 *ngIf="editor"
              [dataEditor]="dataEditor"
 
@@ -30,8 +35,28 @@
              (onEditBack)="onEditBack($event)"
              [isSelectShow]="isSelectShow"
              (onSave)="save($event)"
+
 >
 </c-editor-h5>
 
+<div class="preview-layer" *ngIf="phoneShow" style=" overflow: auto" (click)="phoneShow=false">
+    <div class="preview-md"></div>
+    <div class="preview-phone">
+        <div class="content">
+            <div class="banner">
+                <!--<div class="banner-img" [src]="bannerUrl"/>-->
 
+            </div>
+            <div class="suggestion"></div>
+            <div class="products">
+               <div class="product">
+                   <img/>
+                   <span></span>
+                   <span></span>
+                   <span></span>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
 

@@ -396,7 +396,7 @@ export class ApiService {
       .catch(this.handleError);
   }
 
-// admin-role
+// H5
   uploadHtml5Page(title: string, description: string, label: string, header: string, content: string, footer: string): Promise<any> {
     const url: string = "api/admin/info/add";
     this.spinService.spin(true);
@@ -462,6 +462,21 @@ export class ApiService {
     })
       .toPromise()
       .then(data => data)
+      .catch(this.handleError);
+  }
+
+  valueAddedView(): Promise<any> {
+    const url: string = "api/admin/info/addService";
+    this.spinService.spin(true);
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+    })
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        console.log('666666666',data);
+        return data
+      })
       .catch(this.handleError);
   }
 

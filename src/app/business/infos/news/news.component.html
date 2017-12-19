@@ -44,17 +44,22 @@
     <div class="preview-phone">
         <div class="content">
             <div class="banner">
-                <!--<div class="banner-img" [src]="bannerUrl"/>-->
-
+                <img class="banner-img" [src]="bannerUrl"/>
             </div>
-            <div class="suggestion"></div>
+            <div class="suggestion">
+              <img class="suggestion-img" [src]="suggestionUrl1"/>
+              <img class="suggestion-img" [src]="suggestionUrl2"/>
+              <img class="suggestion-img" [src]="suggestionUrl3"/>
+            </div>
             <div class="products">
                <div class="product">
-                   <img/>
-                   <span></span>
-                   <span></span>
-                   <span></span>
+                 <img class="product-img" [src]="productUrl"/>
+                 <div class="product-desc">
+                   <label class="description">标签创建的是被引用图像的占位空间。</label>
+                   <label class="price">￥88.88</label>
+                 </div>
                </div>
+              <hr>
             </div>
         </div>
     </div>

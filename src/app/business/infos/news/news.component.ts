@@ -78,17 +78,31 @@ export class NewsComponent implements OnInit {
 
     flag: boolean = true;
     id: string;
-    bannerUrl: string;
+    description: string;
+    price: string;
+    bannerUrl: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
+    suggestionUrl1: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
+    suggestionUrl2: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
+    suggestionUrl3: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
+    productUrl: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
 
 
 
     addService(){
         console.log('000');
         this.bannerUrl= this.data[0]['url'];
-        console.log(this.bannerUrl,'bannerUrl');
-        // if(this.bannerUrl) {
-            this.phoneShow = true;
-        // }
+
+        this.http.valueAddedView().then(data => {
+          if (data['status'] == 'ok') {
+            console.log(data,'data');
+          }
+        }).catch(err => {
+          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+          this.toastService.toast(toastCfg);
+        });
+
+        this.phoneShow = true;
+
     }
 
     editH5(i: number) {

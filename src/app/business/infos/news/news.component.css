@@ -38,11 +38,12 @@
 }
  .banner {
      width:224px;
-     height:100px;
+     max-height:100px;
  }
- .banner-img {
+ .banner img {
      width:224px;
      height:100px;
+     max-height:100px;
  }
 .suggestion {
      width:224px;
@@ -90,4 +91,7 @@ hr {
   width: 220px;
   margin-left:2px;
   margin-bottom: 2%;
+}
+img {
+  width:100%;
 }

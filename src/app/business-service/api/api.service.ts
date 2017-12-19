@@ -466,7 +466,7 @@ export class ApiService {
   }
 
   valueAddedView(): Promise<any> {
-    const url: string = "api/admin/info/addService";
+    const url: string = "api/admin/info/addServices";
     this.spinService.spin(true);
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
@@ -474,7 +474,6 @@ export class ApiService {
       .toPromise()
       .then(data => {
         this.spinService.spin(false);
-        console.log('666666666',data);
         return data
       })
       .catch(this.handleError);

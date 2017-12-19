@@ -39,24 +39,22 @@
 >
 </c-editor-h5>
 
-<div class="preview-layer" *ngIf="phoneShow" style=" overflow: auto" (click)="phoneShow=false">
+<div class="preview-layer" [hidden]="!phoneShow" style=" overflow: auto" (click)="phoneShow=false">
     <div class="preview-md"></div>
     <div class="preview-phone">
         <div class="content">
-            <div class="banner">
-                <img class="banner-img" [src]="bannerUrl"/>
-            </div>
+            <div class="banner" id="banner"></div>
             <div class="suggestion">
-              <img class="suggestion-img" [src]="suggestionUrl1"/>
-              <img class="suggestion-img" [src]="suggestionUrl2"/>
-              <img class="suggestion-img" [src]="suggestionUrl3"/>
+              <div class="suggestion-img" id="suggestion1"></div>
+              <div class="suggestion-img" id="suggestion2"></div>
+              <div class="suggestion-img" id="suggestion3"></div>
             </div>
             <div class="products">
                <div class="product">
-                 <img class="product-img" [src]="productUrl"/>
+                 <div class="product-img" id="product"></div>
                  <div class="product-desc">
-                   <label class="description">标签创建的是被引用图像的占位空间。</label>
-                   <label class="price">￥88.88</label>
+                   <label class="description"></label>
+                   <label class="price"></label>
                  </div>
                </div>
               <hr>
@@ -64,4 +62,5 @@
         </div>
     </div>
 </div>
+
 

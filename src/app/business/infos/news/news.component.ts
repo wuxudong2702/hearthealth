@@ -89,12 +89,12 @@ export class NewsComponent implements OnInit {
 
 
     addService(){
-        console.log('000');
         this.bannerUrl= this.data[0]['url'];
-
+         console.log(document.getElementById('banner'),'-------');
         this.http.valueAddedView().then(data => {
           if (data['status'] == 'ok') {
-            console.log(data,'data');
+            console.log(data, 'data');
+            document.getElementById('banner').innerHTML = data['data']['banner'];
           }
         }).catch(err => {
           const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
@@ -102,7 +102,6 @@ export class NewsComponent implements OnInit {
         });
 
         this.phoneShow = true;
-
     }
 
     editH5(i: number) {

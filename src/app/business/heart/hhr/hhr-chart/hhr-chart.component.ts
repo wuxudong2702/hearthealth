@@ -34,7 +34,7 @@ export class HhrChartComponent implements OnInit {
   clickTime: string;
   dataIndex: number;
   flag: number = 1;
-  field: string = 'n_total_detbeat';
+  field: string = 'nBpmCode';
   dataChart: Array<any>;
   chartDetailsData: Array<any>;
   isDetails: boolean = false;
@@ -131,42 +131,6 @@ export class HhrChartComponent implements OnInit {
 
   chartView() {
     this.onChart.emit();
-  }
-
-  indicator1() {
-    this.field = 'n_total_detbeat';
-    this.flag = 1;
-    this.chartToggle(this.dataList, this.valueList);
-  }
-
-  indicator2() {
-    this.field = 'indicator2';
-    this.flag = 2;
-    this.chartToggle(this.dataList, this.valueList);
-  }
-
-  indicator3() {
-    this.field = 'indicator3';
-    this.flag = 3;
-    this.chartToggle(this.dataList, this.valueList);
-  }
-
-  indicator4() {
-    this.field = 'indicator4';
-    this.flag = 4;
-    this.chartToggle(this.dataList, this.valueList);
-  }
-
-  indicator5() {
-    this.field = 'indicator5';
-    this.flag = 5;
-    this.chartToggle(this.dataList, this.valueList);
-  }
-
-  indicator6() {
-    this.field = 'indicator6';
-    this.flag = 6;
-    this.chartToggle(this.dataList, this.valueList);
   }
 
   show() {
@@ -328,7 +292,13 @@ export class HhrChartComponent implements OnInit {
                   v[1] = "";
               }
             }
-            if (v[0] == "n_sdnn_zzsjzzl_code" || v[0] == "n_rmssd_xxgtjnl_code" || v[0] == "n_tp_zzsjtjnl_code") {
+            if (v[0] == "n_lf_yjfynl_code" || v[0] == "n_hf_hfnl_code" || v[0] == "n_sdnn_zzsjzzl_code" || v[0] == "n_rmssd_xxgtjnl_code" || v[0] == "n_tp_zzsjtjnl_code") {
+              if(v[0] == "n_lf_yjfynl_code"){
+                v[0] = "n_lf_yjfynl_code(应激反应能力)";
+              }
+              if(v[0] == "n_hf_hfnl_code"){
+                v[0] = "n_hf_hfnl_code(情绪恢复能力)";
+              }
               if(v[0] == "n_sdnn_zzsjzzl_code"){
                 v[0] = "n_sdnn_zzsjzzl_code(自主神经总张力)";
               }
@@ -337,27 +307,6 @@ export class HhrChartComponent implements OnInit {
               }
               if(v[0] == "n_tp_zzsjtjnl_code"){
                 v[0] = "n_tp_zzsjtjnl_code(自主神经调节能力)";
-              }
-              switch (v[1]) {
-                case '0' :
-                  v[1] = "未处理异常";
-                  break;
-                case '1' :
-                  v[1] = "正常";
-                  break;
-                case '2' :
-                  v[1] = "异常";
-                  break;
-                default:
-                  v[1] = "";
-              }
-            }
-            if (v[0] == "n_lf_yjfynl_code" || v[0] == "n_hf_hfnl_code") {
-              if(v[0] == "n_lf_yjfynl_code"){
-                v[0] = "n_lf_yjfynl_code(应激反应能力)";
-              }
-              if(v[0] == "n_hf_hfnl_code"){
-                v[0] = "n_hf_hfnl_code(情绪恢复能力)";
               }
               switch (v[1]) {
                 case '0' :
@@ -431,6 +380,73 @@ export class HhrChartComponent implements OnInit {
       const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择清空的数据！', 3000);
       this.toastService.toast(toastCfg);
     }
+  }
+
+
+  indicator1() {
+    this.field = 'nBpmCode';
+    this.flag = 1;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+
+  indicator2() {
+    this.field = 'nRythmCode';
+    this.flag = 2;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+  indicator3() {
+    this.field = 'nArrhythmiaCode';
+    this.flag = 3;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+  indicator4() {
+    this.field = 'nHeartHealthCode';
+    this.flag = 4;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+  indicator5() {
+    this.field = 'nPressureCode';
+    this.flag = 5;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+  indicator6() {
+    this.field = 'nSDNN_ZZSJZZLCode';
+    this.flag = 6;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+  indicator7() {
+    this.field = 'nRMSSD_XXGTJNLCode';
+    this.flag = 7;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+  indicator8() {
+    this.field = 'nTP_ZZSJTJNLCode';
+    this.flag = 8;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+  indicator9() {
+    this.field = 'nLF_YJFYNLCode';
+    this.flag = 9;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+  indicator10() {
+    this.field = 'nHF_HFNLCode';
+    this.flag = 10;
+    this.chartToggle(this.dataList, this.valueList);
+  }
+
+  indicator11() {
+    this.field = 'nLFHF_ZZSJPHXCode';
+    this.flag = 11;
+    this.chartToggle(this.dataList, this.valueList);
   }
 
   @HostListener('window:resize')

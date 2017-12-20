@@ -295,7 +295,13 @@ export class EcgdChartComponent implements OnInit {
                   v[1] = "";
               }
             }
-            if (v[0] == "n_sdnn_zzsjzzl_code" || v[0] == "n_rmssd_xxgtjnl_code" || v[0] == "n_tp_zzsjtjnl_code") {
+            if (v[0] == "n_lf_yjfynl_code" || v[0] == "n_hf_hfnl_code" || v[0] == "n_sdnn_zzsjzzl_code" || v[0] == "n_rmssd_xxgtjnl_code" || v[0] == "n_tp_zzsjtjnl_code") {
+              if(v[0] == "n_lf_yjfynl_code"){
+                v[0] = "n_lf_yjfynl_code(应激反应能力)";
+              }
+              if(v[0] == "n_hf_hfnl_code"){
+                v[0] = "n_hf_hfnl_code(情绪恢复能力)";
+              }
               if(v[0] == "n_sdnn_zzsjzzl_code"){
                 v[0] = "n_sdnn_zzsjzzl_code(自主神经总张力)";
               }
@@ -304,27 +310,6 @@ export class EcgdChartComponent implements OnInit {
               }
               if(v[0] == "n_tp_zzsjtjnl_code"){
                 v[0] = "n_tp_zzsjtjnl_code(自主神经调节能力)";
-              }
-              switch (v[1]) {
-                case '0' :
-                  v[1] = "未处理异常";
-                  break;
-                case '1' :
-                  v[1] = "正常";
-                  break;
-                case '2' :
-                  v[1] = "异常";
-                  break;
-                default:
-                  v[1] = "";
-              }
-            }
-            if (v[0] == "n_lf_yjfynl_code" || v[0] == "n_hf_hfnl_code") {
-              if(v[0] == "n_lf_yjfynl_code"){
-                v[0] = "n_lf_yjfynl_code(应激反应能力)";
-              }
-              if(v[0] == "n_hf_hfnl_code"){
-                v[0] = "n_hf_hfnl_code(情绪恢复能力)";
               }
               switch (v[1]) {
                 case '0' :

@@ -10,7 +10,10 @@ import {
 import {ApiService} from '../../../business-service/api/api.service';
 import 'rxjs/add/operator/toPromise';
 import {ToastService} from '../../../shared/toast/toast.service';
-import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
+import {ToastConfig, ToastType }from '../../../shared/toast/toast-model';
+import {AlertConfig, AlertType} from '../../../shared/modal/modal-model';
+import {ModalService} from '../../../shared/modal/modal.service';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-ecgd',
@@ -21,7 +24,7 @@ import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 
 export class EcgdComponent implements OnInit {
 
-  constructor(private cdr: ChangeDetectorRef, private http: ApiService, private toastService: ToastService) {
+  constructor(private modalService: ModalService, private cdr: ChangeDetectorRef, private http: ApiService, private toastService: ToastService) {
   }
 
   ngOnInit(): void {
@@ -43,9 +46,11 @@ export class EcgdComponent implements OnInit {
   data: Array<any>[];
   result: Array<any> = [];
   dataChart1: Array<any> = [];
+  mainInfoArr: Array<any> = [];
   userName: string;
   userId: string;
   chartId: string;
+  mainInfo: string;
   sense_time: any;
   Params: any;
   deleteBtn: boolean = false;
@@ -54,6 +59,7 @@ export class EcgdComponent implements OnInit {
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
   setBtn: boolean = true;
+  mainAccountBtn: boolean = true;
   chartBtn: boolean = true;
   paginationBtn: boolean = true;
   setOperate: boolean = true;
@@ -177,12 +183,51 @@ export class EcgdComponent implements OnInit {
     }
   }
 
+  showMainAccount (id: string) {
+
+    this.http.showEcgdAccount(id).then(data => {
+      if (data['status'] == 'ok') {
+
+          if(id == data['data']['id']){
+            const alertCfg = new AlertConfig(AlertType.INFO, '当前用户为主用户', '');
+            this.modalService.alert(alertCfg);
+          }else{
+            this.mainInfoArr.push(data['data']['id']);
+            this.mainInfoArr.push(data['data']['name']);
+            this.mainInfoArr.push(data['data']['mobile']);
+            this.mainInfoArr.push(data['data']['qq']);
+            this.mainInfoArr.push(data['data']['wexin']);
+            for(let i=0;i<this.mainInfoArr.length;i++){
+              if(isNullOrUndefined(this.mainInfoArr[i])){
+                this.mainInfoArr[i] = '&nbsp;&nbsp;&nbsp;';
+              }
+            }
+            this.mainInfo="<div>\n" +
+              "<label><h5>主用户信息</h5></label>\n"+
+              "  <label>ID :&nbsp;"+this.mainInfoArr[0]+"</label>\n" +
+              "  <label>用户名 :&nbsp;"+this.mainInfoArr[1]+"</label>\n" +
+              "  <label>QQ :&nbsp;"+this.mainInfoArr[3]+"</label>\n" +
+              "  <label>微信 :&nbsp;"+this.mainInfoArr[4]+"</label>\n" +
+              "  <label>手机 :&nbsp;"+this.mainInfoArr[2]+"</label>\n" +
+              "</div>";
+            const alertCfg = new AlertConfig(AlertType.INFO,'',this.mainInfo);
+            this.modalService.alert(alertCfg);
+          }
+      } else {
+        const toastCfg = new ToastConfig(ToastType.ERROR, '', data['message'], 3000);
+        this.toastService.toast(toastCfg);
+      }
+    }).catch(err => {
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
+      this.toastService.toast(toastCfg);
+    });
+  }
+
   set (set: string) {
     this.http.setHeader('heart-data', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('heart-data');
     });
   }
-
 
   sort(sort: sortObj) {
     this.params['sort_key'] = sort.key;

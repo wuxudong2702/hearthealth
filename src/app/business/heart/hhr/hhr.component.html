@@ -6,11 +6,13 @@
   (onChart2)="chart($event)"
   (onSet)="set($event)"
   (onPaginationChange)="paginationChange($event)"
+  (onMainAccount)="showMainAccount($event)"
 
   [pagination]="pagination"
   [headers]="headers"
   [data]="data"
   [chartBtn2]="chartBtn2"
+  [mainAccountBtn]="mainAccountBtn"
   [searchBtn]="searchBtn"
   [setBtn]="setBtn"
   [paginationBtn]="paginationBtn"
@@ -18,3 +20,5 @@
 >
 </c-table-list>
 <app-hhr-chart *ngIf="showChartView" [dataChart1]="dataChart1" [userName]="userName" [chartId]="chartId" [startValue]="startValue" [endValue]="endValue" (onChart)="chartBack($event)" ></app-hhr-chart>
+
+

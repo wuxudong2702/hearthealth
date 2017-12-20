@@ -152,6 +152,8 @@ export class TableListComponent implements OnInit, OnChanges {
   @Input() downloadBtn: boolean;
   @Input() searchBtn: boolean;
   @Input() detailsBtn: boolean;
+  @Input() ecgdMainAccountBtn: boolean;
+  @Input() mainAccountBtn: boolean;
   @Input() editBtn: boolean;
   @Input() editH5Btn: boolean;
   @Input() editZTreeBtn: boolean;
@@ -166,7 +168,6 @@ export class TableListComponent implements OnInit, OnChanges {
   @Input() unBindBtn: boolean;
   @Input() unBindAllBtn: boolean;
   @Input() pagination: paginationObj;
-  @Input() addServiceBtn: boolean;
 
   @Output() onAdd = new EventEmitter<any>();
   @Output() onDel = new EventEmitter<any>();
@@ -176,6 +177,8 @@ export class TableListComponent implements OnInit, OnChanges {
   @Output() onSet = new EventEmitter<any>();
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDetails = new EventEmitter<any>();
+  @Output() onMainAccount = new EventEmitter<any>();
+  @Output() onEcgdMainAccount = new EventEmitter<any>();
   @Output() onChart = new EventEmitter<any>();
   @Output() onChart2 = new EventEmitter<any>();
   @Output() onSort = new EventEmitter<any>();
@@ -199,9 +202,7 @@ export class TableListComponent implements OnInit, OnChanges {
   delAllId: Array<any> = [];
   checkedList: Array<boolean> = [];
   checkedListIds: Array<number> = [];
-    addService(){
-      this.onAddService.emit();
-    }
+
   delAllChecked() {
     if (!this.isDelAll) {
       this.checkedList = this.data.map(v => true);
@@ -356,6 +357,14 @@ export class TableListComponent implements OnInit, OnChanges {
 
   details(id: number) {
     this.onDetails.emit(id);
+  }
+
+  showMainAccount(id: number) {
+    this.onMainAccount.emit(id);
+  }
+
+  showEcgdMainAccount(id: number) {
+    this.onMainAccount.emit(id);
   }
 
   //Ecgd

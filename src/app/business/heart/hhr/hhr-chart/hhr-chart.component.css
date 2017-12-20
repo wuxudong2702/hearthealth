@@ -21,7 +21,7 @@
 .Btns{
     margin:6px 5px;
     vertical-align: middle;
-    width:80px;
+    width:130px;
     height:32px;
     border:none;
     color: #fff;
@@ -45,7 +45,7 @@
 .clearBtn {
     margin:6px 5px;
     vertical-align: middle;
-    width:100px;
+    width:130px;
 }
 .dateInputStyle {
     margin-left:100px;

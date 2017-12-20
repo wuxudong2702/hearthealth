@@ -75,9 +75,6 @@
             <button class=" btn btn-secondary btn-sm pull-right " *ngIf="setBtn" (click)="showModalSetFunc()"><i
               class="fa fa-sun-o fa-fw "></i> 设置
             </button>
-            <button class=" btn btn-secondary btn-sm pull-right " *ngIf="addServiceBtn" (click)="addService()"><i
-              class="fa fa-sun-o fa-fw "></i> 增值服务
-            </button>
           </th>
         </tr>
         </thead>
@@ -124,6 +121,12 @@
             </button>
             <button class="btn btn-warning btn-sm" *ngIf="uploadBtn&&row['default']=='1'" (click)="default(row['id'])"><i
                     class="fa fa-upload fa-fw"></i> 取消默认
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="ecgdMainAccountBtn" (click)="showEcgdMainAccount(row['user_id'])"><i
+              class="fa fa-search fa-fw"></i> 主用户
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="mainAccountBtn" (click)="showMainAccount(row['id'])"><i
+              class="fa fa-search fa-fw"></i> 主用户
             </button>
           </td>
         </tr>

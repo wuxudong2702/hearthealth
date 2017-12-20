@@ -57,6 +57,7 @@ export class NewsComponent implements OnInit {
         {key: INFOTYPE.HEALTH, value: '健康资讯'}
     ];
     dataEditor: Array<any> = [];
+    products: Array<any> = [];
     isSelectShow: boolean = false;
 
 
@@ -64,13 +65,12 @@ export class NewsComponent implements OnInit {
     deleteAllBtn: boolean = false;
     addBtn: boolean = false;
     editH5Btn: boolean = false;
-    addServiceBtn: boolean = true;
+
     searchBtn: boolean = true;
     setBtn: boolean = true;
     paginationBtn: boolean = true;
     setOperate: boolean = true;
     editor: boolean = false;
-    phoneShow: boolean = false;
     pagination: paginationObj = new paginationObj();
     HTML5Content: string;
     url: string = '/api/admin/info/index';
@@ -78,31 +78,7 @@ export class NewsComponent implements OnInit {
 
     flag: boolean = true;
     id: string;
-    description: string;
-    price: string;
-    bannerUrl: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
-    suggestionUrl1: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
-    suggestionUrl2: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
-    suggestionUrl3: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
-    productUrl: string = "http://www.w3school.com.cn/i/eg_tulip.jpg";
 
-
-
-    addService(){
-        this.bannerUrl= this.data[0]['url'];
-         console.log(document.getElementById('banner'),'-------');
-        this.http.valueAddedView().then(data => {
-          if (data['status'] == 'ok') {
-            console.log(data, 'data');
-            document.getElementById('banner').innerHTML = data['data']['banner'];
-          }
-        }).catch(err => {
-          const toastCfg = new ToastConfig(ToastType.ERROR, '', err, 3000);
-          this.toastService.toast(toastCfg);
-        });
-
-        this.phoneShow = true;
-    }
 
     editH5(i: number) {
         this.dataEditor = this.data[i];

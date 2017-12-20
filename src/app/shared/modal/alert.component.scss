@@ -4,3 +4,33 @@
     color:$c-color-black-secondary
 }
 
+.showMainAccount {
+
+}
+
+.showMainAccount div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  margin-left: 3%;
+}
+
+.showMainAccount div div{
+  width: 82%;
+  height: 1px;
+  background-color: #777777;
+}
+
+.showMainAccount h5 {
+  font-weight:bold;
+}
+
+.showMainAccount hr {
+  color:#777777;
+}
+
+.submit {
+  float: right;
+  margin-right: 25px;
+}

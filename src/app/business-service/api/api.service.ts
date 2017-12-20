@@ -396,6 +396,36 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+  showEcgdAccount(id: string): Promise<any> {
+    const url: string = "api/admin/heart/user/account";
+    this.spinService.spin(true);
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      id: id
+    })
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        return data
+      })
+      .catch(this.handleError);
+  }
+  showReportAccount(user_id: string): Promise<any> {
+    const url: string = "api/admin/report/user/account";
+    this.spinService.spin(true);
+    return this.httpClient.post(url, {
+      token: this.sessionStorageService.get('token'),
+      user_id: user_id
+    })
+      .toPromise()
+      .then(data => {
+        this.spinService.spin(false);
+        console.log(data,'----------');
+        return data
+      })
+      .catch(this.handleError);
+  }
+
 // H5
   uploadHtml5Page(title: string, description: string, label: string, header: string, content: string, footer: string): Promise<any> {
     const url: string = "api/admin/info/add";

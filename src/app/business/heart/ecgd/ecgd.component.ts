@@ -189,7 +189,7 @@ export class EcgdComponent implements OnInit {
       if (data['status'] == 'ok') {
 
           if(id == data['data']['id']){
-            const alertCfg = new AlertConfig(AlertType.INFO, '当前用户为主用户', '');
+            const alertCfg = new AlertConfig(AlertType.INFO, '主用户信息', '当前用户为主用户');
             this.modalService.alert(alertCfg);
           }else{
             this.mainInfoArr.push(data['data']['id']);
@@ -203,14 +203,13 @@ export class EcgdComponent implements OnInit {
               }
             }
             this.mainInfo="<div>\n" +
-              "<label><h5>主用户信息</h5></label>\n"+
               "  <label>ID :&nbsp;"+this.mainInfoArr[0]+"</label>\n" +
               "  <label>用户名 :&nbsp;"+this.mainInfoArr[1]+"</label>\n" +
               "  <label>QQ :&nbsp;"+this.mainInfoArr[3]+"</label>\n" +
               "  <label>微信 :&nbsp;"+this.mainInfoArr[4]+"</label>\n" +
               "  <label>手机 :&nbsp;"+this.mainInfoArr[2]+"</label>\n" +
               "</div>";
-            const alertCfg = new AlertConfig(AlertType.INFO,'',this.mainInfo);
+            const alertCfg = new AlertConfig(AlertType.INFO,'主用户信息',this.mainInfo);
             this.modalService.alert(alertCfg);
           }
       } else {

@@ -1,5 +1,5 @@
 {
    "/api": {
-      "target": "http://192.168.0.197:8000"
+      "target": "http://apihh.cellpies.com"
    }
 }

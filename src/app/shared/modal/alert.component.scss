@@ -5,14 +5,15 @@
 }
 
 .showMainAccount {
-
+  font-size:17px;
+  margin-bottom: 15px;
 }
 
 .showMainAccount div {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  text-align: left;
+  text-align: center;
   margin-left: 3%;
 }
 
@@ -33,4 +34,16 @@
 .submit {
   float: right;
   margin-right: 25px;
+}
+
+hr {
+  color:gainsboro;
+  margin-top: 30px;
+}
+h5 {
+  margin-top:3%;
+
+}
+.closeBtn {
+  margin-right: 10px;
 }

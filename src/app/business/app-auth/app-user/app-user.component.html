@@ -9,6 +9,9 @@
   [editBtn]="editBtn"
   [detailsBtn]="detailsBtn"
   [setOperate]="setOperate"
+  [toHhrBtn]="toHhrBtn"
+  [toEcgdBtn]="toEcgdBtn"
+
 
   (onDetails)="details($event)"
   (onSort)="sort($event)"
@@ -20,6 +23,8 @@
   [pagination]="pagination"
   (onPaginationChange)="paginationChange($event)"
   (onSearch)="search($event)"
+  (onToHhr)="toHhr($event)"
+  (onToEcgd)="toEcgd($event)"
 
   *ngIf="tableView"
 >
@@ -56,6 +61,8 @@
   (onBack)="subUsersback()"
   (onSearch)="subUserSearch($event)"
   (onAdd)="subUsersAdd($event)"
+  (onToHhr)="toHhr($event)"
+  (onToEcgd)="toEcgd($event)"
 
   [headers]="subUserHeaders"
   [data]="subUserData"
@@ -69,6 +76,9 @@
   [setOperate]="setOperate"
   [paginationBtn]="paginationBtn"
   [pagination]="sub_pagination"
+  [toHhrBtn]="toHhrBtn"
+  [toEcgdBtn]="toEcgdBtn"
+
   (onPaginationChange)="sub_paginationChange($event)"
   (onSet)="sub_set($event)"
 

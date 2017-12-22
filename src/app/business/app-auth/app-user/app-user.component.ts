@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import {_switch} from "rxjs/operator/switch";
 import {ToastService} from '../../../shared/toast/toast.service';
 import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -15,7 +16,7 @@ import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 })
 export class AppUserComponent implements OnInit {
 
-  constructor(private http: ApiService, private toastService: ToastService) {
+  constructor(private router: Router, private http: ApiService, private toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -51,6 +52,8 @@ export class AppUserComponent implements OnInit {
   editBtn: boolean = false;
   searchBtn: boolean = true;
   detailsBtn: boolean = true;
+  toHhrBtn: boolean = true;
+  toEcgdBtn: boolean = true;
   setBtn: boolean = true;
   backBtn: boolean = true;
   setOperate: boolean = true;
@@ -289,7 +292,14 @@ export class AppUserComponent implements OnInit {
   }
 
 
+  toHhr(id) {
+    this.router.navigate(['/app/hhr-show/'+id]);
+  }
 
+  toEcgd(id) {
+    console.log(id,'---')
+    this.router.navigate(['/app/ecgd-chart-show/'+id]);
+  }
 
 
 

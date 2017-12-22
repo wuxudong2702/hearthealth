@@ -34,7 +34,7 @@ export class HhrChartComponent implements OnInit {
   clickTime: string;
   dataIndex: number;
   flag: number = 1;
-  field: string = 'nBpmCode';
+  field: string = 'n_bpm_code';
   dataChart: Array<any>;
   chartDetailsData: Array<any>;
   isDetails: boolean = false;
@@ -384,69 +384,81 @@ export class HhrChartComponent implements OnInit {
 
 
   indicator1() {
-    this.field = 'nBpmCode';
+    this.field = 'n_bpm_code';
     this.flag = 1;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
 
   indicator2() {
-    this.field = 'nRythmCode';
+    this.field = 'n_rythm_code';
     this.flag = 2;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
+
   }
 
   indicator3() {
-    this.field = 'nArrhythmiaCode';
+    this.field = 'n_arrhythmia_code';
     this.flag = 3;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
   indicator4() {
-    this.field = 'nHeartHealthCode';
+    this.field = 'n_heart_health_code';
     this.flag = 4;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
   indicator5() {
-    this.field = 'nPressureCode';
+    this.field = 'n_pressure_code';
     this.flag = 5;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
   indicator6() {
-    this.field = 'nSDNN_ZZSJZZLCode';
+    this.field = 'n_sdnn_zzsjzzl_code';
     this.flag = 6;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
   indicator7() {
-    this.field = 'nRMSSD_XXGTJNLCode';
+    this.field = 'n_rmssd_xxgtjnl_code';
     this.flag = 7;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
   indicator8() {
-    this.field = 'nTP_ZZSJTJNLCode';
+    this.field = 'n_tp_zzsjtjnl_code';
     this.flag = 8;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
   indicator9() {
-    this.field = 'nLF_YJFYNLCode';
+    this.field = 'n_lf_yjfynl_code';
     this.flag = 9;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
   indicator10() {
-    this.field = 'nHF_HFNLCode';
+    this.field = 'n_hf_hfnl_code';
     this.flag = 10;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
   indicator11() {
-    this.field = 'nLFHF_ZZSJPHXCode';
+    this.field = 'n_lfhf_zzsjphx_code';
     this.flag = 11;
     this.chartToggle(this.dataList, this.valueList);
+    this.isDetails = false;
   }
 
   @HostListener('window:resize')

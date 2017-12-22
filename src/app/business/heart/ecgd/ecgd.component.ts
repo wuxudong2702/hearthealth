@@ -14,6 +14,8 @@ import {ToastConfig, ToastType }from '../../../shared/toast/toast-model';
 import {AlertConfig, AlertType} from '../../../shared/modal/modal-model';
 import {ModalService} from '../../../shared/modal/modal.service';
 import {isNullOrUndefined} from "util";
+import {Observable} from "rxjs/Observable";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-ecgd',
@@ -24,22 +26,34 @@ import {isNullOrUndefined} from "util";
 
 export class EcgdComponent implements OnInit {
 
-  constructor(private modalService: ModalService, private cdr: ChangeDetectorRef, private http: ApiService, private toastService: ToastService) {
-  }
+  constructor(private route: ActivatedRoute,
+              private modalService: ModalService,
+              private cdr: ChangeDetectorRef,
+              private http: ApiService,
+              private toastService: ToastService) {}
 
   ngOnInit(): void {
-    if (this.http.hasToken()) {
-      this.headers = this.http.getHeader('heart-data');
-      this.params['page']='1';
-      this.getHeartData(this.url,this.params);
-      this.http.isHavePerm('ecgd-del').then(v => {
-        this.deleteBtn = v;
-        this.deleteAllBtn = v;
-      });
-      this.http.isHavePerm('ecgd-download').then(v => {
-        this.downloadBtn = v;
-      });
-    }
+
+    const id: Observable<string> = this.route.params.map(p => p.id);
+    id.subscribe((id)=>{
+      console.log(id);
+      if (this.http.hasToken()) {
+        this.headers = this.http.getHeader('heart-data');
+        this.params['page']='1';
+        this.params['find_key']='user_id';
+        this.params['find_val']= id;
+        this.getHeartData(this.url,this.params);
+        this.http.isHavePerm('ecgd-del').then(v => {
+          this.deleteBtn = v;
+          this.deleteAllBtn = v;
+        });
+        this.http.isHavePerm('ecgd-download').then(v => {
+          this.downloadBtn = v;
+        });
+      }
+    });
+
+
   }
 
   headers: Array<cell> = [];

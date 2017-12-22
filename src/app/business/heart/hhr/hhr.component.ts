@@ -9,7 +9,10 @@ import {ToastConfig, ToastType} from '../../../shared/toast/toast-model';
 import {AlertConfig, AlertType} from '../../../shared/modal/modal-model';
 import {ModalService} from '../../../shared/modal/modal.service';
 import {isNullOrUndefined} from "util";
-
+import 'rxjs/add/operator/switchMap';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Location }                 from '@angular/common';
+import {Observable} from "rxjs/Observable";
 @Component({
   selector: 'app-hhr',
   templateUrl: './hhr.component.html',
@@ -18,15 +21,33 @@ import {isNullOrUndefined} from "util";
 })
 export class HhrComponent implements OnInit {
 
-  constructor(private modalService: ModalService, private http: ApiService, private toastService: ToastService) {
+  constructor(
+    private route: ActivatedRoute,
+    private modalService: ModalService,
+    private http: ApiService,
+    private toastService: ToastService
+  ) {
+
   }
 
   ngOnInit() {
-    if(this.http.hasToken()){
+    const id: Observable<string> = this.route.params.map(p => p.id);
+    id.subscribe((id)=>{
+      console.log(id);
+      if(this.http.hasToken()){
         this.headers = this.http.getHeader('reports');
-      this.params['page']='1';
-      this.getHeartData(this.url,this.params);
-    }
+        this.params['page']='1';
+        this.params['find_key']='id';
+        this.params['find_val']= id;
+        this.getHeartData(this.url,this.params);
+      }
+    });
+
+
+
+    // this.route.paramMap
+    //   .switchMap((params: ParamMap) => {console.log(+params.get('id'))})
+    //   .subscribe();
   }
 
   dataChart: Array<any> = [];

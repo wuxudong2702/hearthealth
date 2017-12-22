@@ -86,9 +86,6 @@
             {{row[header.key] | CPipe:header.pipe_type:header.pipe_params }}
           </td>
           <td class="text-center" *ngIf="setOperate">
-            <button class="btn btn-info btn-sm" *ngIf="detailsBtn" (click)="details(i)"><i
-              class="fa fa-search fa-fw"></i> 子用户
-            </button>
             <button class="btn btn-success btn-sm" *ngIf="editBtn" (click)="edit(i)"><i class="fa fa-pencil fa-fw"></i>
               编辑
             </button>
@@ -99,7 +96,6 @@
             <button class="btn btn-success btn-sm" *ngIf="editZTreeBtn" (click)="editZTree(i)"><i
               class="fa fa-pencil fa-fw"></i>
               编辑
-
             </button>
             <button class="btn btn-danger btn-sm" *ngIf="deleteBtn" (click)="showModalDel(i)"><i
               class="fa fa-trash-o fa-fw"></i>
@@ -127,6 +123,13 @@
             </button>
             <button class="btn btn-info btn-sm" *ngIf="mainAccountBtn" (click)="showMainAccount(row['id'])"><i
               class="fa fa-search fa-fw"></i> 主用户
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="detailsBtn" (click)="details(i)" title="查看子用户" ><i
+              class="fa fa-user-plus"></i>
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="toHhrBtn" (click)="toHhr(row['id'])" title="查看健康档案"><i class="fa fa-files-o"></i>
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="toEcgdBtn" (click)="toEcgd(row['id'])" title="查看心电波形"><i class="fa fa-line-chart"></i>
             </button>
           </td>
         </tr>

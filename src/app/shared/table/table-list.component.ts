@@ -154,6 +154,8 @@ export class TableListComponent implements OnInit, OnChanges {
   @Input() detailsBtn: boolean;
   @Input() ecgdMainAccountBtn: boolean;
   @Input() mainAccountBtn: boolean;
+  @Input() toHhrBtn: boolean;
+  @Input() toEcgdBtn: boolean;
   @Input() editBtn: boolean;
   @Input() editH5Btn: boolean;
   @Input() editZTreeBtn: boolean;
@@ -178,6 +180,8 @@ export class TableListComponent implements OnInit, OnChanges {
   @Output() onEdit = new EventEmitter<any>();
   @Output() onDetails = new EventEmitter<any>();
   @Output() onMainAccount = new EventEmitter<any>();
+  @Output() onToHhr = new EventEmitter<any>();
+  @Output() onToEcgd = new EventEmitter<any>();
   @Output() onEcgdMainAccount = new EventEmitter<any>();
   @Output() onChart = new EventEmitter<any>();
   @Output() onChart2 = new EventEmitter<any>();
@@ -361,6 +365,14 @@ export class TableListComponent implements OnInit, OnChanges {
 
   showMainAccount(id: number) {
     this.onMainAccount.emit(id);
+  }
+
+  toHhr(id: number) {
+    this.onToHhr.emit(id);
+  }
+
+  toEcgd(id: number) {
+    this.onToEcgd.emit(id);
   }
 
   showEcgdMainAccount(id: number) {

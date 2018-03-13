@@ -1,5 +1,5 @@
 ## admin 
- 基于angular4.2.4+ng-bootstrap1.0.0-beta.4+bootstrap4.0.0-beta+scss的后台管理系统界面
+ 基于angular4.2.4+ng-bootstrap1.0.0-beta.4+bootstrap4.0.0的后台管理系统界面
 
 
 ## 更新记录
@@ -25,8 +25,6 @@
    8.1 src/app/shared/hierarchy-view/hierarchy-view.component.ts
 9. 添加第三方ng2-img-cropper组件<br/>
    9.1 https://github.com/search?q=ng2-img-cropper&type=Code&utf8=%E2%9C%93
-10. 添加头像更换功能<br/>
-   10.1 src/main/avatar-cropper.component.ts
 11. 添加http服务<br/>
    11.1 src/app/core/http.service.ts
 12. 添加utils工具<br/>

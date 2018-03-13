@@ -1,0 +1,128 @@
+<c-table-list
+  [headers]="headers"
+  [data]="data"
+  [deleteBtn]="deleteBtn"
+  [searchBtn]="searchBtn"
+  [deleteAllBtn]="deleteAllBtn"
+  [setBtn]="setBtn"
+  [addBtn]="addBtn"
+  [editBtn]="editBtn"
+  [detailsBtn]="detailsBtn"
+  [setOperate]="setOperate"
+  [toHhrBtn]="toHhrBtn"
+  [toEcgdBtn]="toEcgdBtn"
+
+
+  (onDetails)="details($event)"
+  (onSort)="sort($event)"
+  (onDel)="del($event)"
+  (onDelAll)="delAll($event)"
+  (onAdd)="add($event)"
+  (onSet)="set($event)"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
+  (onSearch)="search($event)"
+  (onToHhr)="toHhr($event)"
+  (onToEcgd)="toEcgd($event)"
+
+  *ngIf="tableView"
+>
+</c-table-list>
+
+<app-table-add
+  [headers]="headerAdd"
+  [addEditTitle]="addEditTitle"
+  [flag]="flag"
+  (onAddCancel)="cancel($event)"
+  (onSubmit)="submit($event)"
+
+  *ngIf="addView"
+>
+</app-table-add>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--子用戶信息-->
+<c-table-list
+  (onSort)="subUsersSort($event)"
+  (onDel)="subUsersDel($event)"
+  (onDelAll)="delAll($event)"
+  (onBack)="subUsersback()"
+  (onSearch)="subUserSearch($event)"
+  (onAdd)="subUsersAdd($event)"
+  (onToHhr)="toHhr($event)"
+  (onToEcgd)="toEcgd($event)"
+
+  [headers]="subUserHeaders"
+  [data]="subUserData"
+  [deleteBtn]="deleteBtn"
+  [editBtn]="editBtn"
+  [searchBtn]="searchBtn"
+  [backBtn]="backBtn"
+  [deleteAllBtn]="deleteAllBtn"
+  [setBtn]="setBtn"
+  [addBtn]="addBtn"
+  [setOperate]="setOperate"
+  [paginationBtn]="paginationBtn"
+  [pagination]="sub_pagination"
+  [toHhrBtn]="toHhrBtn"
+  [toEcgdBtn]="toEcgdBtn"
+
+  (onPaginationChange)="sub_paginationChange($event)"
+  (onSet)="sub_set($event)"
+
+  *ngIf="subUsersView"
+>
+</c-table-list>
+<!--子用户添加和编辑-->
+<app-table-add
+  [headers]="subUsersheaderAdd"
+  [addEditTitle]="addEditTitle"
+  [flag]="flag"
+  (onAddCancel)="subUsersCancel($event)"
+  (onSubmit)="subUserSubmit($event)"
+
+  *ngIf="addSubUserView"
+>
+</app-table-add>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<app-table-edit-->
+<!--[headers]="headerEdit"-->
+<!--[editId]="editId"-->
+<!--[data]="data"-->
+<!--(onEditCancel)="Cancel($event)"-->
+<!--(onSubmit)="Submit($event)"-->
+
+<!--*ngIf="editView"-->
+<!--&gt;-->
+<!--</app-table-edit>-->

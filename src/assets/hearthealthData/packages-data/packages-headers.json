@@ -1,0 +1,32 @@
+{
+  "headers":[
+    {
+      "key": "versions",
+      "show": true,
+      "name": "版本",
+      "index": 0,
+      "order": "SortDirection.NONE",
+      "pipe": {"type": "DataType.NONE", "params": ""},
+      "val": "",
+      "selectVal":"",
+      "validExample": "12",
+      "required": true,
+      "pattern": "",
+      "inputType": 0
+    },
+    {
+      "key": "updateInfo",
+      "show": true,
+      "name": "更新说明",
+      "index": 1,
+      "order": "SortDirection.NONE",
+      "pipe": {"type": "DataType.NONE", "params": ""},
+      "val": "",
+      "selectVal":"",
+      "validExample": "12",
+      "required": true,
+      "pattern": "",
+      "inputType": 0
+    }
+  ]
+}

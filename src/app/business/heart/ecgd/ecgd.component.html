@@ -1,0 +1,35 @@
+<c-table-list
+  *ngIf="!showChartView"
+  (onChart)="chart($event)"
+  (onSort)="sort($event)"
+  (onSearch)="search($event)"
+  (onMainAccount)="showMainAccount($event)"
+
+  (onDel)="del($event)"
+  (onDelAll)="delAll($event)"
+  (onDownload)="download($event)"
+  (onSet)="set($event)"
+
+  [headers]="headers"
+  [data]="data"
+  [chartBtn]="chartBtn"
+  [deleteBtn]="deleteBtn"
+  [downloadBtn]="downloadBtn"
+  [searchBtn]="searchBtn"
+  [deleteAllBtn]="deleteAllBtn"
+  [setBtn]="setBtn"
+  [ecgdMainAccountBtn]="mainAccountBtn"
+  [setOperate]="setOperate"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
+
+>
+</c-table-list>
+
+<app-ecgd-chart  class="ecgdChart" *ngIf="showChartView"
+                 [dataChart1]="dataChart1"
+                 [Params]="Params"
+                 (back)="back($event)" >
+</app-ecgd-chart>
+

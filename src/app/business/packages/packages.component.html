@@ -1,0 +1,46 @@
+
+<c-table-list
+  *ngIf="tableView"
+
+  (onSort)="sort($event)"
+  (onDel)="del($event)"
+  (onDelAll)="delAll($event)"
+  (onAdd)="add($event)"
+  (onEdit)="add($event)"
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
+  (onUpload)="upload($event)"
+  (onDefault)="setDefault($event)"
+
+  [headers]="headers"
+  [data]="data"
+  [deleteBtn]="deleteBtn"
+  [addBtn]="addBtn"
+  [editBtn]="editBtn"
+  [deleteAllBtn]="deleteAllBtn"
+  [setOperate]="setOperate"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  [searchBtn]="searchBtn"
+  [setBtn]="setBtn"
+  [uploadBtn]="uploadBtn"
+  (onPaginationChange)="paginationChange($event)"
+>
+</c-table-list>
+<app-table-add
+    [headers]="headerAdd"
+    [addEditTitle]="addEditTitle"
+    [flag]="flag"
+    (onAddCancel)="cancel()"
+    [cancel_disabled]="cancel_disabled"
+    (onSubmit)="submit($event)"
+    (onAddFile)="addFile($event)"
+
+    *ngIf="addView"
+>
+</app-table-add>
+<div class="progress" style="margin-bottom: 0;" *ngIf="addView" >
+  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': progress + '%' }"></div>
+</div>
+
+

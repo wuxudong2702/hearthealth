@@ -1,0 +1,33 @@
+{
+  "data":[
+    {
+      "subUsersMaxNum": 12,
+      "appRole": "1"
+
+    },
+    {
+      "subUsersMaxNum": 2,
+      "appRole": "1"
+    },
+    {
+      "subUsersMaxNum": 9,
+      "appRole": "1"
+    },
+    {
+      "subUsersMaxNum": 9,
+      "appRole": "1"
+    },
+    {
+      "subUsersMaxNum": 19,
+      "appRole": "1"
+    },
+    {
+      "subUsersMaxNum": 9,
+      "appRole": "1"
+    },
+    {
+      "subUsersMaxNum": 20,
+      "appRole": "1"
+    }
+  ]
+}

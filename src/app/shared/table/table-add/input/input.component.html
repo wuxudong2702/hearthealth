@@ -1,0 +1,132 @@
+<div [formGroup]="form" class="form-inline">
+
+    <div style="width: 180px" class="text-right" for="name">
+      <span *ngIf="field.required && flag==true" style="color:red;">* &nbsp;&nbsp; </span>
+      <span *ngIf="field.key=='app' && flag==true" style="color:red;">* &nbsp;&nbsp; </span>
+      {{field.name+":"}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+
+
+  <!--<input type="text" style="display: none;" disabled autocomplete = "off"/>-->
+    <input
+            type="text"
+            class="form-control addInputValue"
+            [class.AddInputTree]="!AddInput"
+            [class.treeInput]="treeAdd"
+            id="name"
+            name="name"
+            *ngIf="field.input_type == 0&&field.key!='password'&&field.key!='password_confirmation'"
+            [(ngModel)]="field.val"
+            [formControlName]="field.key"
+            placeholder="请输入"
+            onfocus="this.placeholder=''"
+            onblur="this.placeholder='请输入'"
+            autocomplete="off"
+            (keyup)="change()"
+            (click)="change()"
+            (blur)="checkVer()"
+            pattern={{field.pattern}}
+    >
+
+    <input type="password" style="display: none;" disabled autocomplete="off"/>
+
+    <input
+            type="password"
+            class="form-control addInputValue"
+            name="name"
+            *ngIf="field.key=='password'"
+            [(ngModel)]="field.val"
+            [formControlName]="field.key"
+            placeholder="请输入"
+            onfocus="this.placeholder=''"
+            onblur="this.placeholder='请输入'"
+            autocomplete="new-password"
+            (keyup)="change()"
+            (click)="change()"
+            (change)="change()"
+            (mouseleave)="change()"
+    >
+    <input
+            type="password"
+            class="form-control addInputValue"
+            name="name"
+            *ngIf="field.key=='password_confirmation'"
+            [(ngModel)]="field.val"
+            [formControlName]="field.key"
+            placeholder="请输入"
+            onfocus="this.placeholder=''"
+            onblur="this.placeholder='请输入'"
+            autocomplete="new-password"
+            (keyup)="change()"
+            (click)="change()"
+            (change)="change()"
+            (mouseleave)="change()"
+    >
+    <input
+            type="text"
+            class="form-control addInputValue"
+            id="remindList"
+            name="remindList"
+            *ngIf="field.input_type == 3"
+            [(ngModel)]="field.val"
+            [formControlName]="field.key"
+            placeholder="请输入"
+            autocomplete="off"
+            onfocus="this.placeholder=''"
+            onblur="this.placeholder='请输入'"
+            (keyup)="change()"
+            (change)="change()"
+            list="list"
+
+    >
+    <datalist id="list"  *ngIf="field.input_type == 3">
+        <option *ngFor="let val of remind;" value={{val}}>{{val}}</option>
+    </datalist>
+
+    <select class="form-control addInputValue"
+            *ngIf="field.input_type==1" name={{field.key}}
+            [formControlName]="field.key"
+            [(ngModel)]="field.val"
+    >
+        <option *ngFor="let val of field.select_val;" value={{val}}>{{val}}</option>
+    </select>
+
+    <input [dpDayPicker]="datePickerConfig"
+           name={{field.key}}
+           [theme]="'dp-material'"
+           [(ngModel)]="field.val"
+           [formControlName]="field.key"
+           [mode]="'day'"
+           *ngIf="field.input_type==2"
+           class="form-control dateInput dateInputStyle addInputValue "
+           placeholder="请选择日期"/>
+
+    <input
+      type="file"
+      class="form-control addInputValue"
+      *ngIf="field.input_type == 4"
+      [(ngModel)]="field.val"
+      [formControlName]="field.key"
+       #file
+
+      (change)="upload(file.files)"
+
+    >
+
+
+    <div class="" *ngIf="!isValid  && isDirty ">
+        <div *ngIf="field.required==true && field.val==''" class="alert-danger valid " [class.TreeValidExample]="treeAdd">
+            {{field.name+'是必填项！'}}
+        </div>
+        <div *ngIf="field.val!=''" class="alert-danger validExample " [class.TreeValidExample]="treeAdd">
+            {{field.valid_example}}
+        </div>
+    </div>
+    <div class="" *ngIf="isValid  && !isMatch && isDirty && field.key=='password_confirmation'">
+        <div *ngIf="field.val!=''" class="alert-danger valid " [class.TreeValidExample]="treeAdd">{{
+            '两次密码不匹配'}}
+        </div>
+    </div>
+</div>
+
+

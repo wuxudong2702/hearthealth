@@ -1,0 +1,59 @@
+.ztree {
+  width: 90%;
+  height: 90%;
+  overflow:auto ;
+  /*padding-right: 20px;*/
+  margin-right: 2%;
+  border-left:1px solid lightgray;
+  border-right:1px solid lightgray;
+  border-top:25px solid lightgray;
+  border-bottom:1px solid lightgray;
+  border-radius:12px 12px 0 0;
+
+
+  padding-right: 30px;
+
+  /*margin-left:40%;*/
+  /*margin: 5px auto;*/
+  /*background-color: white;*/
+  /*margin-top: 12%;*/
+  /*margin-left: 10%;*/
+
+  /*padding-top: 15px;*/
+  /*line-height: 30px;*/
+}
+
+/*.tittle {*/
+  /*margin-bottom: 15px;*/
+  /*font-size: 22px;*/
+  /*border-left: 3px solid #10a2e9;*/
+  /*padding-left: 8px;*/
+  /*margin-left: 10px;*/
+  /*font-weight: bold;*/
+  /*color: #555555;*/
+  /*font-family: KaiTi, SimSun, Microsoft Yahei, 微软雅黑, Arial, sans-serif;*/
+/*}*/
+
+/*.content {*/
+  /*height: 75%;*/
+  /*overflow-y: auto;*/
+  /*width: 100%;*/
+  /*text-align: center;*/
+  /*max-height: 500px;*/
+/*}*/
+
+.ztree-align {
+  /*margin-left: 40%;*/
+}
+
+.footer {
+  margin-left: 327%;
+  margin-top: 0;
+  width: 200px;
+}
+
+.footer button {
+  /*width: 50px;*/
+  /*margin:10px;*/
+}
+

@@ -1,0 +1,15 @@
+<div class="chartStyle" >
+  <button class="btn btn-success btn-sm" (click)="chartView()">返回</button>
+  <h4 class="text-center text-primary" >用户：&nbsp;{{userName}} &nbsp;&nbsp;&nbsp; 测量时间：&nbsp;{{ sense_time }}</h4>
+  <div echarts [options]="chartOption" class="demo-chart"></div>
+  <div class="details-panel">
+    <hr>
+    <h3 >心电数据详情</h3>
+    <h2 *ngIf="details_none" class="text-center">暂无数据</h2>
+    <div *ngIf="!details_none">
+      <label class="details" *ngFor="let data of chartDetailsData" title={{data}}>{{data[0]}}：&nbsp;{{data[1]}}
+      </label>
+    </div>
+  </div>
+</div>
+

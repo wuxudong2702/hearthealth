@@ -1,0 +1,134 @@
+{
+  "headers": [
+    {
+      "key": "userName",
+      "show": "true",
+      "name": "用户名",
+      "index": "0",
+      "order": "SortDirection.NONE",
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+
+      } ,
+      "val": "",
+      "selectVal":[],
+      "validExample": "需要填写用户名",
+      "required": true,
+      "pattern": "",
+      "inputType": "INPUTTYPE.INPUT"
+
+    },
+    {
+      "key": "relationship",
+      "show": "true",
+      "name": "与主账户关系",
+      "index": "1",
+      "order": "SortDirection.NONE",
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      } ,
+      "val": "",
+      "selectVal":[],
+      "validExample": "需要填写用户名",
+      "required": true,
+      "pattern": "",
+      "inputType": "INPUTTYPE.INPUT"
+    },
+    {
+      "key": "age",
+      "show": "true",
+      "name": "年龄",
+      "index": "2",
+      "order": "SortDirection.NONE",
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal":[],
+      "validExample": "需要填写用户名",
+      "required": true,
+      "pattern": "",
+      "inputType": "INPUTTYPE.INPUT"
+    },
+    {
+      "key": "acquisitionTime",
+      "show": "true",
+      "name": "心跳数据采集时间",
+      "index": "3",
+      "order": "SortDirection.NONE",
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal":[],
+      "validExample": "需要填写用户名",
+      "required": true,
+      "pattern": "",
+      "inputType": "INPUTTYPE.INPUT"
+    },
+    {
+      "key": "heartDataLength",
+      "show": "true",
+      "name": "心跳数据长度",
+      "index": "5",
+      "order": "SortDirection.NONE",
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal":[],
+      "validExample": "需要填写用户名",
+      "required": true,
+      "pattern": "",
+      "inputType": "INPUTTYPE.INPUT"
+    },
+    {
+      "key": "devNumber",
+      "show": "true",
+      "name": "采集设备号",
+      "index": "6",
+      "order": "SortDirection.NONE",
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal":[],
+      "validExample": "需要填写用户名",
+      "required": true,
+      "pattern": "",
+      "inputType": "INPUTTYPE.INPUT"
+    },
+    {
+      "key": "HeartRate",
+      "show": "true",
+      "name": "心率",
+      "index": "7",
+      "order": "SortDirection.NONE",
+      "pipe": {
+        "type": "DataType.NONE",
+        "params": ""
+      },
+      "val": "",
+      "selectVal":[],
+      "validExample": "需要填写用户名",
+      "required": true,
+      "pattern": "",
+      "inputType": "INPUTTYPE.INPUT"
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+

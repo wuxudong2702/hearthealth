@@ -1,0 +1,33 @@
+{
+  "headers":[
+    {
+      "key": "appRole",
+      "show": true,
+      "name": "账户角色",
+      "index": 0,
+      "order": "SortDirection.NONE",
+      "pipe": {"type": 0, "params": {"0":"子账户","1":"主账户"}},
+      "val": "",
+      "selectVal":["子账户","主账户"],
+      "validExample": "",
+      "required": false,
+      "pattern": "",
+      "inputType":1
+    },
+    {
+      "key": "subUsersMaxNum",
+      "show": true,
+      "name": "最大子用户个数",
+      "index": 1,
+      "order": "SortDirection.NONE",
+      "pipe": {"type": 5, "params": ""},
+      "val": "",
+      "selectVal":"",
+      "validExample": "12",
+      "required": true,
+      "pattern": "[0-9]+$",
+      "inputType": 0
+    }
+  ]
+}
+

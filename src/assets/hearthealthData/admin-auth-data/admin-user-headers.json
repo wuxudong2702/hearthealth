@@ -1,0 +1,32 @@
+{
+    "headers":[
+      {
+        "key": "administrator",
+        "show": true,
+        "name": "管理员姓名",
+        "index": 4,
+        "order": "SortDirection.NONE",
+        "pipe": {"type": "DataType.NONE", "params": ""},
+        "val": "",
+        "selectVal":"",
+        "validExample": "武旭东",
+        "required": true,
+        "pattern": "",
+        "inputType": "0"
+      },
+      {
+        "key": "character",
+        "show": true,
+        "name": "角色",
+        "index": 3,
+        "order": "SortDirection.NONE",
+        "pipe": {"type": "DataType.NONE", "params": ""},
+        "val": "",
+        "selectVal":"",
+        "validExample": "",
+        "required": false,
+        "pattern": "",
+        "inputType": "1"
+      }
+    ]
+}

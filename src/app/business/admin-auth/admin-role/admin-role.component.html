@@ -1,0 +1,62 @@
+<c-table-list
+  *ngIf="tableView"
+
+  (onDel)="del($event)"
+  (onDelAll)="delAll($event)"
+  (onEditZTree)="edit($event)"
+  (onAdd)="add($event)"
+
+  (onSort)="sort($event)"
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
+
+  [headers]="headers"
+  [data]="data"
+  [addBtn]="addBtn"
+  [deleteBtn]="deleteBtn"
+  [deleteAllBtn]="deleteAllBtn"
+  [editZTreeBtn]="editZTreeBtn"
+  [setOperate]="setOperate"
+  [searchBtn]="searchBtn"
+  [setBtn]="setBtn"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
+>
+</c-table-list>
+
+<div *ngIf="!tableView" class="roleAdd" >
+  <h2 class="tittle ">{{addEditTitle}}</h2>
+  <div class="adminZtree">
+    <app-admin-ztree
+      *ngIf="addTreeView"
+      [isShow]="isShow"
+      (onZTreeSubmit)="addSubmit($event)"
+      [nodes]="nodes"
+    >
+    </app-admin-ztree>
+    <app-admin-ztree
+      *ngIf="editTreeView"
+      [isShow]="isShow"
+      (onZTreeSubmit)="editSubmit($event)"
+      [nodes]="updateNodes"
+    >
+    </app-admin-ztree>
+  </div>
+  <div class="table">
+    <app-table-add
+      [headers]="headerAdd"
+      [addEditTitle]="addEditTitle"
+      [flag]="flag"
+      (onAddCancel)="cancel($event)"
+      (onSubmit)="submit($event)"
+      [isShowTittle]="false"
+      [treeAdd]="treeAdd"
+      (onSendFormValue)="sendFormValue($event)"
+      *ngIf="addView"
+    >
+    </app-table-add>
+  </div>
+
+
+</div>

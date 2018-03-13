@@ -1,0 +1,42 @@
+<c-table-list
+        *ngIf="!editor"
+        (onSort)="sort($event)"
+        (onDel)="del($event)"
+        (onDelAll)="delAll($event)"
+        (onEditH5)="editH5($event)"
+        (onAdd)="add($event)"
+        (onSearch)="search($event)"
+        (onSet)="set($event)"
+
+
+
+        [headers]="headers"
+        [data]="data"
+        [addBtn]="addBtn"
+        [deleteBtn]="deleteBtn"
+        [editH5Btn]="editH5Btn"
+        [searchBtn]="searchBtn"
+        [deleteAllBtn]="deleteAllBtn"
+        [setBtn]="setBtn"
+        [setOperate]="setOperate"
+        [paginationBtn]="paginationBtn"
+        [pagination]="pagination"
+        (onPaginationChange)="paginationChange($event)"
+>
+</c-table-list>
+
+
+<c-editor-h5 *ngIf="editor"
+             [dataEditor]="dataEditor"
+
+             [H5Type]="H5Type"
+             [HTML5Content]="HTML5Content"
+             (onEditBack)="onEditBack($event)"
+             [isSelectShow]="isSelectShow"
+             (onSave)="save($event)"
+
+>
+</c-editor-h5>
+
+
+

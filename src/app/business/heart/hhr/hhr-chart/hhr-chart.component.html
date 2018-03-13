@@ -1,0 +1,53 @@
+<div class="chartStyle">
+
+  <div>
+    <button class="btn btn-success btn-md Btns" (click)="chartView()">返回</button>
+      <input [(ngModel)]="selectedDateStart" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
+             class="form-control dateInput dateInputStyle " placeholder="开始时间" />&nbsp;&nbsp;-&nbsp;&nbsp;
+      <input [(ngModel)]="selectedDateEnd" [dpDayPicker]="datePickerConfig" [theme]="'dp-material'" [mode]="'day'"
+             class="form-control dateInput" placeholder="结束时间" />
+      <button class="btn btn-primary showBtn" (click)="show()">显示</button>
+  </div>
+  <div class="text-center text-primary text">
+    <h4>用户：&nbsp;{{userName}}</h4>
+  </div>
+  <div echarts *ngIf="!chart_none" [options]="chartOption"  (chartClick) ="chartClick($event)" class="demo-chart" id="myChart"></div>
+  <h1 *ngIf="chart_none" class="text-center chart_none">暂无数据</h1>
+  <div class="text-center">
+    <button class=" Btns" [class.selected]="this.flag==1" [class.button_disabled]="chart_none" (click)="indicator1()" [disabled]="chart_none">心率结论
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==2" [class.button_disabled]="chart_none" (click)="indicator2()" [disabled]="chart_none">节律结论
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==3" [class.button_disabled]="chart_none" (click)="indicator3()" [disabled]="chart_none">心律失常结论
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==4" [class.button_disabled]="chart_none" (click)="indicator4()" [disabled]="chart_none">心脏健康结论
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==5" [class.button_disabled]="chart_none" (click)="indicator5()" [disabled]="chart_none">压力等级
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==6" [class.button_disabled]="chart_none" (click)="indicator6()" [disabled]="chart_none">自主神经总张力
+    </button>
+  </div>
+  <div class="text-center">
+    <button class=" Btns" [class.selected]="this.flag==7" [class.button_disabled]="chart_none" (click)="indicator7()" [disabled]="chart_none">心血管调节能力
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==8" [class.button_disabled]="chart_none" (click)="indicator8()" [disabled]="chart_none">自主神经调节能力
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==9" [class.button_disabled]="chart_none" (click)="indicator9()" [disabled]="chart_none">应激反应能力
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==10" [class.button_disabled]="chart_none" (click)="indicator10()" [disabled]="chart_none">情绪恢复能力
+    </button>
+    <button class=" Btns" [class.selected]="this.flag==11" [class.button_disabled]="chart_none" (click)="indicator11()" [disabled]="chart_none">自主神经平衡性
+    </button>
+    <button class="btn btn-danger btn-md clearBtn" [class.button_disabled]="chart_none" (click)="clear()" [disabled]="chart_none">删除本次数据</button>
+  </div>
+  <div class="details-panel" *ngIf="isDetails">
+    <hr>
+    <h3 >心电数据详情</h3>
+    <label class="details_time">检测时间：{{this.clickTime}}</label>
+    <h2 *ngIf="details_none" class="text-center">暂无数据</h2>
+    <div *ngIf="!details_none">
+    <label class="details" *ngFor="let data of chartDetailsData" title={{data[0]}}>{{data[0]}}：&nbsp;{{data[1]}}
+    </label>
+    </div>
+  </div>
+</div>

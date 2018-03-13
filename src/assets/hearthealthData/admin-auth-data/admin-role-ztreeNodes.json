@@ -1,0 +1,55 @@
+{
+    "nodes":[
+      {
+        "id":"0","key": "hearthealth",
+        "checked": true,
+        "open":true,
+        "name": "心电后台管理系统",
+        "children": [
+          { "id":"1","key": "ecgd-data-show", "name": "心电数据", "checked": true , "open":true , "children":[
+            { "id":"2","key": "ecgd-chart-show","name": "心电波形" ,"checked": true,"children":[
+              { "id":"3","key": "ecgd-del","name": "删除功能" ,"checked": true },
+              { "id":"4","key": "ecgd-download","name": "下载功能" ,"checked": true }
+            ]},
+            {"id":"5","key": "hhr-show","name": "健康档案" ,"checked": true ,"children":[
+              {"id":"6","key": "hhr-del","name": "删除功能" ,"checked": true }
+            ]}
+          ]},
+          {"id":"7","key": "heart-dev-show","name": "设备管理"  ,"checked": true ,"open":false ,"children":[
+              {"id":"8","key": "heart-dev-add","name": "添加功能" ,"checked": true },
+              {"id":"9","key": "heart-dev-edit","name": "修改功能" ,"checked": true },
+              {"id":"10","key": "heart-dev-del","name": "删除功能" ,"checked": true }
+          ]},
+          {"id":"11","key": "info-show","name": "信息管理"  ,"checked": true ,"open":false ,"children":[
+              {"id":"12","key": "info-add","name": "添加功能" ,"checked": true },
+              {"id":"13","key": "info-edit","name": "编辑功能" ,"checked": true },
+              {"id":"14","key": "info-del","name": "删除功能" ,"checked": true }
+          ]},
+          {"id":"19","key": "app-auth-show","name": "App权限" ,"checked": true ,"open":true ,"children":[
+            {"id":"20","key": "app-user-show","name": "App用户" ,"checked": true ,"children":[
+              {"id":"21","key": "app-user-add","name": "添加功能" ,"checked": true },
+              {"id":"22","key": "app-user-edit","name": "编辑功能" ,"checked": true },
+              {"id":"23","key": "app-user-del","name": "删除功能" ,"checked": true }
+            ]},
+            {"id":"24","key": "app-role-show","name": "App角色" ,"checked": true ,"children":[
+              {"id":"25","key": "app-role-edit","name": "编辑功能" ,"checked": true }
+            ]}
+          ]},
+          {"id":"26","key": "admin-show","name": "后台权限"  ,"checked": true ,"open":true ,"children":[
+            {"id":"27","key": "admin-user-show","name": "后台用户" ,"checked": true ,"children":[
+              {"id":"28","key": "admin-user-add","name": "添加功能" ,"checked": true },
+              {"id":"29","key": "admin-user-edit","name": "编辑功能" ,"checked": true },
+              {"id":"30","key": "admin-user-del","name": "删除功能" ,"checked": true }
+            ]},
+            {"id":"31","key": "admin-role-show","name": "后台角色" ,"checked": true ,"children":[
+              {"id":"32","key": "admin-role-add","name": "添加功能" ,"checked": true },
+              {"id":"33","key": "admin-role-edit","name": "编辑功能" ,"checked": true },
+              {"id":"34","key": "admin-role-del","name": "删除功能" ,"checked": true }
+            ]}
+          ]},
+          {"id":"35","key": "log","name": "日志管理"  ,"checked": true ,"open":true ,"children":[
+          ]}
+        ]
+      }
+    ]
+}

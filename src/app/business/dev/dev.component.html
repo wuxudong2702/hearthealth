@@ -1,0 +1,39 @@
+<c-table-list
+  *ngIf="tableView"
+
+  [headers]="headers"
+  [data]="data"
+  [unBindBtn]="unBindBtn"
+  [searchBtn]="searchBtn"
+  [unBindAllBtn]="unBindAllBtn"
+  [setBtn]="setBtn"
+  [paginationBtn]="paginationBtn"
+  [setOperate]="setOperate"
+  [addBtn]="addBtn"
+
+  (onSort)="sort($event)"
+  (onDelAll)="delAll($event)"
+  (onAddSubmit)="submit($event)"
+  (onDel)="del($event)"
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
+
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
+>
+</c-table-list>
+
+
+
+<app-table-add
+  [headers]="headers"
+  [addEditTitle]="addEditTitle"
+
+  (onAddCancel)="cancel($event)"
+  (onSubmit)="submit($event)"
+
+  *ngIf="addView"
+>
+</app-table-add>
+
+

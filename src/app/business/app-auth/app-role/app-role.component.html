@@ -1,0 +1,33 @@
+<c-table-list
+  *ngIf="tableView"
+
+  (onSort)="sort($event)"
+
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
+  (onAdd)="add($event)"
+
+  [headers]="headers"
+  [data]="data"
+  [editBtn]="editBtn"
+  [setBtn]="setBtn"
+  [setOperate]="setOperate"
+  [searchBtn]="searchBtn"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
+>
+</c-table-list>
+<app-table-add
+  *ngIf="addView"
+
+  [headers]="headerAdd"
+  [addEditTitle]="addEditTitle"
+
+  (onAddCancel)="cancel($event)"
+  (onSubmit)="submit($event)"
+
+
+>
+</app-table-add>
+

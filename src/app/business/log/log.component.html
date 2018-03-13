@@ -1,0 +1,15 @@
+<c-table-list
+  (onSort)="sort($event)"
+  (onSearch)="search($event)"
+  (onSet)="set($event)"
+
+  [headers]="headers"
+  [data]="data"
+
+  [setOperate]="setOperate"
+  [searchBtn]="searchBtn"
+  [setBtn]="setBtn"
+  [paginationBtn]="paginationBtn"
+  [pagination]="pagination"
+  (onPaginationChange)="paginationChange($event)"
+>

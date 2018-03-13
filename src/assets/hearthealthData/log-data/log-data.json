@@ -1,0 +1,19 @@
+{
+  "data":[
+    {
+      "userName": "user1",
+      "operate": "修改用户名",
+      "operateTime": "2017-10-1 10:20:00"
+    },
+    {
+      "userName": "user2",
+      "operate": "添加用户",
+      "operateTime": "2017-10-1 10:20:00"
+    },
+    {
+      "userName": "user3",
+      "operate": "解绑设备",
+      "operateTime": "2017-10-1 10:20:00"
+    }
+  ]
+}

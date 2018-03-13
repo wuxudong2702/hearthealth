@@ -1,0 +1,15 @@
+<div class=" tableAdd">
+  <h2 class="tittle ">编辑</h2>
+  <div class="">
+
+    <form class="addForm " [formGroup]="form" >
+      <div class=" form-inline formCenter " *ngFor="let header of headers">
+        <app-input-edit [field]="header" [data]="data" [editId]="editId" [form]="form" ></app-input-edit>
+      </div>
+      <div class="form-button ">
+        <button type="button" class="btn btn-success" [disabled]="!form.valid" (click)="submit()">提交</button>
+        <button type="button" class="btn btn-default" (click)="editCancel()">取消</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{
+    "data":[
+      {
+        "administratorPermissions": "李四",
+        "Permissions": "管理员"
+      },
+      {
+        "administratorPermissions": "王小二",
+        "Permissions": "超级管理员"
+      }
+    ]
+}

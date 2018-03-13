@@ -1,0 +1,362 @@
+
+body,div,input,span,button{
+}
+/* 全局居中，如果不需要居中，则应该把此设置删除 */
+div.editor-top,div.editor-content,div.editor-bottom{
+  width: 1000px;
+  margin: 0 auto;
+}
+div.editor-top{
+  position: relative;
+}
+div.editor-top input{
+  position: relative;
+  display: block;
+  width: 1000px;
+  border: none;
+  color:#9f9f9f;
+  outline: none;
+}
+
+div.editor-top #article-title{
+  font-size: 30px;
+}
+
+div.editor-top #article-author{
+  font-size: 18px;
+}
+
+div.editor-top .editor-top-line{
+  margin: 10px 0;
+  width:1000px;
+  border: none;
+  border-top: solid 1px #e2e2e2;
+}
+
+/**设置编辑器部分样式**/
+div.editor-content{
+  position: relative;
+}
+#editor{
+  position: relative;
+  width: 1000px;
+}
+
+div.editor-bottom{
+  position: relative;
+}
+
+/**设置编辑器底部样式**/
+
+div.editor-bottom .image-model{
+  height: 30px;
+  margin:15px 0;
+}
+
+.image-model span{
+  font-size:24px;
+}
+.image-model input{
+  margin-left: 40px;
+  margin-right: 10px;
+
+}
+.image-model input,.image-model label{
+  padding: 0;
+  height: 24px;
+  vertical-align: middle;
+}
+.img-upload{
+  display: inline-block;
+  position: relative;
+  margin-right: 20px;
+  width: 220px;
+  height: 140px;
+  border: 2px dashed #9f9f9f;
+}
+.single-preivew{
+  display: inline-block;
+  position: relative;
+  margin-right: 20px;
+  width: 220px;
+  height: 140px;
+}
+.line-row{
+  position: absolute;
+  width: 60px;
+  margin: 65px 80px;
+  border-top: 10px solid #9f9f9f;
+}
+.line-col{
+  position: absolute;
+  height: 60px;
+  margin: 40px 105px;
+  border-left: 10px solid #9f9f9f;
+}
+
+div.buttons{
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom:20px;
+  text-align: center;
+}
+
+div.buttons button{
+  width: 150px;
+  height: 46px;
+  margin: 0px 20px;
+  background-color: #fb4b4e;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 8px;
+}
+
+/**预览页面**/
+div.preview-layer{
+  /*display: none;*/
+  position: relative;
+
+}
+div.preview-layer .preview-md{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index:999;
+  background-color:#000;
+  opacity:0.7;
+}
+
+div.preview-layer .preview-phone{
+  position: fixed;
+  width: 266px;
+  height: 539px;
+  left: 40%;
+  text-align: center;
+
+  background: url(images/iphone-md.png) no-repeat no-repeat;
+  z-index: 9999;
+}
+/*@media screen and (max-width:1370px){*/
+  /*div.preview-layer .preview-phone{*/
+    /*position: fixed;*/
+    /*width: 310px;*/
+    /*height: 640px;*/
+    /*left: 40%;*/
+    /*text-align: center;*/
+    /*background: url(images/iphone-bg.png) no-repeat no-repeat;*/
+    /*z-index: 9999;*/
+  /*}*/
+/*}*/
+#preview-html{
+  position: absolute;
+  width:361px;
+  height: 638px;
+  top:98px;
+  left:24px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  outline: none;
+  background-color: #fff;
+}
+
+
+body,ul,li,a,img,p,h1,h2,h3,h4,input,form,button{padding:0;margin:0;border:0;list-style: none;}
+
+body{margin: 0 auto;padding-top: 20px; position: relative;word-break:break-all;max-width: 640px;min-width: 320px;background: #ededed;}
+.article-title h1{font-size: 1.3em;margin-bottom: 10px;padding: 0 10px;text-align: center;}
+.article-content{font-size: 1.1em;color: #000000;}
+.article-top{
+  margin-bottom: 2.5em;
+
+}
+.article-time {
+  line-height: 1.2em;margin: 20px 0;text-indent: 0.5em;color:#b6b6b6;position: absolute;
+}
+.article-yue {
+  right: 10px;
+  float: right;
+  line-height: 1.2em;
+  margin: 20px 0;
+  text-indent: 0.5em;
+  color: #b6b6b6;
+  position: absolute;
+}
+.article-zan1{
+  margin: 0 10px 20px 10px;
+}
+.article-zan{
+  color:#b6b6b6;
+}
+.article-zan img{
+  width: 18px;
+  height: 18px;
+  right: 40px;
+
+}
+.article-zan p{
+  right: 20px;
+}
+
+.article-content p{
+  word-wrap: break-word;line-height: 1.2em;margin: 20px 0 0 0;text-indent: 1.8em;
+}
+.article-content img {max-width: 100%;display: block;margin: 0 auto;border-radius: 4px;}
+
+.user-comment{
+
+  margin: 0 10px;
+  border-left: #fb4b4e solid 0.4em;
+  padding-left: 5px;
+  color:#b6b6b6 ;
+}
+.comment-title{color:#595959;}
+.comment-list{
+  margin: 20px 10px 120px 10px;
+}
+
+.comment-top{
+  margin: 10px 0;
+
+}
+
+.user-name{
+  color:#a1a1a1;
+  float: left;
+}
+.comment-hot{
+  margin-left: 20px;
+  width: 20px;
+  height: 20px;
+  vertical-align: bottom;
+}
+.comment-zan {
+  right: 20px;
+  float: right;
+}
+.comment-zan img{
+  width: 18px;
+  height: 18px;
+}
+.comment-bottom{
+  margin-top: 40px;
+}
+.comment-time{
+  color:#a1a1a1;
+  font-size: 0.8em;
+  margin: 10px 0;
+}
+
+.comment-div{
+  clear: both;
+  height: 100%;
+  overflow: auto;
+}
+
+.user-all{
+  color: #a1a1a1;
+  text-align: center;
+  font-size: 0.8em;
+}
+#footer{
+  width:100%;
+  box-sizing: border-box;
+  border-top:0.15em solid #cbcaca;
+  padding:10px;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  bottom: 0;
+  background: #ededed;
+  overflow: hidden;
+}
+#footer-ping{
+  background: #d8d8d8;
+  line-height: 3.75em;
+  border-radius: 0.3em;
+  float: left;
+  padding: 0 20px;
+  width: 50%;
+  border:0 solid #d8d8d8;
+  display: inline-block;
+
+}
+#footer-button{
+  width: 20%;
+  float: right;
+  border:0.18em solid #fb4d50;
+  display: none;
+  border-radius: 0.3em;
+  line-height: 2.8em;
+  text-align: center;
+  color: #fb4d50;
+  margin-right: 5%;
+}
+
+.open-comment{
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid #d8d8d8;
+  padding: 5px 5px 2px 5px;
+  border-radius: 8px;
+  float:right;
+}
+.click-zan{
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid #d8d8d8;
+  padding: 5px 5px 2px 5px;
+  border-radius: 8px;
+  float:right;
+}
+.comment-total{
+  position: absolute;
+  top: 5px;
+  margin-left: 20px;
+  border-radius: 13px;
+  background-color: red;
+  width: 25px;
+  height: 25px;
+  color: white;
+  text-align: center;
+  font-size: 15px;
+  line-height: 25px;
+}
+input::-webkit-input-placeholder{ color:#FFF;font-size:14px;}
+input::-webkit-input-placeholder {color:#FFF;font-size:14px;}
+input:-moz-placeholder {color:#FFF;font-size:14px;}
+input::-moz-placeholder {color:#FFF;font-size:14px;
+}
+input:-ms-input-placeholder{color:#FFF;font-size:14px;
+}
+.clear-float{
+  clear: both;
+}
+
+.iframe1{
+  position: fixed;
+  width: 236px;
+  height: 411px;
+  left: 40%;
+  background: white;
+  text-align: center;
+  z-index: 9999;
+  margin-left: 14px;
+  margin-top: 63px;
+}
+
+.editorBtns button{
+  margin-top:1px;
+}
+.h5Select{
+  margin-bottom: 10px;
+}
+.ql-align-center {
+  margin: 0 auto;
+  background-color: red;
+}

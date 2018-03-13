@@ -1,0 +1,162 @@
+<div class="c-content-inner" *ngIf="!(tableAdd || tableEdit)">
+
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-sm" *ngIf="backBtn" (click)="back()"><i
+            class="fa  fa-backward "></i>返回
+          </button>
+          <button class="btn btn-success btn-sm" *ngIf="downloadBtn" (click)="download()"><i
+            class="fa fa-arrow-down fa-fw"></i>下载
+          </button>
+          <button class="btn btn-primary btn-sm" *ngIf="addBtn" (click)="add()"><i class="fa fa-plus fa-fw"></i>添加
+          </button>
+          <!--<button class="btn btn-primary btn-sm" *ngIf="addBtn" (click)="addCommon()"><i class="fa fa-plus fa-fw"></i>添加-->
+          <!--</button>-->
+          <button class="btn btn-danger btn-sm" *ngIf="deleteAllBtn" (click)="showModalDelAll()"><i
+            class="fa fa-trash-o fa-fw"></i> 全部删除
+          </button>
+          <button class="btn btn-danger btn-sm" *ngIf="unBindAllBtn" (click)="showModalDelAll()"><i
+            class="fa fa-trash-o fa-fw"></i> 全部解绑
+          </button>
+          <!--<button class="btn btn-primary btn-sm" *ngIf="uploadBtn" (click)="upload()"><i-->
+            <!--class="fa fa-upload fa-fw"></i>上传-->
+          <!--</button>-->
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3" *ngIf="searchBtn">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <select class="form-control" [(ngModel)]="selectValue">
+            <option value="" style="display:none">请选择</option>
+            <option *ngFor="let header of headers" [hidden]="!header.show||header.key=='earliest'||header.key=='created_at'||header.key=='latest'||header.key=='sense_time'||header.key=='updated_at'||header.key=='birth'" value={{header.key}}>{{header.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" *ngIf="searchBtn">
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="text" [(ngModel)]="searchValue" class="form-control"
+                 placeholder="请输入关键字" onfocus="this.placeholder=''" onblur="this.placeholder='请输入关键字'">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3" *ngIf="searchBtn">
+      <div class="form-group">
+        <div class="col-md-9">
+          <button class="btn btn-primary" (click)="search()"><i class="fa fa-search fa-fw"></i> 查询</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th class="text-center" *ngIf="setOperate"><input [(ngModel)]="isDelAll" (click)="delAllChecked()"
+                                                            type="checkbox"/></th>
+          <th class="text-center" *ngFor="let header of headers;let i = index" [hidden]="!header.show"
+              (click)="sort(i)">
+            {{header.name}}
+            <span class="fa" [class.fa-sort-asc]="header.order == 1"
+                  [class.fa-sort-desc]="header.order == 2"></span>
+            <!--<span class="fa" [class.fa-sort-desc]="header.order===2" (click)="sortDesc(i)" ></span>-->
+          </th>
+
+          <th class=" text-center c-w-2 " *ngIf="setOperate">
+            <span class="">操作</span>
+            <!--<button class="" *ngIf="setBtn" ><i-->
+              <!--class=""></i>-->
+            <!--</button>-->
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let row of data;let i = index" [class.alert-primary]="i%2==0">
+          <td class="text-center" *ngIf="setOperate"><input type="checkbox" (click)="delChecked(i)"
+                                                            [(ngModel)]="checkedList[i]"/></td>
+          <td *ngFor="let header of headers" [hidden]="!header.show" class="text-center">
+            {{row[header.key] | CPipe:header.pipe_type:header.pipe_params }}
+          </td>
+          <td class="text-center" *ngIf="setOperate">
+            <button class="btn btn-success btn-sm" *ngIf="editBtn" (click)="edit(i)"><i class="fa fa-pencil fa-fw"></i>
+              编辑
+            </button>
+            <button class="btn btn-success btn-sm" *ngIf="editH5Btn" (click)="editH5(i)"><i
+              class="fa fa-pencil fa-fw"></i>
+              编辑
+            </button>
+            <button class="btn btn-success btn-sm" *ngIf="editZTreeBtn" (click)="editZTree(i)"><i
+              class="fa fa-pencil fa-fw"></i>
+              编辑
+            </button>
+            <button class="btn btn-danger btn-sm" *ngIf="deleteBtn" (click)="showModalDel(i)"><i
+              class="fa fa-trash-o fa-fw"></i>
+              删除
+            </button>
+            <button class="btn btn-danger btn-sm" *ngIf="unBindBtn" (click)="showModalDel(i)"><i
+              class="fa fa-trash-o fa-fw"></i>
+              解绑
+            </button>
+            <button class="btn btn-warning btn-sm" *ngIf="chartBtn"
+                    (click)="chart(row)"><i
+              class="fa fa-area-chart fa-fw"></i> 图表
+            </button>
+            <button class="btn btn-warning btn-sm" *ngIf="chartBtn2" (click)="chart2(row['id'],row['name'],i)"><i
+                    class="fa fa-area-chart fa-fw"></i> 图表
+            </button>
+            <button class="btn btn-warning btn-sm" *ngIf="uploadBtn&&row['default']=='0'" (click)="default(row['id'])"><i
+                    class="fa fa-upload fa-fw"></i> 设为默认
+            </button>
+            <button class="btn btn-warning btn-sm" *ngIf="uploadBtn&&row['default']=='1'" (click)="default(row['id'])"><i
+                    class="fa fa-upload fa-fw"></i> 取消默认
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="ecgdMainAccountBtn" (click)="showEcgdMainAccount(row['user_id'])"><i
+              class="fa fa-search fa-fw"></i> 主用户
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="mainAccountBtn" (click)="showMainAccount(row['id'])"><i
+              class="fa fa-search fa-fw"></i> 主用户
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="detailsBtn" (click)="details(i)" title="查看子用户" ><i
+              class="fa fa-user-plus"></i>
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="toHhrBtn" (click)="toHhr(row['id'])" title="查看健康档案"><i class="fa fa-files-o"></i>
+            </button>
+            <button class="btn btn-info btn-sm" *ngIf="toEcgdBtn" (click)="toEcgd(row['id'])" title="查看心电波形"><i class="fa fa-line-chart"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <c-pagination #hp
+
+                    [pagination]="pagination"
+                    [total]="100"
+                    (onDataChanged)="onDataChanged($event)"
+                    (onPaginationChange)="paginationChange($event)"
+                    *ngIf="paginationBtn"
+      >
+      </c-pagination>
+    </div>
+  </div>
+</div>
+
+
+<!--<app-table-add *ngIf="tableAdd" [headers]="headers" (onCancel)="onCancel($event)" (onSubmit)="onSubmit($event)"  ></app-table-add>-->
+<!--<app-table-edit *ngIf="tableEdit" [headers]="headers" [data]="data" [editId]="editId" (onEditCommonCancel)="onEditCommonCancle($event)" (onSubmit)="onSubmit($event)"  ></app-table-edit>-->
+
+
+
+
+
+
+
+
+

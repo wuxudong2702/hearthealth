@@ -11,18 +11,18 @@ import {SimpleDataHttpPageComponent} from "./simple-data-http-page.component";
 
 @NgModule({
     imports: [
-        CommonModule,
-        PaginationModule
+        // CommonModule,
+        // PaginationModule
     ],
     declarations: [
-        SimpleDataTableDirective,
-        SimpleDataSortComponent,
-        SimpleDataHttpPageComponent
+        // SimpleDataTableDirective,
+        // SimpleDataSortComponent,
+        // SimpleDataHttpPageComponent
     ],
     exports: [
-        SimpleDataTableDirective,
-        SimpleDataSortComponent,
-        SimpleDataHttpPageComponent
+        // SimpleDataTableDirective,
+        // SimpleDataSortComponent,
+        // SimpleDataHttpPageComponent
     ]
 })
 export class SimpleDataTableModule {

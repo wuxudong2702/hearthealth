@@ -125,8 +125,12 @@ export class CPipePipe implements PipeTransform {
   templateUrl: './table-list.component.html',
   styles: [`
     tbody tr:hover {
-      background-color: lightyellow;
+      background-color: lightblue;
     }
+    thead tr{
+        background-color:lightgoldenrodyellow;
+    }  
+      
   `],
 })
 
@@ -303,9 +307,9 @@ export class TableListComponent implements OnInit, OnChanges {
     // console.log(this.headers, 'table list');
   }
 
-  set () {
-    this.onSet.emit({});
-  }
+  // set () {
+  //   this.onSet.emit({});
+  // }
 
   showModalSetFunc() {//设置模态框
     let setConfig = new SetConfig('', this.headers);

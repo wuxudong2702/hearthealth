@@ -166,11 +166,23 @@ export class NewsComponent implements OnInit {
         }
     }
 
+
+    // set(set: string) {
+    //
+    //      this.http.setHeader('infos', "title,true,0;description,true,1;label,true,2;created_at,true,3;updated_at,true,4;url,true,5;").then(w => {
+    //       this.headers = this.http.getHeader('infos');
+    //     });
+    // }
+
+
     set(set: string) {
-        this.http.setHeader('infos', set).then(v => v).then(w => {
-            this.headers = this.http.getHeader('infos');
+
+         this.http.setHeader('infos', set).then(w => {
+          this.headers = this.http.getHeader('infos');
         });
     }
+
+
 
     save(html) {
         // console.log( html,'===============');
@@ -241,6 +253,4 @@ export class NewsComponent implements OnInit {
             this.toastService.toast(toastCfg);
         });
     }
-
-
 }

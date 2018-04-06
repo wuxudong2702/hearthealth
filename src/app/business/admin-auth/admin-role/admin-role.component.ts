@@ -188,8 +188,8 @@ export class AdminRoleComponent implements OnInit {
   submit(submiData) {
       if (this.flag) {
           //添加
-          // console.log(this.permsAdd, 'this.permsAdd');
           if (this.permsAdd) {
+              console.log('submiData',submiData);
               this.http.rolesAdd(submiData.name, submiData.description, this.permsAdd).then(data => {
                   if (data['status'] == 'ok') {
                     this.data = data['data'];

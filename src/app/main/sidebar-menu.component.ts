@@ -8,29 +8,32 @@ import {  Router } from '@angular/router';
 @Component({
     selector: 'c-sidebar-menu',
     template: `
-        <div class="c-nav-search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="搜索菜单..." (input)="inputSearchTxt($event);">
-                <span class="input-group-btn">
-               <button class="btn btn-info c-not-shadow" type="button" (click)="searchMenu();">
-                   <i class="fa  fa-search fa-fw"></i>
-                </button>
-            </span>
-            </div>
-        </div>
+        <!--<div class="c-nav-search">-->
+            <!--<div class="input-group">-->
+                <!--<input type="text" class="form-control" placeholder="搜索菜单..." (input)="inputSearchTxt($event);">-->
+                <!--<span class="input-group-btn">-->
+               <!--<button class="btn btn-info c-not-shadow" type="button" (click)="searchMenu();">-->
+                   <!--<i class="fa  fa-search fa-fw"></i>-->
+                <!--</button>-->
+            <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="c-nav" c-custom-scrollbar>
-            <span class="c-search-msg" [hidden]="searchMsgHidden">搜索的菜单不存在...</span>
+            <!--<span class="c-search-msg" [hidden]="searchMsgHidden">搜索的菜单不存在...</span>-->
             <ul class="c-sidebar-menu" [hidden]="!searchMsgHidden">
                 <li *ngFor="let item of data">
                     <a (click)="itemClicked(item);">
                         <i style="margin-top:3px;width:17px" class="fa  pull-right"
                            [ngClass]="{'fa-angle-down': !isLeaf(item) && item.isExpend, 'fa-angle-left': !isLeaf(item) && !item.isExpend}"></i>
-                        <i class="fa " [ngClass]="item.icon"></i> <span>{{item.name}}</span>
+                        <i class="fa "
+                        ></i> <span>{{item.name}}</span>
                     </a>
                     <c-treeview-menu [data]="item"></c-treeview-menu>
                 </li>
-            </ul>
+        </ul>
         </div>
+        <!--[ngClass]="item.icon" 在class="fa"裏面-->
+
     `,
     styleUrls: ['./sidebar-menu.component.scss']
 })

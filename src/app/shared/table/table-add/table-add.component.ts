@@ -7,6 +7,8 @@ import {FormControlService} from "./form-controll.service"
 import {ShareService} from "./input/share.service";
 import {FileUploader} from "ng2-file-upload";
 
+
+
 @Component({
   selector: 'app-table-add',
   templateUrl: './table-add.component.html',

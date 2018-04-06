@@ -1,5 +1,4 @@
 <div [formGroup]="form" class="form-inline" >
-
   <label style="width: 100px" for="name">{{field.name+":"}}</label>
   <input
     type="text"
@@ -31,7 +30,7 @@
          class="form-control dateInput dateInputStyle addInputValue "
          placeholder="请选择日期"/>
   <div class=" " *ngIf="!isValid  && isDirty ">
-     <div *ngIf="field.required==true&&field.val==''" class="alert-danger validExample ">{{field.name+'是必填项！'}}</div>
+     <div *ngIf="field.required == true&&field.val==''" class="alert-danger validExample ">{{field.name+'是必填项！'}}</div>
     <div *ngIf="field.val!=''" class="alert-danger validExample " >请输入正确的格式，例如： {{field.validExample}}</div>
 
   </div>

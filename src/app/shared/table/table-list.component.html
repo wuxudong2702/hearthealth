@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="col-md-2" *ngIf="searchBtn">
+    <div class="col-md-3" *ngIf="searchBtn">
       <div class="form-group row">
         <div class="col-md-12">
           <select class="form-control" [(ngModel)]="selectValue">
@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-2" *ngIf="searchBtn">
+    <div class="col-md-3" *ngIf="searchBtn">
       <div class="form-group">
         <div class="col-md-12">
           <input type="text" [(ngModel)]="searchValue" class="form-control"
@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4" *ngIf="searchBtn">
+    <div class="col-md-3" *ngIf="searchBtn">
       <div class="form-group">
         <div class="col-md-9">
           <button class="btn btn-primary" (click)="search()"><i class="fa fa-search fa-fw"></i> 查询</button>
@@ -72,14 +72,14 @@
 
           <th class=" text-center c-w-2 " *ngIf="setOperate">
             <span class="">操作</span>
-            <button class=" btn btn-secondary btn-sm pull-right " *ngIf="setBtn" (click)="showModalSetFunc()"><i
-              class="fa fa-sun-o fa-fw "></i> 设置
-            </button>
+            <!--<button class="" *ngIf="setBtn" ><i-->
+              <!--class=""></i>-->
+            <!--</button>-->
           </th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let row of data;let i = index" [class.alert-info]="i%2==0">
+        <tr *ngFor="let row of data;let i = index" [class.alert-primary]="i%2==0">
           <td class="text-center" *ngIf="setOperate"><input type="checkbox" (click)="delChecked(i)"
                                                             [(ngModel)]="checkedList[i]"/></td>
           <td *ngFor="let header of headers" [hidden]="!header.show" class="text-center">

@@ -15,10 +15,7 @@ import {isNullOrUndefined} from "util";
  * http服务
  */
 @Injectable()
-// export class params {
-//   data: Array<any>;
-//   key: string;
-// }
+
 export class ApiService {
 
   token: string = '';
@@ -37,9 +34,9 @@ export class ApiService {
     let headers = this.sessionStorageService.getObject('headers');
 
     if (perm && headerConfig && headers) {
-      this.perms = perm;
-      this.headerConfig = headerConfig;
-      this.headers = headers;
+        this.perms = perm;
+        this.headerConfig = headerConfig;
+        this.headers = headers;
     }
   }
 
@@ -216,6 +213,7 @@ export class ApiService {
       .then(data => {
         return new Promise((fulfill, reject) => {
           if (data['status'] == 'ok') {
+            // console.log(data['data'],'--');
             this.headerConfig = data['data'];
             this.sessionStorageService.setObject('headerConfig', this.headerConfig);
             fulfill(true);
@@ -235,8 +233,9 @@ export class ApiService {
     let header: any = this.headers[table];
     let config: any = this.headerConfig[table];
     // console.log(config, '1111111111111');
+    console.log(header, 'header');
 
-    let _header: Array<any> = [];
+    let _header = [];
     _header = header.map(v => {
       let key: string = v['key'];
       if (config && config[key]) {
@@ -270,6 +269,7 @@ export class ApiService {
       .then(data => {
         if (data['status'] == 'ok') {
           this.spinService.spin(false);
+          // console.log(data,'setHeader');
           return this.getHeaderConfig();
         } else {
           console.error('设置表头错误', data['message']);
@@ -731,13 +731,13 @@ export class ApiService {
   }
 
 //admin-user
-  rolesAdd(name: string, description: string, perms: string) {
+  rolesAdd(name: string, description: string, permsTree: string) {
     const urls: string = "/api/admin/admins/role/add";
     return this.httpClient.post(urls, {
       token: this.sessionStorageService.get('token'),
       name: name,
       description: description,
-      perms: perms
+      permsTree: permsTree
     })
       .toPromise()
       .then(data => {
@@ -762,8 +762,8 @@ export class ApiService {
 //app-user
 
   userAdd(parent_id: string = null, submitData, role) {
-    // console.log(submitData, '0000000000000000000000');
-    const url: string = '/api/admin/app/user/add';
+
+    const url: string = '/api/admin/app_user/add';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       mobile: submitData.mobile,
@@ -789,7 +789,7 @@ export class ApiService {
 
   userUpdate(edit_id: string = null, parent_id: string = null, submitData, role) {
     // console.log(password,password_confirmation,role,'password_confirmed');
-    const url: string = '/api/admin/app/user/update';
+    const url: string = '/api/admin/app_user/update';
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       id: edit_id,
@@ -816,7 +816,7 @@ export class ApiService {
 
 
   userDelData(id: string = null) {
-    const url: string = " /api/admin/app/user/del";
+    const url: string = " /api/admin/app_user/del";
     return this.httpClient.post(url, {
       token: this.sessionStorageService.get('token'),
       id: id
@@ -861,6 +861,7 @@ export class ApiService {
     return this.httpClient.post(url, params)
       .toPromise()
       .then(data => {
+          console.log('所有的index-data，不管成功与否',data);
         this.spinService.spin(false);
         // console.log('所有表格初始值',data);
         let Data={};

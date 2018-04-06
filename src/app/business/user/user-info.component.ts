@@ -7,6 +7,8 @@ import { AppService } from '../../app.service';
 })
 export class UserInfoComponent {
 
+
+
   constructor(private appService: AppService) {
     this.appService.titleEventEmitter.emit("个人资料");
   }

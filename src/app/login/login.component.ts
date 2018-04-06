@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         if (data.status == 'ok') {
           const toastCfg = new ToastConfig(ToastType.SUCCESS, '', '登录成功!', 3000);
           that.toastService.toast(toastCfg);
-          that.router.navigate(['/app/home']);
+          that.router.navigate(['app/ecgd-chart-show']);
         } else {
           const toastCfg = new ToastConfig(ToastType.ERROR, '登录失败', data.message, 3000);
           that.toastService.toast(toastCfg);

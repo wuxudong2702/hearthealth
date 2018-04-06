@@ -38,7 +38,7 @@
     </button>
     <button class=" Btns" [class.selected]="this.flag==11" [class.button_disabled]="chart_none" (click)="indicator11()" [disabled]="chart_none">自主神经平衡性
     </button>
-    <button class="btn btn-danger btn-md clearBtn" [class.button_disabled]="chart_none" (click)="clear()" [disabled]="chart_none">清空本次数据</button>
+    <button class="btn btn-danger btn-md clearBtn" [class.button_disabled]="chart_none" (click)="clear()" [disabled]="chart_none">删除本次数据</button>
   </div>
   <div class="details-panel" *ngIf="isDetails">
     <hr>

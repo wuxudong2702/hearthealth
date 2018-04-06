@@ -25,11 +25,6 @@
               {"id":"13","key": "info-edit","name": "编辑功能" ,"checked": true },
               {"id":"14","key": "info-del","name": "删除功能" ,"checked": true }
           ]},
-          {"id":"15","key": "app-upgrade-show","name": "APP升级"  ,"checked": true ,"open":false ,"children":[
-              {"id":"16","key": "app-upgrade-add","name": "添加功能" ,"checked": true },
-              {"id":"17","key": "app-upgrade-edit","name": "编辑功能" ,"checked": true },
-              {"id":"18","key": "app-upgrade-del","name": "删除功能" ,"checked": true }
-          ]},
           {"id":"19","key": "app-auth-show","name": "App权限" ,"checked": true ,"open":true ,"children":[
             {"id":"20","key": "app-user-show","name": "App用户" ,"checked": true ,"children":[
               {"id":"21","key": "app-user-add","name": "添加功能" ,"checked": true },

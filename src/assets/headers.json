@@ -113,84 +113,7 @@
     }
 
   ],
-  "app-upgrades": [
-    {
-      "key": "ver",
-      "show": true,
-      "name": "版本号",
-      "index": 0,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "版本号至少是一个整数，例如12.4.34",
-      "required": true,
-      "pattern": "\\d+([\\.]{1}\\d+)*",
-      "input_type": 0
-    },
-    {
-      "key": "url",
-      "show": true,
-      "name": "地址",
-      "index": 1,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
-    {
-      "key": "desc",
-      "show": true,
-      "name": "描述",
-      "index": 2,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "长度超出限制",
-      "required": false,
-      "pattern": "^.{0,100}$",
-      "input_type": 0
-    },
 
-    {
-      "key": "default",
-      "show": true,
-      "name": "是否为默认下载",
-      "index": 3,
-      "order": 0,
-      "pipe_type": 1,
-      "pipe_params": {"0":"否", "1":"是"},
-      "val": "",
-      "select_val": ["否","是"],
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
-      "input_type": 1
-    },
-    {
-      "key": "app",
-      "show": false,
-      "name": "app升级包",
-      "index": 4,
-      "order": 0,
-      "pipe_type": 4,
-      "pipe_params": "",
-      "val": "",
-      "select_val": "",
-      "valid_example": "",
-      "required": false,
-      "pattern": "",
-      "input_type": 4
-    }
-  ],
   "devs": [
     {
       "key": "mobile",
@@ -222,36 +145,8 @@
       "pattern": "^[0-9a-zA-Z_\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
-    {
-      "key": "qq",
-      "show": true,
-      "name": "QQ",
-      "index": 4,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": true,
-      "pattern": "[1-9][0-9]{4,14}",
-      "input_type": 0
-    },
-    {
-      "key": "weixin",
-      "show": true,
-      "name": "微信",
-      "index": 5,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": true,
-      "pattern": "",
-      "input_type": 0
-    },
+
+
     {
       "key": "type",
       "show": true,
@@ -299,36 +194,7 @@
       "pattern": "^[0-9a-zA-Z\\u4e00-\\u9fa5]{1,16}$",
       "input_type": 0
     },
-    {
-      "key": "qq",
-      "show": true,
-      "name": "QQ",
-      "index": 7,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": true,
-      "pattern": "[1-9][0-9]{4,14}",
-      "input_type": 0
-    },
-    {
-      "key": "weixin",
-      "show": true,
-      "name": "微信",
-      "index": 8,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "",
-      "required": true,
-      "pattern": "",
-      "input_type": 0
-    },
+
 
     {
       "key": "birth",
@@ -407,12 +273,11 @@
     }
   ],
   "infos": [
-
     {
       "key": "label",
       "show": true,
       "name": "标签",
-      "index": "1",
+      "index": 8,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": {},
@@ -442,7 +307,7 @@
       "key": "title",
       "show": true,
       "name": "标题",
-      "index": 3,
+      "index": 1,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -457,7 +322,7 @@
       "key": "description",
       "show": true,
       "name": "描述",
-      "index": 4,
+      "index": 3,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -472,7 +337,7 @@
       "key": "updated_at",
       "show": true,
       "name": "最近更新日期",
-      "index": 5,
+      "index": 4,
       "order": 0,
       "pipe_type": 2,
       "pipe_params": "yyyy-MM-dd",
@@ -487,7 +352,7 @@
       "key": "url",
       "show": false,
       "name": "地址",
-      "index": 6,
+      "index": 5,
       "order": 0,
       "pipe_type": 0,
       "pipe_params": "",
@@ -530,36 +395,7 @@
       "pattern": "",
       "input_type": 0
     },
-    {
-      "key": "qq",
-      "show": true,
-      "name": "QQ",
-      "index": 6,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "请输入正确格式",
-      "required": false,
-      "pattern": "[1-9][0-9]{4,14}",
-      "input_type": 0
-    },
-    {
-      "key": "weixin",
-      "show": true,
-      "name": "微信",
-      "index": 7,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": [],
-      "valid_example": "请输入正确格式",
-      "required": false,
-      "pattern": "",
-      "input_type": 0
-    },
+
 
     {
       "key": "historicalTests",
@@ -640,36 +476,8 @@
     }
   ],
   "users": [
-    {
-      "key": "weixin",
-      "show": true,
-      "name": "微信",
-      "index": 0,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": "",
-      "valid_example": "请输入正确格式",
-      "required": false,
-      "pattern": "^[a-zA-Z0-9][-_a-zA-Z0-9]{5,19}$",
-      "input_type": 0
-    },
-    {
-      "key": "qq",
-      "show": true,
-      "name": "QQ",
-      "index": 1,
-      "order": 0,
-      "pipe_type": 0,
-      "pipe_params": "",
-      "val": "",
-      "select_val": "",
-      "valid_example": "请输入正确格式",
-      "required": false,
-      "pattern": "[1-9][0-9]{4,19}",
-      "input_type": 0
-    },
+
+
     {
       "key": "password",
       "show": false,

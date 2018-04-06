@@ -10,12 +10,15 @@ import  { MenuData }    from '../main/main-model';
     <ul class="c-treeview-menu" [hidden]="!data.isExpend"  *ngIf="!isLeaf(data)">
           <li *ngFor="let item of data.children">
               <a  (click)="itemClicked(item);">
-                  <i class="fa " [ngClass]="item.icon"></i> <span>{{item.name}}</span>   
+                  <i class="fa " 
+                  ></i> <span>{{item.name}}</span>   
                   <i style="margin-top:3px;width:17px" class="fa  pull-right"  [ngClass]="{'fa-angle-down': !isLeaf(item) && item.isExpend, 'fa-angle-left': !isLeaf(item) && !item.isExpend}"></i>
                </a>
               <c-treeview-menu [data]="item"></c-treeview-menu>
           </li>
     </ul>
+    <!--[ngClass]="item.icon" 在class="fa“裏面-->
+
   `,
   styleUrls:['./treeview-menu.component.scss']
 })

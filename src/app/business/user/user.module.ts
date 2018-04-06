@@ -15,16 +15,16 @@ import { UserInfoComponent} from './user-info.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    UserRoutingModule,
-    PaginationModule
+    // CommonModule,
+    // FormsModule,
+    // UserRoutingModule,
+    // PaginationModule
   ],
   declarations: [
-    UserComponent,
-    UserAddComponent,
-    UserListComponent,
-    UserInfoComponent
+    // UserComponent,
+    // UserAddComponent,
+    // UserListComponent,
+    // UserInfoComponent
   ],
   exports: [
   ],

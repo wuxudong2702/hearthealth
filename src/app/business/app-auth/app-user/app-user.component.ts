@@ -65,12 +65,12 @@ export class AppUserComponent implements OnInit {
   subUsersView: boolean = false;
 
   pagination: paginationObj = new paginationObj();
-  url: string = '/api/admin/app/user/index';
+  url: string = '/api/admin/app_user/index';
   params:params=new params();
 
   sub_pagination: paginationObj = new paginationObj();
 
-  sub_url: string = '/api/admin/app/user/index';
+  sub_url: string = '/api/admin/app_user/index';
   sub_params:params=new params();
 
   id: number = 0;
@@ -251,6 +251,8 @@ export class AppUserComponent implements OnInit {
 
 
   set (set: string) {
+      // "sex,true,0;mobile,true,1;birth,true,2;weixin,true,3;height,false,4;name,false,5;qq,true,6;zone,true,7;weight,true,8;email,true,9;password,false,10;password_confirmation,false,11;"
+      // sex,true,0;mobile,true,1;birth,true,2;weixin,true,3;height,true,4;name,true,5;qq,true,6;zone,true,7;weight,true,8;email,true,9;password,false,10;password_confirmation,false,11;
     this.http.setHeader('users', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('users');
     });

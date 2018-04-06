@@ -107,6 +107,8 @@ export class EcgdComponent implements OnInit {
 
 
   back() {
+
+
     this.showChartView = !this.showChartView;
   }
 

@@ -362,7 +362,7 @@ export class HhrChartComponent implements OnInit {
 
   clear() {
     if (this.dataIndex >= 0) {
-      let confirmCfg = new ConfirmConfig('您确认清空该次数据吗？');
+      let confirmCfg = new ConfirmConfig('您确认删除该次数据吗？');
       let result = this.modalService.confirm(confirmCfg);
       result.then(v => {
         this.http.delHhrDataDetails(this.chartId, this.chartDetailsId).then(data => {
@@ -377,7 +377,7 @@ export class HhrChartComponent implements OnInit {
       }).catch(v => {
       })
     } else {
-      const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择清空的数据！', 3000);
+      const toastCfg = new ToastConfig(ToastType.ERROR, '', '请选择需要删除的数据！', 3000);
       this.toastService.toast(toastCfg);
     }
   }

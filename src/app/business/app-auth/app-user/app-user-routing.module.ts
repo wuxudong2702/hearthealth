@@ -9,7 +9,7 @@ const userRoutes: Routes = [
         children: [
         ]
     }
-]
+];
 
 
 @NgModule({

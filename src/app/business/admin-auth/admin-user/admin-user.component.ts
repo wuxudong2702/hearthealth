@@ -233,7 +233,9 @@ export class AdminUserComponent implements OnInit {
 
   getHeartData(url,params){
     this.http.getTableData(url,params).then(data => {
-      if (data['status'] == 'ok') {
+
+
+        if (data['status'] == 'ok') {
         this.data = data['data'];
         this.pagination =data['pagination'];
       } else {
@@ -247,11 +249,11 @@ export class AdminUserComponent implements OnInit {
   }
 
   set (set: string) {
-    this.http.setHeader('admins', set).then(v => v).then(w => {
+
+      this.http.setHeader('admins', set).then(v => v).then(w => {
       this.headers = this.http.getHeader('admins');
     });
   }
-
 
   del(id: string) {
     this.http.adminsDel(id).then(data => {

@@ -86,14 +86,7 @@ export class MainComponent implements OnInit {
                 'icon': 'fa-info',
                 'url': '/app/info-show'
             },
-            {
-                'id': '4',
-                'parentId': '0',
-                'name': 'APP升级',
-                'keyWord': 'app-upgrade-show',
-                'icon': 'fa-gear',
-                'url': '/app/app-upgrade-show'
-            },
+
             {
                 'id': '5',
                 'parentId': '0',
@@ -172,14 +165,15 @@ export class MainComponent implements OnInit {
         this.router.navigate(['/login']);
       }else{
         this.apiService.getMenu().then(data => {
+            console.log(data,'----');
           if (data['status'] == 'ok') {
             this.mainData.menuData = data['data'];
           } else {
-            console.error('获取用户菜单失败', data.message )
+            //console.error('获取用户菜单失败', data.message )
             this.router.navigate(['/login']);
           }
         }).catch(err => {
-          console.error('获取用户菜单异常', err)
+          console.error('获取用户菜单异常', err);
           this.router.navigate(['/login']);
         });
 
@@ -217,7 +211,7 @@ export class MainComponent implements OnInit {
      */
     toHome() {
         this.title = '首页';
-        this.router.navigate(['/app/home']);
+        this.router.navigate(['app/ecgd-chart-show']);
     }
 
     /**

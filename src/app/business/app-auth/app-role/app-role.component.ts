@@ -36,7 +36,7 @@ export class AppRoleComponent implements OnInit {
     }
   }
 
-  headers: Array<cell> = [];
+  headers:  Array <cell>  = [];
   headerAdd: Array<cell> = [];
   data: Array<any> = [];
   editId: number;
@@ -79,11 +79,7 @@ export class AppRoleComponent implements OnInit {
   cancel() {
     this.addView = false;
     this.tableView = true;
-    // for (let i = 0; i < this.headers.length; i++) {
-    //   if (this.headers[i].key == 'name') {
-    //     this.headers[i].show = true;
-    //   }
-    // }
+     
   }
 
   submit(submitData) {

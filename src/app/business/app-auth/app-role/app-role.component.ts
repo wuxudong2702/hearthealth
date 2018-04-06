@@ -66,20 +66,13 @@ export class AppRoleComponent implements OnInit {
       }
       return d;
     });
-    console.log(this.headerAdd,'headeradd');
-    // for (let i = 0; i < this.headerAdd.length; i++) {
-    //   if (this.headerAdd[i].key == 'name') {
-    //     this.headerAdd[i].show = false;
-    //   }
-    // }
     this.addView = true;
     this.tableView = false;
   }
 
   cancel() {
     this.addView = false;
-    this.tableView = true;
-     
+    this.tableView = true; 
   }
 
   submit(submitData) {

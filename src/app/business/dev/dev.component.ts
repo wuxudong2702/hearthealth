@@ -115,7 +115,6 @@ export class DevComponent implements OnInit {
 
   set (set: string) {
     console.log("set",set);
-      // "type,true,2;mobile,true,3;name,true,0;dev_id,true,5;qq,true,6;weixin,true,7;"
     this.http.setHeader('devs',set ).then(v => v).then(w => {
       this.headers = this.http.getHeader('devs');
     });
